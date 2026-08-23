@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ChoiceKart | College Finder & AI Counselling</title>
+<title>ChoiceKart | College Finder & AI</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -22,6 +23,8 @@ body{
     background:#f5f9ff;
     color:#102d4f;
 }
+
+/* ================= HEADER ================= */
 
 header{
     background:white;
@@ -42,7 +45,8 @@ header{
 
 .logo span,
 footer span,
-.admin-header span{
+.admin-header span,
+.ai-title span{
     color:#ff841f;
 }
 
@@ -52,6 +56,12 @@ nav a{
     color:#102d4f;
     font-weight:bold;
 }
+
+nav a:hover{
+    color:#ff841f;
+}
+
+/* ================= HERO ================= */
 
 .hero{
     text-align:center;
@@ -68,7 +78,7 @@ nav a{
 }
 
 .hero p{
-    max-width:750px;
+    max-width:700px;
     margin:20px auto;
     line-height:1.6;
     color:#64748b;
@@ -95,9 +105,12 @@ nav a{
     background:#102d4f;
 }
 
-.ai-btn{
-    background:#7c3aed;
+.btn:hover{
+    opacity:.9;
+    transform:translateY(-1px);
 }
+
+/* ================= SECTION ================= */
 
 .section{
     padding:60px 7%;
@@ -109,35 +122,34 @@ nav a{
     margin-bottom:30px;
 }
 
-.exam-grid,
-.features{
+/* ================= EXAMS ================= */
+
+.exam-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:18px;
 }
 
-.exam,
-.feature{
+.exam{
     background:white;
     padding:25px;
     text-align:center;
     border-radius:14px;
     box-shadow:0 5px 20px #ddd;
-}
-
-.exam{
     cursor:pointer;
     transition:.2s;
 }
 
 .exam:hover{
     transform:translateY(-5px);
+    box-shadow:0 8px 25px #ccc;
 }
 
-.feature .icon{
-    font-size:35px;
-    margin-bottom:12px;
+.exam h3{
+    margin-bottom:8px;
 }
+
+/* ================= FORM ================= */
 
 .form-box{
     max-width:700px;
@@ -162,6 +174,7 @@ textarea{
     border:1px solid #ddd;
     border-radius:7px;
     font-size:16px;
+    background:white;
 }
 
 textarea{
@@ -173,6 +186,8 @@ textarea{
     width:100%;
     margin-top:20px;
 }
+
+/* ================= RESULT ================= */
 
 .result{
     display:none;
@@ -211,130 +226,150 @@ textarea{
     font-weight:bold;
 }
 
+/* ================= FEATURES ================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.feature{
+    background:white;
+    padding:25px;
+    text-align:center;
+    border-radius:14px;
+    box-shadow:0 5px 20px #ddd;
+}
+
+.feature .icon{
+    font-size:35px;
+    margin-bottom:12px;
+}
+
+/* ================= AI SECTION ================= */
+
 .ai-section{
-    background:linear-gradient(135deg,#f3e8ff,#eef7ff);
+    background:linear-gradient(135deg,#102d4f,#183f69);
+    color:white;
 }
 
 .ai-box{
     max-width:850px;
     margin:auto;
     background:white;
+    color:#102d4f;
     border-radius:18px;
-    padding:25px;
-    box-shadow:0 5px 25px #ddd;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,.2);
 }
 
-.ai-title{
-    text-align:center;
-    margin-bottom:10px;
+.ai-header{
+    background:#102d4f;
+    color:white;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-.ai-title span{
-    color:#7c3aed;
+.ai-icon{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#ff841f;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
 }
 
-.ai-subtitle{
-    text-align:center;
-    color:#64748b;
-    margin-bottom:20px;
+.ai-header h2{
+    font-size:22px;
 }
 
-.ai-chat{
-    height:300px;
+.ai-header p{
+    font-size:13px;
+    color:#dbeafe;
+    margin-top:4px;
+}
+
+.ai-messages{
+    height:360px;
     overflow-y:auto;
+    padding:20px;
     background:#f8fafc;
-    border-radius:12px;
-    padding:15px;
-    margin-bottom:15px;
 }
 
 .ai-message{
-    max-width:85%;
-    padding:12px 15px;
-    border-radius:12px;
-    margin-bottom:10px;
+    max-width:80%;
+    padding:13px 15px;
+    border-radius:13px;
+    margin-bottom:12px;
     line-height:1.5;
+    font-size:15px;
 }
 
 .ai-message.bot{
-    background:#ede9fe;
-    color:#4c1d95;
+    background:white;
+    border:1px solid #e2e8f0;
+    margin-right:auto;
 }
 
 .ai-message.user{
-    background:#102d4f;
+    background:#ff841f;
     color:white;
     margin-left:auto;
 }
 
-.ai-input-row{
+.ai-input-area{
+    padding:15px;
     display:flex;
     gap:10px;
+    border-top:1px solid #ddd;
 }
 
-.ai-input-row input{
+.ai-input-area input{
     flex:1;
 }
 
-.ai-input-row button{
-    width:auto;
-    margin:0;
+.ai-send{
+    width:110px;
+    border:0;
+    border-radius:8px;
+    background:#ff841f;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.ai-suggestion{
+.ai-suggestions{
+    padding:0 15px 15px;
     display:flex;
     gap:8px;
     flex-wrap:wrap;
-    margin-top:12px;
 }
 
-.ai-suggestion button{
-    border:none;
-    background:#ede9fe;
-    color:#5b21b6;
-    padding:9px 12px;
+.ai-suggestion{
+    border:1px solid #cbd5e1;
+    background:white;
+    padding:8px 12px;
     border-radius:20px;
     cursor:pointer;
+    color:#102d4f;
 }
+
+.ai-suggestion:hover{
+    background:#eef7ff;
+}
+
+/* ================= COUNSELLING ================= */
 
 .counselling-box{
     text-align:center;
 }
 
-.price{
-    font-size:34px;
-    font-weight:bold;
-    color:#ff841f;
-    margin:15px;
-}
-
-.social-links{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:20px;
-}
-
-.social-links a{
-    text-decoration:none;
-    padding:11px 16px;
-    border-radius:8px;
-    color:white;
-    font-weight:bold;
-}
-
-.whatsapp{
-    background:#16a34a;
-}
-
-.instagram{
-    background:#db2777;
-}
-
-.linkedin{
-    background:#2563eb;
-}
+/* ================= FOOTER ================= */
 
 footer{
     background:#102d4f;
@@ -342,6 +377,8 @@ footer{
     text-align:center;
     padding:35px;
 }
+
+/* ================= ADMIN BUTTON ================= */
 
 .admin-open-btn{
     position:fixed;
@@ -358,12 +395,14 @@ footer{
     box-shadow:0 5px 15px rgba(0,0,0,.25);
 }
 
+/* ================= ADMIN LOGIN ================= */
+
 .admin-modal{
     display:none;
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.65);
-    z-index:3000;
+    z-index:2000;
     align-items:center;
     justify-content:center;
     padding:20px;
@@ -400,6 +439,8 @@ footer{
     cursor:pointer;
 }
 
+/* ================= ADMIN PANEL ================= */
+
 #adminPanel{
     display:none;
     position:fixed;
@@ -416,7 +457,10 @@ footer{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:15px;
+}
+
+.admin-header h2 span{
+    color:#ff841f;
 }
 
 .admin-header button{
@@ -426,29 +470,6 @@ footer{
     padding:10px 16px;
     border-radius:8px;
     cursor:pointer;
-}
-
-.admin-tabs{
-    max-width:1100px;
-    margin:auto;
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.admin-tab{
-    border:none;
-    background:#e2e8f0;
-    color:#102d4f;
-    padding:10px 15px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.admin-tab.active{
-    background:#102d4f;
-    color:white;
 }
 
 .admin-card{
@@ -468,6 +489,11 @@ footer{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
+}
+
+.admin-card input,
+.admin-card select{
+    margin:0;
 }
 
 .admin-main-btn{
@@ -520,23 +546,51 @@ footer{
     background:#dc2626;
 }
 
-.stat-grid{
+.admin-tabs{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.admin-tab{
+    border:none;
+    background:#e2e8f0;
+    color:#102d4f;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.admin-tab.active{
+    background:#102d4f;
+    color:white;
+}
+
+/* ================= STATS ================= */
+
+.stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:15px;
+    margin-top:20px;
 }
 
 .stat{
-    background:#eef7ff;
+    background:white;
     padding:20px;
     border-radius:12px;
     text-align:center;
+    box-shadow:0 4px 15px #ddd;
 }
 
 .stat h2{
-    font-size:30px;
     color:#ff841f;
 }
+
+/* ================= MOBILE ================= */
 
 @media(max-width:800px){
 
@@ -553,9 +607,10 @@ footer{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .stat-grid{
+    .stats{
         grid-template-columns:1fr;
     }
+
 }
 
 @media(max-width:600px){
@@ -570,16 +625,22 @@ footer{
 
     .admin-header{
         align-items:flex-start;
+        gap:10px;
+    }
+
+    .admin-header h2{
+        font-size:20px;
+    }
+
+    .ai-input-area{
         flex-direction:column;
     }
 
-    .ai-input-row{
-        flex-direction:column;
-    }
-
-    .ai-input-row button{
+    .ai-send{
         width:100%;
+        padding:13px;
     }
+
 }
 
 @media(max-width:500px){
@@ -596,11 +657,19 @@ footer{
     .section{
         padding:45px 18px;
     }
+
+    .ai-message{
+        max-width:92%;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
+
+<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -611,14 +680,15 @@ Choice<span>Kart</span>
 <nav>
 <a href="#exams">Exams</a>
 <a href="#find">Find Colleges</a>
-<a href="#ai">AI</a>
+<a href="#ai">ChoiceKart AI</a>
+<a href="#how">How It Works</a>
 <a href="#counselling">Counselling</a>
 </nav>
 
 </header>
 
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
@@ -629,21 +699,22 @@ Your Rank.<br>
 
 <p>
 Find colleges and courses based on your entrance exam,
-score/rank, category and preferred course with ChoiceKart AI.
+score/rank, category, course and university type.
+Get smart admission guidance with ChoiceKart AI.
 </p>
 
 <a href="#find" class="btn primary">
 Find My Colleges
 </a>
 
-<a href="#ai" class="btn ai-btn">
+<a href="#ai" class="btn secondary">
 🤖 Ask ChoiceKart AI
 </a>
 
 </section>
 
 
-<!-- EXAMS -->
+<!-- ================= EXAMS ================= -->
 
 <section class="section" id="exams">
 
@@ -676,7 +747,7 @@ Find My Colleges
 </section>
 
 
-<!-- FIND COLLEGE -->
+<!-- ================= FIND COLLEGE ================= -->
 
 <section class="section" id="find">
 
@@ -709,18 +780,22 @@ placeholder="Enter your score or rank"
 <label>Category</label>
 
 <select id="category">
+
 <option>General</option>
 <option>OBC</option>
 <option>SC</option>
 <option>ST</option>
 <option>EWS</option>
+
 </select>
 
 
 <label>Preferred Course</label>
 
 <select id="course">
+
 <option value="">Select course</option>
+
 </select>
 
 
@@ -728,15 +803,15 @@ placeholder="Enter your score or rank"
 
 <select id="collegeType">
 
-<option value="">Any Type</option>
-<option>Central University</option>
-<option>State University</option>
-<option>Private University</option>
-<option>Agriculture University</option>
-<option>Government Medical University</option>
-<option>Government Medical Institute</option>
-<option>Central Government Institute</option>
-<option>Veterinary College</option>
+<option value="All">All Types</option>
+<option value="Central University">Central University</option>
+<option value="Government State University">Government State University</option>
+<option value="Private State University">Private State University</option>
+<option value="Agriculture University">Agriculture University</option>
+<option value="Medical Institute">Medical Institute</option>
+<option value="Veterinary College">Veterinary College</option>
+<option value="Central Government Institute">Central Government Institute</option>
+<option value="Government Medical University">Government Medical University</option>
 
 </select>
 
@@ -762,67 +837,104 @@ Find My Colleges
 </section>
 
 
-<!-- AI -->
+<!-- ================= AI ================= -->
 
 <section class="section ai-section" id="ai">
 
-<h2 class="title">
-🤖 ChoiceKart <span style="color:#7c3aed;">AI</span>
+<h2 class="title" style="color:white;">
+🤖 Meet ChoiceKart AI
 </h2>
 
 <div class="ai-box">
 
-<h2 class="ai-title">
-Your Personal Admission Assistant
-</h2>
+<div class="ai-header">
 
-<p class="ai-subtitle">
-Ask about colleges, courses, exams, cutoffs and counselling.
+<div class="ai-icon">
+🤖
+</div>
+
+<div>
+<h2>Choice<span>Kart AI</span></h2>
+
+<p>
+Your smart college & admission assistant
 </p>
+</div>
 
-<div class="ai-chat" id="aiChat">
+</div>
+
+
+<div
+class="ai-messages"
+id="aiMessages"
+>
 
 <div class="ai-message bot">
-🤖 Hello! I am <b>ChoiceKart AI</b>.<br><br>
-Tell me your exam, score/rank, category and preferred course.
-I will help you find suitable colleges.
-</div>
+
+👋 Namaste! Main <b>ChoiceKart AI</b> hoon.
+
+<br><br>
+
+Mujhse apne exam, score/rank, course,
+category aur colleges ke baare mein pooch sakte ho.
+
+<br><br>
+
+Example:
+<br>
+<b>"Mera CUET score 720 hai, B.Sc chahiye."</b>
 
 </div>
 
-<div class="ai-input-row">
+</div>
+
+
+<div class="ai-suggestions">
+
+<button
+class="ai-suggestion"
+onclick="askAI('CUET ke liye best colleges batao')"
+>
+🎓 CUET Colleges
+</button>
+
+<button
+class="ai-suggestion"
+onclick="askAI('NEET MBBS colleges batao')"
+>
+🩺 NEET MBBS
+</button>
+
+<button
+class="ai-suggestion"
+onclick="askAI('UPCATET agriculture colleges batao')"
+>
+🌾 Agriculture
+</button>
+
+<button
+class="ai-suggestion"
+onclick="askAI('Mujhe admission ke liye guidance chahiye')"
+>
+💡 Admission Guidance
+</button>
+
+</div>
+
+
+<div class="ai-input-area">
 
 <input
 id="aiInput"
-placeholder="Example: I got 520 in NEET, General category..."
-onkeydown="if(event.key==='Enter') askAI()"
+placeholder="Ask ChoiceKart AI..."
+onkeydown="if(event.key==='Enter') sendAI()"
 >
 
 <button
-class="btn ai-btn"
-onclick="askAI()"
+class="ai-send"
+onclick="sendAI()"
 >
-Ask AI
-</button>
-
-</div>
-
-<div class="ai-suggestion">
-
-<button onclick="aiQuestion('I want colleges for CUET')">
-CUET Colleges
-</button>
-
-<button onclick="aiQuestion('I want agriculture colleges')">
-Agriculture
-</button>
-
-<button onclick="aiQuestion('Tell me about NEET colleges')">
-NEET
-</button>
-
-<button onclick="aiQuestion('How does counselling work?')">
-Counselling
+Send
 </button>
 
 </div>
@@ -832,7 +944,7 @@ Counselling
 </section>
 
 
-<!-- HOW -->
+<!-- ================= HOW IT WORKS ================= -->
 
 <section class="section" id="how">
 
@@ -853,15 +965,15 @@ Counselling
 </div>
 
 <div class="feature">
-<div class="icon">🤖</div>
-<h3>03. Ask AI</h3>
-<p>Get personalised guidance.</p>
+<div class="icon">🏫</div>
+<h3>03. Find Colleges</h3>
+<p>See matching colleges.</p>
 </div>
 
 <div class="feature">
-<div class="icon">👨‍🏫</div>
-<h3>04. Counselling</h3>
-<p>Get admission guidance.</p>
+<div class="icon">🤖</div>
+<h3>04. Ask AI</h3>
+<p>Get smart admission guidance.</p>
 </div>
 
 </div>
@@ -869,7 +981,7 @@ Counselling
 </section>
 
 
-<!-- COUNSELLING -->
+<!-- ================= COUNSELLING ================= -->
 
 <section class="section" id="counselling">
 
@@ -877,19 +989,36 @@ Counselling
 
 <div class="form-box counselling-box">
 
-<h2>📞 ChoiceKart Counselling</h2>
+<h2>📞 Book Counselling</h2>
 
 <p style="margin:15px 0;color:#64748b;">
-Get personalised admission guidance from our counsellors.
+Get personalised admission guidance.
 </p>
 
-<div class="price" id="counsellingPrice">
-₹499
-</div>
+<input
+id="counsellingName"
+placeholder="Your Name"
+>
 
-<p>
-Current counselling fee
-</p>
+<input
+id="counsellingPhone"
+placeholder="Mobile Number"
+type="tel"
+style="margin-top:12px;"
+>
+
+<select
+id="counsellingExam"
+style="margin-top:12px;"
+>
+
+<option value="">Select Exam</option>
+<option>CUET</option>
+<option>NEET</option>
+<option>UPCATET</option>
+<option>BVSc</option>
+
+</select>
 
 <button
 class="btn secondary"
@@ -898,12 +1027,12 @@ onclick="bookCounselling()"
 Book Counselling
 </button>
 
-<div class="social-links" id="socialLinks"></div>
-
 </div>
 
 </section>
 
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
@@ -920,7 +1049,7 @@ Choice<span>Kart</span>
 </footer>
 
 
-<!-- ADMIN BUTTON -->
+<!-- ================= ADMIN BUTTON ================= -->
 
 <button
 class="admin-open-btn"
@@ -930,15 +1059,22 @@ onclick="openAdmin()"
 </button>
 
 
-<!-- ADMIN LOGIN -->
+<!-- ================= ADMIN LOGIN ================= -->
 
-<div id="adminLogin" class="admin-modal">
+<div
+id="adminLogin"
+class="admin-modal"
+>
 
 <div class="admin-login-box">
 
-<h2>Choice<span>Kart</span> Admin</h2>
+<h2>
+Choice<span>Kart</span> Admin
+</h2>
 
-<p>Login to manage ChoiceKart.</p>
+<p>
+Login to manage colleges and cutoffs.
+</p>
 
 <input
 type="password"
@@ -955,7 +1091,7 @@ Login
 </div>
 
 
-<!-- ADMIN PANEL -->
+<!-- ================= ADMIN PANEL ================= -->
 
 <div id="adminPanel">
 
@@ -972,17 +1108,37 @@ Close Admin
 </div>
 
 
-<div class="admin-tabs">
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+<h2 id="collegeCount">0</h2>
+<p>Total Colleges</p>
+</div>
+
+<div class="stat">
+<h2 id="cutoffCount">0</h2>
+<p>Total Cutoffs</p>
+</div>
+
+<div class="stat">
+<h2 id="examCount">4</h2>
+<p>Supported Exams</p>
+</div>
+
+</div>
+
+
+<!-- TABS -->
+
+<div
+class="admin-tabs"
+style="margin-top:25px;"
+>
 
 <button
 class="admin-tab active"
-onclick="showAdminTab('dashboardTab',this)"
->
-📊 Dashboard
-</button>
-
-<button
-class="admin-tab"
 onclick="showAdminTab('collegeTab',this)"
 >
 🏫 Colleges
@@ -995,96 +1151,72 @@ onclick="showAdminTab('cutoffTab',this)"
 🎯 Cutoffs
 </button>
 
-<button
-class="admin-tab"
-onclick="showAdminTab('settingsTab',this)"
->
-⚙ Settings
-</button>
-
 </div>
 
 
-<!-- DASHBOARD -->
+<!-- ================= COLLEGE TAB ================= -->
 
-<div id="dashboardTab">
+<div id="collegeTab">
 
 <div class="admin-card">
 
-<h3>📊 ChoiceKart Overview</h3>
-
-<div class="stat-grid">
-
-<div class="stat">
-<h2 id="collegeCount">0</h2>
-<p>Colleges</p>
-</div>
-
-<div class="stat">
-<h2 id="cutoffCount">0</h2>
-<p>Cutoffs</p>
-</div>
-
-<div class="stat">
-<h2 id="counsellingCount">0</h2>
-<p>Counselling Bookings</p>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- COLLEGE TAB -->
-
-<div id="collegeTab" style="display:none;">
-
-<div class="admin-card">
-
-<h3>➕ Add New College</h3>
+<h3>
+➕ Add New College
+</h3>
 
 <div class="admin-grid">
 
 <select id="adminExam">
-<option value="">Select Exam</option>
+
+<option value="">
+Select Exam
+</option>
+
 <option>CUET</option>
 <option>NEET</option>
 <option>UPCATET</option>
 <option>BVSc</option>
+
 </select>
+
 
 <input
 id="adminCollegeName"
 placeholder="College Name"
 >
 
+
 <input
 id="adminCourses"
 placeholder="Courses separated by comma"
 >
+
 
 <input
 id="adminLocation"
 placeholder="Location"
 >
 
+
 <select id="adminType">
 
-<option value="">College Type</option>
+<option value="">
+Select College Type
+</option>
+
 <option>Central University</option>
-<option>State University</option>
-<option>Private University</option>
+<option>Government State University</option>
+<option>Private State University</option>
 <option>Agriculture University</option>
-<option>Government Medical University</option>
-<option>Government Medical Institute</option>
-<option>Central Government Institute</option>
+<option>Medical Institute</option>
 <option>Veterinary College</option>
+<option>Central Government Institute</option>
+<option>Government Medical University</option>
 
 </select>
 
 </div>
+
 
 <button
 class="admin-main-btn"
@@ -1098,7 +1230,9 @@ Add College
 
 <div class="admin-card">
 
-<h3>📋 Manage Colleges</h3>
+<h3>
+📋 Manage Colleges
+</h3>
 
 <div id="adminCollegeList">
 Loading...
@@ -1109,13 +1243,18 @@ Loading...
 </div>
 
 
-<!-- CUTOFF TAB -->
+<!-- ================= CUTOFF TAB ================= -->
 
-<div id="cutoffTab" style="display:none;">
+<div
+id="cutoffTab"
+style="display:none;"
+>
 
 <div class="admin-card">
 
-<h3>🎯 Add Cutoff</h3>
+<h3>
+🎯 Add Cutoff
+</h3>
 
 <div class="admin-grid">
 
@@ -1124,9 +1263,13 @@ id="cutoffCollegeName"
 placeholder="College Name"
 >
 
+
 <select id="cutoffExamName">
 
-<option value="">Select Exam</option>
+<option value="">
+Select Exam
+</option>
+
 <option>CUET</option>
 <option>NEET</option>
 <option>UPCATET</option>
@@ -1134,10 +1277,12 @@ placeholder="College Name"
 
 </select>
 
+
 <input
 id="cutoffCourseName"
 placeholder="Course"
 >
+
 
 <select id="cutoffCategory">
 
@@ -1149,11 +1294,13 @@ placeholder="Course"
 
 </select>
 
+
 <input
 type="number"
 id="cutoffScore"
 placeholder="Cutoff Score / Rank"
 >
+
 
 <input
 type="number"
@@ -1162,6 +1309,7 @@ placeholder="Year"
 >
 
 </div>
+
 
 <button
 class="admin-main-btn"
@@ -1175,87 +1323,13 @@ Save Cutoff
 
 <div class="admin-card">
 
-<h3>📊 Manage Cutoffs</h3>
+<h3>
+📊 Manage Cutoffs
+</h3>
 
 <div id="adminCutoffList">
 No cutoffs added yet.
 </div>
-
-</div>
-
-</div>
-
-
-<!-- SETTINGS -->
-
-<div id="settingsTab" style="display:none;">
-
-<div class="admin-card">
-
-<h3>💰 Counselling Settings</h3>
-
-<label>Counselling Price</label>
-
-<input
-type="number"
-id="settingPrice"
-placeholder="Example: 499"
->
-
-<button
-class="admin-main-btn"
-onclick="saveSettings()"
->
-Save Counselling Price
-</button>
-
-</div>
-
-
-<div class="admin-card">
-
-<h3>📱 Social / Contact Settings</h3>
-
-<label>WhatsApp Number</label>
-
-<input
-id="settingWhatsapp"
-placeholder="Example: 919876543210"
->
-
-<label>Instagram URL</label>
-
-<input
-id="settingInstagram"
-placeholder="Instagram profile URL"
->
-
-<label>LinkedIn URL</label>
-
-<input
-id="settingLinkedin"
-placeholder="LinkedIn profile URL"
->
-
-<button
-class="admin-main-btn"
-onclick="saveSettings()"
->
-Save Contact Settings
-</button>
-
-</div>
-
-
-<div class="admin-card">
-
-<h3>🤖 AI Settings</h3>
-
-<p style="color:#64748b;line-height:1.6;">
-ChoiceKart AI currently uses the ChoiceKart database
-for smart local recommendations. A secure AI API/backend
-can be connected later.
-</p>
 
 </div>
 
@@ -1266,16 +1340,16 @@ can be connected later.
 
 <script>
 
-/* ===============================
-   ADMIN
-================================ */
+/* =====================================================
+   CHOICEKART ADMIN PASSWORD
+===================================================== */
 
 const ADMIN_PASSWORD = "ChoiceKart@2026";
 
 
-/* ===============================
+/* =====================================================
    COURSES
-================================ */
+===================================================== */
 
 const defaultCourses = {
 
@@ -1322,9 +1396,9 @@ BVSc:[
 };
 
 
-/* ===============================
+/* =====================================================
    DEFAULT COLLEGES
-================================ */
+===================================================== */
 
 const defaultColleges = [
 
@@ -1397,7 +1471,7 @@ exam:"NEET",
 name:"Institute of Medical Sciences, BHU",
 courses:["MBBS","BDS"],
 location:"Varanasi, Uttar Pradesh",
-type:"Central University"
+type:"Medical Institute"
 },
 
 {
@@ -1413,7 +1487,7 @@ exam:"NEET",
 name:"Dr. Ram Manohar Lohia Institute of Medical Sciences",
 courses:["MBBS"],
 location:"Lucknow, Uttar Pradesh",
-type:"Government Medical Institute"
+type:"Government Medical University"
 },
 
 {
@@ -1482,40 +1556,24 @@ type:"Veterinary College"
 ];
 
 
-/* ===============================
-   LOAD DATA
-================================ */
+/* =====================================================
+   LOAD DATABASE
+===================================================== */
 
 let colleges =
-JSON.parse(localStorage.getItem("choicekart_colleges"))
-|| defaultColleges;
+JSON.parse(
+localStorage.getItem("choicekart_colleges")
+) || defaultColleges;
 
 let cutoffs =
-JSON.parse(localStorage.getItem("choicekart_cutoffs"))
-|| [];
-
-let bookings =
-JSON.parse(localStorage.getItem("choicekart_bookings"))
-|| [];
-
-let settings =
-JSON.parse(localStorage.getItem("choicekart_settings"))
-|| {
-
-price:499,
-
-whatsapp:"",
-
-instagram:"",
-
-linkedin:""
-
-};
+JSON.parse(
+localStorage.getItem("choicekart_cutoffs")
+) || [];
 
 
-/* ===============================
+/* =====================================================
    SAVE
-================================ */
+===================================================== */
 
 function saveData(){
 
@@ -1529,49 +1587,49 @@ localStorage.setItem(
 JSON.stringify(cutoffs)
 );
 
-localStorage.setItem(
-"choicekart_bookings",
-JSON.stringify(bookings)
-);
-
 }
 
 
-/* ===============================
-   COURSES
-================================ */
+/* =====================================================
+   COURSE UPDATE
+===================================================== */
 
 function updateCourses(){
 
 const exam =
 document.getElementById("exam").value;
 
-const select =
+const courseSelect =
 document.getElementById("course");
 
-select.innerHTML =
+courseSelect.innerHTML =
 '<option value="">Select course</option>';
 
 if(!exam) return;
 
-defaultCourses[exam].forEach(course=>{
+defaultCourses[exam].forEach(function(course){
 
 const option =
 document.createElement("option");
 
-option.value=course;
-option.textContent=course;
+option.value = course;
+option.textContent = course;
 
-select.appendChild(option);
+courseSelect.appendChild(option);
 
 });
 
 }
 
 
+/* =====================================================
+   EXAM SELECT
+===================================================== */
+
 function selectExam(exam){
 
-document.getElementById("exam").value=exam;
+document.getElementById("exam").value =
+exam;
 
 updateCourses();
 
@@ -1583,9 +1641,9 @@ behavior:"smooth"
 }
 
 
-/* ===============================
+/* =====================================================
    FIND COLLEGE
-================================ */
+===================================================== */
 
 function findCollege(){
 
@@ -1630,19 +1688,19 @@ return;
 }
 
 
-let matches =
-colleges.filter(college=>{
+const matches =
+colleges.filter(function(college){
 
 const examMatch =
-college.exam===exam;
+college.exam === exam;
 
 const courseMatch =
-course==="Any Course" ||
+course === "Any Course" ||
 college.courses.includes(course);
 
 const typeMatch =
-!type ||
-college.type===type;
+type === "All" ||
+college.type === type;
 
 return examMatch &&
 courseMatch &&
@@ -1657,20 +1715,27 @@ document.getElementById("result");
 const resultText =
 document.getElementById("resultText");
 
-result.style.display="block";
+result.style.display =
+"block";
 
 
-if(matches.length===0){
+if(matches.length === 0){
 
-resultText.innerHTML=`
+resultText.innerHTML = `
 
 <div class="college-card">
 
-<h3>😔 No College Found</h3>
+<h3>
+😔 No College Found
+</h3>
 
 <p>
 No matching college was found in the
 current ChoiceKart database.
+</p>
+
+<p>
+Try selecting "All Types" or another course.
 </p>
 
 </div>
@@ -1682,78 +1747,81 @@ return;
 }
 
 
-let html=`
+let html = `
 
-<p style="margin:12px 0;line-height:1.6">
+<p style="margin:12px 0;line-height:1.6;">
 
-<b>Exam:</b> ${exam}<br>
+<b>Exam:</b> ${escapeHTML(exam)}<br>
 
-<b>Score / Rank:</b> ${score}<br>
+<b>Score / Rank:</b> ${escapeHTML(score)}<br>
 
-<b>Category:</b> ${category}<br>
+<b>Category:</b> ${escapeHTML(category)}<br>
 
-<b>Course:</b> ${course}<br>
+<b>Course:</b> ${escapeHTML(course)}<br>
 
-<b>College Type:</b>
-${type || "Any"}
+<b>College Type:</b> ${escapeHTML(type)}
 
 </p>
 
-<p style="margin-bottom:15px;color:#64748b">
+<p style="margin-bottom:15px;color:#64748b;">
 
-These colleges match your selected
-exam/course/type. Admission depends on
-official eligibility, counselling and cutoff.
+${matches.length} matching college(s) found.
+
+Admission depends on official eligibility,
+counselling and cutoff.
 
 </p>
 
 `;
 
 
-matches.forEach(college=>{
+matches.forEach(function(college){
 
-let collegeCutoffs =
-cutoffs.filter(c=>{
+const collegeCutoffs =
+cutoffs.filter(function(cutoff){
 
 return (
 
-c.college.toLowerCase()===
+cutoff.college.toLowerCase() ===
 college.name.toLowerCase()
 
 &&
 
-c.exam===exam
+cutoff.exam === exam
 
 &&
 
-(c.course===course ||
-course==="Any Course")
+(
+cutoff.course === course ||
+course === "Any Course"
+)
 
 &&
 
-c.category===category
+cutoff.category === category
 
 );
 
 });
 
 
-let cutoffText="";
+let cutoffText = "";
 
 
-if(collegeCutoffs.length){
+if(collegeCutoffs.length > 0){
 
 const latest =
-collegeCutoffs[collegeCutoffs.length-1];
+collegeCutoffs[collegeCutoffs.length - 1];
 
-cutoffText=`
+cutoffText = `
 
 <p>
 
 <b>🎯 Latest Cutoff:</b>
-${latest.score}
+${escapeHTML(latest.score)}
 
-(${latest.category}, ${latest.year})
+(${escapeHTML(latest.category)},
+${escapeHTML(latest.year)})
 
 </p>
 
@@ -1762,25 +1830,27 @@ ${latest.score}
 }
 
 
-html+=`
+html += `
 
 <div class="college-card">
 
-<h3>🏫 ${college.name}</h3>
+<h3>
+🏫 ${escapeHTML(college.name)}
+</h3>
 
 <p>
 <b>📍 Location:</b>
-${college.location}
+${escapeHTML(college.location)}
 </p>
 
 <p>
 <b>🎓 Courses:</b>
-${college.courses.join(", ")}
+${college.courses.map(escapeHTML).join(", ")}
 </p>
 
 <p>
 <b>🏛️ Type:</b>
-${college.type}
+${escapeHTML(college.type)}
 </p>
 
 ${cutoffText}
@@ -1796,7 +1866,8 @@ ${cutoffText}
 });
 
 
-resultText.innerHTML=html;
+resultText.innerHTML =
+html;
 
 result.scrollIntoView({
 behavior:"smooth",
@@ -1806,383 +1877,79 @@ block:"nearest"
 }
 
 
-/* ===============================
-   AI
-================================ */
-
-function addAIMessage(text,type){
-
-const chat =
-document.getElementById("aiChat");
-
-const div =
-document.createElement("div");
-
-div.className =
-"ai-message "+type;
-
-div.innerHTML=text;
-
-chat.appendChild(div);
-
-chat.scrollTop=chat.scrollHeight;
-
-}
-
-
-function aiQuestion(question){
-
-document.getElementById("aiInput").value=question;
-
-askAI();
-
-}
-
-
-function askAI(){
-
-const input =
-document.getElementById("aiInput");
-
-const question =
-input.value.trim();
-
-if(!question) return;
-
-addAIMessage(question,"user");
-
-input.value="";
-
-setTimeout(()=>{
-
-const answer =
-generateAIAnswer(question);
-
-addAIMessage(answer,"bot");
-
-},400);
-
-}
-
-
-/*
-   Smart local ChoiceKart AI
-*/
-
-function generateAIAnswer(question){
-
-const q =
-question.toLowerCase();
-
-
-/* Counselling */
-
-if(
-q.includes("counselling") ||
-q.includes("counseling")
-){
-
-return `
-
-🤖 <b>ChoiceKart AI:</b><br><br>
-
-Our counselling service provides personalised
-admission guidance.<br><br>
-
-💰 Current counselling fee:
-<b>₹${settings.price}</b><br><br>
-
-You can use the <b>Book Counselling</b>
-section to continue.
-
-`;
-
-}
-
-
-/* Agriculture */
-
-if(
-q.includes("agriculture") ||
-q.includes("upcatet") ||
-q.includes("farming")
-){
-
-const list =
-colleges.filter(c=>
-c.exam==="UPCATET"
-);
-
-return `
-
-🤖 <b>ChoiceKart AI:</b><br><br>
-
-For agriculture admissions, UPCATET is one
-of the exams available in this ChoiceKart
-database.<br><br>
-
-<b>Available agriculture colleges:</b><br>
-
-${list.map(c=>"• "+c.name).join("<br>")}
-
-<br><br>
-
-Tell me your <b>score/rank, category and
-course</b> and I can narrow the options.
-
-`;
-
-}
-
-
-/* NEET */
-
-if(
-q.includes("neet") ||
-q.includes("mbbs") ||
-q.includes("medical")
-){
-
-const list =
-colleges.filter(c=>
-c.exam==="NEET"
-);
-
-return `
-
-🤖 <b>ChoiceKart AI:</b><br><br>
-
-For NEET/medical admissions, these colleges
-are currently available in the database:
-
-<br><br>
-
-${list.map(c=>"• "+c.name).join("<br>")}
-
-<br><br>
-
-Send your <b>NEET score/rank + category +
-course</b> for a more specific recommendation.
-
-`;
-
-}
-
-
-/* CUET */
-
-if(
-q.includes("cuet") ||
-q.includes("university") ||
-q.includes("college")
-){
-
-const list =
-colleges.filter(c=>
-c.exam==="CUET"
-);
-
-return `
-
-🤖 <b>ChoiceKart AI:</b><br><br>
-
-For CUET, ChoiceKart currently has:
-
-<br><br>
-
-${list.map(c=>"• "+c.name).join("<br>")}
-
-<br><br>
-
-Tell me your <b>CUET score/rank, category
-and preferred course</b> and I will filter
-the available colleges.
-
-`;
-
-}
-
-
-/* BVSc */
-
-if(
-q.includes("bvsc") ||
-q.includes("veterinary") ||
-q.includes("animal")
-){
-
-const list =
-colleges.filter(c=>
-c.exam==="BVSc"
-);
-
-return `
-
-🤖 <b>ChoiceKart AI:</b><br><br>
-
-Veterinary options currently available:
-
-<br><br>
-
-${list.map(c=>"• "+c.name).join("<br>")}
-
-<br><br>
-
-For a personalised recommendation,
-send your rank/score and category.
-
-`;
-
-}
-
-
-/* Score extraction */
-
-const numbers =
-question.match(/\d+/g);
-
-if(numbers){
-
-return `
-
-🤖 <b>ChoiceKart AI:</b><br><br>
-
-I detected a score/rank of
-<b>${numbers[0]}</b> from your message.
-
-For a proper recommendation, please also
-tell me:
-
-<br><br>
-
-1️⃣ Exam<br>
-2️⃣ Category<br>
-3️⃣ Preferred Course<br>
-4️⃣ Whether the number is a <b>score or rank</b>
-
-<br><br>
-
-Example:<br>
-
-<i>
-"NEET rank 25000, OBC, MBBS"
-</i>
-
-`;
-
-}
-
-
-/* Default */
-
-return `
-
-🤖 <b>ChoiceKart AI:</b><br><br>
-
-I can help you with:
-
-<br><br>
-
-🎓 CUET colleges<br>
-🩺 NEET colleges<br>
-🌾 Agriculture / UPCATET<br>
-🐄 Veterinary / BVSc<br>
-🎯 Score & rank based guidance<br>
-🏫 Course selection<br>
-👨‍🏫 Counselling
-
-<br><br>
-
-Try asking:
-
-<i>
-"I got 520 in NEET, General category,
-which colleges should I consider?"
-</i>
-
-`;
-
-}
-
-
-/* ===============================
+/* =====================================================
    COUNSELLING
-================================ */
+===================================================== */
 
 function bookCounselling(){
 
-const booking={
+const name =
+document.getElementById("counsellingName").value.trim();
 
-date:new Date().toLocaleString(),
+const phone =
+document.getElementById("counsellingPhone").value.trim();
 
-price:settings.price
+const exam =
+document.getElementById("counsellingExam").value;
 
-};
 
-bookings.push(booking);
-
-saveData();
-
-updateDashboard();
-
-if(settings.whatsapp){
-
-const message =
-encodeURIComponent(
-"Hello ChoiceKart, I want to book counselling."
-);
-
-window.open(
-"https://wa.me/"+settings.whatsapp+
-"?text="+message,
-"_blank"
-);
-
-}else{
+if(!name || !phone || !exam){
 
 alert(
-"Counselling request recorded. WhatsApp contact has not been configured by Admin yet."
+"Please enter your name, mobile number and exam."
+);
+
+return;
+
+}
+
+
+alert(
+"✅ Counselling request received!\n\n" +
+"Name: " + name +
+"\nExam: " + exam +
+"\n\nOur counselling feature can be connected to WhatsApp/backend next."
 );
 
 }
 
-}
 
-
-/* ===============================
+/* =====================================================
    ADMIN OPEN
-================================ */
+===================================================== */
 
 function openAdmin(){
 
 document.getElementById("adminLogin")
-.style.display="flex";
+.style.display = "flex";
 
 }
 
+
+/* =====================================================
+   ADMIN LOGIN
+===================================================== */
 
 function adminLogin(){
 
 const password =
 document.getElementById("adminPassword").value;
 
-if(password===ADMIN_PASSWORD){
 
-document.getElementById("adminPassword").value="";
+if(password === ADMIN_PASSWORD){
+
+document.getElementById("adminPassword")
+.value = "";
 
 document.getElementById("adminLogin")
-.style.display="none";
+.style.display = "none";
 
 document.getElementById("adminPanel")
-.style.display="block";
+.style.display = "block";
 
 loadAdminColleges();
-
 loadAdminCutoffs();
-
-loadSettings();
-
-updateDashboard();
+updateStats();
 
 }else{
 
@@ -2193,48 +1960,48 @@ alert("❌ Wrong Admin Password!");
 }
 
 
+/* =====================================================
+   CLOSE ADMIN
+===================================================== */
+
 function closeAdmin(){
 
 document.getElementById("adminPanel")
-.style.display="none";
+.style.display = "none";
 
 }
 
 
-/* ===============================
+/* =====================================================
    ADMIN TABS
-================================ */
+===================================================== */
 
 function showAdminTab(tabId,button){
 
-[
-"dashboardTab",
-"collegeTab",
-"cutoffTab",
-"settingsTab"
-].forEach(id=>{
+document.getElementById("collegeTab")
+.style.display = "none";
 
-document.getElementById(id)
-.style.display="none";
-
-});
+document.getElementById("cutoffTab")
+.style.display = "none";
 
 document.getElementById(tabId)
-.style.display="block";
+.style.display = "block";
 
 document.querySelectorAll(".admin-tab")
-.forEach(tab=>
-tab.classList.remove("active")
-);
+.forEach(function(tab){
+
+tab.classList.remove("active");
+
+});
 
 button.classList.add("active");
 
 }
 
 
-/* ===============================
+/* =====================================================
    ADD COLLEGE
-================================ */
+===================================================== */
 
 function adminAddCollege(){
 
@@ -2245,7 +2012,7 @@ const name =
 document.getElementById("adminCollegeName")
 .value.trim();
 
-const courses =
+const coursesInput =
 document.getElementById("adminCourses")
 .value.trim();
 
@@ -2254,11 +2021,10 @@ document.getElementById("adminLocation")
 .value.trim();
 
 const type =
-document.getElementById("adminType")
-.value;
+document.getElementById("adminType").value;
 
 
-if(!exam || !name || !courses){
+if(!exam || !name || !coursesInput){
 
 alert(
 "Please fill Exam, College Name and Courses."
@@ -2269,79 +2035,101 @@ return;
 }
 
 
-colleges.push({
+const newCollege = {
 
 exam:exam,
 
 name:name,
 
-courses:courses
+courses:
+coursesInput
 .split(",")
-.map(x=>x.trim())
-.filter(Boolean),
+.map(function(course){
+return course.trim();
+})
+.filter(function(course){
+return course !== "";
+}),
 
 location:
 location || "Not Added",
 
 type:
-type || "State University"
+type || "Government State University"
 
-});
+};
 
+
+colleges.push(newCollege);
 
 saveData();
 
 loadAdminColleges();
 
-updateDashboard();
+updateStats();
 
-alert("✅ College Added Successfully!");
+alert(
+"✅ College Added Successfully!"
+);
 
 
-document.getElementById("adminCollegeName").value="";
-document.getElementById("adminCourses").value="";
-document.getElementById("adminLocation").value="";
+document.getElementById(
+"adminCollegeName"
+).value = "";
+
+document.getElementById(
+"adminCourses"
+).value = "";
+
+document.getElementById(
+"adminLocation"
+).value = "";
 
 }
 
 
-/* ===============================
-   LOAD COLLEGES
-================================ */
+/* =====================================================
+   LOAD ADMIN COLLEGES
+===================================================== */
 
 function loadAdminColleges(){
 
 const list =
-document.getElementById("adminCollegeList");
+document.getElementById(
+"adminCollegeList"
+);
 
-let html="";
+let html = "";
 
-colleges.forEach((college,index)=>{
 
-html+=`
+colleges.forEach(function(college,index){
+
+html += `
 
 <div class="admin-item">
 
-<h4>🏫 ${college.name}</h4>
+<h4>
+🏫 ${escapeHTML(college.name)}
+</h4>
 
 <p>
 <b>Exam:</b>
-${college.exam}
+${escapeHTML(college.exam)}
 </p>
 
 <p>
 <b>Courses:</b>
-${college.courses.join(", ")}
+${college.courses.map(escapeHTML).join(", ")}
 </p>
 
 <p>
 <b>Location:</b>
-${college.location}
+${escapeHTML(college.location)}
 </p>
 
 <p>
 <b>Type:</b>
-${college.type}
+${escapeHTML(college.type)}
 </p>
 
 <div class="admin-actions">
@@ -2368,78 +2156,108 @@ Delete
 
 });
 
-list.innerHTML=
+
+list.innerHTML =
 html || "<p>No colleges found.</p>";
 
 }
 
 
-/* ===============================
+/* =====================================================
    EDIT COLLEGE
-================================ */
+===================================================== */
 
 function editCollege(index){
 
-const c=colleges[index];
+const college =
+colleges[index];
 
-const name=prompt(
+
+const name =
+prompt(
 "College Name:",
-c.name
+college.name
 );
 
-if(name===null)return;
+if(name === null) return;
 
-const location=prompt(
+
+const location =
+prompt(
 "Location:",
-c.location
+college.location
 );
 
-if(location===null)return;
+if(location === null) return;
 
-const type=prompt(
+
+const type =
+prompt(
 "College Type:",
-c.type
+college.type
 );
 
-if(type===null)return;
+if(type === null) return;
 
-const courses=prompt(
+
+const courses =
+prompt(
 "Courses separated by comma:",
-c.courses.join(", ")
+college.courses.join(", ")
 );
 
-if(courses===null)return;
+if(courses === null) return;
 
-c.name=name.trim();
 
-c.location=location.trim();
+colleges[index].name =
+name.trim();
 
-c.type=type.trim();
+colleges[index].location =
+location.trim();
 
-c.courses=
+colleges[index].type =
+type.trim();
+
+colleges[index].courses =
 courses
 .split(",")
-.map(x=>x.trim())
-.filter(Boolean);
+.map(function(course){
+return course.trim();
+})
+.filter(function(course){
+return course !== "";
+});
+
 
 saveData();
 
 loadAdminColleges();
 
-alert("✅ College Updated!");
+alert(
+"✅ College Updated!"
+);
 
 }
 
 
-/* ===============================
+/* =====================================================
    DELETE COLLEGE
-================================ */
+===================================================== */
 
 function deleteCollege(index){
 
-if(!confirm(
-"Delete "+colleges[index].name+"?"
-))return;
+const collegeName =
+colleges[index].name;
+
+
+if(
+!confirm(
+"Delete " + collegeName + "?"
+)
+){
+return;
+}
+
 
 colleges.splice(index,1);
 
@@ -2447,36 +2265,46 @@ saveData();
 
 loadAdminColleges();
 
-updateDashboard();
+updateStats();
 
 }
 
 
-/* ===============================
+/* =====================================================
    ADD CUTOFF
-================================ */
+===================================================== */
 
 function adminAddCutoff(){
 
 const college =
-document.getElementById("cutoffCollegeName")
-.value.trim();
+document.getElementById(
+"cutoffCollegeName"
+).value.trim();
 
 const exam =
-document.getElementById("cutoffExamName").value;
+document.getElementById(
+"cutoffExamName"
+).value;
 
 const course =
-document.getElementById("cutoffCourseName")
-.value.trim();
+document.getElementById(
+"cutoffCourseName"
+).value.trim();
 
 const category =
-document.getElementById("cutoffCategory").value;
+document.getElementById(
+"cutoffCategory"
+).value;
 
 const score =
-document.getElementById("cutoffScore").value;
+document.getElementById(
+"cutoffScore"
+).value;
 
 const year =
-document.getElementById("cutoffYear").value;
+document.getElementById(
+"cutoffYear"
+).value;
 
 
 if(
@@ -2487,80 +2315,112 @@ if(
 !year
 ){
 
-alert("Please fill all cutoff details.");
+alert(
+"Please fill all cutoff details."
+);
 
 return;
 
 }
 
 
-cutoffs.push({
+const newCutoff = {
 
-college,
-exam,
-course,
-category,
-score,
-year
+college:college,
 
-});
+exam:exam,
+
+course:course,
+
+category:category,
+
+score:score,
+
+year:year
+
+};
+
+
+cutoffs.push(newCutoff);
 
 saveData();
 
 loadAdminCutoffs();
 
-updateDashboard();
+updateStats();
 
-alert("✅ Cutoff Saved Successfully!");
+alert(
+"✅ Cutoff Saved Successfully!"
+);
 
 
 document.getElementById(
 "cutoffCollegeName"
-).value="";
+).value = "";
 
 document.getElementById(
 "cutoffCourseName"
-).value="";
+).value = "";
 
 document.getElementById(
 "cutoffScore"
-).value="";
+).value = "";
 
 document.getElementById(
 "cutoffYear"
-).value="";
+).value = "";
 
 }
 
 
-/* ===============================
+/* =====================================================
    LOAD CUTOFFS
-================================ */
+===================================================== */
 
 function loadAdminCutoffs(){
 
 const list =
-document.getElementById("adminCutoffList");
+document.getElementById(
+"adminCutoffList"
+);
 
-let html="";
+let html = "";
 
-cutoffs.forEach((c,index)=>{
 
-html+=`
+cutoffs.forEach(function(cutoff,index){
+
+html += `
 
 <div class="admin-item">
 
-<h4>🎯 ${c.college}</h4>
+<h4>
+🎯 ${escapeHTML(cutoff.college)}
+</h4>
 
-<p><b>Exam:</b> ${c.exam}</p>
+<p>
+<b>Exam:</b>
+${escapeHTML(cutoff.exam)}
+</p>
 
-<p><b>Course:</b> ${c.course}</p>
+<p>
+<b>Course:</b>
+${escapeHTML(cutoff.course)}
+</p>
 
-<p><b>Category:</b> ${c.category}</p>
+<p>
+<b>Category:</b>
+${escapeHTML(cutoff.category)}
+</p>
 
-<p><b>Cutoff:</b> ${c.score}</p>
+<p>
+<b>Cutoff:</b>
+${escapeHTML(cutoff.score)}
+</p>
 
-<p><b>Year:</b> ${c.year}</p>
+<p>
+<b>Year:</b>
+${escapeHTML(cutoff.year)}
+</p>
 
 <div class="admin-actions">
 
@@ -2579,20 +2439,27 @@ Delete
 
 });
 
-list.innerHTML=
+
+list.innerHTML =
 html || "<p>No cutoffs added yet.</p>";
 
 }
 
 
-/* ===============================
+/* =====================================================
    DELETE CUTOFF
-================================ */
+===================================================== */
 
 function deleteCutoff(index){
 
-if(!confirm("Delete this cutoff?"))
+if(
+!confirm(
+"Delete this cutoff?"
+)
+){
 return;
+}
+
 
 cutoffs.splice(index,1);
 
@@ -2600,176 +2467,504 @@ saveData();
 
 loadAdminCutoffs();
 
-updateDashboard();
+updateStats();
 
 }
 
 
-/* ===============================
-   SETTINGS
-================================ */
+/* =====================================================
+   ADMIN STATS
+===================================================== */
 
-function loadSettings(){
-
-document.getElementById("settingPrice")
-.value=settings.price;
-
-document.getElementById("settingWhatsapp")
-.value=settings.whatsapp;
-
-document.getElementById("settingInstagram")
-.value=settings.instagram;
-
-document.getElementById("settingLinkedin")
-.value=settings.linkedin;
-
-}
-
-
-function saveSettings(){
-
-const price =
-document.getElementById("settingPrice")
-.value;
-
-const whatsapp =
-document.getElementById("settingWhatsapp")
-.value.trim();
-
-const instagram =
-document.getElementById("settingInstagram")
-.value.trim();
-
-const linkedin =
-document.getElementById("settingLinkedin")
-.value.trim();
-
-
-settings={
-
-price:price || 499,
-
-whatsapp,
-
-instagram,
-
-linkedin
-
-};
-
-
-localStorage.setItem(
-"choicekart_settings",
-JSON.stringify(settings)
-);
-
-updatePublicSettings();
-
-alert("✅ Settings Saved!");
-
-}
-
-
-/* ===============================
-   PUBLIC SETTINGS
-================================ */
-
-function updatePublicSettings(){
-
-document.getElementById(
-"counsellingPrice"
-).textContent=
-"₹"+settings.price;
-
-
-const links =
-document.getElementById("socialLinks");
-
-let html="";
-
-if(settings.whatsapp){
-
-html+=`
-
-<a
-class="whatsapp"
-href="https://wa.me/${settings.whatsapp}"
-target="_blank"
->
-💬 WhatsApp
-</a>
-
-`;
-
-}
-
-if(settings.instagram){
-
-html+=`
-
-<a
-class="instagram"
-href="${settings.instagram}"
-target="_blank"
->
-📸 Instagram
-</a>
-
-`;
-
-}
-
-if(settings.linkedin){
-
-html+=`
-
-<a
-class="linkedin"
-href="${settings.linkedin}"
-target="_blank"
->
-💼 LinkedIn
-</a>
-
-`;
-
-}
-
-links.innerHTML=html;
-
-}
-
-
-/* ===============================
-   DASHBOARD
-================================ */
-
-function updateDashboard(){
+function updateStats(){
 
 document.getElementById(
 "collegeCount"
-).textContent=colleges.length;
+).textContent =
+colleges.length;
 
 document.getElementById(
 "cutoffCount"
-).textContent=cutoffs.length;
-
-document.getElementById(
-"counsellingCount"
-).textContent=bookings.length;
+).textContent =
+cutoffs.length;
 
 }
 
 
-/* ===============================
-   START
-================================ */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   CHOICEKART AI
+===================================================== */
+
+function sendAI(){
+
+const input =
+document.getElementById("aiInput");
+
+const text =
+input.value.trim();
+
+if(!text) return;
+
+askAI(text);
+
+input.value = "";
+
+}
+
+
+/* =====================================================
+   ADD AI MESSAGE
+===================================================== */
+
+function addAIMessage(text,type){
+
+const messages =
+document.getElementById("aiMessages");
+
+const div =
+document.createElement("div");
+
+div.className =
+"ai-message " + type;
+
+div.innerHTML =
+text;
+
+messages.appendChild(div);
+
+messages.scrollTop =
+messages.scrollHeight;
+
+}
+
+
+/* =====================================================
+   AI PROCESSOR
+===================================================== */
+
+function askAI(question){
+
+if(!question) return;
+
+
+addAIMessage(
+escapeHTML(question),
+"user"
+);
+
+
+setTimeout(function(){
+
+const answer =
+generateAIResponse(question);
+
+addAIMessage(
+answer,
+"bot"
+);
+
+},350);
+
+}
+
+
+/* =====================================================
+   SMART AI RESPONSE
+===================================================== */
+
+function generateAIResponse(question){
+
+const q =
+question.toLowerCase();
+
+
+/* GREETING */
+
+if(
+q.includes("hello") ||
+q.includes("hi") ||
+q.includes("hey") ||
+q.includes("namaste")
+){
+
+return `
+
+👋 <b>Namaste!</b>
+
+Main <b>ChoiceKart AI</b> hoon.
+
+Aap mujhe apna:
+
+<ul style="margin:10px 0 10px 20px;">
+
+<li>Exam</li>
+<li>Score / Rank</li>
+<li>Category</li>
+<li>Preferred Course</li>
+<li>College Type</li>
+
+</ul>
+
+bata sakte ho.
+
+Example:
+<b>"CUET 720, General, B.Sc colleges"</b>
+
+`;
+
+}
+
+
+/* HELP */
+
+if(
+q.includes("help") ||
+q.includes("kya kar") ||
+q.includes("kaise")
+){
+
+return `
+
+🤖 Main aapki help kar sakta hoon:
+
+<br><br>
+
+🎓 CUET college search<br>
+🩺 NEET college search<br>
+🌾 UPCATET agriculture colleges<br>
+🐄 BVSc colleges<br>
+🎯 Cutoff information<br>
+🏫 University type filtering<br>
+📚 Course selection<br>
+💡 Admission guidance
+
+<br><br>
+
+Apna exam aur score/rank bhejo.
+
+`;
+
+}
+
+
+/* DETECT EXAM */
+
+let exam = null;
+
+if(q.includes("cuet")) exam="CUET";
+
+if(q.includes("neet")) exam="NEET";
+
+if(q.includes("upcatet")) exam="UPCATET";
+
+if(
+q.includes("bvsc") ||
+q.includes("veterinary") ||
+q.includes("vet")
+){
+exam="BVSc";
+}
+
+
+/* IF NO EXAM */
+
+if(!exam){
+
+if(
+q.includes("college") ||
+q.includes("university") ||
+q.includes("admission")
+){
+
+return `
+
+🎓 College recommendation ke liye mujhe
+kam se kam <b>exam</b> batao.
+
+Example:
+
+<br><br>
+
+<b>
+"CUET B.Sc colleges"
+</b>
+
+<br><br>
+
+Ya:
+
+<b>
+"NEET MBBS colleges"
+</b>
+
+`;
+
+}
+
+return `
+
+🤖 Main ChoiceKart AI hoon.
+
+Aap CUET, NEET, UPCATET ya BVSc ke
+baare mein pooch sakte ho.
+
+Example:
+
+<br><br>
+
+<b>
+"Mera UPCATET score 450 hai, B.Sc Agriculture chahiye."
+</b>
+
+`;
+
+}
+
+
+/* DETECT COURSE */
+
+let course = null;
+
+
+const allCourses = [
+"MBBS",
+"BDS",
+"BAMS",
+"BHMS",
+"BUMS",
+"BSMS",
+"B.Sc Agriculture",
+"B.Sc Horticulture",
+"B.Sc Forestry",
+"B.Tech Agricultural Engineering",
+"B.F.Sc",
+"B.Sc Food Technology",
+"B.V.Sc & A.H",
+"B.Sc Nursing",
+"B.Com",
+"BBA",
+"BCA",
+"B.Pharm",
+"B.Sc",
+"B.A"
+];
+
+
+for(let i=0;i<allCourses.length;i++){
+
+if(
+q.includes(
+allCourses[i].toLowerCase()
+)
+){
+
+course =
+allCourses[i];
+
+break;
+
+}
+
+}
+
+
+/* SPECIAL COURSE DETECTION */
+
+if(
+!course &&
+q.includes("agriculture")
+){
+
+course="B.Sc Agriculture";
+
+}
+
+if(
+!course &&
+q.includes("mbbs")
+){
+
+course="MBBS";
+
+}
+
+
+/* DETECT TYPE */
+
+let type = "All";
+
+if(q.includes("central university")){
+type="Central University";
+}
+
+else if(q.includes("agriculture university")){
+type="Agriculture University";
+}
+
+else if(q.includes("veterinary")){
+type="Veterinary College";
+}
+
+else if(q.includes("medical institute")){
+type="Medical Institute";
+}
+
+
+/* FIND MATCHES */
+
+let matches =
+colleges.filter(function(college){
+
+if(college.exam !== exam)
+return false;
+
+if(
+course &&
+course !== "Any Course" &&
+!college.courses.includes(course)
+)
+return false;
+
+if(
+type !== "All" &&
+college.type !== type
+)
+return false;
+
+return true;
+
+});
+
+
+/* LIMIT */
+
+matches =
+matches.slice(0,8);
+
+
+/* NO MATCH */
+
+if(matches.length === 0){
+
+return `
+
+😔 <b>Abhi exact matching college nahi mila.</b>
+
+<br><br>
+
+Aap:
+
+<ul style="margin:10px 0 10px 20px;">
+<li>Course change karke dekho</li>
+<li>College Type "All Types" rakho</li>
+<li>Exam verify karo</li>
+</ul>
+
+Agar aap apna exact <b>score/rank + category</b>
+bataoge to main aur useful guidance de sakta hoon.
+
+`;
+
+}
+
+
+/* CREATE AI RESULT */
+
+let answer = `
+
+🤖 <b>ChoiceKart AI Recommendation</b>
+
+<br><br>
+
+<b>Exam:</b> ${exam}
+
+${course ? `<br><b>Course:</b> ${escapeHTML(course)}` : ""}
+
+<br><br>
+
+Mere current ChoiceKart database mein
+ye matching options hain:
+
+<br>
+
+`;
+
+
+matches.forEach(function(college,index){
+
+answer += `
+
+<div style="
+margin-top:10px;
+padding:10px;
+background:#f8fafc;
+border-radius:8px;
+">
+
+<b>${index+1}. 🏫
+${escapeHTML(college.name)}</b>
+
+<br>
+
+📍 ${escapeHTML(college.location)}
+
+<br>
+
+🎓 ${college.courses
+.map(escapeHTML)
+.join(", ")}
+
+<br>
+
+🏛️ ${escapeHTML(college.type)}
+
+</div>
+
+`;
+
+});
+
+
+answer += `
+
+<br>
+
+⚠️ <b>Important:</b>
+Ye database-based recommendation hai.
+Final admission official eligibility,
+counselling aur current cutoff par depend karta hai.
+
+`;
+
+
+return answer;
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
 updateCourses();
 
-updatePublicSettings();
-
-updateDashboard();
+updateStats();
 
 </script>
 
