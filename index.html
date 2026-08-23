@@ -220,7 +220,201 @@ footer{
     padding:35px;
 }
 
+/* =========================
+   ADMIN BUTTON
+========================= */
+
+.admin-open-btn{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#102d4f;
+    color:white;
+    border:none;
+    padding:14px 18px;
+    border-radius:30px;
+    cursor:pointer;
+    z-index:999;
+    font-weight:bold;
+    box-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+
+/* ADMIN LOGIN */
+
+.admin-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.admin-login-box{
+    background:white;
+    width:100%;
+    max-width:400px;
+    padding:30px;
+    border-radius:15px;
+}
+
+.admin-login-box h2{
+    margin-bottom:10px;
+}
+
+.admin-login-box span{
+    color:#ff841f;
+}
+
+.admin-login-box input{
+    margin:15px 0;
+}
+
+.admin-login-box button{
+    width:100%;
+    border:none;
+    background:#ff841f;
+    color:white;
+    padding:13px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* ADMIN PANEL */
+
+#adminPanel{
+    display:none;
+    position:fixed;
+    inset:0;
+    overflow-y:auto;
+    background:#f5f9ff;
+    z-index:2001;
+    padding:25px;
+}
+
+.admin-header{
+    max-width:1000px;
+    margin:0 auto 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.admin-header h2 span{
+    color:#ff841f;
+}
+
+.admin-header button{
+    border:none;
+    background:#dc2626;
+    color:white;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.admin-card{
+    max-width:1000px;
+    margin:20px auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px #ddd;
+}
+
+.admin-card h3{
+    margin-bottom:15px;
+}
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.admin-card input,
+.admin-card select{
+    margin:0;
+}
+
+.admin-main-btn{
+    width:100%;
+    margin-top:15px;
+    background:#ff841f;
+    color:white;
+    border:none;
+    padding:13px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.admin-item{
+    background:#f5f9ff;
+    padding:15px;
+    border-radius:10px;
+    margin-top:12px;
+}
+
+.admin-item p{
+    margin:6px 0;
+    color:#475569;
+}
+
+.admin-actions{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+    flex-wrap:wrap;
+}
+
+.edit-btn,
+.delete-btn{
+    width:auto;
+    padding:8px 14px;
+    border:none;
+    border-radius:7px;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.edit-btn{
+    background:#102d4f;
+}
+
+.delete-btn{
+    background:#dc2626;
+}
+
+.admin-tabs{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.admin-tab{
+    border:none;
+    background:#e2e8f0;
+    color:#102d4f;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.admin-tab.active{
+    background:#102d4f;
+    color:white;
+}
+
 /* MOBILE */
+
 @media(max-width:800px){
 
     nav{
@@ -234,6 +428,17 @@ footer{
     .exam-grid,
     .features{
         grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .admin-grid{
+        grid-template-columns:1fr;
+    }
+
+    #adminPanel{
+        padding:15px;
     }
 }
 
@@ -255,10 +460,7 @@ footer{
 </style>
 </head>
 
-
 <body>
-
-<!-- HEADER -->
 
 <header>
 
@@ -275,8 +477,6 @@ Choice<span>Kart</span>
 
 </header>
 
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -301,13 +501,9 @@ Book Counselling
 </section>
 
 
-<!-- EXAMS -->
-
 <section class="section" id="exams">
 
-<h2 class="title">
-Choose Your Exam
-</h2>
+<h2 class="title">Choose Your Exam</h2>
 
 <div class="exam-grid">
 
@@ -336,13 +532,9 @@ Choose Your Exam
 </section>
 
 
-<!-- FIND -->
-
 <section class="section" id="find">
 
-<h2 class="title">
-Find Your Best College
-</h2>
+<h2 class="title">Find Your Best College</h2>
 
 <div class="form-box">
 
@@ -350,28 +542,13 @@ Find Your Best College
 
 <select id="exam" onchange="updateCourses()">
 
-<option value="">
-Select Exam
-</option>
-
-<option value="CUET">
-CUET
-</option>
-
-<option value="NEET">
-NEET
-</option>
-
-<option value="UPCATET">
-UPCATET
-</option>
-
-<option value="BVSc">
-BVSc
-</option>
+<option value="">Select Exam</option>
+<option value="CUET">CUET</option>
+<option value="NEET">NEET</option>
+<option value="UPCATET">UPCATET</option>
+<option value="BVSc">BVSc</option>
 
 </select>
-
 
 <label>Enter Score / Rank</label>
 
@@ -381,19 +558,15 @@ id="score"
 placeholder="Enter your score or rank"
 >
 
-
 <label>Category</label>
 
 <select id="category">
-
 <option>General</option>
 <option>OBC</option>
 <option>SC</option>
 <option>ST</option>
 <option>EWS</option>
-
 </select>
-
 
 <label>Preferred Course</label>
 
@@ -401,14 +574,12 @@ placeholder="Enter your score or rank"
 <option value="">Select course</option>
 </select>
 
-
 <button
 class="btn primary"
 onclick="findCollege()"
 >
 Find My Colleges
 </button>
-
 
 <div class="result" id="result">
 
@@ -423,13 +594,9 @@ Find My Colleges
 </section>
 
 
-<!-- HOW IT WORKS -->
-
 <section class="section" id="how">
 
-<h2 class="title">
-How ChoiceKart Works
-</h2>
+<h2 class="title">How ChoiceKart Works</h2>
 
 <div class="features">
 
@@ -462,13 +629,9 @@ How ChoiceKart Works
 </section>
 
 
-<!-- COUNSELLING -->
-
 <section class="section" id="counselling">
 
-<h2 class="title">
-Need Personal Guidance?
-</h2>
+<h2 class="title">Need Personal Guidance?</h2>
 
 <div class="form-box" style="text-align:center">
 
@@ -490,17 +653,13 @@ Book Counselling
 </section>
 
 
-<!-- FOOTER -->
-
 <footer>
 
 <h2>
 Choice<span>Kart</span>
 </h2>
 
-<p>
-Your Rank. Your Choice. Your Future.
-</p>
+<p>Your Rank. Your Choice. Your Future.</p>
 
 <p style="margin-top:15px;">
 © 2026 ChoiceKart
@@ -509,15 +668,214 @@ Your Rank. Your Choice. Your Future.
 </footer>
 
 
+<!-- ADMIN BUTTON -->
+
+<button class="admin-open-btn" onclick="openAdmin()">
+⚙ Admin
+</button>
+
+
+<!-- ADMIN LOGIN -->
+
+<div id="adminLogin" class="admin-modal">
+
+<div class="admin-login-box">
+
+<h2>Choice<span>Kart</span> Admin</h2>
+
+<p>Login to manage colleges and cutoffs.</p>
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Enter Admin Password"
+>
+
+<button onclick="adminLogin()">
+Login
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ADMIN PANEL -->
+
+<div id="adminPanel">
+
+<div class="admin-header">
+
+<h2>⚙ Choice<span>Kart</span> Admin Panel</h2>
+
+<button onclick="closeAdmin()">
+Close Admin
+</button>
+
+</div>
+
+
+<div class="admin-tabs">
+
+<button class="admin-tab active" onclick="showAdminTab('collegeTab',this)">
+🏫 Colleges
+</button>
+
+<button class="admin-tab" onclick="showAdminTab('cutoffTab',this)">
+🎯 Cutoffs
+</button>
+
+</div>
+
+
+<!-- COLLEGE TAB -->
+
+<div id="collegeTab">
+
+<div class="admin-card">
+
+<h3>➕ Add New College</h3>
+
+<div class="admin-grid">
+
+<select id="adminExam">
+<option value="">Select Exam</option>
+<option>CUET</option>
+<option>NEET</option>
+<option>UPCATET</option>
+<option>BVSc</option>
+</select>
+
+<input
+id="adminCollegeName"
+placeholder="College Name"
+>
+
+<input
+id="adminCourses"
+placeholder="Courses separated by comma"
+>
+
+<input
+id="adminLocation"
+placeholder="Location"
+>
+
+<input
+id="adminType"
+placeholder="College Type"
+>
+
+</div>
+
+<button class="admin-main-btn" onclick="adminAddCollege()">
+Add College
+</button>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>📋 Manage Colleges</h3>
+
+<div id="adminCollegeList">
+Loading...
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CUTOFF TAB -->
+
+<div id="cutoffTab" style="display:none;">
+
+<div class="admin-card">
+
+<h3>🎯 Add Cutoff</h3>
+
+<div class="admin-grid">
+
+<input
+id="cutoffCollegeName"
+placeholder="College Name"
+>
+
+<select id="cutoffExamName">
+<option value="">Select Exam</option>
+<option>CUET</option>
+<option>NEET</option>
+<option>UPCATET</option>
+<option>BVSc</option>
+</select>
+
+<input
+id="cutoffCourseName"
+placeholder="Course"
+>
+
+<select id="cutoffCategory">
+<option>General</option>
+<option>OBC</option>
+<option>SC</option>
+<option>ST</option>
+<option>EWS</option>
+</select>
+
+<input
+type="number"
+id="cutoffScore"
+placeholder="Cutoff Score / Rank"
+>
+
+<input
+type="number"
+id="cutoffYear"
+placeholder="Year (example: 2026)"
+>
+
+</div>
+
+<button class="admin-main-btn" onclick="adminAddCutoff()">
+Save Cutoff
+</button>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>📊 Manage Cutoffs</h3>
+
+<div id="adminCutoffList">
+No cutoffs added yet.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
 <script>
 
 /* =========================================
-   COURSE LIST
+   ADMIN PASSWORD
 ========================================= */
 
-const courses = {
+const ADMIN_PASSWORD = "ChoiceKart@2026";
 
-    CUET: [
+
+/* =========================================
+   DEFAULT COURSE LIST
+========================================= */
+
+const defaultCourses = {
+
+    CUET:[
         "Any Course",
         "B.A",
         "B.Com",
@@ -530,7 +888,7 @@ const courses = {
         "Integrated Programs"
     ],
 
-    NEET: [
+    NEET:[
         "Any Course",
         "MBBS",
         "BDS",
@@ -541,7 +899,7 @@ const courses = {
         "B.Sc Nursing"
     ],
 
-    UPCATET: [
+    UPCATET:[
         "Any Course",
         "B.Sc Agriculture",
         "B.Sc Horticulture",
@@ -552,7 +910,7 @@ const courses = {
         "B.V.Sc & A.H"
     ],
 
-    BVSc: [
+    BVSc:[
         "Any Course",
         "B.V.Sc & A.H"
     ]
@@ -561,12 +919,10 @@ const courses = {
 
 
 /* =========================================
-   COLLEGE DATABASE
+   DEFAULT COLLEGE DATABASE
 ========================================= */
 
-const colleges = [
-
-/* ---------- CUET ---------- */
+const defaultColleges = [
 
 {
 exam:"CUET",
@@ -624,8 +980,6 @@ location:"Silchar, Assam",
 type:"Central University"
 },
 
-/* ---------- NEET ---------- */
-
 {
 exam:"NEET",
 name:"King George's Medical University",
@@ -657,8 +1011,6 @@ courses:["MBBS"],
 location:"Lucknow, Uttar Pradesh",
 type:"Government Medical Institute"
 },
-
-/* ---------- UPCATET ---------- */
 
 {
 exam:"UPCATET",
@@ -707,8 +1059,6 @@ location:"Banda, Uttar Pradesh",
 type:"Agriculture University"
 },
 
-/* ---------- BVSc ---------- */
-
 {
 exam:"BVSc",
 name:"College of Veterinary Science & Animal Husbandry, Ayodhya",
@@ -726,6 +1076,40 @@ type:"Veterinary College"
 }
 
 ];
+
+
+/* =========================================
+   LOAD SAVED DATA
+========================================= */
+
+let colleges =
+JSON.parse(
+    localStorage.getItem("choicekart_colleges")
+) || defaultColleges;
+
+let cutoffs =
+JSON.parse(
+    localStorage.getItem("choicekart_cutoffs")
+) || [];
+
+
+/* =========================================
+   SAVE DATA
+========================================= */
+
+function saveData(){
+
+    localStorage.setItem(
+        "choicekart_colleges",
+        JSON.stringify(colleges)
+    );
+
+    localStorage.setItem(
+        "choicekart_cutoffs",
+        JSON.stringify(cutoffs)
+    );
+
+}
 
 
 /* =========================================
@@ -747,7 +1131,7 @@ function updateCourses(){
         return;
     }
 
-    courses[exam].forEach(function(course){
+    defaultCourses[exam].forEach(function(course){
 
         const option =
             document.createElement("option");
@@ -763,7 +1147,7 @@ function updateCourses(){
 
 
 /* =========================================
-   SELECT EXAM CARD
+   SELECT EXAM
 ========================================= */
 
 function selectExam(exam){
@@ -800,30 +1184,20 @@ function findCollege(){
 
 
     if(!exam){
-
         alert("Please select your exam.");
-
         return;
     }
-
 
     if(!score){
-
         alert("Please enter your score or rank.");
-
         return;
     }
-
 
     if(!course){
-
         alert("Please select your preferred course.");
-
         return;
     }
 
-
-    /* FIND MATCHES */
 
     const matches =
         colleges.filter(function(college){
@@ -831,11 +1205,9 @@ function findCollege(){
             const examMatch =
                 college.exam === exam;
 
-
             const courseMatch =
                 course === "Any Course" ||
                 college.courses.includes(course);
-
 
             return examMatch && courseMatch;
 
@@ -848,67 +1220,88 @@ function findCollege(){
     const resultText =
         document.getElementById("resultText");
 
-
     result.style.display = "block";
 
-
-    /* NO MATCH */
 
     if(matches.length === 0){
 
         resultText.innerHTML = `
-
         <div class="college-card">
-
         <h3>😔 No College Found</h3>
-
         <p>
         No college was found in the current
         ChoiceKart database for this exam and course.
         </p>
-
-        </div>
-
-        `;
+        </div>`;
 
         return;
     }
 
-
-    /* RESULT */
 
     let html = `
 
     <p style="margin:12px 0;line-height:1.6;">
 
     <b>Exam:</b> ${exam}<br>
-
     <b>Score / Rank:</b> ${score}<br>
-
     <b>Category:</b> ${category}<br>
-
     <b>Course:</b> ${course}
 
     </p>
 
     <p style="margin-bottom:15px;color:#64748b;">
-    These are matching colleges in the current
-    ChoiceKart database. Admission depends on
-    official eligibility, counselling and cutoff.
+    These are matching colleges in the ChoiceKart database.
+    Admission depends on official eligibility,
+    counselling and cutoff.
     </p>
-
     `;
 
 
     matches.forEach(function(college){
 
+        const collegeCutoffs =
+        cutoffs.filter(function(cutoff){
+
+            return (
+                cutoff.college.toLowerCase() ===
+                college.name.toLowerCase()
+                &&
+                cutoff.exam === exam
+                &&
+                (
+                    cutoff.course === course ||
+                    course === "Any Course"
+                )
+                &&
+                cutoff.category === category
+            );
+
+        });
+
+
+        let cutoffText = "";
+
+        if(collegeCutoffs.length > 0){
+
+            const latest =
+            collegeCutoffs[collegeCutoffs.length - 1];
+
+            cutoffText = `
+            <p>
+            <b>🎯 Cutoff:</b>
+            ${latest.score}
+            (${latest.category}, ${latest.year})
+            </p>
+            `;
+
+        }
+
+
         html += `
 
         <div class="college-card">
 
-            <h3>
-            🏫 ${college.name}
-            </h3>
+            <h3>🏫 ${college.name}</h3>
 
             <p>
             <b>📍 Location:</b>
@@ -916,8 +1309,8 @@ function findCollege(){
             </p>
 
             <p>
-            <b>🎓 Course:</b>
-            ${course}
+            <b>🎓 Courses:</b>
+            ${college.courses.join(", ")}
             </p>
 
             <p>
@@ -925,19 +1318,19 @@ function findCollege(){
             ${college.type}
             </p>
 
+            ${cutoffText}
+
             <span class="badge">
             ✓ Course Match
             </span>
 
         </div>
-
         `;
 
     });
 
 
     resultText.innerHTML = html;
-
 
     result.scrollIntoView({
         behavior:"smooth",
@@ -956,6 +1349,503 @@ function bookCounselling(){
     alert(
         "Counselling booking feature will be connected next."
     );
+
+}
+
+
+/* =========================================
+   ADMIN OPEN
+========================================= */
+
+function openAdmin(){
+
+    document.getElementById("adminLogin")
+        .style.display = "flex";
+
+}
+
+
+/* =========================================
+   ADMIN LOGIN
+========================================= */
+
+function adminLogin(){
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    if(password === ADMIN_PASSWORD){
+
+        document.getElementById("adminPassword").value = "";
+
+        document.getElementById("adminLogin")
+            .style.display = "none";
+
+        document.getElementById("adminPanel")
+            .style.display = "block";
+
+        loadAdminColleges();
+        loadAdminCutoffs();
+
+    }else{
+
+        alert("❌ Wrong Admin Password!");
+
+    }
+
+}
+
+
+/* =========================================
+   CLOSE ADMIN
+========================================= */
+
+function closeAdmin(){
+
+    document.getElementById("adminPanel")
+        .style.display = "none";
+
+}
+
+
+/* =========================================
+   ADMIN TABS
+========================================= */
+
+function showAdminTab(tabId,button){
+
+    document.getElementById("collegeTab")
+        .style.display = "none";
+
+    document.getElementById("cutoffTab")
+        .style.display = "none";
+
+    document.getElementById(tabId)
+        .style.display = "block";
+
+    document.querySelectorAll(".admin-tab")
+        .forEach(function(tab){
+
+            tab.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+}
+
+
+/* =========================================
+   ADD COLLEGE
+========================================= */
+
+function adminAddCollege(){
+
+    const exam =
+        document.getElementById("adminExam").value;
+
+    const name =
+        document.getElementById("adminCollegeName").value.trim();
+
+    const coursesInput =
+        document.getElementById("adminCourses").value.trim();
+
+    const location =
+        document.getElementById("adminLocation").value.trim();
+
+    const type =
+        document.getElementById("adminType").value.trim();
+
+
+    if(!exam || !name || !coursesInput){
+
+        alert(
+            "Please fill Exam, College Name and Courses."
+        );
+
+        return;
+
+    }
+
+
+    const newCollege = {
+
+        exam:exam,
+
+        name:name,
+
+        courses:
+        coursesInput
+        .split(",")
+        .map(function(course){
+
+            return course.trim();
+
+        })
+        .filter(function(course){
+
+            return course !== "";
+
+        }),
+
+        location:location || "Not Added",
+
+        type:type || "Not Added"
+
+    };
+
+
+    colleges.push(newCollege);
+
+    saveData();
+
+    loadAdminColleges();
+
+    alert("✅ College Added Successfully!");
+
+
+    document.getElementById("adminCollegeName").value = "";
+    document.getElementById("adminCourses").value = "";
+    document.getElementById("adminLocation").value = "";
+    document.getElementById("adminType").value = "";
+
+}
+
+
+/* =========================================
+   LOAD ADMIN COLLEGES
+========================================= */
+
+function loadAdminColleges(){
+
+    const list =
+        document.getElementById("adminCollegeList");
+
+    let html = "";
+
+    colleges.forEach(function(college,index){
+
+        html += `
+
+        <div class="admin-item">
+
+        <h4>🏫 ${college.name}</h4>
+
+        <p><b>Exam:</b> ${college.exam}</p>
+
+        <p>
+        <b>Courses:</b>
+        ${college.courses.join(", ")}
+        </p>
+
+        <p>
+        <b>Location:</b>
+        ${college.location}
+        </p>
+
+        <p>
+        <b>Type:</b>
+        ${college.type}
+        </p>
+
+        <div class="admin-actions">
+
+        <button
+        class="edit-btn"
+        onclick="editCollege(${index})"
+        >
+        Edit
+        </button>
+
+        <button
+        class="delete-btn"
+        onclick="deleteCollege(${index})"
+        >
+        Delete
+        </button>
+
+        </div>
+
+        </div>
+        `;
+
+    });
+
+    list.innerHTML =
+        html || "<p>No colleges found.</p>";
+
+}
+
+
+/* =========================================
+   EDIT COLLEGE
+========================================= */
+
+function editCollege(index){
+
+    const college = colleges[index];
+
+    const name =
+    prompt(
+        "College Name:",
+        college.name
+    );
+
+    if(name === null) return;
+
+
+    const location =
+    prompt(
+        "Location:",
+        college.location
+    );
+
+    if(location === null) return;
+
+
+    const type =
+    prompt(
+        "College Type:",
+        college.type
+    );
+
+    if(type === null) return;
+
+
+    const courses =
+    prompt(
+        "Courses separated by comma:",
+        college.courses.join(", ")
+    );
+
+    if(courses === null) return;
+
+
+    colleges[index].name = name.trim();
+
+    colleges[index].location =
+        location.trim();
+
+    colleges[index].type =
+        type.trim();
+
+    colleges[index].courses =
+        courses
+        .split(",")
+        .map(function(course){
+            return course.trim();
+        })
+        .filter(function(course){
+            return course !== "";
+        });
+
+
+    saveData();
+
+    loadAdminColleges();
+
+    alert("✅ College Updated!");
+
+}
+
+
+/* =========================================
+   DELETE COLLEGE
+========================================= */
+
+function deleteCollege(index){
+
+    const collegeName =
+        colleges[index].name;
+
+    if(
+        !confirm(
+            "Delete " + collegeName + "?"
+        )
+    ){
+        return;
+    }
+
+    colleges.splice(index,1);
+
+    saveData();
+
+    loadAdminColleges();
+
+}
+
+
+/* =========================================
+   ADD CUTOFF
+========================================= */
+
+function adminAddCutoff(){
+
+    const college =
+        document.getElementById("cutoffCollegeName")
+        .value.trim();
+
+    const exam =
+        document.getElementById("cutoffExamName")
+        .value;
+
+    const course =
+        document.getElementById("cutoffCourseName")
+        .value.trim();
+
+    const category =
+        document.getElementById("cutoffCategory")
+        .value;
+
+    const score =
+        document.getElementById("cutoffScore")
+        .value;
+
+    const year =
+        document.getElementById("cutoffYear")
+        .value;
+
+
+    if(
+        !college ||
+        !exam ||
+        !course ||
+        !score ||
+        !year
+    ){
+
+        alert(
+            "Please fill all cutoff details."
+        );
+
+        return;
+
+    }
+
+
+    const newCutoff = {
+
+        college:college,
+        exam:exam,
+        course:course,
+        category:category,
+        score:score,
+        year:year
+
+    };
+
+
+    cutoffs.push(newCutoff);
+
+    saveData();
+
+    loadAdminCutoffs();
+
+    alert("✅ Cutoff Saved Successfully!");
+
+
+    document.getElementById(
+        "cutoffCollegeName"
+    ).value = "";
+
+    document.getElementById(
+        "cutoffCourseName"
+    ).value = "";
+
+    document.getElementById(
+        "cutoffScore"
+    ).value = "";
+
+    document.getElementById(
+        "cutoffYear"
+    ).value = "";
+
+}
+
+
+/* =========================================
+   LOAD CUTOFFS
+========================================= */
+
+function loadAdminCutoffs(){
+
+    const list =
+        document.getElementById("adminCutoffList");
+
+    let html = "";
+
+    cutoffs.forEach(function(cutoff,index){
+
+        html += `
+
+        <div class="admin-item">
+
+        <h4>🎯 ${cutoff.college}</h4>
+
+        <p>
+        <b>Exam:</b>
+        ${cutoff.exam}
+        </p>
+
+        <p>
+        <b>Course:</b>
+        ${cutoff.course}
+        </p>
+
+        <p>
+        <b>Category:</b>
+        ${cutoff.category}
+        </p>
+
+        <p>
+        <b>Cutoff:</b>
+        ${cutoff.score}
+        </p>
+
+        <p>
+        <b>Year:</b>
+        ${cutoff.year}
+        </p>
+
+        <div class="admin-actions">
+
+        <button
+        class="delete-btn"
+        onclick="deleteCutoff(${index})"
+        >
+        Delete
+        </button>
+
+        </div>
+
+        </div>
+        `;
+
+    });
+
+    list.innerHTML =
+        html || "<p>No cutoffs added yet.</p>";
+
+}
+
+
+/* =========================================
+   DELETE CUTOFF
+========================================= */
+
+function deleteCutoff(index){
+
+    if(
+        !confirm("Delete this cutoff?")
+    ){
+        return;
+    }
+
+    cutoffs.splice(index,1);
+
+    saveData();
+
+    loadAdminCutoffs();
 
 }
 
