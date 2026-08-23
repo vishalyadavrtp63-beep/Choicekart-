@@ -670,41 +670,431 @@ function findCollege(){
     else if(exam === "JEE"){
 
         resultText =
-        "⚙️ Based on your JEE rank/score, explore NITs, IIITs, GFTIs and state engineering colleges. Check the latest counselling cut-offs.";
+<script>
+
+const colleges = [
+
+    /* ================= CUET ================= */
+
+    {
+        exam:"CUET",
+        name:"Banaras Hindu University",
+        course:["B.Sc","Agriculture"],
+        minScore:520,
+        category:"General",
+        location:"Varanasi, Uttar Pradesh",
+        type:"Central University"
+    },
+
+    {
+        exam:"CUET",
+        name:"University of Delhi",
+        course:["B.Sc","B.Com","B.A","BBA"],
+        minScore:560,
+        category:"General",
+        location:"Delhi",
+        type:"Central University"
+    },
+
+    {
+        exam:"CUET",
+        name:"Jawaharlal Nehru University",
+        course:["B.A"],
+        minScore:570,
+        category:"General",
+        location:"New Delhi",
+        type:"Central University"
+    },
+
+    {
+        exam:"CUET",
+        name:"Aligarh Muslim University",
+        course:["B.Sc","B.Com","B.A"],
+        minScore:500,
+        category:"General",
+        location:"Aligarh, Uttar Pradesh",
+        type:"Central University"
+    },
+
+    {
+        exam:"CUET",
+        name:"University of Allahabad",
+        course:["B.Sc","B.Com","B.A"],
+        minScore:480,
+        category:"General",
+        location:"Prayagraj, Uttar Pradesh",
+        type:"Central University"
+    },
+
+    {
+        exam:"CUET",
+        name:"Central University of Haryana",
+        course:["B.Sc","B.Com","B.A"],
+        minScore:420,
+        category:"General",
+        location:"Haryana",
+        type:"Central University"
+    },
+
+
+    /* ================= JEE ================= */
+
+    {
+        exam:"JEE",
+        name:"National Institute of Technology, Delhi",
+        course:["Engineering"],
+        minScore:180,
+        category:"General",
+        location:"New Delhi",
+        type:"NIT"
+    },
+
+    {
+        exam:"JEE",
+        name:"National Institute of Technology, Kurukshetra",
+        course:["Engineering"],
+        minScore:170,
+        category:"General",
+        location:"Haryana",
+        type:"NIT"
+    },
+
+    {
+        exam:"JEE",
+        name:"IIIT Delhi",
+        course:["Engineering"],
+        minScore:190,
+        category:"General",
+        location:"New Delhi",
+        type:"IIIT"
+    },
+
+    {
+        exam:"JEE",
+        name:"JSS Academy of Technical Education",
+        course:["Engineering"],
+        minScore:90,
+        category:"General",
+        location:"Noida, Uttar Pradesh",
+        type:"Engineering College"
+    },
+
+
+    /* ================= NEET ================= */
+
+    {
+        exam:"NEET",
+        name:"Maulana Azad Medical College",
+        course:["Medical"],
+        minScore:680,
+        category:"General",
+        location:"New Delhi",
+        type:"Government Medical College"
+    },
+
+    {
+        exam:"NEET",
+        name:"BHU Institute of Medical Sciences",
+        course:["Medical"],
+        minScore:650,
+        category:"General",
+        location:"Varanasi, Uttar Pradesh",
+        type:"Government Medical College"
+    },
+
+    {
+        exam:"NEET",
+        name:"King George's Medical University",
+        course:["Medical"],
+        minScore:640,
+        category:"General",
+        location:"Lucknow, Uttar Pradesh",
+        type:"Government Medical College"
+    },
+
+
+    /* ================= CAT ================= */
+
+    {
+        exam:"CAT",
+        name:"IIM Ahmedabad",
+        course:["MBA"],
+        minScore:98,
+        category:"General",
+        location:"Ahmedabad, Gujarat",
+        type:"IIM"
+    },
+
+    {
+        exam:"CAT",
+        name:"IIM Bangalore",
+        course:["MBA"],
+        minScore:98,
+        category:"General",
+        location:"Bengaluru, Karnataka",
+        type:"IIM"
+    },
+
+    {
+        exam:"CAT",
+        name:"IIM Lucknow",
+        course:["MBA"],
+        minScore:95,
+        category:"General",
+        location:"Lucknow, Uttar Pradesh",
+        type:"IIM"
+    },
+
+    {
+        exam:"CAT",
+        name:"FMS Delhi",
+        course:["MBA"],
+        minScore:95,
+        category:"General",
+        location:"New Delhi",
+        type:"Management Institute"
+    }
+
+];
+
+
+function selectExam(exam){
+
+    document.getElementById("exam").value = exam;
+
+    document.getElementById("find").scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+function getChance(score,minScore){
+
+    score = Number(score);
+    minScore = Number(minScore);
+
+    if(score >= minScore + 70){
+
+        return {
+            text:"High Chance",
+            class:"high"
+        };
+
+    }
+
+    if(score >= minScore){
+
+        return {
+            text:"Moderate Chance",
+            class:"moderate"
+        };
+
+    }
+
+    if(score >= minScore - 40){
+
+        return {
+            text:"Ambitious",
+            class:"ambitious"
+        };
+
+    }
+
+    return null;
+
+}
+
+
+function findCollege(){
+
+    const exam =
+    document.getElementById("exam").value;
+
+    const score =
+    Number(document.getElementById("score").value);
+
+    const category =
+    document.getElementById("category").value;
+
+    const course =
+    document.getElementById("course").value;
+
+
+    if(!exam || !score){
+
+        alert("Please select your exam and enter your score/rank.");
+
+        return;
 
     }
 
 
-    else if(exam === "NEET"){
+    let matches = [];
 
-        resultText =
-        "🩺 Based on your NEET score/rank, explore government and private medical colleges through the applicable counselling process.";
+
+    colleges.forEach(college => {
+
+        if(college.exam !== exam){
+
+            return;
+
+        }
+
+
+        let courseMatch =
+        college.course.includes(course) ||
+        course === "Any Course";
+
+
+        if(!courseMatch){
+
+            return;
+
+        }
+
+
+        const chance =
+        getChance(score,college.minScore);
+
+
+        if(chance){
+
+            matches.push({
+                ...college,
+                chance:chance
+            });
+
+        }
+
+    });
+
+
+    const result =
+    document.getElementById("result");
+
+    const resultText =
+    document.getElementById("resultText");
+
+
+    result.style.display = "block";
+
+
+    if(matches.length === 0){
+
+        resultText.innerHTML = `
+
+        <div class="no-result">
+
+        😕 <b>No strong matches found.</b>
+
+        <p>
+        Try selecting another course or check colleges
+        with lower expected cut-offs.
+        </p>
+
+        </div>
+
+        `;
+
+        result.scrollIntoView({
+            behavior:"smooth"
+        });
+
+        return;
 
     }
 
 
-    else if(exam === "CAT"){
+    let html = `
 
-        resultText =
-        "📊 Based on your CAT percentile/score, explore IIMs and other leading MBA colleges according to your category and profile.";
+    <div class="summary">
 
-    }
+        <h3>🎯 Your College Recommendations</h3>
+
+        <p>
+        <b>${exam}</b> score/rank:
+        <b>${score}</b>
+        </p>
+
+        <p>
+        Category:
+        <b>${category}</b>
+        &nbsp; | &nbsp;
+        Course:
+        <b>${course}</b>
+        </p>
+
+    </div>
+
+    <div class="college-list">
+    `;
 
 
-    document.getElementById("result").style.display = "block";
+    matches.forEach((college,index) => {
+
+        html += `
+
+        <div class="college-card">
+
+            <div class="college-number">
+                ${index + 1}
+            </div>
+
+            <div class="college-info">
+
+                <h3>
+                    ${college.name}
+                </h3>
+
+                <p>
+                    📍 ${college.location}
+                </p>
+
+                <p>
+                    🎓 ${college.type}
+                </p>
+
+                <p>
+                    📚 ${college.course.join(", ")}
+                </p>
+
+            </div>
+
+            <div class="chance ${college.chance.class}">
+                ${college.chance.text}
+            </div>
+
+        </div>
+
+        `;
+
+    });
 
 
-    document.getElementById("resultText").innerHTML =
+    html += `
 
-    "<b>Exam:</b> " + exam +
-    "<br><b>Score / Rank:</b> " + score +
-    "<br><b>Category:</b> " + category +
-    "<br><b>Course:</b> " + course +
-    "<br><br>" + resultText;
+    </div>
+
+    <div class="notice">
+
+        ⚠️ <b>Important:</b>
+        These are estimated recommendations based on
+        the entered score and selected preferences.
+        Actual admission depends on the latest
+        official cut-offs, eligibility, counselling
+        rules and seat availability.
+
+    </div>
+
+    `;
 
 
-    document.getElementById("result").scrollIntoView({
-        behavior: "smooth"
+    resultText.innerHTML = html;
+
+
+    result.scrollIntoView({
+        behavior:"smooth"
     });
 
 }
