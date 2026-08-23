@@ -3,192 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ChoiceKart | Your Rank. Your Choice. Your Future.</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f5f9ff;color:#102d4f}
-header{background:#fff;padding:18px 7%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px #ddd;position:sticky;top:0}
-.logo{font-size:28px;font-weight:800}
-.logo span{color:#ff841f}
-nav a{margin-left:20px;text-decoration:none;color:#102d4f;font-weight:bold}
-.hero{text-align:center;padding:70px 20px;background:linear-gradient(135deg,#eef7ff,#fff)}
-.hero h1{font-size:45px}
-.hero h1 span{color:#ff841f}
-.hero p{max-width:650px;margin:20px auto;line-height:1.6;color:#64748b;font-size:18px}
-.btn{display:inline-block;border:0;padding:14px 25px;border-radius:9px;background:#ff841f;color:white;font-weight:bold;text-decoration:none;cursor:pointer;margin:6px}
-.section{padding:60px 7%}
-.title{text-align:center;font-size:32px;margin-bottom:30px}
-.exams{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.exam{background:white;padding:25px;text-align:center;border-radius:14px;box-shadow:0 5px 20px #ddd;cursor:pointer}
-.form{max-width:600px;margin:auto;background:white;padding:30px;border-radius:15px;box-shadow:0 5px 25px #ddd}
-label{display:block;margin:15px 0 6px;font-weight:bold}
-input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:7px;font-size:16px}
-.form button{width:100%;margin-top:20px}
-.result{display:none;margin-top:20px;padding:18px;background:#e9f8ed;border-radius:10px}
-.features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.feature{background:white;padding:25px;text-align:center;border-radius:14px;box-shadow:0 5px 20px #ddd}
-footer{background:#102d4f;color:white;text-align:center;padding:35px}
-footer span{color:#ff841f}
-
-@media(max-width:700px){
-nav{display:none}
-.hero h1{font-size:34px}
-.exams,.features{grid-template-columns:1fr 1fr}
-}
-@media(max-width:450px){
-.exams,.features{grid-template-columns:1fr}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<div class="logo">Choice<span>Kart</span></div>
-<nav>
-<a href="#exams">Exams</a>
-<a href="#find">Find Colleges</a>
-<a href="#counselling">Counselling</a>
-</nav>
-</header>
-
-<section class="hero">
-<h1>Your Rank.<br><span>Your Choice. Your Future.</span></h1>
-<p>Find the right college and course based on your exam score, rank and preferences.</p>
-<a href="#find" class="btn">Find My Colleges</a>
-<a href="#counselling" class="btn">Book Counselling</a>
-</section>
-
-<section class="section" id="exams">
-<h2 class="title">Choose Your Exam</h2>
-
-<div class="exams">
-<div class="exam" onclick="chooseExam('CUET')"><h3>🎓 CUET</h3><p>University Admissions</p></div>
-<div class="exam" onclick="chooseExam('JEE')"><h3>⚙️ JEE</h3><p>Engineering</p></div>
-<div class="exam" onclick="chooseExam('NEET')"><h3>🩺 NEET</h3><p>Medical</p></div>
-<div class="exam" onclick="chooseExam('CAT')"><h3>📊 CAT</h3><p>MBA Admissions</p></div>
-</div>
-</section>
-
-<section class="section" id="find">
-<h2 class="title">Find Your Best Colleges</h2>
-
-<div class="form">
-
-<label>Exam</label>
-<select id="exam">
-<option value="">Select Exam</option>
-<option>CUET</option>
-<option>JEE</option>
-<option>NEET</option>
-<option>CAT</option>
-</select>
-
-<label>Score / Rank</label>
-<input id="score" type="number" placeholder="Enter your score or rank">
-
-<label>Category</label>
-<select id="category">
-<option>General</option>
-<option>OBC</option>
-<option>SC</option>
-<option>ST</option>
-<option>EWS</option>
-</select>
-
-<label>Preferred Course</label>
-<select id="course">
-<option>Any Course</option>
-<option>B.Sc</option>
-<option>B.Com</option>
-<option>BBA</option>
-<option>Engineering</option>
-<option>Medical</option>
-<option>Agriculture</option>
-<option>MBA</option>
-</select>
-
-<button class="btn" onclick="findColleges()">Find My Colleges</button>
-
-<div class="result" id="result">
-<h3>🎯 College Match</h3>
-<p id="message"></p>
-</div>
-
-</div>
-</section>
-
-<section class="section">
-<h2 class="title">How ChoiceKart Works</h2>
-
-<div class="features">
-<div class="feature">🔢<h3>Enter Rank</h3><p>Add your score or rank.</p></div>
-<div class="feature">🎯<h3>Set Preferences</h3><p>Select your course.</p></div>
-<div class="feature">🏫<h3>Explore Colleges</h3><p>Find suitable options.</p></div>
-<div class="feature">👨‍🏫<h3>Get Counselling</h3><p>Talk to a counsellor.</p></div>
-</div>
-</section>
-
-<section class="section" id="counselling">
-<h2 class="title">Need Personal Guidance?</h2>
-
-<div class="form" style="text-align:center">
-<h2>📞 Book Counselling</h2>
-<p style="margin:15px 0">Get personalised admission guidance.</p>
-<button class="btn" onclick="bookCounselling()">Book Counselling</button>
-</div>
-</section>
-
-<footer>
-<h2>Choice<span>Kart</span></h2>
-<p>Your Rank. Your Choice. Your Future.</p>
-<p style="margin-top:15px">© 2026 ChoiceKart</p>
-</footer>
-
-<script>
-function chooseExam(exam){
-document.getElementById("exam").value=exam;
-document.getElementById("find").scrollIntoView({behavior:"smooth"});
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
 }
 
-function findColleges(){
-let exam=document.getElementById("exam").value;
-let score=document.getElementById("score").value;
-let category=document.getElementById("category").value;
-let course=document.getElementById("course").value;
-
-if(exam==="" || score===""){
-alert("Please select your exam and enter your score/rank.");
-return;
+body{
+    background:#f5f9ff;
+    color:#102d4f;
 }
 
-document.getElementById("result").style.display="block";
-
-document.getElementById("message").innerHTML=
-"Your <b>"+exam+"</b> score/rank is <b>"+score+
-"</b>. Category: <b>"+category+
-"</b>. Course: <b>"+course+
-"</b>.<br><br>College recommendations will appear here after we connect the ChoiceKart college database.";
+/* HEADER */
+header{
+    background:#fff;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px #ddd;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-function bookCounselling(){
-alert("Counselling booking system will be connected next.");
+.logo{
+    font-size:28px;
+    font-weight:800;
 }
-</script>
 
-</body>
-</html>}
-
-.logo span{
+.logo span,
+footer span{
     color:#ff841f;
 }
 
 nav a{
+    margin-left:20px;
     text-decoration:none;
     color:#102d4f;
-    margin-left:25px;
-    font-weight:600;
+    font-weight:bold;
 }
 
 .login{
@@ -198,14 +56,15 @@ nav a{
     border-radius:8px;
 }
 
+/* HERO */
 .hero{
     text-align:center;
     padding:70px 20px;
-    background:linear-gradient(135deg,#eef7ff,#ffffff);
+    background:linear-gradient(135deg,#eef7ff,#fff);
 }
 
 .hero h1{
-    font-size:48px;
+    font-size:45px;
     line-height:1.15;
 }
 
@@ -216,59 +75,60 @@ nav a{
 .hero p{
     max-width:700px;
     margin:20px auto;
-    font-size:19px;
-    color:#64748b;
     line-height:1.6;
+    color:#64748b;
+    font-size:18px;
 }
 
 .buttons{
-    margin-top:30px;
+    margin-top:25px;
 }
 
 .btn{
     display:inline-block;
-    padding:15px 28px;
-    border-radius:10px;
-    text-decoration:none;
+    border:0;
+    padding:14px 25px;
+    border-radius:9px;
+    color:white;
     font-weight:bold;
-    margin:7px;
+    text-decoration:none;
     cursor:pointer;
-    border:none;
+    margin:6px;
     font-size:16px;
 }
 
 .primary{
     background:#ff841f;
-    color:white;
 }
 
 .secondary{
     background:#102d4f;
-    color:white;
 }
 
+/* SECTIONS */
 .section{
     padding:60px 7%;
 }
 
-.section-title{
+.title{
     text-align:center;
-    font-size:34px;
-    margin-bottom:35px;
+    font-size:32px;
+    margin-bottom:30px;
 }
 
+/* EXAMS */
 .exam-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    gap:18px;
 }
 
 .exam{
     background:white;
     padding:25px;
     text-align:center;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.07);
+    border-radius:14px;
+    box-shadow:0 5px 20px #ddd;
     cursor:pointer;
     transition:.2s;
 }
@@ -278,43 +138,40 @@ nav a{
 }
 
 .exam h3{
-    font-size:22px;
     margin-bottom:8px;
 }
 
-.exam p{
-    color:#64748b;
-}
-
+/* FORM */
 .form-box{
-    max-width:700px;
+    max-width:650px;
     margin:auto;
     background:white;
-    padding:35px;
-    border-radius:18px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 25px #ddd;
 }
 
 label{
     display:block;
-    margin-top:18px;
-    margin-bottom:7px;
+    margin:15px 0 6px;
     font-weight:bold;
 }
 
-input,select{
+input,
+select{
     width:100%;
-    padding:14px;
-    border:1px solid #d8e1ec;
-    border-radius:8px;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:7px;
     font-size:16px;
 }
 
 .form-box button{
     width:100%;
-    margin-top:25px;
+    margin-top:20px;
 }
 
+/* RESULT */
 .result{
     display:none;
     margin-top:25px;
@@ -323,18 +180,65 @@ input,select{
     border-radius:12px;
 }
 
+.result-intro{
+    margin:10px 0 15px;
+    line-height:1.6;
+}
+
+/* COLLEGE CARD */
+.college-card{
+    background:white;
+    margin-top:15px;
+    padding:20px;
+    border-radius:12px;
+    border-left:5px solid #ff841f;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.college-card h3{
+    color:#102d4f;
+    margin-bottom:12px;
+    font-size:20px;
+}
+
+.college-card p{
+    margin:7px 0;
+    color:#475569;
+    line-height:1.5;
+}
+
+.chance{
+    display:inline-block;
+    margin-top:8px;
+    padding:7px 12px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.high{
+    background:#d9f7df;
+    color:#15803d;
+}
+
+.good{
+    background:#fff4c2;
+    color:#a16207;
+}
+
+/* FEATURES */
 .features{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    gap:18px;
 }
 
 .feature{
     background:white;
     padding:25px;
-    border-radius:15px;
     text-align:center;
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
+    border-radius:14px;
+    box-shadow:0 5px 20px #ddd;
 }
 
 .feature .icon{
@@ -342,18 +246,21 @@ input,select{
     margin-bottom:12px;
 }
 
+/* FOOTER */
 footer{
     background:#102d4f;
     color:white;
     text-align:center;
-    padding:35px 20px;
+    padding:35px;
 }
 
-footer span{
-    color:#ff841f;
+footer p{
+    margin-top:10px;
 }
 
+/* MOBILE */
 @media(max-width:800px){
+
     nav{
         display:none;
     }
@@ -369,6 +276,7 @@ footer span{
 }
 
 @media(max-width:500px){
+
     .exam-grid,
     .features{
         grid-template-columns:1fr;
@@ -391,6 +299,8 @@ footer span{
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
 <div class="logo">
@@ -408,6 +318,8 @@ Choice<span>Kart</span>
 </header>
 
 
+<!-- HERO -->
+
 <section class="hero">
 
 <h1>
@@ -421,16 +333,25 @@ rank, category, preferences and career goals.
 </p>
 
 <div class="buttons">
-<a href="#find" class="btn primary">Find My Colleges</a>
-<a href="#counselling" class="btn secondary">Book Counselling</a>
+
+<a href="#find" class="btn primary">
+Find My Colleges
+</a>
+
+<a href="#counselling" class="btn secondary">
+Book Counselling
+</a>
+
 </div>
 
 </section>
 
 
+<!-- EXAMS -->
+
 <section class="section" id="exams">
 
-<h2 class="section-title">
+<h2 class="title">
 Choose Your Exam
 </h2>
 
@@ -461,9 +382,11 @@ Choose Your Exam
 </section>
 
 
+<!-- FIND COLLEGES -->
+
 <section class="section" id="find">
 
-<h2 class="section-title">
+<h2 class="title">
 Find Your Best Colleges
 </h2>
 
@@ -472,11 +395,27 @@ Find Your Best Colleges
 <label>Select Exam</label>
 
 <select id="exam">
-<option value="">Select Exam</option>
-<option>CUET</option>
-<option>JEE</option>
-<option>NEET</option>
-<option>CAT</option>
+
+<option value="">
+Select Exam
+</option>
+
+<option value="CUET">
+CUET
+</option>
+
+<option value="JEE">
+JEE
+</option>
+
+<option value="NEET">
+NEET
+</option>
+
+<option value="CAT">
+CAT
+</option>
+
 </select>
 
 
@@ -485,7 +424,7 @@ Find Your Best Colleges
 <input
 type="number"
 id="score"
-placeholder="Example: 620"
+placeholder="Example: 510"
 >
 
 
@@ -493,11 +432,25 @@ placeholder="Example: 620"
 
 <select id="category">
 
-<option>General</option>
-<option>OBC</option>
-<option>SC</option>
-<option>ST</option>
-<option>EWS</option>
+<option value="General">
+General
+</option>
+
+<option value="OBC">
+OBC
+</option>
+
+<option value="SC">
+SC
+</option>
+
+<option value="ST">
+ST
+</option>
+
+<option value="EWS">
+EWS
+</option>
 
 </select>
 
@@ -506,29 +459,60 @@ placeholder="Example: 620"
 
 <select id="course">
 
-<option>Any Course</option>
-<option>Engineering</option>
-<option>Medical</option>
-<option>B.Sc</option>
-<option>B.Com</option>
-<option>BBA</option>
-<option>B.A</option>
-<option>Agriculture</option>
-<option>MBA</option>
+<option value="Any Course">
+Any Course
+</option>
+
+<option value="Engineering">
+Engineering
+</option>
+
+<option value="Medical">
+Medical
+</option>
+
+<option value="B.Sc">
+B.Sc
+</option>
+
+<option value="B.Com">
+B.Com
+</option>
+
+<option value="BBA">
+BBA
+</option>
+
+<option value="B.A">
+B.A
+</option>
+
+<option value="Agriculture">
+Agriculture
+</option>
+
+<option value="MBA">
+MBA
+</option>
 
 </select>
 
 
-<button class="btn primary" onclick="findCollege()">
+<button
+class="btn primary"
+onclick="findCollege()"
+>
 Find My Colleges
 </button>
 
+
+<!-- RESULT -->
 
 <div class="result" id="result">
 
 <h3>🎯 Your College Match</h3>
 
-<p id="resultText"></p>
+<div id="resultText"></div>
 
 </div>
 
@@ -537,36 +521,65 @@ Find My Colleges
 </section>
 
 
+<!-- HOW IT WORKS -->
+
 <section class="section" id="how">
 
-<h2 class="section-title">
+<h2 class="title">
 How ChoiceKart Works
 </h2>
 
 <div class="features">
 
 <div class="feature">
+
 <div class="icon">🔢</div>
+
 <h3>01. Enter Rank</h3>
-<p>Add your exam score or rank.</p>
+
+<p>
+Add your exam score or rank.
+</p>
+
 </div>
 
+
 <div class="feature">
+
 <div class="icon">🎯</div>
+
 <h3>02. Set Preferences</h3>
-<p>Select course, location and budget.</p>
+
+<p>
+Select your preferred course.
+</p>
+
 </div>
 
+
 <div class="feature">
+
 <div class="icon">🏫</div>
+
 <h3>03. Explore Colleges</h3>
-<p>Compare and shortlist colleges.</p>
+
+<p>
+Find and compare suitable colleges.
+</p>
+
 </div>
 
+
 <div class="feature">
+
 <div class="icon">👨‍🏫</div>
+
 <h3>04. Get Counselling</h3>
-<p>Talk to an admission counsellor.</p>
+
+<p>
+Talk to an admission counsellor.
+</p>
+
 </div>
 
 </div>
@@ -574,23 +587,32 @@ How ChoiceKart Works
 </section>
 
 
+<!-- COUNSELLING -->
+
 <section class="section" id="counselling">
 
-<h2 class="section-title">
+<h2 class="title">
 Need Personal Guidance?
 </h2>
 
-<div class="form-box" style="text-align:center">
+<div
+class="form-box"
+style="text-align:center"
+>
 
-<h2>📞 Book Counselling</h2>
+<h2>
+📞 Book Counselling
+</h2>
 
 <p style="margin:15px 0;color:#64748b;">
 Get personalised guidance from our admission counsellors
 and make the right college decision.
 </p>
 
-<button class="btn secondary"
-onclick="alert('Counselling booking feature coming soon!')">
+<button
+class="btn secondary"
+onclick="bookCounselling()"
+>
 Book Counselling
 </button>
 
@@ -599,180 +621,354 @@ Book Counselling
 </section>
 
 
+<!-- FOOTER -->
+
 <footer>
 
-<h2>Choice<span>Kart</span></h2>
+<h2>
+Choice<span>Kart</span>
+</h2>
 
-<p style="margin-top:10px;">
+<p>
 Your Rank. Your Choice. Your Future.
 </p>
 
-<p style="margin-top:20px;">
+<p>
 © 2026 ChoiceKart. All rights reserved.
 </p>
 
 </footer>
 
 
+<!-- JAVASCRIPT -->
+
 <script>
-    const colleges = [
 
-    {
-        exam: "CUET",
-        name: "Banaras Hindu University",
-        course: ["B.Sc", "Agriculture"],
-        minScore: 500,
-        category: "General",
-        location: "Varanasi, Uttar Pradesh",
-        type: "Central University"
-    },
+/*
+==================================================
+COLLEGE DATABASE
+==================================================
+*/
 
-    {
-        exam: "CUET",
-        name: "University of Delhi",
-        course: ["B.Sc", "B.Com", "B.A", "BBA"],
-        minScore: 500,
-        category: "General",
-        location: "New Delhi",
-        type: "Central University"
-    },
+const colleges = [
 
-    {
-        exam: "CUET",
-        name: "Central University of Haryana",
-        course: ["Agriculture", "B.Sc"],
-        minScore: 450,
-        category: "General",
-        location: "Mahendragarh, Haryana",
-        type: "Central University"
-    },
+/* CUET */
 
-    {
-        exam: "CUET",
-        name: "Central University of Jharkhand",
-        course: ["Agriculture", "B.Sc"],
-        minScore: 450,
-        category: "General",
-        location: "Ranchi, Jharkhand",
-        type: "Central University"
-    },
+{
+    exam:"CUET",
+    name:"Banaras Hindu University",
+    course:["B.Sc","Agriculture"],
+    minScore:500,
+    location:"Varanasi, Uttar Pradesh",
+    type:"Central University"
+},
 
-    {
-        exam: "CUET",
-        name: "Central University of South Bihar",
-        course: ["Agriculture", "B.Sc"],
-        minScore: 450,
-        category: "General",
-        location: "Gaya, Bihar",
-        type: "Central University"
-    },
+{
+    exam:"CUET",
+    name:"University of Delhi",
+    course:["B.Sc","B.Com","B.A","BBA"],
+    minScore:500,
+    location:"New Delhi",
+    type:"Central University"
+},
 
-    {
-        exam: "CUET",
-        name: "Assam University",
-        course: ["Agriculture", "B.Sc"],
-        minScore: 450,
-        category: "General",
-        location: "Silchar, Assam",
-        type: "Central University"
-    }
+{
+    exam:"CUET",
+    name:"Central University of Haryana",
+    course:["Agriculture","B.Sc"],
+    minScore:450,
+    location:"Mahendragarh, Haryana",
+    type:"Central University"
+},
+
+{
+    exam:"CUET",
+    name:"Central University of Jharkhand",
+    course:["Agriculture","B.Sc"],
+    minScore:450,
+    location:"Ranchi, Jharkhand",
+    type:"Central University"
+},
+
+{
+    exam:"CUET",
+    name:"Central University of South Bihar",
+    course:["Agriculture","B.Sc"],
+    minScore:450,
+    location:"Gaya, Bihar",
+    type:"Central University"
+},
+
+{
+    exam:"CUET",
+    name:"Assam University",
+    course:["Agriculture","B.Sc"],
+    minScore:450,
+    location:"Silchar, Assam",
+    type:"Central University"
+}
 
 ];
+
+
+/*
+==================================================
+SELECT EXAM
+==================================================
+*/
 
 function selectExam(exam){
 
     document.getElementById("exam").value = exam;
 
     document.getElementById("find").scrollIntoView({
-        behavior: "smooth"
+        behavior:"smooth"
     });
 
 }
 
+
+/*
+==================================================
+FIND COLLEGES
+==================================================
+*/
 
 function findCollege(){
 
-    let exam = document.getElementById("exam").value;
-    let score = Number(document.getElementById("score").value);
-    let category = document.getElementById("category").value;
-    let course = document.getElementById("course").value;
+    const exam =
+        document.getElementById("exam").value;
 
-    if(!exam || !score){
-        alert("Please select your exam and enter your score/rank.");
+    const score =
+        Number(document.getElementById("score").value);
+
+    const category =
+        document.getElementById("category").value;
+
+    const course =
+        document.getElementById("course").value;
+
+
+    /* VALIDATION */
+
+    if(!exam){
+
+        alert("Please select your exam.");
+
         return;
     }
+
+    if(!score){
+
+        alert("Please enter your score or rank.");
+
+        return;
+    }
+
+
+    /*
+    FILTER COLLEGES
+    */
 
     let matches = colleges.filter(function(college){
 
-        let examMatch = college.exam === exam;
+        /* Exam Match */
 
-        let scoreMatch = score >= Number(college.minScore);
+        const examMatch =
+            college.exam === exam;
 
-        let courseMatch = college.course.some(function(c){
-            return c.toLowerCase().includes(course.toLowerCase());
-        });
 
-        let categoryMatch =
-            college.category === "General" ||
-            college.category === category;
+        /* Score Match */
 
-        return examMatch &&
-               scoreMatch &&
-               courseMatch &&
-               categoryMatch;
+        const scoreMatch =
+            score >= Number(college.minScore);
+
+
+        /* Course Match */
+
+        let courseMatch = true;
+
+        if(course !== "Any Course"){
+
+            courseMatch =
+                college.course.some(function(c){
+
+                    return c.toLowerCase()
+                    === course.toLowerCase();
+
+                });
+
+        }
+
+
+        return (
+            examMatch &&
+            scoreMatch &&
+            courseMatch
+        );
+
     });
 
-    let resultBox = document.getElementById("result");
-    let resultText = document.getElementById("resultText");
+
+    /*
+    RESULT BOX
+    */
+
+    const resultBox =
+        document.getElementById("result");
+
+    const resultText =
+        document.getElementById("resultText");
+
 
     resultBox.style.display = "block";
 
+
+    /*
+    NO RESULT
+    */
+
     if(matches.length === 0){
 
-        resultText.innerHTML =
-        "<h3>😔 No College Found</h3>" +
-        "<p>No matching college was found for your score, category and preferred course.</p>" +
-        "<p>Try changing your score, exam or course.</p>";
+        resultText.innerHTML = `
+
+        <div class="college-card">
+
+        <h3>😔 No College Found</h3>
+
+        <p>
+        No matching college was found for your
+        selected exam, score and course.
+        </p>
+
+        <p>
+        Try selecting another course or entering
+        a different score.
+        </p>
+
+        </div>
+
+        `;
 
         return;
     }
 
-    let html =
-        "<h3>🎯 Recommended Colleges</h3>" +
-        "<p>Based on your <b>" + exam + "</b> score of <b>" +
-        score + "</b>, category <b>" + category +
-        "</b> and course <b>" + course + "</b>:</p>";
+
+    /*
+    RESULT HEADER
+    */
+
+    let html = `
+
+    <div class="result-intro">
+
+    Based on your
+    <b>${exam}</b>
+    score of
+    <b>${score}</b>,
+    category
+    <b>${category}</b>
+    and course
+    <b>${course}</b>:
+
+    </div>
+
+    `;
+
+
+    /*
+    COLLEGE CARDS
+    */
 
     matches.forEach(function(college){
 
-        let chance = "";
+        let chance;
+        let chanceClass;
+
 
         if(score >= Number(college.minScore) + 70){
+
             chance = "🟢 High Chance";
-        }
-        else if(score >= Number(college.minScore)){
-            chance = "🟡 Good Chance";
+            chanceClass = "high";
+
         }
         else{
-            chance = "🔴 Low Chance";
+
+            chance = "🟡 Good Chance";
+            chanceClass = "good";
+
         }
 
-        html +=
-        "<div class='college-card'>" +
-        "<h3>" + college.name + "</h3>" +
-        "<p><b>📍 Location:</b> " + college.location + "</p>" +
-        "<p><b>🎓 Course:</b> " + college.course.join(", ") + "</p>" +
-        "<p><b>📊 Minimum Score:</b> " + college.minScore + "</p>" +
-        "<p><b>🏫 Type:</b> " + college.type + "</p>" +
-        "<p><b>🎯 Admission Chance:</b> " + chance + "</p>" +
-        "</div>";
+
+        html += `
+
+        <div class="college-card">
+
+            <h3>
+            🏫 ${college.name}
+            </h3>
+
+            <p>
+            <b>📍 Location:</b>
+            ${college.location}
+            </p>
+
+            <p>
+            <b>🎓 Courses:</b>
+            ${college.course.join(", ")}
+            </p>
+
+            <p>
+            <b>📊 Demo Minimum Score:</b>
+            ${college.minScore}
+            </p>
+
+            <p>
+            <b>🏛️ Type:</b>
+            ${college.type}
+            </p>
+
+            <span class="chance ${chanceClass}">
+            ${chance}
+            </span>
+
+        </div>
+
+        `;
+
     });
 
+
     resultText.innerHTML = html;
+
+
+    /*
+    SCROLL TO RESULT
+    */
+
+    resultBox.scrollIntoView({
+        behavior:"smooth",
+        block:"nearest"
+    });
+
 }
 
-    }
 
+/*
+==================================================
+COUNSELLING
+==================================================
+*/
+
+function bookCounselling(){
+
+    alert(
+        "Counselling booking feature will be connected next."
+    );
+
+}
+
+</script>
 
 </body>
 </html>
