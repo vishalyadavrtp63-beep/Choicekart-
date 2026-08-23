@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ChoiceKart | Your Rank. Your Choice. Your Future.</title>
+<title>ChoiceKart | College Finder</title>
 
 <style>
 *{
@@ -21,7 +21,7 @@ body{
 
 /* HEADER */
 header{
-    background:#fff;
+    background:white;
     padding:18px 7%;
     display:flex;
     justify-content:space-between;
@@ -43,17 +43,10 @@ footer span{
 }
 
 nav a{
-    margin-left:20px;
+    margin-left:18px;
     text-decoration:none;
     color:#102d4f;
     font-weight:bold;
-}
-
-.login{
-    background:#102d4f;
-    color:white !important;
-    padding:10px 20px;
-    border-radius:8px;
 }
 
 /* HERO */
@@ -65,7 +58,6 @@ nav a{
 
 .hero h1{
     font-size:45px;
-    line-height:1.15;
 }
 
 .hero h1 span{
@@ -80,10 +72,6 @@ nav a{
     font-size:18px;
 }
 
-.buttons{
-    margin-top:25px;
-}
-
 .btn{
     display:inline-block;
     border:0;
@@ -91,7 +79,6 @@ nav a{
     border-radius:9px;
     color:white;
     font-weight:bold;
-    text-decoration:none;
     cursor:pointer;
     margin:6px;
     font-size:16px;
@@ -105,7 +92,7 @@ nav a{
     background:#102d4f;
 }
 
-/* SECTIONS */
+/* SECTION */
 .section{
     padding:60px 7%;
 }
@@ -135,10 +122,6 @@ nav a{
 
 .exam:hover{
     transform:translateY(-5px);
-}
-
-.exam h3{
-    margin-bottom:8px;
 }
 
 /* FORM */
@@ -180,12 +163,6 @@ select{
     border-radius:12px;
 }
 
-.result-intro{
-    margin:10px 0 15px;
-    line-height:1.6;
-}
-
-/* COLLEGE CARD */
 .college-card{
     background:white;
     margin-top:15px;
@@ -196,9 +173,7 @@ select{
 }
 
 .college-card h3{
-    color:#102d4f;
     margin-bottom:12px;
-    font-size:20px;
 }
 
 .college-card p{
@@ -207,23 +182,14 @@ select{
     line-height:1.5;
 }
 
-.chance{
+.badge{
     display:inline-block;
     margin-top:8px;
     padding:7px 12px;
     border-radius:20px;
+    background:#e0f2fe;
+    color:#0369a1;
     font-weight:bold;
-    font-size:14px;
-}
-
-.high{
-    background:#d9f7df;
-    color:#15803d;
-}
-
-.good{
-    background:#fff4c2;
-    color:#a16207;
 }
 
 /* FEATURES */
@@ -254,10 +220,6 @@ footer{
     padding:35px;
 }
 
-footer p{
-    margin-top:10px;
-}
-
 /* MOBILE */
 @media(max-width:800px){
 
@@ -282,10 +244,6 @@ footer p{
         grid-template-columns:1fr;
     }
 
-    .hero{
-        padding:50px 18px;
-    }
-
     .hero h1{
         font-size:32px;
     }
@@ -296,6 +254,7 @@ footer p{
 }
 </style>
 </head>
+
 
 <body>
 
@@ -312,7 +271,6 @@ Choice<span>Kart</span>
 <a href="#find">Find Colleges</a>
 <a href="#how">How It Works</a>
 <a href="#counselling">Counselling</a>
-<a class="login" href="#find">Get Started</a>
 </nav>
 
 </header>
@@ -328,11 +286,9 @@ Your Rank.<br>
 </h1>
 
 <p>
-Find the right college and course based on your exam score,
-rank, category, preferences and career goals.
+Find colleges and courses based on your entrance exam,
+score/rank, category and preferred course.
 </p>
-
-<div class="buttons">
 
 <a href="#find" class="btn primary">
 Find My Colleges
@@ -341,8 +297,6 @@ Find My Colleges
 <a href="#counselling" class="btn secondary">
 Book Counselling
 </a>
-
-</div>
 
 </section>
 
@@ -362,19 +316,19 @@ Choose Your Exam
 <p>University Admissions</p>
 </div>
 
-<div class="exam" onclick="selectExam('JEE')">
-<h3>⚙️ JEE</h3>
-<p>Engineering Admissions</p>
-</div>
-
 <div class="exam" onclick="selectExam('NEET')">
 <h3>🩺 NEET</h3>
 <p>Medical Admissions</p>
 </div>
 
-<div class="exam" onclick="selectExam('CAT')">
-<h3>📊 CAT</h3>
-<p>MBA Admissions</p>
+<div class="exam" onclick="selectExam('UPCATET')">
+<h3>🌾 UPCATET</h3>
+<p>Agriculture Admissions</p>
+</div>
+
+<div class="exam" onclick="selectExam('BVSc')">
+<h3>🐄 BVSc</h3>
+<p>Veterinary Admissions</p>
 </div>
 
 </div>
@@ -382,19 +336,19 @@ Choose Your Exam
 </section>
 
 
-<!-- FIND COLLEGES -->
+<!-- FIND -->
 
 <section class="section" id="find">
 
 <h2 class="title">
-Find Your Best Colleges
+Find Your Best College
 </h2>
 
 <div class="form-box">
 
 <label>Select Exam</label>
 
-<select id="exam">
+<select id="exam" onchange="updateCourses()">
 
 <option value="">
 Select Exam
@@ -404,27 +358,27 @@ Select Exam
 CUET
 </option>
 
-<option value="JEE">
-JEE
-</option>
-
 <option value="NEET">
 NEET
 </option>
 
-<option value="CAT">
-CAT
+<option value="UPCATET">
+UPCATET
+</option>
+
+<option value="BVSc">
+BVSc
 </option>
 
 </select>
 
 
-<label>Enter Your Score / Rank</label>
+<label>Enter Score / Rank</label>
 
 <input
 type="number"
 id="score"
-placeholder="Example: 510"
+placeholder="Enter your score or rank"
 >
 
 
@@ -432,25 +386,11 @@ placeholder="Example: 510"
 
 <select id="category">
 
-<option value="General">
-General
-</option>
-
-<option value="OBC">
-OBC
-</option>
-
-<option value="SC">
-SC
-</option>
-
-<option value="ST">
-ST
-</option>
-
-<option value="EWS">
-EWS
-</option>
+<option>General</option>
+<option>OBC</option>
+<option>SC</option>
+<option>ST</option>
+<option>EWS</option>
 
 </select>
 
@@ -458,43 +398,7 @@ EWS
 <label>Preferred Course</label>
 
 <select id="course">
-
-<option value="Any Course">
-Any Course
-</option>
-
-<option value="Engineering">
-Engineering
-</option>
-
-<option value="Medical">
-Medical
-</option>
-
-<option value="B.Sc">
-B.Sc
-</option>
-
-<option value="B.Com">
-B.Com
-</option>
-
-<option value="BBA">
-BBA
-</option>
-
-<option value="B.A">
-B.A
-</option>
-
-<option value="Agriculture">
-Agriculture
-</option>
-
-<option value="MBA">
-MBA
-</option>
-
+<option value="">Select course</option>
 </select>
 
 
@@ -506,11 +410,9 @@ Find My Colleges
 </button>
 
 
-<!-- RESULT -->
-
 <div class="result" id="result">
 
-<h3>🎯 Your College Match</h3>
+<h3>🎯 Recommended Colleges</h3>
 
 <div id="resultText"></div>
 
@@ -532,54 +434,27 @@ How ChoiceKart Works
 <div class="features">
 
 <div class="feature">
-
-<div class="icon">🔢</div>
-
-<h3>01. Enter Rank</h3>
-
-<p>
-Add your exam score or rank.
-</p>
-
+<div class="icon">📝</div>
+<h3>01. Select Exam</h3>
+<p>Choose your entrance exam.</p>
 </div>
 
-
 <div class="feature">
-
 <div class="icon">🎯</div>
-
-<h3>02. Set Preferences</h3>
-
-<p>
-Select your preferred course.
-</p>
-
+<h3>02. Enter Score</h3>
+<p>Add your score or rank.</p>
 </div>
 
-
 <div class="feature">
-
 <div class="icon">🏫</div>
-
-<h3>03. Explore Colleges</h3>
-
-<p>
-Find and compare suitable colleges.
-</p>
-
+<h3>03. Find Colleges</h3>
+<p>See matching colleges.</p>
 </div>
 
-
 <div class="feature">
-
 <div class="icon">👨‍🏫</div>
-
-<h3>04. Get Counselling</h3>
-
-<p>
-Talk to an admission counsellor.
-</p>
-
+<h3>04. Counselling</h3>
+<p>Get admission guidance.</p>
 </div>
 
 </div>
@@ -595,18 +470,12 @@ Talk to an admission counsellor.
 Need Personal Guidance?
 </h2>
 
-<div
-class="form-box"
-style="text-align:center"
->
+<div class="form-box" style="text-align:center">
 
-<h2>
-📞 Book Counselling
-</h2>
+<h2>📞 Book Counselling</h2>
 
 <p style="margin:15px 0;color:#64748b;">
-Get personalised guidance from our admission counsellors
-and make the right college decision.
+Get personalised admission guidance.
 </p>
 
 <button
@@ -633,106 +502,287 @@ Choice<span>Kart</span>
 Your Rank. Your Choice. Your Future.
 </p>
 
-<p>
-© 2026 ChoiceKart. All rights reserved.
+<p style="margin-top:15px;">
+© 2026 ChoiceKart
 </p>
 
 </footer>
 
 
-<!-- JAVASCRIPT -->
-
 <script>
 
-/*
-==================================================
-COLLEGE DATABASE
-==================================================
-*/
+/* =========================================
+   COURSE LIST
+========================================= */
+
+const courses = {
+
+    CUET: [
+        "Any Course",
+        "B.A",
+        "B.Com",
+        "B.Sc",
+        "BBA",
+        "Agriculture",
+        "BCA",
+        "B.Pharm",
+        "B.Sc Nursing",
+        "Integrated Programs"
+    ],
+
+    NEET: [
+        "Any Course",
+        "MBBS",
+        "BDS",
+        "BAMS",
+        "BHMS",
+        "BUMS",
+        "BSMS",
+        "B.Sc Nursing"
+    ],
+
+    UPCATET: [
+        "Any Course",
+        "B.Sc Agriculture",
+        "B.Sc Horticulture",
+        "B.Sc Forestry",
+        "B.Tech Agricultural Engineering",
+        "B.F.Sc",
+        "B.Sc Food Technology",
+        "B.V.Sc & A.H"
+    ],
+
+    BVSc: [
+        "Any Course",
+        "B.V.Sc & A.H"
+    ]
+
+};
+
+
+/* =========================================
+   COLLEGE DATABASE
+========================================= */
 
 const colleges = [
 
-/* CUET */
+/* ---------- CUET ---------- */
 
 {
-    exam:"CUET",
-    name:"Banaras Hindu University",
-    course:["B.Sc","Agriculture"],
-    minScore:500,
-    location:"Varanasi, Uttar Pradesh",
-    type:"Central University"
+exam:"CUET",
+name:"Banaras Hindu University",
+courses:["B.Sc","B.A","B.Com"],
+location:"Varanasi, Uttar Pradesh",
+type:"Central University"
 },
 
 {
-    exam:"CUET",
-    name:"University of Delhi",
-    course:["B.Sc","B.Com","B.A","BBA"],
-    minScore:500,
-    location:"New Delhi",
-    type:"Central University"
+exam:"CUET",
+name:"University of Delhi",
+courses:["B.A","B.Com","B.Sc","BBA"],
+location:"New Delhi",
+type:"Central University"
 },
 
 {
-    exam:"CUET",
-    name:"Central University of Haryana",
-    course:["Agriculture","B.Sc"],
-    minScore:450,
-    location:"Mahendragarh, Haryana",
-    type:"Central University"
+exam:"CUET",
+name:"Aligarh Muslim University",
+courses:["B.A","B.Com","B.Sc","BBA"],
+location:"Aligarh, Uttar Pradesh",
+type:"Central University"
 },
 
 {
-    exam:"CUET",
-    name:"Central University of Jharkhand",
-    course:["Agriculture","B.Sc"],
-    minScore:450,
-    location:"Ranchi, Jharkhand",
-    type:"Central University"
+exam:"CUET",
+name:"Babasaheb Bhimrao Ambedkar University",
+courses:["B.A","B.Sc","B.Com","Agriculture"],
+location:"Lucknow, Uttar Pradesh",
+type:"Central University"
 },
 
 {
-    exam:"CUET",
-    name:"Central University of South Bihar",
-    course:["Agriculture","B.Sc"],
-    minScore:450,
-    location:"Gaya, Bihar",
-    type:"Central University"
+exam:"CUET",
+name:"Central University of Haryana",
+courses:["B.Sc","Agriculture"],
+location:"Mahendragarh, Haryana",
+type:"Central University"
 },
 
 {
-    exam:"CUET",
-    name:"Assam University",
-    course:["Agriculture","B.Sc"],
-    minScore:450,
-    location:"Silchar, Assam",
-    type:"Central University"
+exam:"CUET",
+name:"Central University of Jharkhand",
+courses:["B.Sc","Agriculture"],
+location:"Ranchi, Jharkhand",
+type:"Central University"
+},
+
+{
+exam:"CUET",
+name:"Assam University",
+courses:["B.Sc","B.A","Agriculture"],
+location:"Silchar, Assam",
+type:"Central University"
+},
+
+/* ---------- NEET ---------- */
+
+{
+exam:"NEET",
+name:"King George's Medical University",
+courses:["MBBS","BDS"],
+location:"Lucknow, Uttar Pradesh",
+type:"Government Medical University"
+},
+
+{
+exam:"NEET",
+name:"Institute of Medical Sciences, BHU",
+courses:["MBBS","BDS"],
+location:"Varanasi, Uttar Pradesh",
+type:"Central University"
+},
+
+{
+exam:"NEET",
+name:"AIIMS New Delhi",
+courses:["MBBS","B.Sc Nursing"],
+location:"New Delhi",
+type:"Central Government Institute"
+},
+
+{
+exam:"NEET",
+name:"Dr. Ram Manohar Lohia Institute of Medical Sciences",
+courses:["MBBS"],
+location:"Lucknow, Uttar Pradesh",
+type:"Government Medical Institute"
+},
+
+/* ---------- UPCATET ---------- */
+
+{
+exam:"UPCATET",
+name:"Acharya Narendra Deva University of Agriculture & Technology",
+courses:[
+"B.Sc Agriculture",
+"B.Sc Horticulture",
+"B.V.Sc & A.H"
+],
+location:"Ayodhya, Uttar Pradesh",
+type:"Agriculture University"
+},
+
+{
+exam:"UPCATET",
+name:"Chandra Shekhar Azad University of Agriculture & Technology",
+courses:[
+"B.Sc Agriculture",
+"B.Tech Agricultural Engineering"
+],
+location:"Kanpur, Uttar Pradesh",
+type:"Agriculture University"
+},
+
+{
+exam:"UPCATET",
+name:"Sardar Vallabhbhai Patel University of Agriculture & Technology",
+courses:[
+"B.Sc Agriculture",
+"B.Tech Agricultural Engineering",
+"B.Sc Horticulture"
+],
+location:"Meerut, Uttar Pradesh",
+type:"Agriculture University"
+},
+
+{
+exam:"UPCATET",
+name:"Banda University of Agriculture & Technology",
+courses:[
+"B.Sc Agriculture",
+"B.Sc Horticulture",
+"B.Sc Forestry"
+],
+location:"Banda, Uttar Pradesh",
+type:"Agriculture University"
+},
+
+/* ---------- BVSc ---------- */
+
+{
+exam:"BVSc",
+name:"College of Veterinary Science & Animal Husbandry, Ayodhya",
+courses:["B.V.Sc & A.H"],
+location:"Ayodhya, Uttar Pradesh",
+type:"Veterinary College"
+},
+
+{
+exam:"BVSc",
+name:"College of Veterinary Science & Animal Husbandry, Mathura",
+courses:["B.V.Sc & A.H"],
+location:"Mathura, Uttar Pradesh",
+type:"Veterinary College"
 }
 
 ];
 
 
-/*
-==================================================
-SELECT EXAM
-==================================================
-*/
+/* =========================================
+   UPDATE COURSE LIST
+========================================= */
 
-function selectExam(exam){
+function updateCourses(){
 
-    document.getElementById("exam").value = exam;
+    const exam =
+        document.getElementById("exam").value;
 
-    document.getElementById("find").scrollIntoView({
-        behavior:"smooth"
+    const courseSelect =
+        document.getElementById("course");
+
+    courseSelect.innerHTML =
+        '<option value="">Select course</option>';
+
+    if(!exam){
+        return;
+    }
+
+    courses[exam].forEach(function(course){
+
+        const option =
+            document.createElement("option");
+
+        option.value = course;
+        option.textContent = course;
+
+        courseSelect.appendChild(option);
+
     });
 
 }
 
 
-/*
-==================================================
-FIND COLLEGES
-==================================================
-*/
+/* =========================================
+   SELECT EXAM CARD
+========================================= */
+
+function selectExam(exam){
+
+    document.getElementById("exam").value = exam;
+
+    updateCourses();
+
+    document.getElementById("find")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* =========================================
+   FIND COLLEGES
+========================================= */
 
 function findCollege(){
 
@@ -740,7 +790,7 @@ function findCollege(){
         document.getElementById("exam").value;
 
     const score =
-        Number(document.getElementById("score").value);
+        document.getElementById("score").value;
 
     const category =
         document.getElementById("category").value;
@@ -749,14 +799,13 @@ function findCollege(){
         document.getElementById("course").value;
 
 
-    /* VALIDATION */
-
     if(!exam){
 
         alert("Please select your exam.");
 
         return;
     }
+
 
     if(!score){
 
@@ -766,67 +815,44 @@ function findCollege(){
     }
 
 
-    /*
-    FILTER COLLEGES
-    */
+    if(!course){
 
-    let matches = colleges.filter(function(college){
+        alert("Please select your preferred course.");
 
-        /* Exam Match */
-
-        const examMatch =
-            college.exam === exam;
+        return;
+    }
 
 
-        /* Score Match */
+    /* FIND MATCHES */
 
-        const scoreMatch =
-            score >= Number(college.minScore);
+    const matches =
+        colleges.filter(function(college){
 
-
-        /* Course Match */
-
-        let courseMatch = true;
-
-        if(course !== "Any Course"){
-
-            courseMatch =
-                college.course.some(function(c){
-
-                    return c.toLowerCase()
-                    === course.toLowerCase();
-
-                });
-
-        }
+            const examMatch =
+                college.exam === exam;
 
 
-        return (
-            examMatch &&
-            scoreMatch &&
-            courseMatch
-        );
-
-    });
+            const courseMatch =
+                course === "Any Course" ||
+                college.courses.includes(course);
 
 
-    /*
-    RESULT BOX
-    */
+            return examMatch && courseMatch;
 
-    const resultBox =
+        });
+
+
+    const result =
         document.getElementById("result");
 
     const resultText =
         document.getElementById("resultText");
 
 
-    resultBox.style.display = "block";
+    result.style.display = "block";
 
 
-    /*
-    NO RESULT
-    */
+    /* NO MATCH */
 
     if(matches.length === 0){
 
@@ -837,13 +863,8 @@ function findCollege(){
         <h3>😔 No College Found</h3>
 
         <p>
-        No matching college was found for your
-        selected exam, score and course.
-        </p>
-
-        <p>
-        Try selecting another course or entering
-        a different score.
+        No college was found in the current
+        ChoiceKart database for this exam and course.
         </p>
 
         </div>
@@ -854,51 +875,32 @@ function findCollege(){
     }
 
 
-    /*
-    RESULT HEADER
-    */
+    /* RESULT */
 
     let html = `
 
-    <div class="result-intro">
+    <p style="margin:12px 0;line-height:1.6;">
 
-    Based on your
-    <b>${exam}</b>
-    score of
-    <b>${score}</b>,
-    category
-    <b>${category}</b>
-    and course
-    <b>${course}</b>:
+    <b>Exam:</b> ${exam}<br>
 
-    </div>
+    <b>Score / Rank:</b> ${score}<br>
+
+    <b>Category:</b> ${category}<br>
+
+    <b>Course:</b> ${course}
+
+    </p>
+
+    <p style="margin-bottom:15px;color:#64748b;">
+    These are matching colleges in the current
+    ChoiceKart database. Admission depends on
+    official eligibility, counselling and cutoff.
+    </p>
 
     `;
 
 
-    /*
-    COLLEGE CARDS
-    */
-
     matches.forEach(function(college){
-
-        let chance;
-        let chanceClass;
-
-
-        if(score >= Number(college.minScore) + 70){
-
-            chance = "🟢 High Chance";
-            chanceClass = "high";
-
-        }
-        else{
-
-            chance = "🟡 Good Chance";
-            chanceClass = "good";
-
-        }
-
 
         html += `
 
@@ -914,13 +916,8 @@ function findCollege(){
             </p>
 
             <p>
-            <b>🎓 Courses:</b>
-            ${college.course.join(", ")}
-            </p>
-
-            <p>
-            <b>📊 Demo Minimum Score:</b>
-            ${college.minScore}
+            <b>🎓 Course:</b>
+            ${course}
             </p>
 
             <p>
@@ -928,8 +925,8 @@ function findCollege(){
             ${college.type}
             </p>
 
-            <span class="chance ${chanceClass}">
-            ${chance}
+            <span class="badge">
+            ✓ Course Match
             </span>
 
         </div>
@@ -942,11 +939,7 @@ function findCollege(){
     resultText.innerHTML = html;
 
 
-    /*
-    SCROLL TO RESULT
-    */
-
-    resultBox.scrollIntoView({
+    result.scrollIntoView({
         behavior:"smooth",
         block:"nearest"
     });
@@ -954,11 +947,9 @@ function findCollege(){
 }
 
 
-/*
-==================================================
-COUNSELLING
-==================================================
-*/
+/* =========================================
+   COUNSELLING
+========================================= */
 
 function bookCounselling(){
 
@@ -967,6 +958,13 @@ function bookCounselling(){
     );
 
 }
+
+
+/* =========================================
+   LOAD DEFAULT COURSES
+========================================= */
+
+updateCourses();
 
 </script>
 
