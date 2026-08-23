@@ -630,39 +630,83 @@ function selectExam(exam){
 function findCollege(){
 
     let exam = document.getElementById("exam").value;
-    let score = document.getElementById("score").value;
+    let score = Number(document.getElementById("score").value);
     let category = document.getElementById("category").value;
     let course = document.getElementById("course").value;
 
     if(!exam || !score){
-
         alert("Please select your exam and enter your score/rank.");
+        return;
+    }
+
+    let matches = colleges.filter(function(college){
+
+        let examMatch = college.exam === exam;
+
+        let scoreMatch = score >= Number(college.minScore);
+
+        let courseMatch = college.course.some(function(c){
+            return c.toLowerCase().includes(course.toLowerCase());
+        });
+
+        let categoryMatch =
+            college.category === "General" ||
+            college.category === category;
+
+        return examMatch &&
+               scoreMatch &&
+               courseMatch &&
+               categoryMatch;
+    });
+
+    let resultBox = document.getElementById("result");
+    let resultText = document.getElementById("resultText");
+
+    resultBox.style.display = "block";
+
+    if(matches.length === 0){
+
+        resultText.innerHTML =
+        "<h3>😔 No College Found</h3>" +
+        "<p>No matching college was found for your score, category and preferred course.</p>" +
+        "<p>Try changing your score, exam or course.</p>";
 
         return;
     }
 
+    let html =
+        "<h3>🎯 Recommended Colleges</h3>" +
+        "<p>Based on your <b>" + exam + "</b> score of <b>" +
+        score + "</b>, category <b>" + category +
+        "</b> and course <b>" + course + "</b>:</p>";
 
-    let resultText = "";
+    matches.forEach(function(college){
 
+        let chance = "";
 
-    if(exam === "CUET"){
-
-        if(score >= 700){
-
-            resultText =
-            "🎯 Excellent Score! You may target top universities such as DU, JNU, BHU and Jamia Millia Islamia.";
-
-        }else if(score >= 550){
-
-            resultText =
-            "🟢 Good Chance! You can explore several central universities and good colleges based on your course and category.";
-
-        }else{
-
-            resultText =
-            "🟡 Moderate Chance! Explore universities with flexible cut-offs and check your category-wise eligibility.";
-
+        if(score >= Number(college.minScore) + 70){
+            chance = "🟢 High Chance";
         }
+        else if(score >= Number(college.minScore)){
+            chance = "🟡 Good Chance";
+        }
+        else{
+            chance = "🔴 Low Chance";
+        }
+
+        html +=
+        "<div class='college-card'>" +
+        "<h3>" + college.name + "</h3>" +
+        "<p><b>📍 Location:</b> " + college.location + "</p>" +
+        "<p><b>🎓 Course:</b> " + college.course.join(", ") + "</p>" +
+        "<p><b>📊 Minimum Score:</b> " + college.minScore + "</p>" +
+        "<p><b>🏫 Type:</b> " + college.type + "</p>" +
+        "<p><b>🎯 Admission Chance:</b> " + chance + "</p>" +
+        "</div>";
+    });
+
+    resultText.innerHTML = html;
+}
 
     }
 
