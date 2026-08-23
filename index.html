@@ -1037,69 +1037,88 @@ function findCollege(){
 
         <div class="college-card">
 
-            <div class="college-number">
-                ${index + 1}
-            </div>
-
-            <div class="college-info">
-
-                <h3>
-                    ${college.name}
-                </h3>
-
-                <p>
-                    📍 ${college.location}
-                </p>
-
-                <p>
-                    🎓 ${college.type}
-                </p>
-
-                <p>
-                    📚 ${college.course.join(", ")}
-                </p>
-
-            </div>
-
-            <div class="chance ${college.chance.class}">
-                ${college.chance.text}
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-
-    html += `
-
-    </div>
-
-    <div class="notice">
-
-        ⚠️ <b>Important:</b>
-        These are estimated recommendations based on
-        the entered score and selected preferences.
-        Actual admission depends on the latest
-        official cut-offs, eligibility, counselling
-        rules and seat availability.
-
-    </div>
-
-    `;
-
-
-    resultText.innerHTML = html;
-
-
-    result.scrollIntoView({
-        behavior:"smooth"
-    });
-
+.college-list{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
 }
 
-</script>
+.college-card{
+    background:white;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.college-number{
+    min-width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#102d4f;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.college-info{
+    flex:1;
+}
+
+.college-info h3{
+    margin-bottom:7px;
+    color:#102d4f;
+}
+
+.college-info p{
+    margin:4px 0;
+    color:#64748b;
+    font-size:14px;
+}
+
+.chance{
+    padding:8px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.high{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.moderate{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.ambitious{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.notice{
+    margin-top:20px;
+    padding:15px;
+    background:#fff7ed;
+    border-radius:10px;
+    color:#7c2d12;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.no-result{
+    padding:15px;
+    text-align:center;
+}
 
 </body>
 </html>    .logo span {
