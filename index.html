@@ -618,41 +618,94 @@ Your Rank. Your Choice. Your Future.
 
 function selectExam(exam){
 
-document.getElementById("exam").value = exam;
+    document.getElementById("exam").value = exam;
 
-document.getElementById("find").scrollIntoView({
-behavior:"smooth"
-});
+    document.getElementById("find").scrollIntoView({
+        behavior: "smooth"
+    });
 
 }
 
 
 function findCollege(){
 
-let exam = document.getElementById("exam").value;
+    let exam = document.getElementById("exam").value;
+    let score = document.getElementById("score").value;
+    let category = document.getElementById("category").value;
+    let course = document.getElementById("course").value;
 
-let score = document.getElementById("score").value;
+    if(!exam || !score){
 
-let category = document.getElementById("category").value;
+        alert("Please select your exam and enter your score/rank.");
 
-let course = document.getElementById("course").value;
+        return;
+    }
 
-if(!exam || !score){
 
-alert("Please select your exam and enter your score/rank.");
+    let resultText = "";
 
-return;
 
-}
+    if(exam === "CUET"){
 
-document.getElementById("result").style.display="block";
+        if(score >= 700){
 
-document.getElementById("resultText").innerHTML =
+            resultText =
+            "🎯 Excellent Score! You may target top universities such as DU, JNU, BHU and Jamia Millia Islamia.";
 
-"Based on your <b>"+exam+"</b> score/rank of <b>"+score+
-"</b>, category <b>"+category+
-"</b> and preferred course <b>"+course+
-"</b>, ChoiceKart will show suitable colleges.";
+        }else if(score >= 550){
+
+            resultText =
+            "🟢 Good Chance! You can explore several central universities and good colleges based on your course and category.";
+
+        }else{
+
+            resultText =
+            "🟡 Moderate Chance! Explore universities with flexible cut-offs and check your category-wise eligibility.";
+
+        }
+
+    }
+
+
+    else if(exam === "JEE"){
+
+        resultText =
+        "⚙️ Based on your JEE rank/score, explore NITs, IIITs, GFTIs and state engineering colleges. Check the latest counselling cut-offs.";
+
+    }
+
+
+    else if(exam === "NEET"){
+
+        resultText =
+        "🩺 Based on your NEET score/rank, explore government and private medical colleges through the applicable counselling process.";
+
+    }
+
+
+    else if(exam === "CAT"){
+
+        resultText =
+        "📊 Based on your CAT percentile/score, explore IIMs and other leading MBA colleges according to your category and profile.";
+
+    }
+
+
+    document.getElementById("result").style.display = "block";
+
+
+    document.getElementById("resultText").innerHTML =
+
+    "<b>Exam:</b> " + exam +
+    "<br><b>Score / Rank:</b> " + score +
+    "<br><b>Category:</b> " + category +
+    "<br><b>Course:</b> " + course +
+    "<br><br>" + resultText;
+
+
+    document.getElementById("result").scrollIntoView({
+        behavior: "smooth"
+    });
 
 }
 
