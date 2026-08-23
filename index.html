@@ -1,40 +1,521 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ChoiceKart | Your Rank. Your Choice. Your Future.</title>
+<title>ChoiceKart | Your Rank. Your Choice. Your Future.</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f9ff;
+    color:#102d4f;
+}
+
+header{
+    background:white;
+    padding:16px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#ff841f;
+}
+
+nav a{
+    text-decoration:none;
+    color:#102d4f;
+    margin-left:25px;
+    font-weight:600;
+}
+
+.login{
+    background:#102d4f;
+    color:white !important;
+    padding:10px 20px;
+    border-radius:8px;
+}
+
+.hero{
+    text-align:center;
+    padding:70px 20px;
+    background:linear-gradient(135deg,#eef7ff,#ffffff);
+}
+
+.hero h1{
+    font-size:48px;
+    line-height:1.15;
+}
+
+.hero h1 span{
+    color:#ff841f;
+}
+
+.hero p{
+    max-width:700px;
+    margin:20px auto;
+    font-size:19px;
+    color:#64748b;
+    line-height:1.6;
+}
+
+.buttons{
+    margin-top:30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:15px 28px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+    margin:7px;
+    cursor:pointer;
+    border:none;
+    font-size:16px;
+}
+
+.primary{
+    background:#ff841f;
+    color:white;
+}
+
+.secondary{
+    background:#102d4f;
+    color:white;
+}
+
+.section{
+    padding:60px 7%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:34px;
+    margin-bottom:35px;
+}
+
+.exam-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.exam{
+    background:white;
+    padding:25px;
+    text-align:center;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.07);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.exam:hover{
+    transform:translateY(-5px);
+}
+
+.exam h3{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.exam p{
+    color:#64748b;
+}
+
+.form-box{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+label{
+    display:block;
+    margin-top:18px;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+input,select{
+    width:100%;
+    padding:14px;
+    border:1px solid #d8e1ec;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.form-box button{
+    width:100%;
+    margin-top:25px;
+}
+
+.result{
+    display:none;
+    margin-top:25px;
+    padding:20px;
+    background:#eef8ee;
+    border-radius:12px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.feature{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.feature .icon{
+    font-size:35px;
+    margin-bottom:12px;
+}
+
+footer{
+    background:#102d4f;
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+}
+
+footer span{
+    color:#ff841f;
+}
+
+@media(max-width:800px){
+    nav{
+        display:none;
     }
 
-    body {
-      background: #f8fafc;
-      color: #172033;
+    .hero h1{
+        font-size:36px;
     }
 
-    header {
-      background: white;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #e5e7eb;
+    .exam-grid,
+    .features{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:500px){
+    .exam-grid,
+    .features{
+        grid-template-columns:1fr;
     }
 
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-      color: #0f2747;
+    .hero{
+        padding:50px 18px;
     }
 
-    .logo span {
+    .hero h1{
+        font-size:32px;
+    }
+
+    .section{
+        padding:45px 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+Choice<span>Kart</span>
+</div>
+
+<nav>
+<a href="#exams">Exams</a>
+<a href="#find">Find Colleges</a>
+<a href="#how">How It Works</a>
+<a href="#counselling">Counselling</a>
+<a class="login" href="#find">Get Started</a>
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<h1>
+Your Rank.<br>
+<span>Your Choice. Your Future.</span>
+</h1>
+
+<p>
+Find the right college and course based on your exam score,
+rank, category, preferences and career goals.
+</p>
+
+<div class="buttons">
+<a href="#find" class="btn primary">Find My Colleges</a>
+<a href="#counselling" class="btn secondary">Book Counselling</a>
+</div>
+
+</section>
+
+
+<section class="section" id="exams">
+
+<h2 class="section-title">
+Choose Your Exam
+</h2>
+
+<div class="exam-grid">
+
+<div class="exam" onclick="selectExam('CUET')">
+<h3>🎓 CUET</h3>
+<p>University Admissions</p>
+</div>
+
+<div class="exam" onclick="selectExam('JEE')">
+<h3>⚙️ JEE</h3>
+<p>Engineering Admissions</p>
+</div>
+
+<div class="exam" onclick="selectExam('NEET')">
+<h3>🩺 NEET</h3>
+<p>Medical Admissions</p>
+</div>
+
+<div class="exam" onclick="selectExam('CAT')">
+<h3>📊 CAT</h3>
+<p>MBA Admissions</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="find">
+
+<h2 class="section-title">
+Find Your Best Colleges
+</h2>
+
+<div class="form-box">
+
+<label>Select Exam</label>
+
+<select id="exam">
+<option value="">Select Exam</option>
+<option>CUET</option>
+<option>JEE</option>
+<option>NEET</option>
+<option>CAT</option>
+</select>
+
+
+<label>Enter Your Score / Rank</label>
+
+<input
+type="number"
+id="score"
+placeholder="Example: 620"
+>
+
+
+<label>Category</label>
+
+<select id="category">
+
+<option>General</option>
+<option>OBC</option>
+<option>SC</option>
+<option>ST</option>
+<option>EWS</option>
+
+</select>
+
+
+<label>Preferred Course</label>
+
+<select id="course">
+
+<option>Any Course</option>
+<option>Engineering</option>
+<option>Medical</option>
+<option>B.Sc</option>
+<option>B.Com</option>
+<option>BBA</option>
+<option>B.A</option>
+<option>Agriculture</option>
+<option>MBA</option>
+
+</select>
+
+
+<button class="btn primary" onclick="findCollege()">
+Find My Colleges
+</button>
+
+
+<div class="result" id="result">
+
+<h3>🎯 Your College Match</h3>
+
+<p id="resultText"></p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="how">
+
+<h2 class="section-title">
+How ChoiceKart Works
+</h2>
+
+<div class="features">
+
+<div class="feature">
+<div class="icon">🔢</div>
+<h3>01. Enter Rank</h3>
+<p>Add your exam score or rank.</p>
+</div>
+
+<div class="feature">
+<div class="icon">🎯</div>
+<h3>02. Set Preferences</h3>
+<p>Select course, location and budget.</p>
+</div>
+
+<div class="feature">
+<div class="icon">🏫</div>
+<h3>03. Explore Colleges</h3>
+<p>Compare and shortlist colleges.</p>
+</div>
+
+<div class="feature">
+<div class="icon">👨‍🏫</div>
+<h3>04. Get Counselling</h3>
+<p>Talk to an admission counsellor.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="counselling">
+
+<h2 class="section-title">
+Need Personal Guidance?
+</h2>
+
+<div class="form-box" style="text-align:center">
+
+<h2>📞 Book Counselling</h2>
+
+<p style="margin:15px 0;color:#64748b;">
+Get personalised guidance from our admission counsellors
+and make the right college decision.
+</p>
+
+<button class="btn secondary"
+onclick="alert('Counselling booking feature coming soon!')">
+Book Counselling
+</button>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<h2>Choice<span>Kart</span></h2>
+
+<p style="margin-top:10px;">
+Your Rank. Your Choice. Your Future.
+</p>
+
+<p style="margin-top:20px;">
+© 2026 ChoiceKart. All rights reserved.
+</p>
+
+</footer>
+
+
+<script>
+
+function selectExam(exam){
+
+document.getElementById("exam").value = exam;
+
+document.getElementById("find").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+function findCollege(){
+
+let exam = document.getElementById("exam").value;
+
+let score = document.getElementById("score").value;
+
+let category = document.getElementById("category").value;
+
+let course = document.getElementById("course").value;
+
+if(!exam || !score){
+
+alert("Please select your exam and enter your score/rank.");
+
+return;
+
+}
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("resultText").innerHTML =
+
+"Based on your <b>"+exam+"</b> score/rank of <b>"+score+
+"</b>, category <b>"+category+
+"</b> and preferred course <b>"+course+
+"</b>, ChoiceKart will show suitable colleges.";
+
+}
+
+</script>
+
+</body>
+</html>    .logo span {
       color: #f58220;
     }
 
