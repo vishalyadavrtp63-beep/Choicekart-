@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ChoiceKart | Your Rank. Your Choice. Your Future.</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f8fafc;
+      color: #172033;
+    }
+
+    header {
+      background: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f2747;
+    }
+
+    .logo span {
+      color: #f58220;
+    }
+
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #172033;
+      font-weight: 600;
+    }
+
+    .login {
+      background: #0f2747;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+    }
+
+    .hero {
+      padding: 80px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      background: linear-gradient(135deg, #eef6ff, #ffffff);
+    }
+
+    .hero-text {
+      max-width: 650px;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      line-height: 1.1;
+      color: #0f2747;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #f58220;
+    }
+
+    .hero p {
+      font-size: 19px;
+      line-height: 1.6;
+      color: #64748b;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      background: #f58220;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-right: 10px;
+    }
+
+    .btn.secondary {
+      background: #0f2747;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      width: 350px;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(15,39,71,0.12);
+    }
+
+    .card h2 {
+      color: #0f2747;
+      margin-bottom: 20px;
+    }
+
+    .score {
+      font-size: 38px;
+      font-weight: 800;
+      color: #f58220;
+      margin-bottom: 20px;
+    }
+
+    .result {
+      padding: 12px;
+      background: #f1f5f9;
+      margin: 8px 0;
+      border-radius: 8px;
+    }
+
+    section {
+      padding: 70px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 34px;
+      color: #0f2747;
+      margin-bottom: 40px;
+    }
+
+    .exam-grid,
+    .course-grid,
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .exam,
+    .course,
+    .feature {
+      background: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 14px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    }
+
+    .exam h3,
+    .course h3,
+    .feature h3 {
+      color: #0f2747;
+      margin-bottom: 10px;
+    }
+
+    .exam p,
+    .course p,
+    .feature p {
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .predictor {
+      background: #0f2747;
+      color: white;
+      text-align: center;
+      border-radius: 20px;
+      margin: 0 7%;
+      padding: 60px 20px;
+    }
+
+    .predictor h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .predictor p {
+      color: #dbeafe;
+      margin-bottom: 25px;
+    }
+
+    footer {
+      background: #081b33;
+      color: white;
+      padding: 45px 7%;
+      margin-top: 70px;
+    }
+
+    footer h2 {
+      margin-bottom: 12px;
+    }
+
+    footer p {
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 800px) {
+      nav {
+        display: none;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 55px 6%;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .card {
+        width: 100%;
+      }
+
+      .exam-grid,
+      .course-grid,
+      .feature-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .exam-grid,
+      .course-grid,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Choice<span>Kart</span></div>
+
+    <nav>
+      <a href="#exams">Exams</a>
+      <a href="#courses">Courses</a>
+      <a href="#predictor">College Predictor</a>
+      <a href="#counselling">Counselling</a>
+      <a href="#" class="login">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+
+    <div class="hero-text">
+
+      <h1>
+        Your Rank.<br>
+        <span>Your Choice. Your Future.</span>
+      </h1>
+
+      <p>
+        Find the right college and course based on your exam score,
+        preferences and career goals. Get personalized admission
+        counselling and make better college decisions.
+      </p>
+
+      <a href="#predictor" class="btn">
+        Find My Colleges
+      </a>
+
+      <a href="#counselling" class="btn secondary">
+        Book Counselling
+      </a>
+
+    </div>
+
+    <div class="card">
+
+      <h2>Your College Journey</h2>
+
+      <p>CUET Score</p>
+
+      <div class="score">620 / 800</div>
+
+      <div class="result">
+        🟢 High Chance — 12 Colleges
+      </div>
+
+      <div class="result">
+        🟡 Moderate Chance — 8 Colleges
+      </div>
+
+      <div class="result">
+        🔴 Ambitious — 5 Colleges
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="exams">
+
+    <h2 class="section-title">
+      Choose Your Entrance Exam
+    </h2>
+
+    <div class="exam-grid">
+
+      <div class="exam">
+        <h3>CUET</h3>
+        <p>Find colleges and courses through CUET.</p>
+      </div>
+
+      <div class="exam">
+        <h3>JEE</h3>
+        <p>Explore engineering college options.</p>
+      </div>
+
+      <div class="exam">
+        <h3>NEET</h3>
+        <p>Explore medical admission options.</p>
+      </div>
+
+      <div class="exam">
+        <h3>ICAR</h3>
+        <p>Explore agriculture university options.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="predictor" id="predictor">
+
+    <h2>🎯 College Predictor</h2>
+
+    <p>
+      Not sure which colleges you can get?
+      Enter your rank or score and discover your options.
+    </p>
+
+    <a href="#" class="btn">
+      Check My Colleges
+    </a>
+
+  </div>
+
+  <section id="courses">
+
+    <h2 class="section-title">
+      Popular Courses
+    </h2>
+
+    <div class="course-grid">
+
+      <div class="course">
+        <h3>B.Com</h3>
+        <p>Explore commerce colleges.</p>
+      </div>
+
+      <div class="course">
+        <h3>B.Sc</h3>
+        <p>Explore science programs.</p>
+      </div>
+
+      <div class="course">
+        <h3>BBA</h3>
+        <p>Explore business programs.</p>
+      </div>
+
+      <div class="course">
+        <h3>B.Sc Agriculture</h3>
+        <p>Explore agriculture colleges.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="counselling">
+
+    <h2 class="section-title">
+      How ChoiceKart Works
+    </h2>
+
+    <div class="feature-grid">
+
+      <div class="feature">
+        <h3>01. Enter Your Rank</h3>
+        <p>
+          Add your exam score, rank and category.
+        </p>
+      </div>
+
+      <div class="feature">
+        <h3>02. Set Preferences</h3>
+        <p>
+          Select your preferred course, location and budget.
+        </p>
+      </div>
+
+      <div class="feature">
+        <h3>03. Explore Colleges</h3>
+        <p>
+          Compare and shortlist suitable colleges.
+        </p>
+      </div>
+
+      <div class="feature">
+        <h3>04. Get Counselling</h3>
+        <p>
+          Talk to an admission counsellor for guidance.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+
+    <h2>ChoiceKart</h2>
+
+    <p>
+      Your Rank. Your Choice. Your Future.
+    </p>
+
+    <br>
+
+    <p>
+      © 2026 ChoiceKart. All rights reserved.
+    </p>
+
+  </footer>
+
+</body>
+</html>
