@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>ChoiceKart | College Directory</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f8fc;
+color:#172033;
+}
+
+header{
+background:#102d4f;
+color:white;
+padding:18px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:10;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+}
+
+.logo span{
+color:#ff841f;
+}
+
+header a{
+color:white;
+text-decoration:none;
+}
+
+.container{
+max-width:1250px;
+margin:auto;
+padding:40px 18px;
+}
+
+.hero{
+text-align:center;
+margin-bottom:35px;
+}
+
+.hero h1{
+font-size:40px;
+color:#102d4f;
+margin-bottom:10px;
+}
+
+.hero p{
+color:#64748b;
+}
+
+.filters{
+background:white;
+padding:20px;
+border-radius:15px;
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+gap:12px;
+box-shadow:0 5px 20px #00000010;
+margin-bottom:25px;
+}
+
+input,
+select{
+width:100%;
+padding:13px;
+border:1px solid #dbe3ee;
+border-radius:8px;
+font-size:15px;
+}
+
+.info{
+color:#64748b;
+margin-bottom:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:
+repeat(3,1fr);
+gap:20px;
+}
+
+.card{
+background:white;
+padding:22px;
+border-radius:15px;
+box-shadow:0 5px 20px #0000000d;
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 25px #00000015;
+}
+
+.badge{
+display:inline-block;
+padding:5px 10px;
+background:#edf4ff;
+color:#102d4f;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+}
+
+.card h2{
+font-size:19px;
+color:#102d4f;
+line-height:1.4;
+}
+
+.location{
+color:#64748b;
+font-size:14px;
+}
+
+.tags{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin:12px 0;
+}
+
+.tag{
+background:#f1f5f9;
+padding:5px 8px;
+border-radius:6px;
+font-size:12px;
+}
+
+.details{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin:15px 0;
+}
+
+.detail{
+background:#f8fafc;
+padding:9px;
+border-radius:7px;
+font-size:13px;
+}
+
+.view{
+display:block;
+background:#102d4f;
+color:white;
+text-align:center;
+padding:11px;
+border-radius:8px;
+text-decoration:none;
+margin-top:15px;
+}
+
+.empty{
+background:white;
+padding:50px;
+border-radius:15px;
+text-align:center;
+color:#64748b;
+}
+
+@media(max-width:900px){
+
+.filters{
+grid-template-columns:1fr 1fr;
+}
+
+.grid{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.filters{
+grid-template-columns:1fr;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:30px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+Choice<span>Kart</span>
+</div>
+
+<a href="index.html">
+← Home
+</a>
+
+</header>
+
+
+<div class="container">
+
+
+<section class="hero">
+
+<h1>🎓 College Directory</h1>
+
+<p>
+Find colleges, universities and institutes
+across India.
+</p>
+
+</section>
+
+
+<div class="filters">
+
+<input
+id="search"
+placeholder="Search college..."
+>
+
+<select id="state">
+
+<option value="">
+All States
+</option>
+
+</select>
+
+
+<select id="type">
+
+<option value="">
+All Types
+</option>
+
+</select>
+
+
+<select id="category">
+
+<option value="">
+All Categories
+</option>
+
+</select>
+
+</div>
+
+
+<div
+class="info"
+id="info"
+>
+Loading colleges...
+</div>
+
+
+<div
+class="grid"
+id="collegeGrid"
+></div>
+
+
+</div>
+
+
+<script>
+
+
+let colleges=[];
+
+let filtered=[];
+
+
+const grid=
+document.getElementById(
+"collegeGrid"
+);
+
+
+const info=
+document.getElementById(
+"info"
+);
+
+
+const search=
+document.getElementById(
+"search"
+);
+
+
+const state=
+document.getElementById(
+"state"
+);
+
+
+const type=
+document.getElementById(
+"type"
+);
+
+
+const category=
+document.getElementById(
+"category"
+);
+
+
+
+function escapeHTML(value){
+
+return String(value ?? "")
+.replace(
+/[&<>"']/g,
+function(char){
+
+return {
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[char];
+
+});
+
+}
+
+
+
+async function loadColleges(){
+
+try{
+
+const response=
+await fetch(
+"colleges.json"
+);
+
+
+if(!response.ok){
+
+throw new Error(
+"Could not load database"
+);
+
+}
+
+
+colleges=
+await response.json();
+
+
+filtered=[
+...colleges
+];
+
+
+createFilters();
+
+render();
+
+
+}
+
+catch(error){
+
+info.innerHTML=
+"❌ College database could not be loaded.";
+
+console.error(error);
+
+}
+
+}
+
+
+
+function createFilters(){
+
+const states=[
+...new Set(
+colleges
+.map(c=>c.state)
+.filter(Boolean)
+)
+].sort();
+
+
+const types=[
+...new Set(
+colleges
+.map(c=>c.type)
+.filter(Boolean)
+)
+].sort();
+
+
+const categories=[
+...new Set(
+colleges
+.map(c=>c.category)
+.filter(Boolean)
+)
+].sort();
+
+
+state.innerHTML=
+'<option value="">All States</option>'+
+
+states.map(
+s=>
+`<option value="${escapeHTML(s)}">
+${escapeHTML(s)}
+</option>`
+).join("");
+
+
+type.innerHTML=
+'<option value="">All Types</option>'+
+
+types.map(
+t=>
+`<option value="${escapeHTML(t)}">
+${escapeHTML(t)}
+</option>`
+).join("");
+
+
+category.innerHTML=
+'<option value="">All Categories</option>'+
+
+categories.map(
+c=>
+`<option value="${escapeHTML(c)}">
+${escapeHTML(c)}
+</option>`
+).join("");
+
+}
+
+
+
+function filterColleges(){
+
+const query=
+search.value
+.toLowerCase()
+.trim();
+
+
+filtered=
+colleges.filter(college=>{
+
+const matchesSearch=
+
+!query ||
+
+college.name
+.toLowerCase()
+.includes(query);
+
+
+const matchesState=
+
+!state.value ||
+
+college.state===
+state.value;
+
+
+const matchesType=
+
+!type.value ||
+
+college.type===
+type.value;
+
+
+const matchesCategory=
+
+!category.value ||
+
+college.category===
+category.value;
+
+
+return(
+matchesSearch &&
+matchesState &&
+matchesType &&
+matchesCategory
+);
+
+});
+
+
+render();
+
+}
+
+
+
+function render(){
+
+info.innerHTML=
+`Showing <strong>
+${filtered.length}
+</strong> colleges`;
+
+
+if(filtered.length===0){
+
+grid.innerHTML=`
+
+<div class="empty">
+
+<h2>No college found</h2>
+
+<p>
+Try changing your search
+or filters.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+grid.innerHTML=
+filtered.map(college=>`
+
+<article class="card">
+
+<span class="badge">
+
+${escapeHTML(
+college.type ||
+"College"
+)}
+
+</span>
+
+
+<h2>
+
+${escapeHTML(
+college.name
+)}
+
+</h2>
+
+
+<p class="location">
+
+📍
+
+${escapeHTML(
+college.city
+)}
+
+,
+
+${escapeHTML(
+college.state
+)}
+
+</p>
+
+
+<div class="tags">
+
+${(
+college.approvals || []
+)
+.map(
+approval=>
+`<span class="tag">
+${escapeHTML(approval)}
+</span>`
+)
+.join("")}
+
+
+${(
+college.courses || []
+)
+.slice(0,4)
+.map(
+course=>
+`<span class="tag">
+${escapeHTML(course)}
+</span>`
+)
+.join("")}
+
+</div>
+
+
+<div class="details">
+
+<div class="detail">
+
+🏛️ Category
+
+<br>
+
+<b>
+${escapeHTML(
+college.category
+)}
+</b>
+
+</div>
+
+
+<div class="detail">
+
+📅 Established
+
+<br>
+
+<b>
+${escapeHTML(
+college.established ||
+"—"
+)}
+</b>
+
+</div>
+
+
+<div class="detail">
+
+🎓 Affiliation
+
+<br>
+
+<b>
+${escapeHTML(
+college.affiliation ||
+"—"
+)}
+</b>
+
+</div>
+
+
+<div class="detail">
+
+🏆 Ranking
+
+<br>
+
+<b>
+${
+college.nirfRank
+?
+escapeHTML(
+college.nirfRank
+)
+:
+"—"
+}
+</b>
+
+</div>
+
+</div>
+
+
+<a
+class="view"
+href="college-detail.html?id=${encodeURIComponent(college.id)}"
+>
+
+View College
+
+</a>
+
+</article>
+
+`).join("");
+
+}
+
+
+
+search.addEventListener(
+"input",
+filterColleges
+);
+
+state.addEventListener(
+"change",
+filterColleges
+);
+
+type.addEventListener(
+"change",
+filterColleges
+);
+
+category.addEventListener(
+"change",
+filterColleges
+);
+
+
+loadColleges();
+
+</script>
+
+
+</body>
+
+  </html>
