@@ -212,6 +212,9 @@ window.location.search
 const id=
 params.get("id");
 
+const stateParam =
+params.get("state");
+
 
 function escapeHTML(value){
 
@@ -240,36 +243,47 @@ async function loadCollege(){
 
 try{
 
-const response=
+if(!id || !stateParam){
+throw new Error("Missing college id/state");
+}
+
+const response =
 await fetch(
-"colleges.json"
+"https://indian-colleges-list.vercel.app/api/institutions/states/" +
+encodeURIComponent(stateParam)
 );
 
+if(!response.ok){
+throw new Error("College state API failed");
+}
 
-const colleges=
+const result =
 await response.json();
 
+const rows =
+Array.isArray(result)
+? result
+: (result.data || result.institutions || []);
 
-const college=
-colleges.find(
-c=>c.id===id
+const college =
+rows.find(c =>
+String(
+c.id ||
+c.aicte_id ||
+c.aishe_code ||
+""
+) === String(id)
 );
-
 
 if(!college){
 
-document.getElementById(
-"content"
-).innerHTML=`
+document.getElementById("content").innerHTML=`
 
 <div class="error">
 
 <h2>College not found</h2>
 
-<p>
-The requested college
-does not exist in our database.
-</p>
+<p>The requested college could not be found in the live database.</p>
 
 </div>
 
@@ -279,298 +293,221 @@ return;
 
 }
 
+const normalized={
 
-document.title=
-college.name+
-" | ChoiceKart";
+name:
+college.name ||
+college.institute_name ||
+college.college_name ||
+"Unnamed Institution",
 
+city:
+college.city ||
+college.town ||
+"",
 
-document.getElementById(
-"content"
-).innerHTML=`
+state:
+college.state ||
+college.state_name ||
+stateParam,
+
+type:
+college.institution_type ||
+college.type ||
+"Affiliated College",
+
+category:
+college.category ||
+"College / Institute",
+
+established:
+college.established ||
+"",
+
+affiliation:
+college.university ||
+college.university_name ||
+college.affiliated_university ||
+"",
+
+nirfRank:
+college.nirfRank ||
+college.nirf_rank ||
+null,
+
+fees:
+college.fees ||
+college.fees_ug_inr ||
+null,
+
+placement:
+college.placement ||
+college.placement_avg_lpa ||
+null,
+
+website:
+college.website ||
+college.institute_website ||
+"",
+
+approvals:
+college.approvals ||
+[],
+
+courses:
+Array.isArray(college.courses)
+? college.courses
+: (college.course ? [college.course] : []),
+
+address:
+college.address ||
+college.institute_address ||
+"",
+
+description:
+college.description ||
+"College/institution information from the public AICTE dataset."
+
+};
+
+document.title =
+normalized.name + " | ChoiceKart";
+
+document.getElementById("content").innerHTML=`
 
 <section class="hero">
 
 <span class="badge">
-
-${escapeHTML(
-college.type
-)}
-
+${escapeHTML(normalized.type)}
 </span>
 
-
 <h1>
-
-${escapeHTML(
-college.name
-)}
-
+${escapeHTML(normalized.name)}
 </h1>
 
-
 <p class="location">
-
 📍
-
-${escapeHTML(
-college.city
-)}
-
-,
-
-${escapeHTML(
-college.state
-)}
-
+${escapeHTML(normalized.city)}
+${normalized.city && normalized.state ? ", " : ""}
+${escapeHTML(normalized.state)}
 </p>
-
 
 <div class="grid">
 
+<div class="box">
+<small>Category</small>
+<strong>${escapeHTML(normalized.category)}</strong>
+</div>
 
 <div class="box">
-
-<small>
-Category
-</small>
-
-<strong>
-${escapeHTML(
-college.category
-)}
-</strong>
-
+<small>Established</small>
+<strong>${escapeHTML(normalized.established || "Not available")}</strong>
 </div>
-
 
 <div class="box">
-
-<small>
-Established
-</small>
-
-<strong>
-${escapeHTML(
-college.established ||
-"Not available"
-)}
-</strong>
-
+<small>Affiliation</small>
+<strong>${escapeHTML(normalized.affiliation || "Not available")}</strong>
 </div>
-
 
 <div class="box">
-
-<small>
-Affiliation
-</small>
-
-<strong>
-${escapeHTML(
-college.affiliation ||
-"Not available"
-)}
-</strong>
-
+<small>NIRF Rank</small>
+<strong>${normalized.nirfRank ? escapeHTML(normalized.nirfRank) : "Not available"}</strong>
 </div>
-
 
 <div class="box">
-
-<small>
-NIRF Rank
-</small>
-
-<strong>
-${
-college.nirfRank
-?
-escapeHTML(
-college.nirfRank
-)
-:
-"Not available"
-}
-</strong>
-
+<small>Fees</small>
+<strong>${normalized.fees ? escapeHTML(normalized.fees) : "Not available"}</strong>
 </div>
-
 
 <div class="box">
-
-<small>
-Fees
-</small>
-
-<strong>
-${
-college.fees
-?
-escapeHTML(
-college.fees
-)
-:
-"Not available"
-}
-</strong>
-
-</div>
-
-
-<div class="box">
-
-<small>
-Placement
-</small>
-
-<strong>
-${
-college.placement
-?
-escapeHTML(
-college.placement
-)
-:
-"Not available"
-}
-</strong>
-
+<small>Placement</small>
+<strong>${normalized.placement ? escapeHTML(normalized.placement) : "Not available"}</strong>
 </div>
 
 </div>
-
 
 ${
-college.website
+normalized.website
 ?
-
-`<a
-class="website"
-href="${escapeHTML(college.website)}"
+`<a class="website"
+href="${escapeHTML(normalized.website)}"
 target="_blank"
-rel="noopener"
->
+rel="noopener noreferrer">
 Visit Official Website →
 </a>`
-
 :
-
 ""
-
 }
 
 </section>
 
-
 <section class="section">
 
-<h2>
-About
-</h2>
+<h2>About</h2>
 
 <p>
-
-${escapeHTML(
-college.description ||
-"No description available."
-)}
-
+${escapeHTML(normalized.description)}
 </p>
 
 </section>
 
-
 <section class="section">
 
-<h2>
-Approvals
-</h2>
+<h2>Approvals</h2>
 
 <div class="tags">
 
-${
-(college.approvals || [])
-.map(
-item=>
-`<span class="tag">
-${escapeHTML(item)}
-</span>`
-)
-.join("")
-}
+${(normalized.approvals || [])
+.map(item=>`
+<span class="tag">${escapeHTML(item)}</span>
+`).join("") || "<span class='tag'>Public dataset information</span>"}
 
 </div>
 
 </section>
 
-
 <section class="section">
 
-<h2>
-Courses
-</h2>
+<h2>Courses</h2>
 
 <div class="tags">
 
-${
-(college.courses || [])
-.map(
-item=>
-`<span class="tag">
-${escapeHTML(item)}
-</span>`
-)
-.join("")
-}
+${(normalized.courses || [])
+.map(item=>`
+<span class="tag">${escapeHTML(item)}</span>
+`).join("") || "<span class='tag'>Multiple courses</span>"}
 
 </div>
 
 </section>
 
-
 <section class="section">
 
-<h2>
-Address
-</h2>
+<h2>Address</h2>
 
 <p>
-
-${escapeHTML(
-college.address ||
-"Address not available"
-)}
-
+${escapeHTML(normalized.address || "Address not available")}
 </p>
 
 </section>
 
 `;
 
-}
+}catch(error){
 
-catch(error){
+console.error(error);
 
-document.getElementById(
-"content"
-).innerHTML=`
+document.getElementById("content").innerHTML=`
 
 <div class="error">
 
-<h2>
-Unable to load college
-</h2>
+<h2>Unable to load college</h2>
 
-<p>
-Please try again later.
-</p>
+<p>Please refresh the page and try again.</p>
 
 </div>
 
 `;
-
-console.error(error);
 
 }
 
