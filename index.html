@@ -75,6 +75,7 @@ nav a:hover{color:var(--orange)}
  border:0;
  background:none;
  font-size:25px;
+ cursor:pointer;
 }
 
 .section{
@@ -91,7 +92,7 @@ nav a:hover{color:var(--orange)}
 .subtitle{
  text-align:center;
  color:var(--muted);
- max-width:750px;
+ max-width:800px;
  margin:0 auto 30px;
  line-height:1.6;
 }
@@ -181,7 +182,7 @@ nav a:hover{color:var(--orange)}
  padding:20px;
  border-radius:14px;
  display:grid;
- grid-template-columns:2fr 1fr 1fr 1fr;
+ grid-template-columns:2fr 1fr 1fr;
  gap:10px;
  box-shadow:0 4px 20px #0001;
 }
@@ -192,6 +193,11 @@ input,select,textarea{
  border:1px solid #dbe3ee;
  border-radius:8px;
  font-size:14px;
+}
+
+textarea{
+ min-height:120px;
+ resize:vertical;
 }
 
 .college-topbar{
@@ -224,13 +230,20 @@ input,select,textarea{
 }
 
 .college-image{
- height:130px;
+ height:150px;
  background:linear-gradient(135deg,var(--navy),#315d8f);
  color:white;
  display:flex;
  align-items:center;
  justify-content:center;
  font-size:45px;
+ overflow:hidden;
+}
+
+.college-image img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
 }
 
 .college-info{
@@ -239,7 +252,7 @@ input,select,textarea{
 
 .college-info h3{
  color:var(--navy);
- margin-bottom:8px;
+ margin:10px 0 8px;
  line-height:1.4;
 }
 
@@ -268,6 +281,10 @@ input,select,textarea{
  background:var(--navy);
  color:white;
  cursor:pointer;
+}
+
+.small-btn:hover{
+ background:var(--blue);
 }
 
 .pagination{
@@ -305,6 +322,11 @@ input,select,textarea{
  text-align:center;
  box-shadow:0 5px 20px #00000010;
  cursor:pointer;
+ transition:.2s;
+}
+
+.course-card:hover{
+ transform:translateY(-4px);
 }
 
 .course-icon{
@@ -313,7 +335,7 @@ input,select,textarea{
 }
 
 .form-box{
- max-width:850px;
+ max-width:900px;
  margin:auto;
  background:white;
  padding:28px;
@@ -466,7 +488,7 @@ footer a{
 .modal-content{
  background:white;
  width:100%;
- max-width:600px;
+ max-width:700px;
  max-height:90vh;
  overflow:auto;
  padding:28px;
@@ -477,6 +499,22 @@ footer a{
  float:right;
  font-size:25px;
  cursor:pointer;
+}
+
+.ai-float{
+ position:fixed;
+ right:20px;
+ bottom:85px;
+ width:58px;
+ height:58px;
+ border:0;
+ border-radius:50%;
+ background:var(--orange);
+ color:white;
+ font-size:25px;
+ cursor:pointer;
+ box-shadow:0 8px 25px #0003;
+ z-index:1900;
 }
 
 .admin-btn{
@@ -557,6 +595,85 @@ footer a{
 
 .delete{background:var(--red)}
 .status{background:var(--green)}
+.blue{background:var(--blue)}
+
+.admin-tabs{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin:20px 0;
+}
+
+.admin-tab{
+ border:0;
+ padding:11px 16px;
+ border-radius:8px;
+ background:white;
+ cursor:pointer;
+ font-weight:bold;
+}
+
+.admin-tab.active{
+ background:var(--navy);
+ color:white;
+}
+
+.admin-view{
+ display:none;
+}
+
+.admin-view.active{
+ display:block;
+}
+
+.info-box{
+ padding:15px;
+ border-radius:10px;
+ background:#eff6ff;
+ color:#1e3a8a;
+ margin-bottom:15px;
+}
+
+.detail-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+
+.detail-item{
+ background:#f8fafc;
+ padding:12px;
+ border-radius:8px;
+}
+
+.course-points{
+ text-align:left;
+ margin-top:15px;
+}
+
+.course-points li{
+ margin:8px 0;
+ color:#475569;
+ line-height:1.5;
+}
+
+.cutoff-table{
+ width:100%;
+ border-collapse:collapse;
+ margin-top:15px;
+}
+
+.cutoff-table th,
+.cutoff-table td{
+ border:1px solid #e2e8f0;
+ padding:10px;
+ text-align:left;
+ font-size:13px;
+}
+
+.cutoff-table th{
+ background:#f8fafc;
+}
 
 @media(max-width:900px){
  nav{display:none}
@@ -591,6 +708,9 @@ footer a{
   width:100%;
   padding:13px;
  }
+ .detail-grid{
+  grid-template-columns:1fr;
+ }
 }
 </style>
 </head>
@@ -603,13 +723,13 @@ footer a{
 Choice<span>Kart</span>
 </div>
 
-<nav>
+<nav id="mainNav">
 <a href="#home">Home</a>
 <a href="#colleges">Colleges</a>
 <a href="#courses">Courses</a>
 <a href="#predictor">Predictor</a>
 <a href="#ai">AI</a>
-<a href="#counselling">Counselling</a>
+<a href="#counselling">Advice</a>
 <a href="#help">Help</a>
 </nav>
 
@@ -628,9 +748,9 @@ Your Rank.<br>
 </h1>
 
 <p>
-Explore thousands of Indian colleges, discover courses,
-estimate admission possibilities and get smart guidance
-with ChoiceKart.
+Explore Indian colleges, universities and institutes,
+discover courses, compare opportunities and get admission
+guidance with ChoiceKart.
 </p>
 
 <div class="hero-buttons">
@@ -694,12 +814,12 @@ Recommended Options
 <section class="section" id="colleges">
 
 <h2 class="title">
-🏫 Explore 8,000+ Colleges
+🏫 Explore Colleges & Universities
 </h2>
 
 <p class="subtitle">
-Search and filter Indian higher-education institutions by
-name, state, district and institution type.
+Search Indian colleges, government universities, state universities,
+central universities, private universities and other institutes.
 </p>
 
 
@@ -707,15 +827,11 @@ name, state, district and institution type.
 
 <input
 id="collegeSearch"
-placeholder="🔎 Search college name..."
+placeholder="🔎 Search college or university..."
 >
 
 <select id="stateFilter">
 <option value="">All States</option>
-</select>
-
-<select id="districtFilter">
-<option value="">All Districts</option>
 </select>
 
 <select id="typeFilter">
@@ -728,7 +844,7 @@ placeholder="🔎 Search college name..."
 <div class="college-topbar">
 
 <div class="college-count" id="collegeCount">
-Loading college database...
+Loading institution database...
 </div>
 
 <select id="pageSize" style="width:auto">
@@ -772,7 +888,8 @@ Next →
 </h2>
 
 <p class="subtitle">
-Explore popular undergraduate and professional courses.
+Understand what popular courses teach, why students choose them
+and where they can be useful.
 </p>
 
 <div class="course-grid" id="courseGrid"></div>
@@ -787,7 +904,8 @@ Explore popular undergraduate and professional courses.
 </h2>
 
 <p class="subtitle">
-Enter your profile to explore possible college options.
+Enter your exam, score/rank and category. Prediction uses available
+college cutoff information when it exists in the database.
 </p>
 
 
@@ -812,6 +930,7 @@ Select Exam
 <option>UPCATET</option>
 <option>ICAR UG</option>
 <option>ICAR JRF</option>
+<option>Other</option>
 
 </select>
 
@@ -868,39 +987,7 @@ Select Exam First
 <label>Preferred State</label>
 
 <select id="predictState">
-
 <option>All India</option>
-<option>Uttar Pradesh</option>
-<option>Delhi</option>
-<option>Bihar</option>
-<option>Maharashtra</option>
-<option>Rajasthan</option>
-<option>Haryana</option>
-<option>Madhya Pradesh</option>
-<option>Punjab</option>
-<option>Gujarat</option>
-<option>Karnataka</option>
-<option>Tamil Nadu</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Field</label>
-
-<select id="predictType">
-
-<option>All</option>
-<option>Agriculture</option>
-<option>Medical</option>
-<option>Engineering</option>
-<option>Veterinary</option>
-<option>Government</option>
-<option>Private</option>
-
 </select>
 
 </div>
@@ -1002,11 +1089,12 @@ Send
 <section class="section counselling" id="counselling">
 
 <h2 class="title">
-📞 Book Counselling
+💡 Counselling Advice
 </h2>
 
 <p class="subtitle">
-Get personalised guidance for college and course selection.
+Get personalised admission advice. Submit your details and your
+request will be stored securely for the ChoiceKart team.
 </p>
 
 
@@ -1015,17 +1103,17 @@ Get personalised guidance for college and course selection.
 <div class="form-grid">
 
 <div class="form-group">
-<label>Your Name</label>
+<label>Your Name *</label>
 <input id="cName" placeholder="Enter your name">
 </div>
 
 <div class="form-group">
-<label>Mobile Number</label>
+<label>Mobile Number *</label>
 <input id="cPhone" type="tel" placeholder="Enter mobile number">
 </div>
 
 <div class="form-group">
-<label>Exam</label>
+<label>Exam *</label>
 
 <select id="cExam">
 <option>CUET</option>
@@ -1034,17 +1122,18 @@ Get personalised guidance for college and course selection.
 <option>UPCATET</option>
 <option>ICAR UG</option>
 <option>ICAR JRF</option>
+<option>Other</option>
 </select>
 
 </div>
 
 <div class="form-group">
-<label>Course</label>
+<label>Course *</label>
 <input id="cCourse" placeholder="Example: B.Sc Agriculture">
 </div>
 
 <div class="form-group">
-<label>Score / Rank</label>
+<label>Score / Rank *</label>
 <input id="cRank" placeholder="Enter score or rank">
 </div>
 
@@ -1069,7 +1158,7 @@ class="btn secondary"
 style="width:100%;margin-top:20px"
 onclick="bookCounselling()">
 
-Book Counselling
+💡 Get Counselling Advice
 
 </button>
 
@@ -1086,6 +1175,7 @@ Book Counselling
 
 <p class="subtitle">
 Send your question or problem to the ChoiceKart team.
+Your request is saved in the ChoiceKart admin database.
 </p>
 
 
@@ -1093,7 +1183,7 @@ Send your question or problem to the ChoiceKart team.
 
 <div class="form-group">
 
-<label>Name</label>
+<label>Name *</label>
 
 <input id="helpName"
 placeholder="Enter your name">
@@ -1103,7 +1193,7 @@ placeholder="Enter your name">
 
 <div class="form-group" style="margin-top:15px">
 
-<label>Email</label>
+<label>Email *</label>
 
 <input id="helpEmail"
 type="email"
@@ -1114,7 +1204,7 @@ placeholder="Enter your email">
 
 <div class="form-group" style="margin-top:15px">
 
-<label>Message</label>
+<label>Message *</label>
 
 <textarea
 id="helpMessage"
@@ -1129,9 +1219,13 @@ class="btn primary"
 style="width:100%;margin-top:18px"
 onclick="sendHelp()">
 
-Send Help Request
+📩 Send Help Request
 
 </button>
+
+<p style="font-size:12px;color:#64748b;margin-top:12px">
+Help requests are securely stored in the ChoiceKart database.
+</p>
 
 </div>
 
@@ -1154,7 +1248,7 @@ Choice<span>Kart</span>
 
 <p>
 Helping students explore colleges,
-courses and admission opportunities.
+universities, courses and admission opportunities.
 </p>
 
 </div>
@@ -1176,7 +1270,7 @@ courses and admission opportunities.
 
 <h3>Support</h3>
 
-<a href="#counselling">Counselling</a>
+<a href="#counselling">Counselling Advice</a>
 <a href="#help">Help</a>
 
 </div>
@@ -1191,6 +1285,18 @@ courses and admission opportunities.
 </footer>
 
 
+<!-- SMALL AI ICON -->
+
+<button
+class="ai-float"
+onclick="openAI()"
+title="ChoiceKart AI">
+
+🤖
+
+</button>
+
+
 <button
 class="admin-btn"
 onclick="openAdmin()">
@@ -1199,6 +1305,8 @@ onclick="openAdmin()">
 
 </button>
 
+
+<!-- DETAIL MODAL -->
 
 <div class="modal" id="detailModal">
 
@@ -1217,6 +1325,8 @@ onclick="closeModal()">
 </div>
 
 
+<!-- ADMIN LOGIN -->
+
 <div class="modal" id="adminLogin">
 
 <div class="modal-content">
@@ -1232,13 +1342,20 @@ Choice<span style="color:#ff841f">Kart</span> Admin
 </h2>
 
 <p style="color:#64748b;margin:10px 0 15px">
-Admin dashboard
+Login with your Firebase Authentication account.
 </p>
+
+<input
+id="adminEmail"
+type="email"
+placeholder="Admin email"
+>
 
 <input
 id="adminPassword"
 type="password"
 placeholder="Admin password"
+style="margin-top:10px"
 >
 
 <button
@@ -1255,6 +1372,8 @@ Login
 </div>
 
 
+<!-- ADMIN PANEL -->
+
 <div id="adminPanel">
 
 <div class="admin-header">
@@ -1263,13 +1382,33 @@ Login
 ⚙ ChoiceKart Admin
 </h2>
 
+<div>
+
 <button
 class="btn primary"
+onclick="refreshAdmin()">
+
+Refresh
+
+</button>
+
+<button
+class="btn primary"
+onclick="logoutAdmin()">
+
+Logout
+
+</button>
+
+<button
+class="btn secondary"
 onclick="closeAdmin()">
 
 Close
 
 </button>
+
+</div>
 
 </div>
 
@@ -1280,7 +1419,7 @@ Close
 
 <div class="stat">
 <h2 id="statColleges">0</h2>
-<p>Colleges</p>
+<p>Institutions</p>
 </div>
 
 <div class="stat">
@@ -1290,7 +1429,7 @@ Close
 
 <div class="stat">
 <h2 id="statCounselling">0</h2>
-<p>Counselling</p>
+<p>Advice Requests</p>
 </div>
 
 <div class="stat">
@@ -1301,33 +1440,243 @@ Close
 </div>
 
 
-<div class="admin-card" style="margin-top:20px">
+<div class="admin-tabs">
 
-<h3>Database</h3>
+<button class="admin-tab active"
+onclick="showAdminTab('dashboard',this)">
+Dashboard
+</button>
 
-<p style="color:#64748b;margin-top:10px">
+<button class="admin-tab"
+onclick="showAdminTab('collegesAdmin',this)">
+Institutions
+</button>
 
-The college directory is loaded dynamically.
-Use the public source/database to update institution information.
+<button class="admin-tab"
+onclick="showAdminTab('coursesAdmin',this)">
+Courses
+</button>
+
+<button class="admin-tab"
+onclick="showAdminTab('counsellingAdmin',this)">
+Advice Requests
+</button>
+
+<button class="admin-tab"
+onclick="showAdminTab('helpAdmin',this)">
+Help Requests
+</button>
+
+</div>
+
+
+<div class="admin-view active" id="dashboard">
+
+<div class="admin-card">
+
+<h3>Admin Control</h3>
+
+<p style="color:#64748b;margin-top:10px;line-height:1.7">
+
+The admin dashboard controls the data available to the
+website. Institution data is loaded from
+<b>colleges.json</b>. Advice and Help requests are stored
+in Firebase/local fallback storage.
 
 </p>
 
 </div>
 
+
+<div class="admin-card">
+
+<h3>Current Database</h3>
+
+<div id="databaseStatus"
+class="info-box"
+style="margin-top:15px">
+Checking database...
 </div>
 
 </div>
+
+</div>
+
+
+<div class="admin-view" id="collegesAdmin">
+
+<div class="admin-card">
+
+<h3>Institution Database</h3>
+
+<p style="color:#64748b;margin:10px 0">
+
+Colleges, government universities, state universities,
+central universities, private universities and institutes
+can be displayed from the database.
+
+</p>
+
+<div id="adminCollegeList"></div>
+
+</div>
+
+</div>
+
+
+<div class="admin-view" id="coursesAdmin">
+
+<div class="admin-card">
+
+<h3>Popular Courses</h3>
+
+<div id="adminCourseList"></div>
+
+</div>
+
+</div>
+
+
+<div class="admin-view" id="counsellingAdmin">
+
+<div class="admin-card">
+
+<h3>Counselling Advice Requests</h3>
+
+<div id="adminCounsellingList"></div>
+
+</div>
+
+</div>
+
+
+<div class="admin-view" id="helpAdmin">
+
+<div class="admin-card">
+
+<h3>Help Requests</h3>
+
+<div id="adminHelpList"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+/*
+====================================================
+FIREBASE
+====================================================
+*/
+
+import {
+ initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+ getAuth,
+ signInWithEmailAndPassword,
+ onAuthStateChanged,
+ signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+ getFirestore,
+ collection,
+ addDoc,
+ getDocs,
+ updateDoc,
+ deleteDoc,
+ doc,
+ serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+ apiKey:"AIzaSyBUcPpTX19HBwDK5Thjumoohb-Ihg9vdIk",
+ authDomain:"choicekart-14718.firebaseapp.com",
+ projectId:"choicekart-14718",
+ storageBucket:"choicekart-14718.firebasestorage.app",
+ messagingSenderId:"527870176087",
+ appId:"1:527870176087:web:e8e9e7915e96ad2d102c12",
+ measurementId:"G-SZ3VY3FX4K"
+};
+
+
+const app=initializeApp(firebaseConfig);
+
+const auth=getAuth(app);
+
+const db=getFirestore(app);
+
+
+/*
+====================================================
+MAKE AVAILABLE
+====================================================
+*/
+
+window.ckFirebase={
+ auth,
+ db,
+ signInWithEmailAndPassword,
+ onAuthStateChanged,
+ signOut,
+ collection,
+ addDoc,
+ getDocs,
+ updateDoc,
+ deleteDoc,
+ doc,
+ serverTimestamp
+};
+
+console.log("ChoiceKart Firebase connected");
+
+
+/*
+====================================================
+AUTH STATE
+====================================================
+*/
+
+onAuthStateChanged(auth,user=>{
+
+ window.ckCurrentUser=user||null;
+
+ if(user){
+
+   console.log("Admin authenticated:",user.email);
+
+ }
+
+});
+
+
+/*
+====================================================
+START APPLICATION
+====================================================
+*/
+
+window.startChoiceKart();
+
+</script>
 
 
 <script>
 
-/* =========================================
-   CHOICEKART COLLEGE DATABASE
-========================================= */
-
-const COLLEGE_API =
-"https://indian-colleges-list.vercel.app/api/institutions";
-
+/*
+====================================================
+GLOBAL DATABASE
+====================================================
+*/
 
 let colleges=[];
 
@@ -1337,68 +1686,115 @@ let currentPage=1;
 
 let pageSize=24;
 
+let firebaseReady=false;
 
-/* =========================================
-   DEMO FALLBACK
-========================================= */
+
+/*
+====================================================
+LOCAL FALLBACK
+====================================================
+*/
 
 const fallbackColleges=[
 
 {
- name:"Banaras Hindu University",
+ id:"UP001",
+ name:"Acharya Narendra Deva University of Agriculture and Technology",
+ shortName:"ANDUAT",
  state:"Uttar Pradesh",
- district:"Varanasi",
- type:"Central University",
- course:"Arts, Science, Commerce, Agriculture",
- description:"Central university located in Varanasi."
+ city:"Ayodhya",
+ type:"Government University",
+ category:"State University",
+ established:1975,
+ affiliation:"State University",
+ approvals:["UGC","ICAR"],
+ courses:["B.Sc Agriculture","B.Tech","M.Sc Agriculture","M.Sc","Ph.D"],
+ website:"https://www.nduat.org/",
+ address:"Kumarganj, Ayodhya, Uttar Pradesh",
+ placement:null,
+ description:"A public agricultural university located in Ayodhya, Uttar Pradesh."
 },
 
 {
+ id:"DL001",
  name:"University of Delhi",
+ shortName:"DU",
  state:"Delhi",
- district:"Delhi",
+ city:"New Delhi",
  type:"Central University",
- course:"Arts, Commerce, Science, Management",
- description:"Central university located in Delhi."
+ category:"University",
+ established:1922,
+ affiliation:"Central University",
+ approvals:["UGC"],
+ courses:["BA","B.Sc","B.Com","MA","M.Sc","M.Com","Ph.D"],
+ website:"https://www.du.ac.in/",
+ address:"Delhi, India",
+ description:"A central public university located in New Delhi."
 },
 
 {
- name:"Babasaheb Bhimrao Ambedkar University",
- state:"Uttar Pradesh",
- district:"Lucknow",
- type:"Central University",
- course:"Arts, Science, Agriculture, Management",
- description:"Central university located in Lucknow."
+ id:"MH001",
+ name:"Indian Institute of Technology Bombay",
+ shortName:"IIT Bombay",
+ state:"Maharashtra",
+ city:"Mumbai",
+ type:"Government Institute",
+ category:"Institute",
+ established:1958,
+ affiliation:"Institute of National Importance",
+ approvals:["Government of India"],
+ courses:["B.Tech","BS","M.Tech","M.Des","MBA","M.Sc","Ph.D"],
+ website:"https://www.iitb.ac.in/",
+ address:"Powai, Mumbai, Maharashtra",
+ description:"A public technical institute located in Mumbai."
 },
 
 {
- name:"Chandra Shekhar Azad University of Agriculture and Technology",
- state:"Uttar Pradesh",
- district:"Kanpur",
- type:"Agriculture University",
- course:"Agriculture, Horticulture, Agricultural Engineering",
- description:"Agriculture university located in Kanpur."
+ id:"KA001",
+ name:"Indian Institute of Science",
+ shortName:"IISc",
+ state:"Karnataka",
+ city:"Bengaluru",
+ type:"Government Institute",
+ category:"Institute",
+ established:1909,
+ affiliation:"Institute of National Importance",
+ approvals:["Government of India"],
+ courses:["B.Sc","M.Tech","M.Des","M.Mgt","Ph.D"],
+ website:"https://iisc.ac.in/",
+ address:"Bengaluru, Karnataka",
+ description:"A public research institution located in Bengaluru."
 },
 
 {
- name:"AIIMS New Delhi",
- state:"Delhi",
- district:"New Delhi",
- type:"Medical College",
- course:"MBBS, Nursing, Medical Education",
- description:"National medical institute."
+ id:"TN001",
+ name:"Indian Institute of Technology Madras",
+ shortName:"IIT Madras",
+ state:"Tamil Nadu",
+ city:"Chennai",
+ type:"Government Institute",
+ category:"Institute",
+ established:1959,
+ affiliation:"Institute of National Importance",
+ approvals:["Government of India"],
+ courses:["B.Tech","BS","M.Tech","M.Sc","MBA","Ph.D"],
+ website:"https://www.iitm.ac.in/",
+ address:"Chennai, Tamil Nadu",
+ description:"A public technical institute located in Chennai."
 }
 
 ];
 
 
-/* =========================================
-   ESCAPE
-========================================= */
+/*
+====================================================
+HTML ESCAPE
+====================================================
+*/
 
 function escapeHTML(value){
 
-return String(value ?? "")
+return String(value??"")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -1408,121 +1804,106 @@ return String(value ?? "")
 }
 
 
-/* =========================================
-   LOAD COLLEGES
-========================================= */
+/*
+====================================================
+START
+====================================================
+*/
+
+window.startChoiceKart=async function(){
+
+renderCourses();
+
+await loadColleges();
+
+buildPredictStates();
+
+updateAdminStats();
+
+};
+
+
+/*
+====================================================
+LOAD COLLEGES.JSON FIRST
+====================================================
+*/
 
 async function loadColleges(){
 
-document.getElementById("collegeCount").innerHTML =
-"🔄 Loading college database...";
+const count=
+document.getElementById("collegeCount");
+
+count.innerHTML="🔄 Loading institution database...";
 
 try{
 
-const response =
-await fetch(COLLEGE_API);
+const response=
+await fetch("colleges.json",{cache:"no-store"});
 
-if(!response.ok){
+if(!response.ok)
+throw new Error("JSON unavailable");
 
-throw new Error("API failed");
+const data=await response.json();
 
-}
+if(!Array.isArray(data))
+throw new Error("Invalid JSON");
 
-const result =
-await response.json();
-
-const data =
-Array.isArray(result)
-? result
-: (result.data || []);
-
-
-colleges =
-data.map((c,index)=>({
-
-id:
-c.id ||
-c.aicte_id ||
-index,
-
-name:
-c.name ||
-c.institute_name ||
-c.college_name ||
-"Unnamed Institution",
-
-state:
-c.state || "",
-
-district:
-c.district || "",
-
-type:
-c.institution_type ||
-c.type ||
-"Institution",
-
-course:
-c.course ||
-c.courses ||
-c.program ||
-"Multiple Courses",
-
-university:
-c.university || "",
-
-address:
-c.address || "",
-
-description:
-c.description ||
-"Information available from the public institution dataset."
-
-}));
-
-
-/* Remove duplicates */
-
-const unique = new Map();
-
-colleges.forEach(c=>{
-
-const key =
-(
-c.name +
-"|" +
-c.state
-).toLowerCase();
-
-if(!unique.has(key)){
-
-unique.set(key,c);
-
-}
-
-});
-
-
-colleges =
-Array.from(unique.values());
-
+colleges=data.map(normalizeCollege);
 
 }catch(error){
 
-console.error(error);
+console.warn("colleges.json failed",error);
 
-colleges =
-fallbackColleges;
+try{
 
-document.getElementById("collegeCount").innerHTML =
-"⚠️ Live database unavailable — showing available data.";
+const response=
+await fetch(
+"https://indian-colleges-list.vercel.app/api/institutions"
+);
+
+if(!response.ok)
+throw new Error("API unavailable");
+
+const result=await response.json();
+
+const data=
+Array.isArray(result)
+?result
+:(result.data||[]);
+
+colleges=data.map(normalizeCollege);
+
+}catch(apiError){
+
+console.warn("Public API failed",apiError);
+
+colleges=
+fallbackColleges.map(normalizeCollege);
+
+count.innerHTML=
+"⚠️ Using available institution database.";
 
 }
 
+}
 
-filteredColleges =
-[...colleges];
+const unique=new Map();
 
+colleges.forEach(c=>{
+
+const key=
+(c.name+"|"+c.state).toLowerCase();
+
+if(!unique.has(key))
+unique.set(key,c);
+
+});
+
+colleges=
+Array.from(unique.values());
+
+filteredColleges=[...colleges];
 
 buildFilters();
 
@@ -1533,142 +1914,179 @@ updateAdminStats();
 }
 
 
-/* =========================================
-   FILTER OPTIONS
-========================================= */
+/*
+====================================================
+NORMALIZE COLLEGE
+====================================================
+*/
+
+function normalizeCollege(c,index){
+
+return{
+
+id:c.id||("CK"+index),
+
+name:c.name||
+c.institute_name||
+c.college_name||
+"Unnamed Institution",
+
+shortName:c.shortName||c.short_name||"",
+
+state:c.state||"",
+
+city:c.city||c.district||"",
+
+type:
+c.type||
+c.institution_type||
+"College / Institute",
+
+category:
+c.category||
+"College",
+
+established:c.established||null,
+
+affiliation:c.affiliation||"",
+
+approvals:Array.isArray(c.approvals)
+?c.approvals:[],
+
+courses:Array.isArray(c.courses)
+?c.courses:
+(c.course?[c.course]:[]),
+
+website:c.website||"",
+
+address:c.address||"",
+
+nirfRank:c.nirfRank||c.nirf_rank||null,
+
+rating:c.rating||null,
+
+fees:c.fees||null,
+
+placement:c.placement||null,
+
+image:c.image||c.imageUrl||"",
+
+description:
+c.description||
+"Information available from the institution database.",
+
+cutoff:c.cutoff||c.cutoffs||null,
+
+source:c.source||"Institution database"
+
+};
+
+}
+
+
+/*
+====================================================
+FILTERS
+====================================================
+*/
 
 function buildFilters(){
 
-const states =
+const states=
 [...new Set(
 colleges
 .map(c=>c.state)
 .filter(Boolean)
-)]
-.sort();
+)].sort();
 
-
-const types =
+const types=
 [...new Set(
 colleges
 .map(c=>c.type)
 .filter(Boolean)
-)]
-.sort();
+)].sort();
 
 
-document.getElementById("stateFilter").innerHTML =
-'<option value="">All States</option>' +
-
+document.getElementById("stateFilter").innerHTML=
+'<option value="">All States</option>'+
 states.map(s=>
-`<option value="${escapeHTML(s)}">
-${escapeHTML(s)}
-</option>`
+`<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`
 ).join("");
 
 
-document.getElementById("typeFilter").innerHTML =
-'<option value="">All Types</option>' +
-
+document.getElementById("typeFilter").innerHTML=
+'<option value="">All Types</option>'+
 types.map(t=>
-`<option value="${escapeHTML(t)}">
-${escapeHTML(t)}
-</option>`
+`<option value="${escapeHTML(t)}">${escapeHTML(t)}</option>`
 ).join("");
-
-
-updateDistrictFilter();
 
 }
 
 
-/* =========================================
-   DISTRICT FILTER
-========================================= */
+/*
+====================================================
+PREDICTOR STATES
+====================================================
+*/
 
-function updateDistrictFilter(){
+function buildPredictStates(){
 
-const state =
-document.getElementById("stateFilter").value;
+const select=
+document.getElementById("predictState");
 
-
-const districts =
+const states=
 [...new Set(
-colleges
-.filter(c=>!state || c.state===state)
-.map(c=>c.district)
-.filter(Boolean)
-)]
-.sort();
+colleges.map(c=>c.state).filter(Boolean)
+)].sort();
 
-
-document.getElementById("districtFilter").innerHTML =
-'<option value="">All Districts</option>' +
-
-districts.map(d=>
-`<option value="${escapeHTML(d)}">
-${escapeHTML(d)}
-</option>`
+select.innerHTML=
+'<option>All India</option>'+
+states.map(s=>
+`<option>${escapeHTML(s)}</option>`
 ).join("");
 
 }
 
 
-/* =========================================
-   APPLY FILTER
-========================================= */
+/*
+====================================================
+FILTER
+====================================================
+*/
 
 function applyFilters(){
 
-const search =
+const search=
 document.getElementById("collegeSearch")
-.value
-.toLowerCase()
-.trim();
+.value.toLowerCase().trim();
+
+const state=
+document.getElementById("stateFilter").value;
+
+const type=
+document.getElementById("typeFilter").value;
 
 
-const state =
-document.getElementById("stateFilter")
-.value;
-
-
-const district =
-document.getElementById("districtFilter")
-.value;
-
-
-const type =
-document.getElementById("typeFilter")
-.value;
-
-
-filteredColleges =
+filteredColleges=
 colleges.filter(c=>{
 
-const searchMatch =
-!search ||
+const text=
+(
+c.name+" "+
+c.shortName+" "+
+c.city+" "+
+c.state+" "+
+c.type+" "+
+c.category
+).toLowerCase();
 
-c.name.toLowerCase().includes(search) ||
-
-(c.university || "")
-.toLowerCase()
-.includes(search);
-
-
-return (
-
-searchMatch &&
-
-(!state || c.state===state) &&
-
-(!district || c.district===district) &&
-
-(!type || c.type===type)
-
+return(
+(!search||text.includes(search))&&
+(!state||c.state===state)&&
+(!type||c.type===type)
 );
 
 });
-
 
 currentPage=1;
 
@@ -1677,65 +2095,48 @@ renderColleges();
 }
 
 
-/* =========================================
-   RENDER COLLEGES
-========================================= */
+/*
+====================================================
+RENDER COLLEGES
+====================================================
+*/
 
 function renderColleges(){
 
-const box =
+const box=
 document.getElementById("collegeResults");
 
+pageSize=
+Number(document.getElementById("pageSize").value);
 
-pageSize =
-Number(
-document.getElementById("pageSize").value
-);
-
-
-const totalPages =
+const totalPages=
 Math.max(
 1,
-Math.ceil(
-filteredColleges.length/pageSize
-)
+Math.ceil(filteredColleges.length/pageSize)
 );
 
-
-if(currentPage>totalPages){
-
+if(currentPage>totalPages)
 currentPage=totalPages;
 
-}
-
-
-const start =
+const start=
 (currentPage-1)*pageSize;
 
+const list=
+filteredColleges.slice(start,start+pageSize);
 
-const list =
-filteredColleges.slice(
-start,
-start+pageSize
-);
-
-
-document.getElementById("collegeCount")
-.innerHTML =
-
-`🏫 Showing <b>
-${start+1 > filteredColleges.length ? 0 : start+1}
--
-${Math.min(start+pageSize,filteredColleges.length)}
-</b>
-of
-<b>${filteredColleges.length.toLocaleString()}</b>
+document.getElementById("collegeCount").innerHTML=
+`🏫 Showing <b>${
+filteredColleges.length?start+1:0
+}-${
+Math.min(start+pageSize,filteredColleges.length)
+}</b>
+of <b>${filteredColleges.length.toLocaleString()}</b>
 institutions`;
 
 
 if(!list.length){
 
-box.innerHTML = `
+box.innerHTML=`
 
 <div style="
 grid-column:1/-1;
@@ -1744,7 +2145,7 @@ padding:50px;
 text-align:center;
 border-radius:15px">
 
-<h2>No colleges found</h2>
+<h2>No colleges or universities found</h2>
 
 <p style="color:#64748b;margin-top:10px">
 Try another search or filter.
@@ -1756,13 +2157,26 @@ Try another search or filter.
 
 }else{
 
-box.innerHTML =
-list.map(c=>`
+box.innerHTML=
+list.map(c=>{
+
+const index=
+colleges.indexOf(c);
+
+const image=
+c.image
+?
+`<img src="${escapeHTML(c.image)}"
+alt="${escapeHTML(c.name)}"
+onerror="this.remove()">`
+:"🏫";
+
+return`
 
 <div class="college-card">
 
 <div class="college-image">
-🏫
+${image}
 </div>
 
 <div class="college-info">
@@ -1776,27 +2190,30 @@ ${escapeHTML(c.name)}
 </h3>
 
 <p>
-📍
-${escapeHTML(c.district)}
-${c.district && c.state ? ", " : ""}
+📍 ${escapeHTML(c.city||c.state)}
+${c.city&&c.state?", ":""}
 ${escapeHTML(c.state)}
 </p>
 
-${c.university ? `
-
 <p>
-🏛️ ${escapeHTML(c.university)}
+🎓 ${
+escapeHTML(
+(c.courses||[]).slice(0,3).join(", ")
+||"Multiple Courses"
+)
+}
 </p>
 
-` : ""}
-
-<p>
-🎓 ${escapeHTML(c.course)}
-</p>
+${
+c.placement
+?
+`<p>📈 Placement: <b>${escapeHTML(c.placement)}</b></p>`
+:""
+}
 
 <button
 class="small-btn"
-onclick="showCollege(${colleges.indexOf(c)})">
+onclick="showCollege(${index})">
 
 View Details
 
@@ -1806,138 +2223,100 @@ View Details
 
 </div>
 
-`).join("");
+`;
+
+}).join("");
 
 }
 
 
-document.getElementById("pageInfo")
-.innerText =
+document.getElementById("pageInfo").innerText=
 `Page ${currentPage} of ${totalPages}`;
 
-
-document.getElementById("prevBtn")
-.disabled =
+document.getElementById("prevBtn").disabled=
 currentPage===1;
 
-
-document.getElementById("nextBtn")
-.disabled =
+document.getElementById("nextBtn").disabled=
 currentPage===totalPages;
 
 }
 
 
-/* =========================================
-   PAGINATION
-========================================= */
-
-function nextPage(){
-
-const totalPages =
-Math.ceil(
-filteredColleges.length/pageSize
-);
-
-if(currentPage<totalPages){
-
-currentPage++;
-
-renderColleges();
-
-window.scrollTo({
-top:document.getElementById("colleges").offsetTop-80,
-behavior:"smooth"
-});
-
-}
-
-}
-
-
-function previousPage(){
-
-if(currentPage>1){
-
-currentPage--;
-
-renderColleges();
-
-window.scrollTo({
-top:document.getElementById("colleges").offsetTop-80,
-behavior:"smooth"
-});
-
-}
-
-}
-
-
-/* =========================================
-   COLLEGE DETAILS
-========================================= */
+/*
+====================================================
+COLLEGE DETAILS
+====================================================
+*/
 
 function showCollege(index){
 
-const c =
-colleges[index];
+const c=colleges[index];
 
 if(!c)return;
 
+const courses=
+(c.courses||[]).length
+?(c.courses||[])
+.map(x=>`<span class="badge" style="margin:4px">${escapeHTML(x)}</span>`)
+.join("")
+:"Not available";
 
-document.getElementById("detailContent")
-.innerHTML = `
+
+document.getElementById("detailContent").innerHTML=`
 
 <h2 style="color:#102d4f">
 🏫 ${escapeHTML(c.name)}
 </h2>
 
-<div class="college-image"
-style="margin:20px 0;border-radius:12px">
+<p style="color:#64748b;margin-top:8px">
+📍 ${escapeHTML(c.city||"")}
+${c.city&&c.state?", ":""}
+${escapeHTML(c.state||"")}
+</p>
 
-🏫
+<div class="detail-grid" style="margin-top:20px">
+
+<div class="detail-item">
+<b>Type</b>
+<br>${escapeHTML(c.type)}
+</div>
+
+<div class="detail-item">
+<b>Category</b>
+<br>${escapeHTML(c.category)}
+</div>
+
+<div class="detail-item">
+<b>Established</b>
+<br>${escapeHTML(c.established||"Not available")}
+</div>
+
+<div class="detail-item">
+<b>Affiliation</b>
+<br>${escapeHTML(c.affiliation||"Not available")}
+</div>
+
+<div class="detail-item">
+<b>NIRF Rank</b>
+<br>${escapeHTML(c.nirfRank||"Not available")}
+</div>
+
+<div class="detail-item">
+<b>Placement</b>
+<br>${escapeHTML(c.placement||"Not available")}
+</div>
 
 </div>
 
-<p>
-<b>📍 State:</b>
-${escapeHTML(c.state || "Not available")}
-</p>
+<h3 style="margin-top:22px">
+🎓 Courses
+</h3>
 
-<p style="margin-top:10px">
-<b>📍 District:</b>
-${escapeHTML(c.district || "Not available")}
-</p>
+<div style="margin-top:10px">
+${courses}
+</div>
 
-<p style="margin-top:10px">
-<b>🏛️ Type:</b>
-${escapeHTML(c.type || "Institution")}
-</p>
-
-<p style="margin-top:10px">
-<b>🎓 Courses:</b>
-${escapeHTML(c.course || "Multiple Courses")}
-</p>
-
-${c.university ? `
-
-<p style="margin-top:10px">
-<b>🏛️ University:</b>
-${escapeHTML(c.university)}
-</p>
-
-` : ""}
-
-${c.address ? `
-
-<p style="margin-top:10px">
-<b>📍 Address:</b>
-${escapeHTML(c.address)}
-</p>
-
-` : ""}
-
-<h3 style="margin-top:20px">
+<h3 style="margin-top:22px">
 About
 </h3>
 
@@ -1950,38 +2329,94 @@ ${escapeHTML(c.description)}
 
 </p>
 
+${
+c.address
+?
+`<p style="margin-top:15px">
+<b>📍 Address:</b>
+${escapeHTML(c.address)}
+</p>`
+:""
+}
+
+${
+c.website
+?
+`<a
+href="${escapeHTML(c.website)}"
+target="_blank"
+rel="noopener"
+class="btn secondary"
+style="margin-top:20px">
+Visit Official Website →
+</a>`
+:""
+}
+
 <p style="
 margin-top:20px;
-font-size:13px;
+font-size:12px;
 color:#64748b">
 
-⚠️ Admission, fees, cut-offs,
-placements and eligibility should always
-be verified from the institution's
-official/current admission sources.
+Admission, fees, placement and cutoff information should
+always be verified against the current official admission
+notification.
 
 </p>
 
 `;
 
-
-document.getElementById("detailModal")
-.style.display="flex";
+document.getElementById("detailModal").style.display="flex";
 
 }
 
 
 function closeModal(){
 
-document.getElementById("detailModal")
-.style.display="none";
+document.getElementById("detailModal").style.display="none";
 
 }
 
 
-/* =========================================
-   COURSES
-========================================= */
+/*
+====================================================
+PAGINATION
+====================================================
+*/
+
+function nextPage(){
+
+const totalPages=
+Math.ceil(filteredColleges.length/pageSize);
+
+if(currentPage<totalPages){
+
+currentPage++;
+
+renderColleges();
+
+}
+
+}
+
+function previousPage(){
+
+if(currentPage>1){
+
+currentPage--;
+
+renderColleges();
+
+}
+
+}
+
+
+/*
+====================================================
+COURSES
+====================================================
+*/
 
 const courses=[
 
@@ -1989,56 +2424,104 @@ const courses=[
 name:"B.Sc Agriculture",
 icon:"🌾",
 category:"Agriculture",
-info:"Undergraduate agriculture program covering crop science, soil science, horticulture, genetics, agricultural economics and related areas."
+points:[
+"Learn crop production and agricultural science.",
+"Study soil, genetics, horticulture and plant protection.",
+"Useful for agriculture departments and private agribusiness.",
+"Can lead to M.Sc Agriculture and research opportunities.",
+"Useful for agriculture competitive exams and government jobs."
+]
 },
 
 {
 name:"MBBS",
 icon:"🩺",
 category:"Medical",
-info:"Undergraduate medical education program."
+points:[
+"Professional undergraduate medical degree.",
+"Provides foundation in human anatomy and clinical medicine.",
+"Required pathway for becoming a medical doctor in India.",
+"Includes clinical training and internship.",
+"Can lead to postgraduate medical specialisations."
+]
 },
 
 {
 name:"B.Tech",
 icon:"💻",
 category:"Engineering",
-info:"Engineering and technology undergraduate program."
+points:[
+"Builds engineering and technology fundamentals.",
+"Offers branches such as CSE, ECE, Mechanical and Civil.",
+"Develops technical and problem-solving skills.",
+"Useful for technology, engineering and industry careers.",
+"Can lead to M.Tech, MBA, research or professional roles."
+]
 },
 
 {
 name:"B.Com",
 icon:"💰",
 category:"Commerce",
-info:"Commerce, accounting, finance and business fundamentals."
+points:[
+"Builds fundamentals of accounting and commerce.",
+"Covers finance, taxation and business concepts.",
+"Useful for banking and finance careers.",
+"Provides foundation for CA, CS, CMA and MBA pathways.",
+"Useful for accounting and corporate roles."
+]
 },
 
 {
 name:"BBA",
 icon:"💼",
 category:"Management",
-info:"Business administration and management program."
+points:[
+"Introduces business and management principles.",
+"Develops communication and leadership skills.",
+"Covers marketing, finance, HR and operations.",
+"Useful foundation for MBA and management careers.",
+"Can support careers in business and corporate organisations."
+]
 },
 
 {
 name:"BCA",
 icon:"💻",
 category:"Computer Applications",
-info:"Computer applications, programming and software fundamentals."
+points:[
+"Introduces programming and computer applications.",
+"Develops software and problem-solving skills.",
+"Covers databases, web development and computing.",
+"Can lead to MCA and software-related careers.",
+"Useful for IT and digital technology roles."
+]
 },
 
 {
 name:"B.V.Sc & A.H",
 icon:"🐄",
 category:"Veterinary",
-info:"Veterinary science and animal husbandry."
+points:[
+"Professional education in veterinary medicine.",
+"Covers animal health and disease management.",
+"Includes animal nutrition and husbandry.",
+"Useful for veterinary clinical and government services.",
+"Can lead to postgraduate veterinary specialisation."
+]
 },
 
 {
 name:"B.Sc Horticulture",
 icon:"🌱",
 category:"Agriculture",
-info:"Fruits, vegetables, floriculture and horticultural sciences."
+points:[
+"Focuses on fruits, vegetables and ornamental crops.",
+"Includes floriculture and nursery management.",
+"Develops skills in modern horticultural production.",
+"Useful for agriculture and horticulture departments.",
+"Can lead to postgraduate study and agribusiness careers."
+]
 }
 
 ];
@@ -2046,11 +2529,7 @@ info:"Fruits, vegetables, floriculture and horticultural sciences."
 
 function renderCourses(){
 
-const grid =
-document.getElementById("courseGrid");
-
-
-grid.innerHTML =
+document.getElementById("courseGrid").innerHTML=
 courses.map((c,i)=>`
 
 <div
@@ -2073,6 +2552,15 @@ ${escapeHTML(c.category)}
 
 </p>
 
+<p style="
+color:#64748b;
+font-size:12px;
+margin-top:10px">
+
+Click to see 5 important points
+
+</p>
+
 </div>
 
 `).join("");
@@ -2082,71 +2570,55 @@ ${escapeHTML(c.category)}
 
 function showCourse(index){
 
-const c =
-courses[index];
+const c=courses[index];
 
+document.getElementById("detailContent").innerHTML=`
 
-document.getElementById("detailContent")
-.innerHTML = `
-
-<h2>
-${c.icon}
-${escapeHTML(c.name)}
+<h2 style="color:#102d4f">
+${c.icon} ${escapeHTML(c.name)}
 </h2>
 
-<p style="margin-top:15px">
-<b>Category:</b>
-${escapeHTML(c.category)}
+<p style="margin-top:8px">
+<b>Category:</b> ${escapeHTML(c.category)}
 </p>
 
 <h3 style="margin-top:20px">
-About This Course
+Why is this course important?
 </h3>
 
-<p style="
-color:#475569;
-line-height:1.7;
-margin-top:10px">
+<ul class="course-points">
 
-${escapeHTML(c.info)}
+${c.points.map(p=>
+`<li>✅ ${escapeHTML(p)}</li>`
+).join("")}
 
-</p>
+</ul>
 
 `;
 
-
-document.getElementById("detailModal")
-.style.display="flex";
+document.getElementById("detailModal").style.display="flex";
 
 }
 
 
-/* =========================================
-   PREDICTOR
-========================================= */
+/*
+====================================================
+PREDICTOR COURSES
+====================================================
+*/
 
 const examCourses={
 
 CUET:[
-"B.A",
-"B.Com",
-"B.Sc",
-"BBA",
-"BCA",
-"B.Sc Agriculture"
+"B.A","B.Com","B.Sc","BBA","BCA","B.Sc Agriculture"
 ],
 
 NEET:[
-"MBBS",
-"BDS",
-"BAMS",
-"BHMS",
-"B.Sc Nursing"
+"MBBS","BDS","BAMS","BHMS","B.Sc Nursing"
 ],
 
 JEE:[
-"B.Tech",
-"Engineering"
+"B.Tech","Engineering"
 ],
 
 UPCATET:[
@@ -2166,6 +2638,10 @@ UPCATET:[
 "ICAR JRF":[
 "M.Sc Agriculture",
 "Agricultural Research"
+],
+
+Other:[
+"General Course"
 ]
 
 };
@@ -2173,23 +2649,19 @@ UPCATET:[
 
 function updatePredictCourses(){
 
-const exam =
-document.getElementById("predictExam")
-.value;
+const exam=
+document.getElementById("predictExam").value;
 
-
-const select =
+const select=
 document.getElementById("predictCourse");
 
-
-select.innerHTML =
+select.innerHTML=
 "<option value=''>Select Course</option>";
 
-
-(examCourses[exam] || [])
+(examCourses[exam]||[])
 .forEach(course=>{
 
-select.innerHTML +=
+select.innerHTML+=
 `<option>${escapeHTML(course)}</option>`;
 
 });
@@ -2197,29 +2669,104 @@ select.innerHTML +=
 }
 
 
+/*
+====================================================
+CUTOFF LOGIC
+====================================================
+*/
+
+function getCutoffForCollege(college,exam,course,category){
+
+/*
+Database may contain cutoff/cutoffs like:
+
+cutoff:{
+ CUET:{
+  "B.Sc Agriculture":{
+   General:600,
+   OBC:560
+  }
+ }
+}
+
+or:
+
+cutoffs:{
+ CUET:600
+}
+
+*/
+
+const data=
+college.cutoff||college.cutoffs;
+
+if(!data)return null;
+
+let examData=
+data[exam];
+
+if(examData==null)
+return null;
+
+if(typeof examData==="number")
+return examData;
+
+if(typeof examData==="object"){
+
+let courseData=
+examData[course]||
+examData[course?.toUpperCase()]||
+examData["default"]||
+examData;
+
+if(typeof courseData==="number")
+return courseData;
+
+if(typeof courseData==="object"){
+
+return Number(
+courseData[category]||
+courseData.General||
+courseData.general||
+courseData["Last Year"]||
+courseData.lastYear||
+0
+)||null;
+
+}
+
+}
+
+return null;
+
+}
+
+
+/*
+====================================================
+PREDICTOR
+====================================================
+*/
+
 function predictCollege(){
 
-const exam =
-document.getElementById("predictExam")
-.value;
+const exam=
+document.getElementById("predictExam").value;
+
+const score=
+Number(document.getElementById("predictScore").value);
+
+const course=
+document.getElementById("predictCourse").value;
+
+const category=
+document.getElementById("predictCategory").value;
+
+const state=
+document.getElementById("predictState").value;
 
 
-const score =
-document.getElementById("predictScore")
-.value;
-
-
-const course =
-document.getElementById("predictCourse")
-.value;
-
-
-const state =
-document.getElementById("predictState")
-.value;
-
-
-if(!exam || !score || !course){
+if(!exam||!score||!course){
 
 alert(
 "Please select exam, enter score/rank and course."
@@ -2230,54 +2777,108 @@ return;
 }
 
 
-let list =
+let list=
 colleges.filter(c=>
-state==="All India" ||
+state==="All India"||
 c.state===state
 );
 
-
-if(!list.length){
-
+if(!list.length)
 list=colleges;
 
+
+/*
+If cutoff data exists, compare against it.
+Otherwise show institutions without pretending
+that an invented cutoff is official.
+*/
+
+const withCutoff=[];
+const withoutCutoff=[];
+
+list.forEach(c=>{
+
+const cutoff=
+getCutoffForCollege(
+c,
+exam,
+course,
+category
+);
+
+if(cutoff){
+
+const margin=score-cutoff;
+
+withCutoff.push({
+college:c,
+cutoff,
+margin
+});
+
+}else{
+
+withoutCutoff.push(c);
+
+}
+
+});
+
+
+withCutoff.sort((a,b)=>
+b.margin-a.margin
+);
+
+
+const high=
+withCutoff.filter(x=>x.margin>=20);
+
+const medium=
+withCutoff.filter(
+x=>x.margin>=0&&x.margin<20
+);
+
+const low=
+withCutoff.filter(x=>x.margin<0);
+
+
+function renderCutoff(arr,type){
+
+if(!arr.length)
+return "<p>No cutoff data available for this category/course.</p>";
+
+return arr.slice(0,10).map(x=>`
+
+<p style="margin:10px 0">
+
+🏫 <b>
+${escapeHTML(x.college.name)}
+</b>
+
+<br>
+
+<span style="font-size:12px;color:#64748b">
+
+Last available cutoff:
+${escapeHTML(x.cutoff)}
+
+&nbsp; | &nbsp;
+
+Your score/rank:
+${escapeHTML(score)}
+
+</span>
+
+</p>
+
+`).join("");
+
 }
 
 
-const high=list.slice(0,5);
-const medium=list.slice(5,10);
-const low=list.slice(10,15);
+document.getElementById("predictResult").style.display="block";
 
-
-function names(arr){
-
-if(!arr.length){
-
-return "<p>No matching colleges available.</p>";
-
-}
-
-
-return arr.map(c=>
-
-`<p style="margin:8px 0">
-🏫 <b>${escapeHTML(c.name)}</b>
-— ${escapeHTML(c.state)}
-</p>`
-
-).join("");
-
-}
-
-
-const result =
-document.getElementById("predictResult");
-
-
-result.style.display="block";
-
-
-result.innerHTML = `
+document.getElementById("predictResult").innerHTML=`
 
 <div style="
 padding:15px;
@@ -2287,18 +2888,19 @@ border-radius:10px">
 <h3>🎯 Prediction Profile</h3>
 
 <p>
-<b>Exam:</b>
-${escapeHTML(exam)}
+<b>Exam:</b> ${escapeHTML(exam)}
 </p>
 
 <p>
-<b>Score / Rank:</b>
-${escapeHTML(score)}
+<b>Score / Rank:</b> ${escapeHTML(score)}
 </p>
 
 <p>
-<b>Course:</b>
-${escapeHTML(course)}
+<b>Category:</b> ${escapeHTML(category)}
+</p>
+
+<p>
+<b>Course:</b> ${escapeHTML(course)}
 </p>
 
 </div>
@@ -2306,128 +2908,137 @@ ${escapeHTML(course)}
 
 <div class="prediction-section prediction-high">
 
-<h3>🟢 High Chance Options</h3>
+<h3>🟢 High Chance</h3>
 
-${names(high)}
+${renderCutoff(high,"high")}
 
 </div>
 
 
 <div class="prediction-section prediction-medium">
 
-<h3>🟡 Moderate Options</h3>
+<h3>🟡 Moderate Chance</h3>
 
-${names(medium)}
+${renderCutoff(medium,"medium")}
 
 </div>
 
 
 <div class="prediction-section prediction-low">
 
-<h3>🔴 Ambitious Options</h3>
+<h3>🔴 Ambitious</h3>
 
-${names(low)}
+${renderCutoff(low,"low")}
 
 </div>
 
 
-<p style="
-margin-top:15px;
-font-size:13px;
-color:#64748b">
+<div class="info-box" style="margin-top:15px">
 
-⚠️ This is only an estimate.
-Final admission depends on official
-cut-offs, eligibility, category,
-counselling rules and seat availability.
+<b>Important:</b>
 
-</p>
+The predictor compares your score/rank only where
+last-year cutoff data is actually available in the
+database. It does not invent a cutoff.
+
+For colleges without cutoff data, verify the latest
+official counselling cutoff before making a choice.
+
+</div>
 
 `;
 
 }
 
 
-/* =========================================
-   AI
-========================================= */
+/*
+====================================================
+AI
+====================================================
+*/
+
+function openAI(){
+
+document.getElementById("ai").scrollIntoView({
+behavior:"smooth"
+});
+
+setTimeout(()=>{
+document.getElementById("aiInput").focus();
+},500);
+
+}
+
 
 function addAI(text,type){
 
-const box =
+const box=
 document.getElementById("aiMessages");
 
-
-const div =
+const div=
 document.createElement("div");
 
-
-div.className =
-"message " + type;
-
+div.className=
+"message "+type;
 
 div.innerHTML=text;
 
-
 box.appendChild(div);
 
-
-box.scrollTop =
-box.scrollHeight;
+box.scrollTop=box.scrollHeight;
 
 }
 
 
 function sendAI(){
 
-const input =
+const input=
 document.getElementById("aiInput");
 
-
-const q =
+const q=
 input.value.trim();
 
-
 if(!q)return;
-
 
 addAI(
 escapeHTML(q),
 "user"
 );
 
-
 input.value="";
-
 
 setTimeout(()=>{
 
-const lower =
-q.toLowerCase();
+const lower=q.toLowerCase();
 
+let answer=`
 
-let answer = `
+🤖 <b>ChoiceKart AI</b>
 
-🤖 Main ChoiceKart AI hoon.
+<br><br>
 
-Aap mujhe apna
-<b>exam, score/rank, course aur preferred state</b>
-bata sakte ho.
+Exam, score/rank, course, category
+aur preferred state batao.
+
+<br><br>
+
+Main available ChoiceKart data ke
+basis par guidance de sakta hoon.
 
 `;
 
 
 if(lower.includes("agriculture")){
 
-answer = `
+answer=`
 
 🌾 <b>Agriculture Guidance</b>
 
 <br><br>
 
-B.Sc Agriculture,
-Horticulture, Forestry aur
-related programs explore kar sakte ho.
+B.Sc Agriculture, Horticulture,
+Forestry aur related programs
+explore kar sakte ho.
 
 <br><br>
 
@@ -2437,111 +3048,116 @@ Apna exam aur score/rank batao.
 
 }
 
-
 else if(lower.includes("neet")){
 
-answer = `
+answer=`
 
 🩺 <b>NEET Guidance</b>
 
 <br><br>
 
-MBBS, BDS, BAMS, BHMS aur
-other medical options score/rank,
-category and counselling rules
-par depend karte hain.
+MBBS, BDS, BAMS, BHMS aur other
+medical options score/rank, category
+aur counselling rules par depend karte hain.
 
 `;
 
 }
 
-
 else if(lower.includes("cuet")){
 
-answer = `
+answer=`
 
 🎓 <b>CUET Guidance</b>
 
 <br><br>
 
 CUET score, category, course aur
-university preference batao.
+university preference important hain.
 
 `;
 
 }
 
-
 else if(lower.includes("jee")){
 
-answer = `
+answer=`
 
 💻 <b>JEE Guidance</b>
 
 <br><br>
 
 JEE rank, category, branch aur
-preferred state batao.
+preferred state important factors hain.
 
 `;
 
 }
 
+else if(
+lower.includes("course")||
+lower.includes("courses")
+){
 
-addAI(
-answer,
-"bot"
-);
+answer=`
+
+📚 <b>Course Guidance</b>
+
+<br><br>
+
+ChoiceKart ke Popular Courses section
+me course par click karke uske 5 important
+points dekh sakte ho.
+
+`;
+
+}
+
+addAI(answer,"bot");
 
 },500);
 
 }
 
 
-/* =========================================
-   COUNSELLING
-========================================= */
+/*
+====================================================
+COUNSELLING / ADVICE
+====================================================
+*/
 
-function bookCounselling(){
+async function bookCounselling(){
 
-const name =
+const name=
 document.getElementById("cName").value.trim();
 
-const phone =
+const phone=
 document.getElementById("cPhone").value.trim();
 
-const exam =
+const exam=
 document.getElementById("cExam").value;
 
-const course =
+const course=
 document.getElementById("cCourse").value.trim();
 
-const rank =
+const rank=
 document.getElementById("cRank").value.trim();
 
-const category =
+const category=
 document.getElementById("cCategory").value;
 
 
-if(!name || !phone || !course || !rank){
+if(!name||!phone||!course||!rank){
 
 alert(
-"Please fill all important details."
+"Please fill all required details."
 );
 
 return;
 
 }
 
-
-const requests =
-JSON.parse(
-localStorage.getItem("ck_counselling") || "[]"
-);
-
-
-requests.push({
-
+const request={
 name,
 phone,
 exam,
@@ -2549,20 +3165,47 @@ course,
 rank,
 category,
 status:"New",
-date:new Date().toLocaleString()
+createdAt:new Date().toISOString()
+};
 
-});
 
-
-localStorage.setItem(
+saveLocal(
 "ck_counselling",
-JSON.stringify(requests)
+request
 );
 
+
+try{
+
+if(window.ckFirebase){
+
+await window.ckFirebase.addDoc(
+window.ckFirebase.collection(
+window.ckFirebase.db,
+"counselling"
+),
+{
+...request,
+serverCreatedAt:
+window.ckFirebase.serverTimestamp()
+}
+);
+
+}
 
 alert(
-"✅ Counselling request submitted successfully!"
+"✅ Counselling advice request submitted successfully!"
 );
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"✅ Request saved. Firebase sync is currently unavailable."
+);
+
+}
 
 
 document.getElementById("cName").value="";
@@ -2570,29 +3213,30 @@ document.getElementById("cPhone").value="";
 document.getElementById("cCourse").value="";
 document.getElementById("cRank").value="";
 
-
 updateAdminStats();
 
 }
 
 
-/* =========================================
-   HELP
-========================================= */
+/*
+====================================================
+HELP
+====================================================
+*/
 
-function sendHelp(){
+async function sendHelp(){
 
-const name =
+const name=
 document.getElementById("helpName").value.trim();
 
-const email =
+const email=
 document.getElementById("helpEmail").value.trim();
 
-const message =
+const message=
 document.getElementById("helpMessage").value.trim();
 
 
-if(!name || !email || !message){
+if(!name||!email||!message){
 
 alert("Please fill all fields.");
 
@@ -2601,32 +3245,49 @@ return;
 }
 
 
-const requests =
-JSON.parse(
-localStorage.getItem("ck_help") || "[]"
-);
-
-
-requests.push({
-
+const request={
 name,
 email,
 message,
+to:"vishalyadav.rtp89@gmail.com",
 status:"New",
-date:new Date().toLocaleString()
+createdAt:new Date().toISOString()
+};
 
-});
 
-
-localStorage.setItem(
+saveLocal(
 "ck_help",
-JSON.stringify(requests)
+request
 );
 
 
-alert(
-"✅ Help request submitted successfully!"
+let firebaseSaved=false;
+
+try{
+
+if(window.ckFirebase){
+
+await window.ckFirebase.addDoc(
+window.ckFirebase.collection(
+window.ckFirebase.db,
+"helpRequests"
+),
+{
+...request,
+serverCreatedAt:
+window.ckFirebase.serverTimestamp()
+}
 );
+
+firebaseSaved=true;
+
+}
+
+}catch(error){
+
+console.error("Firebase help error:",error);
+
+}
 
 
 document.getElementById("helpName").value="";
@@ -2636,12 +3297,52 @@ document.getElementById("helpMessage").value="";
 
 updateAdminStats();
 
+
+if(firebaseSaved){
+
+alert(
+"✅ Help request sent successfully and saved in ChoiceKart Admin."
+);
+
+}else{
+
+alert(
+"✅ Help request saved locally. Please check Firebase configuration/rules."
+);
+
+}
+
 }
 
 
-/* =========================================
-   ADMIN
-========================================= */
+/*
+====================================================
+LOCAL STORAGE
+====================================================
+*/
+
+function saveLocal(key,item){
+
+const arr=
+JSON.parse(
+localStorage.getItem(key)||"[]"
+);
+
+arr.push(item);
+
+localStorage.setItem(
+key,
+JSON.stringify(arr)
+);
+
+}
+
+
+/*
+====================================================
+ADMIN
+====================================================
+*/
 
 function openAdmin(){
 
@@ -2659,33 +3360,73 @@ document.getElementById("adminLogin")
 }
 
 
-function loginAdmin(){
+async function loginAdmin(){
 
-const password =
-document.getElementById("adminPassword")
-.value;
+const email=
+document.getElementById("adminEmail").value.trim();
+
+const password=
+document.getElementById("adminPassword").value;
 
 
-/*
-IMPORTANT:
-For production use Firebase Authentication.
-This demo login is intentionally simple.
-*/
+if(!email||!password){
 
-if(password==="Yadav@505"){
+alert("Enter admin email and password.");
+
+return;
+
+}
+
+
+try{
+
+if(!window.ckFirebase){
+
+throw new Error("Firebase not ready");
+
+}
+
+await window.ckFirebase.signInWithEmailAndPassword(
+window.ckFirebase.auth,
+email,
+password
+);
 
 closeAdminLogin();
 
 document.getElementById("adminPanel")
 .style.display="block";
 
-updateAdminStats();
+await refreshAdmin();
 
-}else{
+}catch(error){
 
-alert("❌ Wrong password!");
+console.error(error);
+
+alert(
+"❌ Admin login failed. Check Firebase Authentication email/password."
+);
 
 }
+
+}
+
+
+async function logoutAdmin(){
+
+try{
+
+await window.ckFirebase.signOut(
+window.ckFirebase.auth
+);
+
+}catch(error){
+
+console.error(error);
+
+}
+
+closeAdmin();
 
 }
 
@@ -2698,51 +3439,474 @@ document.getElementById("adminPanel")
 }
 
 
-function updateAdminStats(){
+async function refreshAdmin(){
 
-const counselling =
-JSON.parse(
-localStorage.getItem("ck_counselling") || "[]"
-);
+updateAdminStats();
 
+renderAdminCollegeList();
 
-const help =
-JSON.parse(
-localStorage.getItem("ck_help") || "[]"
-);
+renderAdminCourseList();
 
-
-document.getElementById("statColleges")
-innerText =
-colleges.length;
-
-
-document.getElementById("statCourses")
-.innerText =
-courses.length;
-
-
-document.getElementById("statCounselling")
-.innerText =
-counselling.length;
-
-
-document.getElementById("statHelp")
-.innerText =
-help.length;
+await loadAdminRequests();
 
 }
 
 
-/* =========================================
-   MOBILE MENU
-========================================= */
+/*
+====================================================
+ADMIN STATS
+====================================================
+*/
+
+async function updateAdminStats(){
+
+document.getElementById("statColleges")
+.innerText=
+colleges.length;
+
+document.getElementById("statCourses")
+.innerText=
+courses.length;
+
+
+const localCounselling=
+JSON.parse(
+localStorage.getItem("ck_counselling")||"[]"
+);
+
+const localHelp=
+JSON.parse(
+localStorage.getItem("ck_help")||"[]"
+);
+
+
+document.getElementById("statCounselling")
+.innerText=
+localCounselling.length;
+
+document.getElementById("statHelp")
+.innerText=
+localHelp.length;
+
+
+document.getElementById("databaseStatus")
+innerHTML=`
+
+<b>Database status:</b>
+
+${window.ckFirebase
+?"Firebase Firestore connected"
+:"Local fallback active"}
+
+<br><br>
+
+<b>Institutions:</b>
+${colleges.length}
+
+<br>
+
+<b>Courses:</b>
+${courses.length}
+
+`;
+
+}
+
+
+/*
+====================================================
+ADMIN TABS
+====================================================
+*/
+
+function showAdminTab(id,button){
+
+document.querySelectorAll(".admin-view")
+.forEach(x=>x.classList.remove("active"));
+
+document.querySelectorAll(".admin-tab")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+button.classList.add("active");
+
+}
+
+
+/*
+====================================================
+ADMIN COLLEGES
+====================================================
+*/
+
+function renderAdminCollegeList(){
+
+const box=
+document.getElementById("adminCollegeList");
+
+box.innerHTML=
+colleges.slice(0,100).map(c=>`
+
+<div class="admin-list-item">
+
+<b>
+${escapeHTML(c.name)}
+</b>
+
+<p style="color:#64748b;font-size:13px;margin-top:5px">
+
+${escapeHTML(c.type)}
+|
+${escapeHTML(c.state)}
+
+</p>
+
+<button
+class="action-btn blue"
+onclick="showCollegeById('${escapeHTML(c.id)}')">
+
+View
+
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+function showCollegeById(id){
+
+const index=
+colleges.findIndex(c=>c.id===id);
+
+if(index>=0){
+
+showCollege(index);
+
+}
+
+}
+
+
+/*
+====================================================
+ADMIN COURSES
+====================================================
+*/
+
+function renderAdminCourseList(){
+
+document.getElementById("adminCourseList").innerHTML=
+courses.map(c=>`
+
+<div class="admin-list-item">
+
+<b>
+${c.icon} ${escapeHTML(c.name)}
+</b>
+
+<p style="color:#64748b;margin-top:5px">
+${escapeHTML(c.category)}
+</p>
+
+<ul class="course-points">
+
+${c.points.slice(0,5).map(p=>
+`<li>${escapeHTML(p)}</li>`
+).join("")}
+
+</ul>
+
+</div>
+
+`).join("");
+
+}
+
+
+/*
+====================================================
+ADMIN REQUESTS
+====================================================
+*/
+
+async function loadAdminRequests(){
+
+let counselling=[];
+
+let help=[];
+
+
+try{
+
+if(window.ckFirebase){
+
+const cSnap=
+await window.ckFirebase.getDocs(
+window.ckFirebase.collection(
+window.ckFirebase.db,
+"counselling"
+)
+);
+
+cSnap.forEach(d=>{
+counselling.push({
+id:d.id,
+...d.data()
+});
+});
+
+
+const hSnap=
+await window.ckFirebase.getDocs(
+window.ckFirebase.collection(
+window.ckFirebase.db,
+"helpRequests"
+)
+);
+
+hSnap.forEach(d=>{
+help.push({
+id:d.id,
+...d.data()
+});
+});
+
+}
+
+}catch(error){
+
+console.error("Admin Firebase read error",error);
+
+}
+
+
+if(!counselling.length){
+
+counselling=
+JSON.parse(
+localStorage.getItem("ck_counselling")||"[]"
+);
+
+}
+
+if(!help.length){
+
+help=
+JSON.parse(
+localStorage.getItem("ck_help")||"[]"
+);
+
+}
+
+
+document.getElementById("statCounselling")
+.innerText=counselling.length;
+
+document.getElementById("statHelp")
+.innerText=help.length;
+
+
+renderAdminCounselling(counselling);
+
+renderAdminHelp(help);
+
+}
+
+
+/*
+====================================================
+COUNSELLING ADMIN
+====================================================
+*/
+
+function renderAdminCounselling(data){
+
+const box=
+document.getElementById("adminCounsellingList");
+
+if(!data.length){
+
+box.innerHTML=
+"<p style='color:#64748b'>No advice requests yet.</p>";
+
+return;
+
+}
+
+box.innerHTML=
+data.map((r,i)=>`
+
+<div class="admin-list-item">
+
+<h4>
+👤 ${escapeHTML(r.name||"")}
+</h4>
+
+<p style="margin-top:8px">
+📱 ${escapeHTML(r.phone||"")}
+</p>
+
+<p>
+🎯 Exam: ${escapeHTML(r.exam||"")}
+</p>
+
+<p>
+🎓 Course: ${escapeHTML(r.course||"")}
+</p>
+
+<p>
+🏆 Score/Rank: ${escapeHTML(r.rank||"")}
+</p>
+
+<p>
+Category: ${escapeHTML(r.category||"")}
+</p>
+
+<p style="color:#64748b;font-size:12px;margin-top:8px">
+${escapeHTML(r.createdAt||"")}
+</p>
+
+${
+r.id
+?
+`<button
+class="action-btn status"
+onclick="markRequestDone('counselling','${escapeHTML(r.id)}')">
+Mark Done
+</button>`
+:""
+}
+
+</div>
+
+`).join("");
+
+}
+
+
+/*
+====================================================
+HELP ADMIN
+====================================================
+*/
+
+function renderAdminHelp(data){
+
+const box=
+document.getElementById("adminHelpList");
+
+if(!data.length){
+
+box.innerHTML=
+"<p style='color:#64748b'>No help requests yet.</p>";
+
+return;
+
+}
+
+box.innerHTML=
+data.map(r=>`
+
+<div class="admin-list-item">
+
+<h4>
+👤 ${escapeHTML(r.name||"")}
+</h4>
+
+<p style="margin-top:8px">
+📧 ${escapeHTML(r.email||"")}
+</p>
+
+<p style="
+margin-top:10px;
+line-height:1.6">
+
+${escapeHTML(r.message||"")}
+
+</p>
+
+<p style="color:#64748b;font-size:12px;margin-top:8px">
+${escapeHTML(r.createdAt||"")}
+</p>
+
+${
+r.id
+?
+`<button
+class="action-btn status"
+onclick="markRequestDone('helpRequests','${escapeHTML(r.id)}')">
+Mark Done
+</button>`
+:""
+}
+
+</div>
+
+`).join("");
+
+}
+
+
+/*
+====================================================
+MARK REQUEST DONE
+====================================================
+*/
+
+async function markRequestDone(collectionName,id){
+
+try{
+
+if(window.ckFirebase){
+
+await window.ckFirebase.updateDoc(
+
+window.ckFirebase.doc(
+window.ckFirebase.db,
+collectionName,
+id
+),
+
+{
+status:"Done"
+}
+
+);
+
+alert("Request marked as Done.");
+
+await refreshAdmin();
+
+}
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Could not update request."
+);
+
+}
+
+}
+
+
+/*
+====================================================
+MOBILE MENU
+====================================================
+*/
 
 function toggleMenu(){
 
-const nav =
-document.querySelector("nav");
-
+const nav=
+document.getElementById("mainNav");
 
 if(nav.style.display==="flex"){
 
@@ -2771,9 +3935,11 @@ nav.style.flexDirection="column";
 }
 
 
-/* =========================================
-   MODAL BACKDROP
-========================================= */
+/*
+====================================================
+MODAL
+====================================================
+*/
 
 window.addEventListener("click",e=>{
 
@@ -2794,9 +3960,11 @@ closeAdminLogin();
 });
 
 
-/* =========================================
-   FILTER EVENTS
-========================================= */
+/*
+====================================================
+FILTER EVENTS
+====================================================
+*/
 
 document
 .getElementById("collegeSearch")
@@ -2805,28 +3973,12 @@ document
 applyFilters
 );
 
-
 document
 .getElementById("stateFilter")
 .addEventListener(
 "change",
-()=>{
-
-updateDistrictFilter();
-
-applyFilters();
-
-}
-);
-
-
-document
-.getElementById("districtFilter")
-.addEventListener(
-"change",
 applyFilters
 );
-
 
 document
 .getElementById("typeFilter")
@@ -2835,28 +3987,44 @@ document
 applyFilters
 );
 
-
 document
 .getElementById("pageSize")
 .addEventListener(
 "change",
 ()=>{
-
 currentPage=1;
-
 renderColleges();
-
 }
 );
 
 
-/* =========================================
-   START
-========================================= */
+/*
+====================================================
+GLOBAL FUNCTIONS
+====================================================
+*/
 
-renderCourses();
-
-loadColleges();
+window.openAI=openAI;
+window.sendAI=sendAI;
+window.showCollege=showCollege;
+window.closeModal=closeModal;
+window.showCourse=showCourse;
+window.predictCollege=predictCollege;
+window.updatePredictCourses=updatePredictCourses;
+window.bookCounselling=bookCounselling;
+window.sendHelp=sendHelp;
+window.openAdmin=openAdmin;
+window.closeAdmin=closeAdmin;
+window.closeAdminLogin=closeAdminLogin;
+window.loginAdmin=loginAdmin;
+window.logoutAdmin=logoutAdmin;
+window.refreshAdmin=refreshAdmin;
+window.showAdminTab=showAdminTab;
+window.markRequestDone=markRequestDone;
+window.showCollegeById=showCollegeById;
+window.toggleMenu=toggleMenu;
+window.nextPage=nextPage;
+window.previousPage=previousPage;
 
 </script>
 
