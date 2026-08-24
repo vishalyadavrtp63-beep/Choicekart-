@@ -1175,7 +1175,7 @@ footer a{display:block;}
    CONFIG
 ================================ */
 
-const ADMIN_PASSWORD = "ChoiceKart@2026";
+const ADMIN_PASSWORD = "Yadav@505";
 
 /* ================================
    DEFAULT COLLEGES
@@ -1671,7 +1671,64 @@ function sendHelp(){
    ADMIN
 ================================ */
 
-function openAdminLogin(){
+async function adminAddCollege(){
+
+    const name = document.getElementById("adminCollegeName").value.trim();
+    const state = document.getElementById("adminCollegeState").value.trim();
+    const type = document.getElementById("adminCollegeType").value;
+    const course = document.getElementById("adminCollegeCourse").value.trim();
+
+    if(!name || !state || !course){
+        alert("Please fill all college details.");
+        return;
+    }
+
+    const college = {
+        name: name,
+        state: state,
+        type: type,
+        course: course,
+        description: "Information added by ChoiceKart Admin.",
+        createdAt: new Date().toISOString()
+    };
+
+    try {
+
+        const {
+            db,
+            collection,
+            addDoc
+        } = window.choiceKartFirebase;
+
+        const docRef = await addDoc(
+            collection(db, "colleges"),
+            college
+        );
+
+        college.id = docRef.id;
+
+        colleges.push(college);
+
+        renderColleges();
+        loadAdminData();
+        updateStats();
+
+        document.getElementById("adminCollegeName").value = "";
+        document.getElementById("adminCollegeState").value = "";
+        document.getElementById("adminCollegeCourse").value = "";
+
+        alert("✅ College Firebase database me save ho gaya!");
+
+    } catch(error) {
+
+        console.error("Firebase Error:", error);
+
+        alert(
+            "❌ Firebase me save nahi hua.\n\n" +
+            error.message
+        );
+    }
+}
     document.getElementById("adminLoginModal").style.display="flex";
 }
 
