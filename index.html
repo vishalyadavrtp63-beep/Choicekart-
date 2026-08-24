@@ -3,648 +3,600 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ChoiceKart | Your Rank. Your Choice. Your Future.</title>
 
 <style>
 :root{
---navy:#102d4f;
---blue:#1d4ed8;
---orange:#ff841f;
---light:#f5f9ff;
---white:#fff;
---text:#172033;
---muted:#64748b;
---green:#16a34a;
---yellow:#f59e0b;
---red:#dc2626;
+    --navy:#102d4f;
+    --blue:#1d4ed8;
+    --orange:#ff841f;
+    --light:#f5f9ff;
+    --white:#fff;
+    --text:#172033;
+    --muted:#64748b;
+    --green:#16a34a;
+    --yellow:#f59e0b;
+    --red:#dc2626;
 }
 
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:Arial,sans-serif;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
 }
 
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;}
 
 body{
-background:var(--light);
-color:var(--text);
+    background:var(--light);
+    color:var(--text);
 }
 
-a{text-decoration:none}
+a{text-decoration:none;}
 
 header{
-background:white;
-padding:16px 7%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 2px 12px rgba(0,0,0,.08);
-position:sticky;
-top:0;
-z-index:1000;
+    background:white;
+    padding:16px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
-font-size:28px;
-font-weight:800;
-color:var(--navy);
+    font-size:28px;
+    font-weight:800;
+    color:var(--navy);
 }
 
-.logo span{color:var(--orange)}
+.logo span{color:var(--orange);}
 
 nav{
-display:flex;
-gap:16px;
-align-items:center;
+    display:flex;
+    gap:16px;
+    align-items:center;
 }
 
 nav a{
-color:var(--navy);
-font-weight:bold;
-font-size:14px;
+    color:var(--navy);
+    font-weight:bold;
+    font-size:14px;
 }
+
+nav a:hover{color:var(--orange);}
 
 .mobile-menu{
-display:none;
-background:none;
-border:none;
-font-size:24px;
+    display:none;
+    background:none;
+    border:none;
+    font-size:24px;
 }
 
-.section{
-padding:70px 7%;
-}
+.section{padding:70px 7%;}
 
 .title{
-text-align:center;
-font-size:34px;
-color:var(--navy);
-margin-bottom:12px;
+    text-align:center;
+    font-size:34px;
+    color:var(--navy);
+    margin-bottom:12px;
 }
 
 .subtitle{
-text-align:center;
-color:var(--muted);
-max-width:750px;
-margin:0 auto 35px;
-line-height:1.6;
+    text-align:center;
+    color:var(--muted);
+    max-width:750px;
+    margin:0 auto 35px;
+    line-height:1.6;
 }
 
 .btn{
-border:none;
-display:inline-block;
-padding:14px 22px;
-border-radius:9px;
-font-weight:bold;
-cursor:pointer;
-font-size:15px;
+    border:none;
+    display:inline-block;
+    padding:14px 22px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+    font-size:15px;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    opacity:.92;
 }
 
 .primary{
-background:var(--orange);
-color:white;
+    background:var(--orange);
+    color:white;
 }
 
 .secondary{
-background:var(--navy);
-color:white;
+    background:var(--navy);
+    color:white;
 }
 
 .outline{
-background:white;
-color:var(--navy);
-border:1px solid #dbe3ee;
+    background:white;
+    color:var(--navy);
+    border:1px solid #dbe3ee;
 }
-
-/* HERO */
 
 .hero{
-padding:90px 7%;
-min-height:520px;
-display:flex;
-align-items:center;
-gap:50px;
-background:linear-gradient(135deg,#eef7ff,#fff);
+    padding:90px 7%;
+    min-height:520px;
+    display:flex;
+    align-items:center;
+    gap:50px;
+    background:linear-gradient(135deg,#eef7ff,#fff);
 }
 
-.hero-left{flex:1}
+.hero-left{flex:1;}
 
 .hero h1{
-font-size:52px;
-line-height:1.15;
-color:var(--navy);
+    font-size:52px;
+    line-height:1.15;
+    color:var(--navy);
 }
 
-.hero h1 span{color:var(--orange)}
+.hero h1 span{color:var(--orange);}
 
 .hero p{
-color:var(--muted);
-margin:22px 0;
-font-size:18px;
-line-height:1.7;
-max-width:650px;
+    color:var(--muted);
+    margin:22px 0;
+    font-size:18px;
+    line-height:1.7;
+    max-width:650px;
 }
 
 .hero-buttons{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
 .hero-card{
-flex:1;
-max-width:430px;
-background:white;
-padding:25px;
-border-radius:18px;
-box-shadow:0 15px 45px rgba(16,45,79,.15);
+    flex:1;
+    max-width:430px;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(16,45,79,.15);
 }
 
 .hero-card h3{
-color:var(--navy);
-margin-bottom:20px;
+    color:var(--navy);
+    margin-bottom:20px;
 }
 
 .profile-row{
-display:flex;
-justify-content:space-between;
-padding:12px 0;
-border-bottom:1px solid #edf2f7;
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #edf2f7;
 }
 
 .chance{
-display:flex;
-justify-content:space-between;
-padding:13px;
-margin-top:10px;
-border-radius:9px;
+    display:flex;
+    justify-content:space-between;
+    padding:13px;
+    margin-top:10px;
+    border-radius:9px;
 }
 
-.high{background:#dcfce7;color:#166534}
-.medium{background:#fef3c7;color:#92400e}
-.low{background:#fee2e2;color:#991b1b}
-
-/* COLLEGE */
+.high{background:#dcfce7;color:#166534;}
+.medium{background:#fef3c7;color:#92400e;}
+.low{background:#fee2e2;color:#991b1b;}
 
 .filters{
-background:white;
-padding:20px;
-border-radius:14px;
-box-shadow:0 4px 20px rgba(0,0,0,.07);
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-max-width:1000px;
-margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 4px 20px rgba(0,0,0,.07);
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    max-width:1000px;
+    margin:auto;
 }
 
 input,select,textarea{
-width:100%;
-padding:13px;
-border:1px solid #dbe3ee;
-border-radius:8px;
-font-size:15px;
+    width:100%;
+    padding:13px;
+    border:1px solid #dbe3ee;
+    border-radius:8px;
+    font-size:15px;
 }
 
 textarea{
-min-height:110px;
-resize:vertical;
+    min-height:110px;
+    resize:vertical;
 }
 
 .college-results{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-margin-top:30px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:30px;
 }
 
 .college-card{
-background:white;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
 .college-image{
-height:150px;
-background:linear-gradient(135deg,var(--navy),#315d8f);
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:45px;
+    height:150px;
+    background:linear-gradient(135deg,var(--navy),#315d8f);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
 }
 
-.college-info{padding:18px}
+.college-info{padding:18px;}
 
 .college-info h3{
-color:var(--navy);
-margin-bottom:8px;
+    color:var(--navy);
+    margin-bottom:8px;
 }
 
 .college-info p{
-color:var(--muted);
-margin:7px 0;
-font-size:14px;
+    color:var(--muted);
+    margin:7px 0;
+    font-size:14px;
 }
 
 .small-btn{
-margin-top:12px;
-width:100%;
-padding:10px;
-background:var(--navy);
-color:white;
-border:none;
-border-radius:7px;
-cursor:pointer;
+    margin-top:12px;
+    width:100%;
+    padding:10px;
+    background:var(--navy);
+    color:white;
+    border:none;
+    border-radius:7px;
+    cursor:pointer;
 }
 
-/* COURSES */
-
 .course-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:18px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
 }
 
 .course-card{
-cursor:pointer;
-background:white;
-padding:25px;
-border-radius:14px;
-text-align:center;
-box-shadow:0 5px 20px rgba(0,0,0,.07);
+    cursor:pointer;
+    background:white;
+    padding:25px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.course-card:hover{
+    transform:translateY(-4px);
 }
 
 .course-icon{
-font-size:38px;
-margin-bottom:12px;
+    font-size:38px;
+    margin-bottom:12px;
 }
 
-/* FORM */
-
 .form-box{
-max-width:850px;
-margin:auto;
-background:white;
-padding:30px;
-border-radius:16px;
-box-shadow:0 8px 30px rgba(0,0,0,.08);
+    max-width:850px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
 
 .form-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:16px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
 }
 
 .form-group label{
-display:block;
-font-weight:bold;
-margin-bottom:7px;
-color:var(--navy);
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+    color:var(--navy);
 }
 
-/* PREDICTOR */
-
 .predictor-result{
-display:none;
-margin-top:25px;
+    display:none;
+    margin-top:25px;
 }
 
 .prediction-section{
-padding:18px;
-border-radius:12px;
-margin-top:15px;
+    padding:18px;
+    border-radius:12px;
+    margin-top:15px;
 }
 
+.prediction-section h3{margin-bottom:10px;}
+
 .prediction-high{
-background:#ecfdf5;
-border-left:5px solid var(--green);
+    background:#ecfdf5;
+    border-left:5px solid var(--green);
 }
 
 .prediction-medium{
-background:#fffbeb;
-border-left:5px solid var(--yellow);
+    background:#fffbeb;
+    border-left:5px solid var(--yellow);
 }
 
 .prediction-low{
-background:#fef2f2;
-border-left:5px solid var(--red);
+    background:#fef2f2;
+    border-left:5px solid var(--red);
 }
-
-/* AI */
 
 .ai-section{
-background:linear-gradient(135deg,var(--navy),#1e4978);
+    background:linear-gradient(135deg,var(--navy),#1e4978);
 }
 
-.ai-section .title{color:white}
+.ai-section .title{color:white;}
 
 .ai-box{
-max-width:850px;
-margin:auto;
-background:white;
-border-radius:16px;
-overflow:hidden;
+    max-width:850px;
+    margin:auto;
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
 }
 
 .ai-header{
-background:var(--navy);
-color:white;
-padding:18px;
+    background:var(--navy);
+    color:white;
+    padding:18px;
 }
 
 .ai-messages{
-height:320px;
-overflow-y:auto;
-padding:18px;
-background:#f8fafc;
+    height:320px;
+    overflow-y:auto;
+    padding:18px;
+    background:#f8fafc;
 }
 
 .message{
-max-width:78%;
-padding:12px;
-margin-bottom:12px;
-border-radius:12px;
-line-height:1.5;
+    max-width:78%;
+    padding:12px;
+    margin-bottom:12px;
+    border-radius:12px;
+    line-height:1.5;
 }
 
 .bot{
-background:white;
-border:1px solid #e2e8f0;
+    background:white;
+    border:1px solid #e2e8f0;
 }
 
 .user{
-background:var(--orange);
-color:white;
-margin-left:auto;
+    background:var(--orange);
+    color:white;
+    margin-left:auto;
 }
 
 .ai-input{
-display:flex;
-gap:10px;
-padding:15px;
+    display:flex;
+    gap:10px;
+    padding:15px;
 }
 
-.ai-input input{flex:1}
+.ai-input input{flex:1;}
 
 .ai-input button{
-width:110px;
-background:var(--orange);
-border:none;
-color:white;
-border-radius:8px;
-cursor:pointer;
+    width:110px;
+    background:var(--orange);
+    border:none;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-/* COUNSELLING */
+.counselling{background:#fff7ed;}
 
-.counselling{
-background:#fff7ed;
+.help-box{
+    max-width:750px;
+    margin:auto;
 }
-
-/* FOOTER */
 
 footer{
-background:var(--navy);
-color:white;
-padding:50px 7%;
+    background:var(--navy);
+    color:white;
+    padding:50px 7%;
 }
 
 .footer-grid{
-display:grid;
-grid-template-columns:2fr 1fr 1fr;
-gap:30px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:30px;
 }
 
-footer h3{margin-bottom:15px}
+footer h3{margin-bottom:15px;}
 
 footer p,footer a{
-color:#cbd5e1;
-line-height:1.8;
-font-size:14px;
+    color:#cbd5e1;
+    line-height:1.8;
+    font-size:14px;
 }
 
-footer a{display:block}
-
-/* MODAL */
+footer a{display:block;}
 
 .modal{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.65);
-z-index:3000;
-align-items:center;
-justify-content:center;
-padding:20px;
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:3000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
 .modal-content{
-background:white;
-width:100%;
-max-width:600px;
-max-height:90vh;
-overflow:auto;
-padding:28px;
-border-radius:16px;
+    background:white;
+    width:100%;
+    max-width:600px;
+    max-height:90vh;
+    overflow:auto;
+    padding:28px;
+    border-radius:16px;
 }
 
 .close{
-float:right;
-font-size:24px;
-cursor:pointer;
+    float:right;
+    font-size:24px;
+    cursor:pointer;
 }
 
-/* ADMIN */
-
 .admin-btn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:var(--navy);
-color:white;
-border:none;
-padding:14px 18px;
-border-radius:30px;
-cursor:pointer;
-font-weight:bold;
-z-index:2000;
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:var(--navy);
+    color:white;
+    border:none;
+    padding:14px 18px;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:bold;
+    z-index:2000;
 }
 
 #adminPanel{
-display:none;
-position:fixed;
-inset:0;
-z-index:4000;
-background:#f5f9ff;
-overflow-y:auto;
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:4000;
+    background:#f5f9ff;
+    overflow-y:auto;
 }
 
 .admin-header{
-background:var(--navy);
-color:white;
-padding:20px 6%;
-display:flex;
-justify-content:space-between;
-align-items:center;
+    background:var(--navy);
+    color:white;
+    padding:20px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .admin-wrap{
-padding:30px 7%;
+    padding:30px 7%;
 }
 
 .admin-stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
 .stat{
-background:white;
-padding:20px;
-text-align:center;
-border-radius:12px;
-box-shadow:0 4px 15px rgba(0,0,0,.07);
+    background:white;
+    padding:20px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
 }
 
-.stat h2{color:var(--orange)}
+.stat h2{color:var(--orange);}
 
 .tabs{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-margin:25px 0;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:25px 0;
 }
 
 .tab{
-border:none;
-padding:11px 15px;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-background:#e2e8f0;
+    border:none;
+    padding:11px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    background:#e2e8f0;
 }
 
 .tab.active{
-background:var(--navy);
-color:white;
+    background:var(--navy);
+    color:white;
 }
 
 .admin-card{
-background:white;
-padding:25px;
-border-radius:15px;
-margin-bottom:20px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:20px;
 }
 
 .admin-list-item{
-padding:15px;
-background:#f8fafc;
-border-radius:10px;
-margin-top:10px;
+    padding:15px;
+    background:#f8fafc;
+    border-radius:10px;
+    margin-top:10px;
 }
 
-.admin-list-item h4{
-margin-bottom:7px;
-}
+.admin-list-item h4{margin-bottom:7px;}
 
 .action-btn{
-margin-top:10px;
-padding:8px 12px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-color:white;
-font-weight:bold;
+    margin-top:10px;
+    padding:8px 12px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    color:white;
+    font-weight:bold;
 }
 
-.delete{background:var(--red)}
-.status{background:var(--green)}
+.delete{background:var(--red);}
+.status{background:var(--green);}
+
+.firebase-status{
+    margin:15px 0;
+    padding:12px;
+    border-radius:8px;
+    background:#ecfdf5;
+    color:#166534;
+    font-weight:bold;
+}
 
 @media(max-width:900px){
-
-nav{display:none}
-
-.mobile-menu{display:block}
-
-.hero{
-flex-direction:column;
-}
-
-.hero h1{
-font-size:40px;
-}
-
-.grid,.course-grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-.college-results{
-grid-template-columns:repeat(2,1fr);
-}
-
-.filters{
-grid-template-columns:1fr;
-}
-
-.admin-stats{
-grid-template-columns:repeat(2,1fr);
-}
-
+    nav{display:none;}
+    .mobile-menu{display:block;}
+    .hero{flex-direction:column;}
+    .hero h1{font-size:40px;}
+    .college-results{grid-template-columns:repeat(2,1fr);}
+    .course-grid{grid-template-columns:repeat(2,1fr);}
+    .filters{grid-template-columns:1fr;}
+    .admin-stats{grid-template-columns:repeat(2,1fr);}
 }
 
 @media(max-width:600px){
-
-.section{
-padding:50px 18px;
-}
-
-header{
-padding:15px 18px;
-}
-
-.hero{
-padding:65px 18px;
-}
-
-.hero h1{
-font-size:34px;
-}
-
-.course-grid,
-.college-results,
-.form-grid{
-grid-template-columns:1fr;
-}
-
-.footer-grid{
-grid-template-columns:1fr;
-}
-
-.admin-stats{
-grid-template-columns:1fr;
-}
-
-.ai-input{
-flex-direction:column;
-}
-
-.ai-input button{
-width:100%;
-padding:13px;
-}
-
-.admin-header{
-flex-direction:column;
-gap:15px;
-align-items:flex-start;
-}
-
+    .section{padding:50px 18px;}
+    header{padding:15px 18px;}
+    .hero{padding:65px 18px;}
+    .hero h1{font-size:34px;}
+    .college-results,
+    .course-grid,
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+    .footer-grid{grid-template-columns:1fr;}
+    .admin-stats{grid-template-columns:1fr;}
+    .ai-input{flex-direction:column;}
+    .ai-input button{
+        width:100%;
+        padding:13px;
+    }
 }
 </style>
 </head>
@@ -652,892 +604,757 @@ align-items:flex-start;
 <body>
 
 <header>
+    <div class="logo">Choice<span>Kart</span></div>
 
-<div class="logo">Choice<span>Kart</span></div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#colleges">Explore Colleges</a>
+        <a href="#courses">Courses</a>
+        <a href="#predictor">Predictor</a>
+        <a href="#ai">AI</a>
+        <a href="#counselling">Counselling</a>
+        <a href="#help">Help</a>
+    </nav>
 
-<nav>
-<a href="#home">Home</a>
-<a href="#colleges">Explore Colleges</a>
-<a href="#courses">Courses</a>
-<a href="#predictor">Predictor</a>
-<a href="#ai">AI</a>
-<a href="#counselling">Counselling</a>
-<a href="#help">Help</a>
-</nav>
-
-<button class="mobile-menu">☰</button>
-
+    <button class="mobile-menu">☰</button>
 </header>
-
-
-<!-- HERO -->
 
 <section class="hero" id="home">
 
-<div class="hero-left">
+    <div class="hero-left">
+        <h1>Your Rank.<br><span>Your Choice. Your Future.</span></h1>
 
-<h1>
-Your Rank.<br>
-<span>Your Choice. Your Future.</span>
-</h1>
+        <p>
+            Explore colleges, discover courses, predict your admission chances
+            and get smart guidance with ChoiceKart.
+        </p>
 
-<p>
-Explore colleges, discover courses, predict your admission chances
-and get smart guidance with ChoiceKart.
-</p>
+        <div class="hero-buttons">
+            <a href="#predictor" class="btn primary">🎯 Find My College</a>
+            <a href="#counselling" class="btn secondary">📞 Book Counselling</a>
+        </div>
+    </div>
 
-<div class="hero-buttons">
+    <div class="hero-card">
+        <h3>🎯 Your ChoiceKart Profile</h3>
 
-<a href="#predictor" class="btn primary">
-🎯 Find My College
-</a>
+        <div class="profile-row">
+            <span>Exam</span>
+            <b>CUET</b>
+        </div>
 
-<a href="#counselling" class="btn secondary">
-📞 Book Counselling
-</a>
+        <div class="profile-row">
+            <span>Score</span>
+            <b>620 / 800</b>
+        </div>
 
-</div>
+        <div class="profile-row">
+            <span>Course</span>
+            <b>B.Sc Agriculture</b>
+        </div>
 
-</div>
+        <h4 style="margin-top:18px;">Recommended Options</h4>
 
+        <div class="chance high">
+            <span>🟢 High Chance</span><b>12</b>
+        </div>
 
-<div class="hero-card">
+        <div class="chance medium">
+            <span>🟡 Moderate</span><b>8</b>
+        </div>
 
-<h3>🎯 Your ChoiceKart Profile</h3>
-
-<div class="profile-row">
-<span>Exam</span>
-<b>CUET</b>
-</div>
-
-<div class="profile-row">
-<span>Score</span>
-<b>620 / 800</b>
-</div>
-
-<div class="profile-row">
-<span>Course</span>
-<b>B.Sc Agriculture</b>
-</div>
-
-<h4 style="margin-top:18px;">
-Recommended Options
-</h4>
-
-<div class="chance high">
-<span>🟢 High Chance</span>
-<b>12</b>
-</div>
-
-<div class="chance medium">
-<span>🟡 Moderate</span>
-<b>8</b>
-</div>
-
-<div class="chance low">
-<span>🔴 Ambitious</span>
-<b>5</b>
-</div>
-
-</div>
+        <div class="chance low">
+            <span>🔴 Ambitious</span><b>5</b>
+        </div>
+    </div>
 
 </section>
-
-
-<!-- COLLEGES -->
 
 <section class="section" id="colleges">
 
-<h2 class="title">🏫 Explore Colleges</h2>
+    <h2 class="title">🏫 Explore Colleges</h2>
 
-<p class="subtitle">
-Explore universities and colleges state-wise across India.
-</p>
+    <p class="subtitle">
+        Explore universities and colleges state-wise across India.
+    </p>
 
-<div class="filters">
+    <div class="filters">
 
-<select id="stateFilter">
+        <select id="stateFilter">
+            <option value="">All States</option>
+            <option>Uttar Pradesh</option>
+            <option>Delhi</option>
+            <option>Bihar</option>
+            <option>Maharashtra</option>
+            <option>Rajasthan</option>
+            <option>Haryana</option>
+            <option>Madhya Pradesh</option>
+            <option>Punjab</option>
+            <option>Gujarat</option>
+            <option>Karnataka</option>
+            <option>Tamil Nadu</option>
+        </select>
 
-<option value="">All States</option>
-<option>Uttar Pradesh</option>
-<option>Delhi</option>
-<option>Bihar</option>
-<option>Maharashtra</option>
-<option>Rajasthan</option>
-<option>Haryana</option>
-<option>Madhya Pradesh</option>
-<option>Punjab</option>
-<option>Gujarat</option>
-<option>Karnataka</option>
-<option>Tamil Nadu</option>
+        <select id="typeFilter">
+            <option value="">All Types</option>
+            <option>Central University</option>
+            <option>State University</option>
+            <option>Government College</option>
+            <option>Private University</option>
+            <option>Agriculture University</option>
+            <option>Medical College</option>
+            <option>Engineering College</option>
+        </select>
 
-</select>
+        <button class="btn primary" onclick="filterColleges()">
+            Explore Colleges
+        </button>
 
+    </div>
 
-<select id="typeFilter">
-
-<option value="">All Types</option>
-<option>Central University</option>
-<option>State University</option>
-<option>Government College</option>
-<option>Private University</option>
-<option>Agriculture University</option>
-<option>Medical College</option>
-<option>Engineering College</option>
-
-</select>
-
-
-<button class="btn primary" onclick="filterColleges()">
-Explore Colleges
-</button>
-
-</div>
-
-<div class="college-results" id="collegeResults"></div>
+    <div class="college-results" id="collegeResults"></div>
 
 </section>
-
-
-<!-- COURSES -->
 
 <section class="section" id="courses">
 
-<h2 class="title">
-📚 Explore Popular Courses
-</h2>
+    <h2 class="title">📚 Explore Popular Courses</h2>
 
-<p class="subtitle">
-Learn about courses, eligibility, duration, careers and opportunities.
-</p>
+    <p class="subtitle">
+        Learn about courses, eligibility, duration, careers and opportunities.
+    </p>
 
-<div class="course-grid" id="courseGrid"></div>
+    <div class="course-grid" id="courseGrid"></div>
 
 </section>
-
-
-<!-- PREDICTOR -->
 
 <section class="section" id="predictor">
 
-<h2 class="title">
-🎯 College Predictor
-</h2>
+    <h2 class="title">🎯 College Predictor</h2>
 
-<p class="subtitle">
-Enter your profile and explore possible college options.
-</p>
+    <p class="subtitle">
+        Enter your profile and explore possible college options.
+    </p>
 
-<div class="form-box">
+    <div class="form-box">
 
-<div class="form-grid">
+        <div class="form-grid">
 
-<div class="form-group">
+            <div class="form-group">
+                <label>Entrance Exam</label>
 
-<label>Entrance Exam</label>
+                <select id="predictExam" onchange="updatePredictCourses()">
+                    <option value="">Select Exam</option>
+                    <option>CUET</option>
+                    <option>NEET</option>
+                    <option>JEE</option>
+                    <option>UPCATET</option>
+                    <option>ICAR UG</option>
+                    <option>ICAR JRF</option>
+                </select>
+            </div>
 
-<select id="predictExam" onchange="updatePredictCourses()">
+            <div class="form-group">
+                <label>Score / Rank</label>
+                <input id="predictScore" type="number"
+                       placeholder="Enter score or rank">
+            </div>
 
-<option value="">Select Exam</option>
-<option>CUET</option>
-<option>NEET</option>
-<option>JEE</option>
-<option>UPCATET</option>
-<option>ICAR UG</option>
-<option>ICAR JRF</option>
+            <div class="form-group">
+                <label>Category</label>
 
-</select>
+                <select id="predictCategory">
+                    <option>General</option>
+                    <option>OBC</option>
+                    <option>EWS</option>
+                    <option>SC</option>
+                    <option>ST</option>
+                </select>
+            </div>
 
-</div>
+            <div class="form-group">
+                <label>Preferred Course</label>
 
+                <select id="predictCourse">
+                    <option value="">Select Exam First</option>
+                </select>
+            </div>
 
-<div class="form-group">
+            <div class="form-group">
+                <label>Preferred State</label>
 
-<label>Score / Rank</label>
+                <select id="predictState">
+                    <option>All India</option>
+                    <option>Uttar Pradesh</option>
+                    <option>Delhi</option>
+                    <option>Bihar</option>
+                    <option>Maharashtra</option>
+                    <option>Rajasthan</option>
+                </select>
+            </div>
 
-<input id="predictScore"
-type="number"
-placeholder="Enter score or rank">
+            <div class="form-group">
+                <label>College Type / Field</label>
 
-</div>
+                <select id="predictType">
+                    <option>All</option>
+                    <option>Agriculture</option>
+                    <option>Horticulture</option>
+                    <option>Medical</option>
+                    <option>Engineering</option>
+                    <option>Veterinary</option>
+                    <option>Government</option>
+                    <option>Private</option>
+                </select>
+            </div>
 
+        </div>
 
-<div class="form-group">
+        <button class="btn primary"
+                style="width:100%;margin-top:20px;"
+                onclick="predictCollege()">
+            🎯 Predict My Colleges
+        </button>
 
-<label>Category</label>
+        <div class="predictor-result" id="predictResult"></div>
 
-<select id="predictCategory">
-
-<option>General</option>
-<option>OBC</option>
-<option>EWS</option>
-<option>SC</option>
-<option>ST</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Preferred Course</label>
-
-<select id="predictCourse">
-
-<option value="">
-Select Exam First
-</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Preferred State</label>
-
-<select id="predictState">
-
-<option>All India</option>
-<option>Uttar Pradesh</option>
-<option>Delhi</option>
-<option>Bihar</option>
-<option>Maharashtra</option>
-<option>Rajasthan</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>College Type / Field</label>
-
-<select id="predictType">
-
-<option>All</option>
-<option>Agriculture</option>
-<option>Horticulture</option>
-<option>Medical</option>
-<option>Engineering</option>
-<option>Veterinary</option>
-<option>Government</option>
-<option>Private</option>
-
-</select>
-
-</div>
-
-</div>
-
-
-<button class="btn primary"
-style="width:100%;margin-top:20px;"
-onclick="predictCollege()">
-
-🎯 Predict My Colleges
-
-</button>
-
-<div class="predictor-result"
-id="predictResult">
-</div>
-
-</div>
+    </div>
 
 </section>
-
-
-<!-- AI -->
 
 <section class="section ai-section" id="ai">
 
-<h2 class="title">
-🤖 ChoiceKart AI
-</h2>
+    <h2 class="title">🤖 ChoiceKart AI</h2>
 
-<p class="subtitle" style="color:#dbeafe;">
-Ask about exams, colleges, courses and admissions.
-</p>
+    <p class="subtitle" style="color:#dbeafe;">
+        Ask about exams, colleges, courses and admissions.
+    </p>
 
-<div class="ai-box">
+    <div class="ai-box">
 
-<div class="ai-header">
+        <div class="ai-header">
+            <h3>🤖 ChoiceKart AI Assistant</h3>
+            <p>Your smart college and admission guide</p>
+        </div>
 
-<h3>🤖 ChoiceKart AI Assistant</h3>
+        <div class="ai-messages" id="aiMessages">
 
-<p>
-Your smart college and admission guide
-</p>
+            <div class="message bot">
+                👋 Namaste! Main <b>ChoiceKart AI</b> hoon.<br><br>
+                Mujhe apna exam, score/rank, course ya college preference batao.
+                Example:
+                <b>"Mera CUET score 620 hai, B.Sc Agriculture chahiye."</b>
+            </div>
 
-</div>
+        </div>
 
+        <div class="ai-input">
 
-<div class="ai-messages" id="aiMessages">
+            <input id="aiInput"
+                   placeholder="Ask ChoiceKart AI..."
+                   onkeydown="if(event.key==='Enter')sendAI()">
 
-<div class="message bot">
+            <button onclick="sendAI()">Send</button>
 
-👋 Namaste! Main <b>ChoiceKart AI</b> hoon.
+        </div>
 
-<br><br>
-
-Mujhe apna exam, score/rank, course ya college preference batao.
-
-<br><br>
-
-Example:
-
-<b>
-"Mera CUET score 620 hai, B.Sc Agriculture chahiye."
-</b>
-
-</div>
-
-</div>
-
-
-<div class="ai-input">
-
-<input
-id="aiInput"
-placeholder="Ask ChoiceKart AI..."
-onkeydown="if(event.key==='Enter')sendAI()">
-
-<button onclick="sendAI()">
-Send
-</button>
-
-</div>
-
-</div>
+    </div>
 
 </section>
-
-
-<!-- COUNSELLING -->
 
 <section class="section counselling" id="counselling">
 
-<h2 class="title">
-📞 Book Your Counselling
-</h2>
+    <h2 class="title">📞 Book Your Counselling</h2>
 
-<p class="subtitle">
-Get personalised guidance for your college and course selection.
-</p>
+    <p class="subtitle">
+        Get personalised guidance for your college and course selection.
+    </p>
 
-<div class="form-box">
+    <div class="form-box">
 
-<div class="form-grid">
+        <div class="form-grid">
 
-<div class="form-group">
-<label>Your Name</label>
-<input id="cName" placeholder="Enter your name">
-</div>
+            <div class="form-group">
+                <label>Your Name</label>
+                <input id="cName" placeholder="Enter your name">
+            </div>
 
-<div class="form-group">
-<label>Mobile Number</label>
-<input id="cPhone" type="tel" placeholder="Enter mobile number">
-</div>
+            <div class="form-group">
+                <label>Mobile Number</label>
+                <input id="cPhone" type="tel"
+                       placeholder="Enter mobile number">
+            </div>
 
-<div class="form-group">
-<label>Exam</label>
+            <div class="form-group">
+                <label>Exam</label>
 
-<select id="cExam">
-<option>CUET</option>
-<option>NEET</option>
-<option>JEE</option>
-<option>UPCATET</option>
-<option>ICAR UG</option>
-<option>ICAR JRF</option>
-</select>
+                <select id="cExam">
+                    <option>CUET</option>
+                    <option>NEET</option>
+                    <option>JEE</option>
+                    <option>UPCATET</option>
+                    <option>ICAR UG</option>
+                    <option>ICAR JRF</option>
+                </select>
+            </div>
 
-</div>
+            <div class="form-group">
+                <label>Which Course?</label>
+                <input id="cCourse"
+                       placeholder="Example: B.Sc Agriculture">
+            </div>
 
-<div class="form-group">
-<label>Which Course?</label>
-<input id="cCourse" placeholder="Example: B.Sc Agriculture">
-</div>
+            <div class="form-group">
+                <label>Score / Rank</label>
+                <input id="cRank" placeholder="Enter score or rank">
+            </div>
 
-<div class="form-group">
-<label>Score / Rank</label>
-<input id="cRank" placeholder="Enter score or rank">
-</div>
+            <div class="form-group">
+                <label>Category</label>
 
-<div class="form-group">
+                <select id="cCategory">
+                    <option>General</option>
+                    <option>OBC</option>
+                    <option>EWS</option>
+                    <option>SC</option>
+                    <option>ST</option>
+                </select>
+            </div>
 
-<label>Category</label>
+        </div>
 
-<select id="cCategory">
-<option>General</option>
-<option>OBC</option>
-<option>EWS</option>
-<option>SC</option>
-<option>ST</option>
-</select>
+        <button class="btn secondary"
+                style="width:100%;margin-top:20px;"
+                onclick="bookCounselling()">
+            Book Counselling
+        </button>
 
-</div>
-
-</div>
-
-
-<button class="btn secondary"
-style="width:100%;margin-top:20px;"
-onclick="bookCounselling()">
-
-Book Counselling
-
-</button>
-
-</div>
+    </div>
 
 </section>
-
-
-<!-- HELP -->
 
 <section class="section" id="help">
 
-<h2 class="title">
-🆘 Need Help?
-</h2>
+    <h2 class="title">🆘 Need Help?</h2>
 
-<p class="subtitle">
-Send your question or problem and the ChoiceKart team can help you.
-</p>
+    <p class="subtitle">
+        Send your question or problem and the ChoiceKart team can help you.
+    </p>
 
-<div class="form-box">
+    <div class="form-box help-box">
 
-<div class="form-group">
+        <div class="form-group">
+            <label>Your Name</label>
+            <input id="helpName" placeholder="Enter your name">
+        </div>
 
-<label>Your Name</label>
+        <div class="form-group">
+            <label>Your Email</label>
+            <input id="helpEmail"
+                   type="email"
+                   placeholder="Enter your email">
+        </div>
 
-<input id="helpName"
-placeholder="Enter your name">
+        <div class="form-group">
+            <label>Your Problem / Message</label>
 
-</div>
+            <textarea id="helpMessage"
+                      placeholder="Tell us how we can help you..."></textarea>
+        </div>
 
+        <button class="btn primary"
+                style="width:100%;margin-top:18px;"
+                onclick="sendHelp()">
+            Send Help Request
+        </button>
 
-<div class="form-group">
+        <p style="margin-top:15px;text-align:center;color:#64748b;">
+            Help contact:
+            <b>vishalyadav.rtp89@gmail.com</b>
+        </p>
 
-<label>Your Email</label>
-
-<input id="helpEmail"
-type="email"
-placeholder="Enter your email">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Your Problem / Message</label>
-
-<textarea id="helpMessage"
-placeholder="Tell us how we can help you..."></textarea>
-
-</div>
-
-
-<button class="btn primary"
-style="width:100%;margin-top:18px;"
-onclick="sendHelp()">
-
-Send Help Request
-
-</button>
-
-
-<p style="margin-top:15px;text-align:center;color:#64748b;">
-Help contact:
-<b>vishalyadav.rtp89@gmail.com</b>
-</p>
-
-</div>
+    </div>
 
 </section>
 
-
-<!-- FOOTER -->
-
 <footer>
 
-<div class="footer-grid">
+    <div class="footer-grid">
 
-<div>
+        <div>
+            <h2 class="logo" style="color:white;">
+                Choice<span>Kart</span>
+            </h2>
 
-<h2 class="logo" style="color:white;">
-Choice<span>Kart</span>
-</h2>
+            <p>
+                <b>Your Rank. Your Choice. Your Future.</b>
+            </p>
 
-<p>
-<b>Your Rank. Your Choice. Your Future.</b>
-</p>
+            <p>
+                Helping students explore colleges, courses and admission
+                opportunities.
+            </p>
+        </div>
 
-<p>
-Helping students explore colleges, courses and admission opportunities.
-</p>
+        <div>
+            <h3>Platform</h3>
+            <a href="#colleges">Explore Colleges</a>
+            <a href="#courses">Explore Courses</a>
+            <a href="#predictor">College Predictor</a>
+            <a href="#ai">ChoiceKart AI</a>
+        </div>
 
-</div>
+        <div>
+            <h3>Support</h3>
+            <a href="#counselling">Book Counselling</a>
+            <a href="#help">Help</a>
+            <p>vishalyadav.rtp89@gmail.com</p>
+        </div>
 
+    </div>
 
-<div>
-
-<h3>Platform</h3>
-
-<a href="#colleges">Explore Colleges</a>
-<a href="#courses">Explore Courses</a>
-<a href="#predictor">College Predictor</a>
-<a href="#ai">ChoiceKart AI</a>
-
-</div>
-
-
-<div>
-
-<h3>Support</h3>
-
-<a href="#counselling">Book Counselling</a>
-<a href="#help">Help</a>
-
-<p>
-vishalyadav.rtp89@gmail.com
-</p>
-
-</div>
-
-</div>
-
-
-<p style="margin-top:30px;text-align:center;">
-© 2026 ChoiceKart. All Rights Reserved.
-</p>
+    <p style="margin-top:30px;text-align:center;">
+        © 2026 ChoiceKart. All Rights Reserved.
+    </p>
 
 </footer>
 
-
-<!-- ADMIN BUTTON -->
-
-<button class="admin-btn"
-onclick="openAdminLogin()">
-
-⚙ Admin Login
-
+<button class="admin-btn" onclick="openAdminLogin()">
+    ⚙ Admin Login
 </button>
-
 
 <!-- ADMIN LOGIN -->
 
-<div class="modal"
-id="adminLoginModal">
+<div class="modal" id="adminLoginModal">
 
-<div class="modal-content">
+    <div class="modal-content">
 
-<span class="close"
-onclick="closeAdminLogin()">
-×
-</span>
+        <span class="close"
+              onclick="closeAdminLogin()">×</span>
 
-<h2 style="color:#102d4f;margin-bottom:10px;">
-Choice<span style="color:#ff841f;">Kart</span> Admin
-</h2>
+        <h2 style="color:#102d4f;margin-bottom:10px;">
+            Choice<span style="color:#ff841f;">Kart</span> Admin
+        </h2>
 
-<p style="color:#64748b;margin-bottom:15px;">
-Login to manage ChoiceKart information.
-</p>
+        <p style="color:#64748b;margin-bottom:15px;">
+            Login to manage ChoiceKart information.
+        </p>
 
-<input
-id="adminPassword"
-type="password"
-placeholder="Enter Admin Password">
+        <input id="adminPassword"
+               type="password"
+               placeholder="Enter Admin Password">
 
-<button class="btn primary"
-style="width:100%;margin-top:15px;"
-onclick="adminLogin()">
+        <button class="btn primary"
+                style="width:100%;margin-top:15px;"
+                onclick="adminLogin()">
+            Login
+        </button>
 
-Login
-
-</button>
+    </div>
 
 </div>
-
-</div>
-
 
 <!-- ADMIN PANEL -->
 
 <div id="adminPanel">
 
-<div class="admin-header">
+    <div class="admin-header">
 
-<h2>
-⚙ ChoiceKart Admin Dashboard
-</h2>
+        <h2>⚙ ChoiceKart Admin Dashboard</h2>
 
-<button class="btn primary"
-onclick="closeAdmin()">
+        <button class="btn primary"
+                onclick="closeAdmin()">
+            Close Admin
+        </button>
 
-Close Admin
+    </div>
 
-</button>
+    <div class="admin-wrap">
+
+        <div class="firebase-status" id="firebaseStatus">
+            🔄 Connecting to Firebase...
+        </div>
+
+        <div class="admin-stats">
+
+            <div class="stat">
+                <h2 id="statColleges">0</h2>
+                <p>Colleges</p>
+            </div>
+
+            <div class="stat">
+                <h2 id="statCourses">0</h2>
+                <p>Courses</p>
+            </div>
+
+            <div class="stat">
+                <h2 id="statCounselling">0</h2>
+                <p>Counselling Requests</p>
+            </div>
+
+            <div class="stat">
+                <h2 id="statHelp">0</h2>
+                <p>Help Requests</p>
+            </div>
+
+        </div>
+
+        <div class="tabs">
+
+            <button class="tab active"
+                    onclick="showTab('adminColleges',this)">
+                🏫 Colleges
+            </button>
+
+            <button class="tab"
+                    onclick="showTab('adminCourses',this)">
+                📚 Courses
+            </button>
+
+            <button class="tab"
+                    onclick="showTab('adminCounselling',this)">
+                📞 Counselling
+            </button>
+
+            <button class="tab"
+                    onclick="showTab('adminHelp',this)">
+                🆘 Help
+            </button>
+
+        </div>
+
+        <!-- COLLEGES -->
+
+        <div id="adminColleges"
+             class="admin-tab-content">
+
+            <div class="admin-card">
+
+                <h3>➕ Add College</h3>
+
+                <div class="form-grid">
+
+                    <input id="adminCollegeName"
+                           placeholder="College / University Name">
+
+                    <input id="adminCollegeState"
+                           placeholder="State">
+
+                    <select id="adminCollegeType">
+
+                        <option>Government College</option>
+                        <option>Private University</option>
+                        <option>Central University</option>
+                        <option>State University</option>
+                        <option>Agriculture University</option>
+                        <option>Medical College</option>
+                        <option>Engineering College</option>
+
+                    </select>
+
+                    <input id="adminCollegeCourse"
+                           placeholder="Main Course / Field">
+
+                </div>
+
+                <button class="btn primary"
+                        style="margin-top:15px;"
+                        onclick="adminAddCollege()">
+                    Add College
+                </button>
+
+            </div>
+
+            <div class="admin-card">
+
+                <h3>Manage Colleges</h3>
+
+                <div id="adminCollegeList"></div>
+
+            </div>
+
+        </div>
+
+        <!-- COURSES -->
+
+        <div id="adminCourses"
+             class="admin-tab-content"
+             style="display:none;">
+
+            <div class="admin-card">
+
+                <h3>➕ Add Course</h3>
+
+                <div class="form-grid">
+
+                    <input id="adminCourseName"
+                           placeholder="Course Name">
+
+                    <input id="adminCourseCategory"
+                           placeholder="Category">
+
+                </div>
+
+                <textarea id="adminCourseInfo"
+                          style="margin-top:15px;"
+                          placeholder="Course information"></textarea>
+
+                <button class="btn primary"
+                        style="margin-top:15px;"
+                        onclick="adminAddCourse()">
+                    Add Course
+                </button>
+
+            </div>
+
+            <div class="admin-card">
+
+                <h3>Manage Courses</h3>
+
+                <div id="adminCourseList"></div>
+
+            </div>
+
+        </div>
+
+        <!-- COUNSELLING -->
+
+        <div id="adminCounselling"
+             class="admin-tab-content"
+             style="display:none;">
+
+            <div class="admin-card">
+
+                <h3>📞 Counselling Requests</h3>
+
+                <div id="adminCounsellingList"></div>
+
+            </div>
+
+        </div>
+
+        <!-- HELP -->
+
+        <div id="adminHelp"
+             class="admin-tab-content"
+             style="display:none;">
+
+            <div class="admin-card">
+
+                <h3>🆘 Help Requests</h3>
+
+                <div id="adminHelpList"></div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
+<!-- DETAILS -->
 
-<div class="admin-wrap">
+<div class="modal" id="detailModal">
 
+    <div class="modal-content">
 
-<div class="admin-stats">
+        <span class="close"
+              onclick="closeDetails()">×</span>
 
-<div class="stat">
-<h2 id="statColleges">0</h2>
-<p>Colleges</p>
-</div>
+        <div id="detailContent"></div>
 
-<div class="stat">
-<h2 id="statCourses">0</h2>
-<p>Courses</p>
-</div>
-
-<div class="stat">
-<h2 id="statCounselling">0</h2>
-<p>Counselling Requests</p>
-</div>
-
-<div class="stat">
-<h2 id="statHelp">0</h2>
-<p>Help Requests</p>
-</div>
+    </div>
 
 </div>
 
+<script type="module">
 
-<div class="tabs">
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-<button class="tab active"
-onclick="showTab('adminColleges',this)">
-🏫 Colleges
-</button>
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    deleteDoc,
+    doc,
+    updateDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-<button class="tab"
-onclick="showTab('adminCourses',this)">
-📚 Courses
-</button>
+const firebaseConfig = {
 
-<button class="tab"
-onclick="showTab('adminCounselling',this)">
-📞 Counselling
-</button>
+    apiKey:"AIzaSyBUcPpTX19HBwDK5Thjumoohb-Ihg9vdIk",
 
-<button class="tab"
-onclick="showTab('adminHelp',this)">
-🆘 Help
-</button>
+    authDomain:"choicekart-14718.firebaseapp.com",
 
-</div>
+    projectId:"choicekart-14718",
 
+    storageBucket:"choicekart-14718.firebasestorage.app",
 
-<!-- COLLEGE ADMIN -->
+    messagingSenderId:"527870176087",
 
-<div id="adminColleges"
-class="admin-tab-content">
+    appId:"1:527870176087:web:e8e9e7915e96ad2d102c12",
 
+    measurementId:"G-SZ3VY3FX4K"
+};
 
-<div class="admin-card">
+try{
 
-<h3>
-➕ Add College
-</h3>
+    const app=initializeApp(firebaseConfig);
 
-<div class="form-grid">
+    const db=getFirestore(app);
 
-<input
-id="adminCollegeName"
-placeholder="College / University Name">
+    window.choiceKartDB=db;
 
-<input
-id="adminCollegeState"
-placeholder="State">
+    window.choiceKartFirebase={
+        db,
+        collection,
+        getDocs,
+        addDoc,
+        deleteDoc,
+        doc,
+        updateDoc
+    };
 
+    const status=document.getElementById("firebaseStatus");
 
-<select id="adminCollegeType">
+    if(status){
+        status.innerHTML="✅ Firebase Connected";
+    }
 
-<option>Government College</option>
-<option>Private University</option>
-<option>Central University</option>
-<option>State University</option>
-<option>Agriculture University</option>
-<option>Medical College</option>
-<option>Engineering College</option>
+    console.log("ChoiceKart Firebase Connected");
 
-</select>
+}catch(error){
 
+    console.error("Firebase error:",error);
 
-<input
-id="adminCollegeCourse"
-placeholder="Main Course / Field">
+    const status=document.getElementById("firebaseStatus");
 
-</div>
+    if(status){
+        status.innerHTML="⚠️ Firebase connection problem";
+    }
 
+}
 
-<button class="btn primary"
-style="margin-top:15px;"
-onclick="adminAddCollege()">
-
-Add College
-
-</button>
-
-</div>
-
-
-<div class="admin-card">
-
-<h3>
-Manage Colleges
-</h3>
-
-<div id="adminCollegeList"></div>
-
-</div>
-
-</div>
-
-
-<!-- COURSE ADMIN -->
-
-<div id="adminCourses"
-class="admin-tab-content"
-style="display:none;">
-
-<div class="admin-card">
-
-<h3>
-➕ Add Course
-</h3>
-
-<div class="form-grid">
-
-<input
-id="adminCourseName"
-placeholder="Course Name">
-
-<input
-id="adminCourseCategory"
-placeholder="Category">
-
-</div>
-
-<textarea
-id="adminCourseInfo"
-style="margin-top:15px;"
-placeholder="Course information">
-</textarea>
-
-
-<button class="btn primary"
-style="margin-top:15px;"
-onclick="adminAddCourse()">
-
-Add Course
-
-</button>
-
-</div>
-
-
-<div class="admin-card">
-
-<h3>
-Manage Courses
-</h3>
-
-<div id="adminCourseList"></div>
-
-</div>
-
-</div>
-
-
-<!-- COUNSELLING ADMIN -->
-
-<div id="adminCounselling"
-class="admin-tab-content"
-style="display:none;">
-
-<div class="admin-card">
-
-<h3>
-📞 Counselling Requests
-</h3>
-
-<div id="adminCounsellingList"></div>
-
-</div>
-
-</div>
-
-
-<!-- HELP ADMIN -->
-
-<div id="adminHelp"
-class="admin-tab-content"
-style="display:none;">
-
-<div class="admin-card">
-
-<h3>
-🆘 Help Requests
-</h3>
-
-<div id="adminHelpList"></div>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- DETAILS MODAL -->
-
-<div class="modal"
-id="detailModal">
-
-<div class="modal-content">
-
-<span class="close"
-onclick="closeDetails()">
-×
-</span>
-
-<div id="detailContent"></div>
-
-</div>
-
-</div>
-
+</script>
 
 <script>
 
-/* ================================
-   ADMIN PASSWORD
-================================ */
+/* =================================
+   CONFIG
+================================= */
 
-const ADMIN_PASSWORD = "Yadav@505";
+const ADMIN_PASSWORD="Yadav@505";
 
 
-/* ================================
+/* =================================
    DEFAULT COLLEGES
-================================ */
+================================= */
 
-const defaultColleges = [
+const defaultColleges=[
 
 {
 name:"Banaras Hindu University",
@@ -1590,11 +1407,11 @@ description:"National-level medical institute."
 ];
 
 
-/* ================================
+/* =================================
    DEFAULT COURSES
-================================ */
+================================= */
 
-const defaultCourses = [
+const defaultCourses=[
 
 {
 name:"B.Sc Agriculture",
@@ -1655,1376 +1472,1621 @@ info:"Course focused on fruits, vegetables, floriculture and horticultural scien
 ];
 
 
-/* ================================
+/* =================================
    LOCAL DATABASE
-================================ */
+================================= */
 
-let colleges =
+let colleges=
 JSON.parse(localStorage.getItem("ck_colleges")) ||
 defaultColleges;
 
-let courses =
+let courses=
 JSON.parse(localStorage.getItem("ck_courses")) ||
 defaultCourses;
 
-let counsellingRequests =
+let counsellingRequests=
 JSON.parse(localStorage.getItem("ck_counselling")) ||
 [];
 
-let helpRequests =
+let helpRequests=
 JSON.parse(localStorage.getItem("ck_help")) ||
 [];
 
 
+/* =================================
+   SAVE
+================================= */
+
 function saveData(){
 
-localStorage.setItem(
-"ck_colleges",
-JSON.stringify(colleges)
-);
+    localStorage.setItem(
+        "ck_colleges",
+        JSON.stringify(colleges)
+    );
 
-localStorage.setItem(
-"ck_courses",
-JSON.stringify(courses)
-);
+    localStorage.setItem(
+        "ck_courses",
+        JSON.stringify(courses)
+    );
 
-localStorage.setItem(
-"ck_counselling",
-JSON.stringify(counsellingRequests)
-);
+    localStorage.setItem(
+        "ck_counselling",
+        JSON.stringify(counsellingRequests)
+    );
 
-localStorage.setItem(
-"ck_help",
-JSON.stringify(helpRequests)
-);
-
+    localStorage.setItem(
+        "ck_help",
+        JSON.stringify(helpRequests)
+    );
 }
 
 
-/* ================================
-   ESCAPE HTML
-================================ */
+/* =================================
+   SECURITY
+================================= */
 
 function escapeHTML(value){
 
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
+    return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
 
-/* ================================
-   RENDER COLLEGES
-================================ */
+/* =================================
+   COLLEGE RENDER
+================================= */
 
 function renderColleges(list=colleges){
 
-const box=document.getElementById("collegeResults");
+    const box=document.getElementById("collegeResults");
 
-box.innerHTML="";
+    if(!box)return;
 
-list.forEach((college)=>{
+    box.innerHTML="";
 
-const originalIndex=colleges.indexOf(college);
+    list.forEach(college=>{
 
-box.innerHTML+=`
+        const originalIndex=colleges.indexOf(college);
 
-<div class="college-card">
+        box.innerHTML+=`
 
-<div class="college-image">
-🏫
-</div>
+        <div class="college-card">
 
-<div class="college-info">
+            <div class="college-image">
+                🏫
+            </div>
 
-<h3>
-${escapeHTML(college.name)}
-</h3>
+            <div class="college-info">
 
-<p>
-📍 ${escapeHTML(college.state)}
-</p>
+                <h3>
+                    ${escapeHTML(college.name)}
+                </h3>
 
-<p>
-🏛️ ${escapeHTML(college.type)}
-</p>
+                <p>
+                    📍 ${escapeHTML(college.state)}
+                </p>
 
-<p>
-🎓 ${escapeHTML(college.course)}
-</p>
+                <p>
+                    🏛️ ${escapeHTML(college.type)}
+                </p>
 
-<button
-class="small-btn"
-onclick="showCollege(${originalIndex})">
+                <p>
+                    🎓 ${escapeHTML(college.course)}
+                </p>
 
-View Details
+                <button class="small-btn"
+                        onclick="showCollege(${originalIndex})">
+                    View Details
+                </button>
 
-</button>
+            </div>
 
-</div>
+        </div>
 
-</div>
+        `;
+    });
 
-`;
+    if(list.length===0){
 
-});
-
-
-if(list.length===0){
-
-box.innerHTML=`
-<p style="grid-column:1/-1;text-align:center;color:#64748b;">
-No colleges found for this filter.
-</p>
-`;
-
-}
-
+        box.innerHTML=`
+            <p style="grid-column:1/-1;text-align:center;">
+                No colleges found for this filter.
+            </p>
+        `;
+    }
 }
 
 
-/* ================================
+/* =================================
    FILTER COLLEGES
-================================ */
+================================= */
 
 function filterColleges(){
 
-const state=
-document.getElementById("stateFilter").value;
+    const state=
+        document.getElementById("stateFilter").value;
 
-const type=
-document.getElementById("typeFilter").value;
+    const type=
+        document.getElementById("typeFilter").value;
 
+    const filtered=colleges.filter(c=>{
 
-const filtered=colleges.filter(c=>
+        return(
+            (!state || c.state===state) &&
+            (!type || c.type===type)
+        );
 
-(!state || c.state===state) &&
+    });
 
-(!type || c.type===type)
-
-);
-
-
-renderColleges(filtered);
-
+    renderColleges(filtered);
 }
 
 
-/* ================================
+/* =================================
    COLLEGE DETAILS
-================================ */
+================================= */
 
 function showCollege(index){
 
-const c=colleges[index];
+    const c=colleges[index];
 
-if(!c)return;
+    if(!c)return;
 
-document.getElementById("detailContent").innerHTML=`
+    document.getElementById("detailContent").innerHTML=`
 
-<h2 style="color:#102d4f;">
-🏫 ${escapeHTML(c.name)}
-</h2>
+        <h2 style="color:#102d4f;">
+            🏫 ${escapeHTML(c.name)}
+        </h2>
 
-<div
-class="college-image"
-style="margin:20px 0;border-radius:12px;">
-🏫
-</div>
+        <div class="college-image"
+             style="margin:20px 0;border-radius:12px;">
+            🏫
+        </div>
 
-<p>
-<b>📍 Location:</b>
-${escapeHTML(c.state)}
-</p>
+        <p>
+            <b>📍 Location:</b>
+            ${escapeHTML(c.state)}
+        </p>
 
-<p style="margin-top:10px;">
-<b>🏛️ Type:</b>
-${escapeHTML(c.type)}
-</p>
+        <p style="margin-top:10px;">
+            <b>🏛️ Type:</b>
+            ${escapeHTML(c.type)}
+        </p>
 
-<p style="margin-top:10px;">
-<b>🎓 Courses / Field:</b>
-${escapeHTML(c.course)}
-</p>
+        <p style="margin-top:10px;">
+            <b>🎓 Courses / Field:</b>
+            ${escapeHTML(c.course)}
+        </p>
 
-<h3 style="margin-top:20px;">
-About
-</h3>
+        <h3 style="margin-top:20px;">
+            About
+        </h3>
 
-<p style="line-height:1.7;color:#475569;">
-${escapeHTML(
-c.description ||
-"Information can be updated from the Admin Dashboard."
-)}
-</p>
+        <p style="line-height:1.7;
+                  color:#475569;
+                  margin-top:10px;">
+            ${escapeHTML(
+                c.description ||
+                "Information can be updated from the Admin Dashboard."
+            )}
+        </p>
 
-`;
+        <div style="margin-top:20px;
+                    padding:15px;
+                    background:#f8fafc;
+                    border-radius:10px;">
 
-document.getElementById("detailModal").style.display="flex";
+            <b>Important Information</b>
 
+            <p style="margin-top:8px;
+                      color:#64748b;">
+
+                Fees, placement statistics, admission rules
+                and rankings should be verified from
+                official/current sources.
+
+            </p>
+
+        </div>
+    `;
+
+    document.getElementById("detailModal")
+        .style.display="flex";
 }
 
 
 function closeDetails(){
 
-document.getElementById("detailModal").style.display="none";
-
+    document.getElementById("detailModal")
+        .style.display="none";
 }
 
 
-/* ================================
+/* =================================
    COURSES
-================================ */
+================================= */
 
 function renderCourses(){
 
-const grid=document.getElementById("courseGrid");
+    const grid=document.getElementById("courseGrid");
 
-grid.innerHTML="";
+    if(!grid)return;
 
-courses.forEach((course,index)=>{
+    grid.innerHTML="";
 
-grid.innerHTML+=`
+    courses.forEach((course,index)=>{
 
-<div
-class="course-card"
-onclick="showCourse(${index})">
+        grid.innerHTML+=`
 
-<div class="course-icon">
-${course.icon || "📚"}
-</div>
+        <div class="course-card"
+             onclick="showCourse(${index})">
 
-<h3>
-${escapeHTML(course.name)}
-</h3>
+            <div class="course-icon">
+                ${course.icon || "📚"}
+            </div>
 
-<p>
-${escapeHTML(course.category)}
-</p>
+            <h3>
+                ${escapeHTML(course.name)}
+            </h3>
 
-</div>
+            <p>
+                ${escapeHTML(course.category)}
+            </p>
 
-`;
+        </div>
 
-});
-
+        `;
+    });
 }
 
 
 function showCourse(index){
 
-const c=courses[index];
+    const c=courses[index];
 
-if(!c)return;
+    if(!c)return;
 
-document.getElementById("detailContent").innerHTML=`
+    document.getElementById("detailContent").innerHTML=`
 
-<h2>
-${c.icon || "📚"}
-${escapeHTML(c.name)}
-</h2>
+        <h2>
+            ${c.icon || "📚"}
+            ${escapeHTML(c.name)}
+        </h2>
 
-<p style="margin-top:15px;">
-<b>Category:</b>
-${escapeHTML(c.category)}
-</p>
+        <p style="margin-top:15px;">
+            <b>Category:</b>
+            ${escapeHTML(c.category)}
+        </p>
 
-<h3 style="margin-top:20px;">
-About This Course
-</h3>
+        <h3 style="margin-top:20px;">
+            About This Course
+        </h3>
 
-<p
-style="line-height:1.7;color:#475569;margin-top:10px;">
+        <p style="line-height:1.7;
+                  color:#475569;
+                  margin-top:10px;">
+            ${escapeHTML(c.info)}
+        </p>
 
-${escapeHTML(c.info)}
+        <div style="margin-top:20px;line-height:1.8;">
 
-</p>
+            <p>
+                ⏳ <b>Duration:</b>
+                Depends on course and institution
+            </p>
 
-<div
-style="margin-top:20px;line-height:1.8;">
+            <p>
+                📝 <b>Eligibility:</b>
+                Depends on official admission requirements
+            </p>
 
-<p>
-⏳ <b>Duration:</b>
-Depends on the course and institution
-</p>
+            <p>
+                🎯 <b>Entrance:</b>
+                May depend on university/exam rules
+            </p>
 
-<p>
-📝 <b>Eligibility:</b>
-Depends on official admission requirements
-</p>
+            <p>
+                💼 <b>Career:</b>
+                Depends on specialization and skills
+            </p>
 
-<p>
-🎯 <b>Entrance:</b>
-May depend on university/exam rules
-</p>
+        </div>
 
-<p>
-💼 <b>Career:</b>
-Career opportunities depend on specialization and skills
-</p>
+    `;
 
-</div>
-
-`;
-
-document.getElementById("detailModal").style.display="flex";
-
+    document.getElementById("detailModal")
+        .style.display="flex";
 }
 
 
-/* ================================
+/* =================================
    PREDICTOR
-================================ */
+================================= */
 
 const examCourses={
 
-"CUET":[
-"B.A",
-"B.Com",
-"B.Sc",
-"BBA",
-"BCA",
-"B.Sc Agriculture"
-],
+    CUET:[
+        "B.A",
+        "B.Com",
+        "B.Sc",
+        "BBA",
+        "BCA",
+        "B.Sc Agriculture"
+    ],
 
-"NEET":[
-"MBBS",
-"BDS",
-"BAMS",
-"BHMS",
-"B.Sc Nursing"
-],
+    NEET:[
+        "MBBS",
+        "BDS",
+        "BAMS",
+        "BHMS",
+        "B.Sc Nursing"
+    ],
 
-"JEE":[
-"B.Tech",
-"Engineering"
-],
+    JEE:[
+        "B.Tech",
+        "Engineering"
+    ],
 
-"UPCATET":[
-"B.Sc Agriculture",
-"B.Sc Horticulture",
-"B.Sc Forestry",
-"B.V.Sc & A.H"
-],
+    UPCATET:[
+        "B.Sc Agriculture",
+        "B.Sc Horticulture",
+        "B.Sc Forestry",
+        "B.V.Sc & A.H"
+    ],
 
-"ICAR UG":[
-"B.Sc Agriculture",
-"Horticulture",
-"Forestry",
-"Fisheries"
-],
+    "ICAR UG":[
+        "B.Sc Agriculture",
+        "Horticulture",
+        "Forestry",
+        "Fisheries"
+    ],
 
-"ICAR JRF":[
-"M.Sc Agriculture",
-"Agricultural Research"
-]
-
+    "ICAR JRF":[
+        "M.Sc Agriculture",
+        "Agricultural Research"
+    ]
 };
 
 
 function updatePredictCourses(){
 
-const exam=
-document.getElementById("predictExam").value;
+    const exam=
+        document.getElementById("predictExam").value;
 
-const select=
-document.getElementById("predictCourse");
+    const select=
+        document.getElementById("predictCourse");
 
-select.innerHTML=
-"<option value=''>Select Course</option>";
+    select.innerHTML=
+        "<option value=''>Select Course</option>";
 
-(examCourses[exam] || []).forEach(course=>{
+    (examCourses[exam] || []).forEach(course=>{
 
-select.innerHTML+=`
-<option>${escapeHTML(course)}</option>
-`;
-
-});
-
+        select.innerHTML+=`
+            <option>${escapeHTML(course)}</option>
+        `;
+    });
 }
 
-
-/* ================================
-   PREDICT COLLEGE
-================================ */
 
 function predictCollege(){
 
-const exam=
-document.getElementById("predictExam").value;
+    const exam=
+        document.getElementById("predictExam").value;
 
-const score=
-document.getElementById("predictScore").value;
+    const score=
+        document.getElementById("predictScore").value;
 
-const course=
-document.getElementById("predictCourse").value;
+    const course=
+        document.getElementById("predictCourse").value;
 
-const state=
-document.getElementById("predictState").value;
+    const state=
+        document.getElementById("predictState").value;
+
+    if(!exam || !score || !course){
+
+        alert(
+            "Please select exam, enter score/rank and select course."
+        );
+
+        return;
+    }
+
+    let filtered=colleges.filter(c=>{
+
+        return state==="All India" ||
+               c.state===state;
+
+    });
+
+    if(filtered.length===0){
+
+        filtered=colleges;
+    }
+
+    const high=filtered.slice(0,2);
+    const medium=filtered.slice(2,4);
+    const low=filtered.slice(4,6);
 
 
-if(!exam || !score || !course){
+    function collegeNames(arr){
 
-alert(
-"Please select exam, enter score/rank and select course."
-);
+        if(!arr.length){
 
-return;
+            return `
+                <p>
+                    More data will appear as the database grows.
+                </p>
+            `;
+        }
 
+        return arr.map(c=>`
+
+            <p style="margin:8px 0;">
+                🏫 <b>${escapeHTML(c.name)}</b>
+                — ${escapeHTML(c.state)}
+            </p>
+
+        `).join("");
+    }
+
+
+    const result=
+        document.getElementById("predictResult");
+
+    result.style.display="block";
+
+    result.innerHTML=`
+
+        <div style="padding:15px;
+                    background:#eff6ff;
+                    border-radius:10px;">
+
+            <h3>🎯 Your Prediction Profile</h3>
+
+            <p>
+                <b>Exam:</b>
+                ${escapeHTML(exam)}
+            </p>
+
+            <p>
+                <b>Score / Rank:</b>
+                ${escapeHTML(score)}
+            </p>
+
+            <p>
+                <b>Course:</b>
+                ${escapeHTML(course)}
+            </p>
+
+            <p>
+                <b>Location:</b>
+                ${escapeHTML(state)}
+            </p>
+
+        </div>
+
+        <div class="prediction-section prediction-high">
+
+            <h3>🟢 High Chance Options</h3>
+
+            ${collegeNames(high)}
+
+        </div>
+
+        <div class="prediction-section prediction-medium">
+
+            <h3>🟡 Moderate Chance Options</h3>
+
+            ${collegeNames(medium)}
+
+        </div>
+
+        <div class="prediction-section prediction-low">
+
+            <h3>🔴 Ambitious Options</h3>
+
+            ${collegeNames(low)}
+
+        </div>
+
+        <p style="margin-top:15px;
+                  color:#64748b;
+                  font-size:13px;">
+
+            ⚠️ Prediction is an estimate.
+            Final admission depends on official eligibility,
+            current cutoff, category and seat availability.
+
+        </p>
+    `;
 }
 
 
-let filtered=colleges.filter(c=>
-
-state==="All India" ||
-c.state===state
-
-);
-
-
-if(filtered.length===0){
-
-filtered=colleges;
-
-}
-
-
-const high=filtered.slice(0,2);
-const medium=filtered.slice(2,4);
-const low=filtered.slice(4,6);
-
-
-function collegeNames(arr){
-
-if(!arr.length){
-
-return `
-<p>
-More data will appear as the database grows.
-</p>
-`;
-
-}
-
-return arr.map(c=>`
-
-<p style="margin:8px 0;">
-🏫 <b>${escapeHTML(c.name)}</b>
-— ${escapeHTML(c.state)}
-</p>
-
-`).join("");
-
-}
-
-
-const result=
-document.getElementById("predictResult");
-
-result.style.display="block";
-
-result.innerHTML=`
-
-<div
-style="padding:15px;background:#eff6ff;border-radius:10px;">
-
-<h3>
-🎯 Your Prediction Profile
-</h3>
-
-<p>
-<b>Exam:</b>
-${escapeHTML(exam)}
-</p>
-
-<p>
-<b>Score / Rank:</b>
-${escapeHTML(score)}
-</p>
-
-<p>
-<b>Course:</b>
-${escapeHTML(course)}
-</p>
-
-<p>
-<b>Location:</b>
-${escapeHTML(state)}
-</p>
-
-</div>
-
-
-<div
-class="prediction-section prediction-high">
-
-<h3>
-🟢 High Chance Options
-</h3>
-
-${collegeNames(high)}
-
-</div>
-
-
-<div
-class="prediction-section prediction-medium">
-
-<h3>
-🟡 Moderate Chance Options
-</h3>
-
-${collegeNames(medium)}
-
-</div>
-
-
-<div
-class="prediction-section prediction-low">
-
-<h3>
-🔴 Ambitious Options
-</h3>
-
-${collegeNames(low)}
-
-</div>
-
-
-<p
-style="margin-top:15px;color:#64748b;font-size:13px;">
-
-⚠️ Prediction is an estimate.
-Final admission depends on official eligibility,
-current cutoff, category and seat availability.
-
-</p>
-
-`;
-
-}
-
-
-/* ================================
+/* =================================
    AI
-================================ */
+================================= */
 
 function addAI(text,type){
 
-const box=
-document.getElementById("aiMessages");
+    const box=
+        document.getElementById("aiMessages");
 
-const msg=
-document.createElement("div");
+    const msg=
+        document.createElement("div");
 
-msg.className=
-"message "+type;
+    msg.className=
+        "message "+type;
 
-msg.innerHTML=text;
+    msg.innerHTML=text;
 
-box.appendChild(msg);
+    box.appendChild(msg);
 
-box.scrollTop=box.scrollHeight;
-
+    box.scrollTop=box.scrollHeight;
 }
 
 
 function sendAI(){
 
-const input=
-document.getElementById("aiInput");
+    const input=
+        document.getElementById("aiInput");
 
-const q=input.value.trim();
+    const q=input.value.trim();
 
-if(!q)return;
+    if(!q)return;
 
-addAI(
-escapeHTML(q),
-"user"
-);
+    addAI(
+        escapeHTML(q),
+        "user"
+    );
 
-input.value="";
+    input.value="";
 
+    setTimeout(()=>{
 
-setTimeout(()=>{
+        const lower=q.toLowerCase();
 
-const lower=q.toLowerCase();
+        let answer=`
 
-let answer=`
+            🤖 Main ChoiceKart AI hoon.
 
-🤖 Main ChoiceKart AI hoon.
+            Aap mujhe apna
+            <b>exam, score/rank, course aur preferred location</b>
+            bata sakte ho.
 
-<br><br>
+        `;
 
-Aap mujhe apna
-<b>exam, score/rank, course aur preferred location</b>
-bata sakte ho.
+        if(lower.includes("agriculture")){
 
-`;
+            answer=`
 
+                🌾 <b>Agriculture Guidance:</b><br><br>
 
-if(lower.includes("agriculture")){
+                Aap B.Sc Agriculture,
+                Horticulture, Forestry ya related courses
+                explore kar sakte ho.
 
-answer=`
+                Apna exam aur score/rank batao.
 
-🌾 <b>Agriculture Guidance:</b>
+            `;
+        }
 
-<br><br>
+        else if(lower.includes("neet")){
 
-Aap B.Sc Agriculture,
-Horticulture, Forestry ya related courses explore kar sakte ho.
+            answer=`
 
-<br><br>
+                🩺 <b>NEET Guidance:</b><br><br>
 
-Apna exam aur score/rank batao.
+                MBBS, BDS aur other medical courses ke options
+                score/rank, category, state quota aur
+                official counselling rules par depend karte hain.
 
-`;
+            `;
+        }
 
+        else if(lower.includes("cuet")){
+
+            answer=`
+
+                🎓 <b>CUET Guidance:</b><br><br>
+
+                Course, CUET score, category aur university
+                preference batao.
+
+            `;
+        }
+
+        addAI(answer,"bot");
+
+    },500);
 }
 
 
-if(lower.includes("neet")){
-
-answer=`
-
-🩺 <b>NEET Guidance:</b>
-
-<br><br>
-
-MBBS, BDS aur other medical courses ke options
-score/rank, category, state quota aur official counselling
-rules par depend karte hain.
-
-`;
-
-}
-
-
-if(lower.includes("cuet")){
-
-answer=`
-
-🎓 <b>CUET Guidance:</b>
-
-<br><br>
-
-Course, CUET score, category aur university preference batao.
-
-`;
-
-}
-
-
-addAI(answer,"bot");
-
-},500);
-
-}
-
-
-/* ================================
+/* =================================
    COUNSELLING
-================================ */
+================================= */
 
-function bookCounselling(){
+async function bookCounselling(){
 
-const request={
+    const request={
 
-name:
-document.getElementById("cName").value.trim(),
+        name:
+            document.getElementById("cName")
+            .value.trim(),
 
-phone:
-document.getElementById("cPhone").value.trim(),
+        phone:
+            document.getElementById("cPhone")
+            .value.trim(),
 
-exam:
-document.getElementById("cExam").value,
+        exam:
+            document.getElementById("cExam")
+            .value,
 
-course:
-document.getElementById("cCourse").value.trim(),
+        course:
+            document.getElementById("cCourse")
+            .value.trim(),
 
-rank:
-document.getElementById("cRank").value.trim(),
+        rank:
+            document.getElementById("cRank")
+            .value.trim(),
 
-category:
-document.getElementById("cCategory").value,
+        category:
+            document.getElementById("cCategory")
+            .value,
 
-status:"New",
+        status:"New",
 
-date:new Date().toLocaleString()
+        date:new Date().toLocaleString()
 
-};
+    };
 
 
-if(
-!request.name ||
-!request.phone ||
-!request.course ||
-!request.rank
-){
+    if(
+        !request.name ||
+        !request.phone ||
+        !request.course ||
+        !request.rank
+    ){
 
-alert(
-"Please fill all important counselling details."
-);
+        alert(
+            "Please fill all important counselling details."
+        );
 
-return;
+        return;
+    }
 
+
+    counsellingRequests.push(request);
+
+    saveData();
+
+    /*
+       Firebase save
+    */
+
+    try{
+
+        if(window.choiceKartFirebase){
+
+            const {
+                db,
+                collection,
+                addDoc
+            }=window.choiceKartFirebase;
+
+            await addDoc(
+                collection(db,"counsellingRequests"),
+                request
+            );
+        }
+
+    }catch(error){
+
+        console.error(
+            "Counselling Firebase error:",
+            error
+        );
+
+    }
+
+
+    alert(
+        "✅ Counselling request booked successfully!"
+    );
+
+
+    document.getElementById("cName").value="";
+    document.getElementById("cPhone").value="";
+    document.getElementById("cCourse").value="";
+    document.getElementById("cRank").value="";
+
+    updateStats();
 }
 
 
-counsellingRequests.push(request);
-
-saveData();
-
-alert(
-"✅ Counselling request booked successfully!"
-);
-
-
-document.getElementById("cName").value="";
-document.getElementById("cPhone").value="";
-document.getElementById("cCourse").value="";
-document.getElementById("cRank").value="";
-
-
-updateStats();
-
-}
-
-
-/* ================================
+/* =================================
    HELP
-================================ */
+================================= */
 
-function sendHelp(){
+async function sendHelp(){
 
-const request={
+    const request={
 
-name:
-document.getElementById("helpName").value.trim(),
+        name:
+            document.getElementById("helpName")
+            .value.trim(),
 
-email:
-document.getElementById("helpEmail").value.trim(),
+        email:
+            document.getElementById("helpEmail")
+            .value.trim(),
 
-message:
-document.getElementById("helpMessage").value.trim(),
+        message:
+            document.getElementById("helpMessage")
+            .value.trim(),
 
-status:"New",
+        status:"New",
 
-date:new Date().toLocaleString()
+        date:new Date().toLocaleString()
 
-};
+    };
 
 
-if(
-!request.name ||
-!request.email ||
-!request.message
-){
+    if(
+        !request.name ||
+        !request.email ||
+        !request.message
+    ){
 
-alert("Please fill all fields.");
+        alert("Please fill all fields.");
 
-return;
+        return;
+    }
 
+
+    helpRequests.push(request);
+
+    saveData();
+
+
+    try{
+
+        if(window.choiceKartFirebase){
+
+            const {
+                db,
+                collection,
+                addDoc
+            }=window.choiceKartFirebase;
+
+            await addDoc(
+                collection(db,"helpRequests"),
+                request
+            );
+        }
+
+    }catch(error){
+
+        console.error(
+            "Help Firebase error:",
+            error
+        );
+
+    }
+
+
+    alert(
+        "✅ Help request submitted successfully!"
+    );
+
+
+    document.getElementById("helpName").value="";
+    document.getElementById("helpEmail").value="";
+    document.getElementById("helpMessage").value="";
+
+    updateStats();
 }
 
 
-helpRequests.push(request);
-
-saveData();
-
-alert(
-"✅ Help request submitted successfully!"
-);
-
-
-document.getElementById("helpName").value="";
-document.getElementById("helpEmail").value="";
-document.getElementById("helpMessage").value="";
-
-
-updateStats();
-
-}
-
-
-/* ================================
+/* =================================
    ADMIN LOGIN
-================================ */
+================================= */
 
 function openAdminLogin(){
 
-document.getElementById(
-"adminLoginModal"
-).style.display="flex";
+    document.getElementById(
+        "adminLoginModal"
+    ).style.display="flex";
 
 }
 
 
 function closeAdminLogin(){
 
-document.getElementById(
-"adminLoginModal"
-).style.display="none";
+    document.getElementById(
+        "adminLoginModal"
+    ).style.display="none";
 
 }
 
 
 function adminLogin(){
 
-const password=
-document.getElementById("adminPassword").value;
+    const password=
+        document.getElementById("adminPassword")
+        .value;
 
+    if(password===ADMIN_PASSWORD){
 
-if(password===ADMIN_PASSWORD){
+        document.getElementById(
+            "adminPassword"
+        ).value="";
 
-document.getElementById(
-"adminPassword"
-).value="";
+        closeAdminLogin();
 
-closeAdminLogin();
+        document.getElementById(
+            "adminPanel"
+        ).style.display="block";
 
-document.getElementById(
-"adminPanel"
-).style.display="block";
+        loadAdminData();
 
-loadAdminData();
+        updateStats();
 
-updateStats();
+    }else{
 
-}else{
+        alert("❌ Wrong Admin Password!");
 
-alert("❌ Wrong Admin Password!");
-
-}
-
+    }
 }
 
 
 function closeAdmin(){
 
-document.getElementById(
-"adminPanel"
-).style.display="none";
+    document.getElementById(
+        "adminPanel"
+    ).style.display="none";
 
 }
 
 
-/* ================================
+/* =================================
    ADMIN TABS
-================================ */
+================================= */
 
 function showTab(id,button){
 
-document
-.querySelectorAll(".admin-tab-content")
-.forEach(el=>{
-el.style.display="none";
-});
+    document.querySelectorAll(
+        ".admin-tab-content"
+    ).forEach(el=>{
+
+        el.style.display="none";
+
+    });
 
 
-const selected=
-document.getElementById(id);
+    const selected=
+        document.getElementById(id);
 
-if(selected){
+    if(selected){
 
-selected.style.display="block";
+        selected.style.display="block";
 
+    }
+
+
+    document.querySelectorAll(
+        ".tab"
+    ).forEach(el=>{
+
+        el.classList.remove("active");
+
+    });
+
+
+    if(button){
+
+        button.classList.add("active");
+
+    }
 }
 
 
-document
-.querySelectorAll(".tab")
-.forEach(el=>{
-el.classList.remove("active");
-});
-
-
-if(button){
-
-button.classList.add("active");
-
-}
-
-}
-
-
-/* ================================
+/* =================================
    ADD COLLEGE
-================================ */
+   ONLY ONE FUNCTION
+================================= */
 
-function adminAddCollege(){
+async function adminAddCollege(){
 
-const name=
-document.getElementById(
-"adminCollegeName"
-).value.trim();
+    const name=
+        document.getElementById(
+            "adminCollegeName"
+        ).value.trim();
 
-const state=
-document.getElementById(
-"adminCollegeState"
-).value.trim();
+    const state=
+        document.getElementById(
+            "adminCollegeState"
+        ).value.trim();
 
-const type=
-document.getElementById(
-"adminCollegeType"
-).value;
+    const type=
+        document.getElementById(
+            "adminCollegeType"
+        ).value;
 
-const course=
-document.getElementById(
-"adminCollegeCourse"
-).value.trim();
+    const course=
+        document.getElementById(
+            "adminCollegeCourse"
+        ).value.trim();
 
 
-if(!name || !state || !course){
+    if(!name || !state || !course){
 
-alert(
-"Please fill all college details."
-);
+        alert(
+            "Please fill all college details."
+        );
 
-return;
+        return;
+    }
 
+
+    const college={
+
+        name:name,
+
+        state:state,
+
+        type:type,
+
+        course:course,
+
+        description:
+            "Information added by ChoiceKart Admin.",
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    /*
+       Firebase
+    */
+
+    try{
+
+        if(window.choiceKartFirebase){
+
+            const {
+                db,
+                collection,
+                addDoc
+            }=window.choiceKartFirebase;
+
+            const docRef=
+                await addDoc(
+                    collection(db,"colleges"),
+                    college
+                );
+
+            college.firebaseId=
+                docRef.id;
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Firebase college error:",
+            error
+        );
+
+    }
+
+
+    colleges.push(college);
+
+    saveData();
+
+    renderColleges();
+
+    loadAdminData();
+
+    updateStats();
+
+
+    document.getElementById(
+        "adminCollegeName"
+    ).value="";
+
+    document.getElementById(
+        "adminCollegeState"
+    ).value="";
+
+    document.getElementById(
+        "adminCollegeCourse"
+    ).value="";
+
+
+    alert(
+        "✅ College added successfully."
+    );
 }
 
 
-colleges.push({
-
-name:name,
-
-state:state,
-
-type:type,
-
-course:course,
-
-description:
-"Information added by ChoiceKart Admin.",
-
-createdAt:
-new Date().toISOString()
-
-});
-
-
-saveData();
-
-renderColleges();
-
-loadAdminData();
-
-updateStats();
-
-
-document.getElementById(
-"adminCollegeName"
-).value="";
-
-document.getElementById(
-"adminCollegeState"
-).value="";
-
-document.getElementById(
-"adminCollegeCourse"
-).value="";
-
-
-alert(
-"✅ College added successfully."
-);
-
-}
-
-
-/* ================================
+/* =================================
    ADD COURSE
-================================ */
+================================= */
 
-function adminAddCourse(){
+async function adminAddCourse(){
 
-const name=
-document.getElementById(
-"adminCourseName"
-).value.trim();
+    const name=
+        document.getElementById(
+            "adminCourseName"
+        ).value.trim();
 
-const category=
-document.getElementById(
-"adminCourseCategory"
-).value.trim();
+    const category=
+        document.getElementById(
+            "adminCourseCategory"
+        ).value.trim();
 
-const info=
-document.getElementById(
-"adminCourseInfo"
-).value.trim();
+    const info=
+        document.getElementById(
+            "adminCourseInfo"
+        ).value.trim();
 
 
-if(!name || !category || !info){
+    if(!name || !category || !info){
 
-alert(
-"Please fill all course details."
-);
+        alert(
+            "Please fill all course details."
+        );
 
-return;
+        return;
+    }
 
+
+    const course={
+
+        name:name,
+
+        category:category,
+
+        info:info,
+
+        icon:"📚"
+
+    };
+
+
+    try{
+
+        if(window.choiceKartFirebase){
+
+            const {
+                db,
+                collection,
+                addDoc
+            }=window.choiceKartFirebase;
+
+            const docRef=
+                await addDoc(
+                    collection(db,"courses"),
+                    course
+                );
+
+            course.firebaseId=
+                docRef.id;
+        }
+
+    }catch(error){
+
+        console.error(
+            "Firebase course error:",
+            error
+        );
+
+    }
+
+
+    courses.push(course);
+
+    saveData();
+
+    loadAdminData();
+
+    renderCourses();
+
+    updateStats();
+
+
+    document.getElementById(
+        "adminCourseName"
+    ).value="";
+
+    document.getElementById(
+        "adminCourseCategory"
+    ).value="";
+
+    document.getElementById(
+        "adminCourseInfo"
+    ).value="";
+
+
+    alert(
+        "✅ Course added successfully."
+    );
 }
 
 
-courses.push({
-
-name:name,
-
-category:category,
-
-info:info,
-
-icon:"📚"
-
-});
-
-
-saveData();
-
-loadAdminData();
-
-renderCourses();
-
-updateStats();
-
-
-document.getElementById(
-"adminCourseName"
-).value="";
-
-document.getElementById(
-"adminCourseCategory"
-).value="";
-
-document.getElementById(
-"adminCourseInfo"
-).value="";
-
-
-alert(
-"✅ Course added successfully."
-);
-
-}
-
-
-/* ================================
-   LOAD ADMIN DATA
-================================ */
+/* =================================
+   ADMIN DATA
+================================= */
 
 function loadAdminData(){
 
-const collegeList=
-document.getElementById(
-"adminCollegeList"
-);
+    const collegeList=
+        document.getElementById(
+            "adminCollegeList"
+        );
 
-const courseList=
-document.getElementById(
-"adminCourseList"
-);
+    const courseList=
+        document.getElementById(
+            "adminCourseList"
+        );
 
-const counsellingList=
-document.getElementById(
-"adminCounsellingList"
-);
+    const counsellingList=
+        document.getElementById(
+            "adminCounsellingList"
+        );
 
-const helpList=
-document.getElementById(
-"adminHelpList"
-);
+    const helpList=
+        document.getElementById(
+            "adminHelpList"
+        );
 
 
-/* COLLEGES */
+    collegeList.innerHTML=
+        colleges.map((c,i)=>`
 
-collegeList.innerHTML=
+        <div class="admin-list-item">
 
-colleges.map((c,i)=>`
+            <h4>
+                🏫 ${escapeHTML(c.name)}
+            </h4>
 
-<div class="admin-list-item">
+            <p>
+                ${escapeHTML(c.state)}
+                |
+                ${escapeHTML(c.type)}
+            </p>
 
-<h4>
-🏫 ${escapeHTML(c.name)}
-</h4>
+            <p>
+                ${escapeHTML(c.course)}
+            </p>
 
-<p>
-${escapeHTML(c.state)}
-|
-${escapeHTML(c.type)}
-</p>
+            <button class="action-btn delete"
+                    onclick="deleteCollege(${i})">
+                Delete
+            </button>
 
-<p>
-${escapeHTML(c.course)}
-</p>
+        </div>
 
-<button
-class="action-btn delete"
-onclick="deleteCollege(${i})">
+        `).join("") ||
+        "No colleges.";
 
-Delete
 
-</button>
+    courseList.innerHTML=
+        courses.map((c,i)=>`
 
-</div>
+        <div class="admin-list-item">
 
-`).join("")
+            <h4>
+                📚 ${escapeHTML(c.name)}
+            </h4>
 
-||
+            <p>
+                ${escapeHTML(c.category)}
+            </p>
 
-"No colleges.";
+            <p>
+                ${escapeHTML(c.info)}
+            </p>
 
+            <button class="action-btn delete"
+                    onclick="deleteCourse(${i})">
+                Delete
+            </button>
 
-/* COURSES */
+        </div>
 
-courseList.innerHTML=
+        `).join("") ||
+        "No courses.";
 
-courses.map((c,i)=>`
 
-<div class="admin-list-item">
+    counsellingList.innerHTML=
+        counsellingRequests.map((r,i)=>`
 
-<h4>
-📚 ${escapeHTML(c.name)}
-</h4>
+        <div class="admin-list-item">
 
-<p>
-${escapeHTML(c.category)}
-</p>
+            <h4>
+                📞 ${escapeHTML(r.name)}
+            </h4>
 
-<p>
-${escapeHTML(c.info)}
-</p>
+            <p>
+                <b>Phone:</b>
+                ${escapeHTML(r.phone)}
+            </p>
 
-<button
-class="action-btn delete"
-onclick="deleteCourse(${i})">
+            <p>
+                <b>Exam:</b>
+                ${escapeHTML(r.exam)}
+            </p>
 
-Delete
+            <p>
+                <b>Course:</b>
+                ${escapeHTML(r.course)}
+            </p>
 
-</button>
+            <p>
+                <b>Score/Rank:</b>
+                ${escapeHTML(r.rank)}
+            </p>
 
-</div>
+            <p>
+                <b>Category:</b>
+                ${escapeHTML(r.category)}
+            </p>
 
-`).join("")
+            <p>
+                <b>Status:</b>
+                ${escapeHTML(r.status)}
+            </p>
 
-||
+            <button class="action-btn status"
+                    onclick="completeCounselling(${i})">
 
-"No courses.";
+                Mark Completed
 
+            </button>
 
-/* COUNSELLING */
+        </div>
 
-counsellingList.innerHTML=
+        `).join("") ||
+        "No counselling requests.";
 
-counsellingRequests.map((r,i)=>`
 
-<div class="admin-list-item">
+    helpList.innerHTML=
+        helpRequests.map((r,i)=>`
 
-<h4>
-📞 ${escapeHTML(r.name)}
-</h4>
+        <div class="admin-list-item">
 
-<p>
-<b>Phone:</b>
-${escapeHTML(r.phone)}
-</p>
+            <h4>
+                🆘 ${escapeHTML(r.name)}
+            </h4>
 
-<p>
-<b>Exam:</b>
-${escapeHTML(r.exam)}
-</p>
+            <p>
+                <b>Email:</b>
+                ${escapeHTML(r.email)}
+            </p>
 
-<p>
-<b>Course:</b>
-${escapeHTML(r.course)}
-</p>
+            <p>
+                ${escapeHTML(r.message)}
+            </p>
 
-<p>
-<b>Score/Rank:</b>
-${escapeHTML(r.rank)}
-</p>
+            <p>
+                <b>Status:</b>
+                ${escapeHTML(r.status)}
+            </p>
 
-<p>
-<b>Status:</b>
-${escapeHTML(r.status)}
-</p>
+            <button class="action-btn status"
+                    onclick="resolveHelp(${i})">
 
-<button
-class="action-btn status"
-onclick="completeCounselling(${i})">
+                Mark Resolved
 
-Mark Completed
+            </button>
 
-</button>
+        </div>
 
-</div>
-
-`).join("")
-
-||
-
-"No counselling requests.";
-
-
-/* HELP */
-
-helpList.innerHTML=
-
-helpRequests.map((r,i)=>`
-
-<div class="admin-list-item">
-
-<h4>
-🆘 ${escapeHTML(r.name)}
-</h4>
-
-<p>
-<b>Email:</b>
-${escapeHTML(r.email)}
-</p>
-
-<p>
-${escapeHTML(r.message)}
-</p>
-
-<p>
-<b>Status:</b>
-${escapeHTML(r.status)}
-</p>
-
-<button
-class="action-btn status"
-onclick="resolveHelp(${i})">
-
-Mark Resolved
-
-</button>
-
-</div>
-
-`).join("")
-
-||
-
-"No help requests.";
-
+        `).join("") ||
+        "No help requests.";
 }
 
 
-/* ================================
+/* =================================
    DELETE COLLEGE
-================================ */
+================================= */
 
-function deleteCollege(i){
+async function deleteCollege(i){
 
-if(!confirm("Delete this college?"))return;
+    if(!confirm("Delete this college?")){
 
-colleges.splice(i,1);
+        return;
+    }
 
-saveData();
 
-loadAdminData();
+    const college=colleges[i];
 
-renderColleges();
 
-updateStats();
+    try{
+
+        if(
+            window.choiceKartFirebase &&
+            college.firebaseId
+        ){
+
+            const {
+                db,
+                deleteDoc,
+                doc
+            }=window.choiceKartFirebase;
+
+            await deleteDoc(
+                doc(
+                    db,
+                    "colleges",
+                    college.firebaseId
+                )
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Firebase delete error:",
+            error
+        );
+
+    }
+
+
+    colleges.splice(i,1);
+
+    saveData();
+
+    loadAdminData();
+
+    renderColleges();
+
+    updateStats();
 
 }
 
 
-/* ================================
+/* =================================
    DELETE COURSE
-================================ */
+================================= */
 
-function deleteCourse(i){
+async function deleteCourse(i){
 
-if(!confirm("Delete this course?"))return;
+    if(!confirm("Delete this course?")){
 
-courses.splice(i,1);
+        return;
+    }
 
-saveData();
 
-loadAdminData();
+    const course=courses[i];
 
-renderCourses();
 
-updateStats();
+    try{
+
+        if(
+            window.choiceKartFirebase &&
+            course.firebaseId
+        ){
+
+            const {
+                db,
+                deleteDoc,
+                doc
+            }=window.choiceKartFirebase;
+
+            await deleteDoc(
+                doc(
+                    db,
+                    "courses",
+                    course.firebaseId
+                )
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Firebase delete error:",
+            error
+        );
+
+    }
+
+
+    courses.splice(i,1);
+
+    saveData();
+
+    loadAdminData();
+
+    renderCourses();
+
+    updateStats();
 
 }
 
 
-/* ================================
-   COMPLETE COUNSELLING
-================================ */
+/* =================================
+   COUNSELLING STATUS
+================================= */
 
 function completeCounselling(i){
 
-counsellingRequests[i].status=
-"Completed";
+    counsellingRequests[i].status=
+        "Completed";
 
-saveData();
+    saveData();
 
-loadAdminData();
+    loadAdminData();
 
 }
 
 
-/* ================================
-   RESOLVE HELP
-================================ */
+/* =================================
+   HELP STATUS
+================================= */
 
 function resolveHelp(i){
 
-helpRequests[i].status=
-"Resolved";
+    helpRequests[i].status=
+        "Resolved";
 
-saveData();
+    saveData();
 
-loadAdminData();
+    loadAdminData();
 
 }
 
 
-/* ================================
+/* =================================
    STATS
-================================ */
+================================= */
 
 function updateStats(){
 
-document.getElementById(
-"statColleges"
-).textContent=colleges.length;
+    const collegesStat=
+        document.getElementById(
+            "statColleges"
+        );
 
-document.getElementById(
-"statCourses"
-).textContent=courses.length;
+    const coursesStat=
+        document.getElementById(
+            "statCourses"
+        );
 
-document.getElementById(
-"statCounselling"
-).textContent=
-counsellingRequests.length;
+    const counsellingStat=
+        document.getElementById(
+            "statCounselling"
+        );
 
-document.getElementById(
-"statHelp"
-).textContent=
-helpRequests.length;
+    const helpStat=
+        document.getElementById(
+            "statHelp"
+        );
 
+
+    if(collegesStat){
+
+        collegesStat.textContent=
+            colleges.length;
+
+    }
+
+    if(coursesStat){
+
+        coursesStat.textContent=
+            courses.length;
+
+    }
+
+    if(counsellingStat){
+
+        counsellingStat.textContent=
+            counsellingRequests.length;
+
+    }
+
+    if(helpStat){
+
+        helpStat.textContent=
+            helpRequests.length;
+
+    }
 }
 
 
-/* ================================
+/* =================================
    INITIALIZE
-================================ */
+================================= */
 
 renderColleges();
 
 renderCourses();
 
 updateStats();
+
+
+/* =================================
+   MOBILE MENU
+================================= */
+
+const mobileMenu=
+    document.querySelector(".mobile-menu");
+
+const nav=
+    document.querySelector("nav");
+
+if(mobileMenu){
+
+    mobileMenu.addEventListener(
+        "click",
+        ()=>{
+
+            nav.style.display=
+                nav.style.display==="flex"
+                ? "none"
+                : "flex";
+
+            if(nav.style.display==="flex"){
+
+                nav.style.position="absolute";
+                nav.style.top="70px";
+                nav.style.left="0";
+                nav.style.right="0";
+                nav.style.background="white";
+                nav.style.padding="20px";
+                nav.style.flexDirection="column";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =================================
+   CLOSE MODALS ON BACKDROP
+================================= */
+
+window.addEventListener(
+    "click",
+    function(event){
+
+        const login=
+            document.getElementById(
+                "adminLoginModal"
+            );
+
+        const detail=
+            document.getElementById(
+                "detailModal"
+            );
+
+        if(event.target===login){
+
+            closeAdminLogin();
+
+        }
+
+        if(event.target===detail){
+
+            closeDetails();
+
+        }
+
+    }
+);
 
 </script>
 
