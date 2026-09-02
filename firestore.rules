@@ -1,0 +1,51 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public read-only data. Keep this collection read-only from the client.
+    match /colleges/{collegeId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Student-submitted requests. Anyone may create a request, but clients
+    // must never be able to read, edit, or delete another user's submissions.
+    // Admin access is granted through a Firebase custom claim: {admin: true}.
+    match /counsellingRequests/{requestId} {
+      allow create: if requestIsValid();
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /helpRequests/{requestId} {
+      allow create: if requestIsValid();
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Default deny for every collection not explicitly listed above.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    function requestIsValid() {
+      return request.resource.data.keys().hasOnly([
+        'name',
+        'phone',
+        'email',
+        'exam',
+        'course',
+        'rank',
+        'category',
+        'message',
+        'createdAt'
+      ])
+      && request.resource.data.name is string
+      && request.resource.data.name.size() >= 2
+      && request.resource.data.name.size() <= 100;
+    }
+  }
+}
