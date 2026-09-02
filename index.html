@@ -607,13 +607,91 @@ footer a{
 
 <body>
 
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBUcPpTX19HBwDK5Thjumoohb-Ihg9vdIk",
+    authDomain: "choicekart-14718.firebaseapp.com",
+    projectId: "choicekart-14718",
+    storageBucket: "choicekart-14718.firebasestorage.app",
+    messagingSenderId: "527870176087",
+    appId: "1:527870176087:web:e8e9e7915e96ad2d102c12",
+    measurementId: "G-SZ3VY3FX4K"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+window.firebaseAuth = auth;
+window.firebaseDB = db;
+
+window.firebaseFunctions = {
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+
+    collection,
+    addDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc
+};
+
+
+window.firebaseReady = true;
+
+window.dispatchEvent(new Event("firebase-ready"));
+
+
+onAuthStateChanged(auth, (user)=>{
+
+window.currentAdminUser = user;
+
+if(typeof window.onAdminAuthChanged === "function"){
+
+window.onAdminAuthChanged(user);
+
+}
+
+});
+
+
+console.log("✅ ChoiceKart Firebase connected successfully");
+
+</script>
+
+
 <header>
 
 <div class="logo">
 Choice<span>Kart</span>
 </div>
 
-<nav>
+<nav id="mainNav">
 <a href="#home">Home</a>
 <a href="#colleges">Colleges</a>
 <a href="#courses">Courses</a>
@@ -625,7 +703,7 @@ Choice<span>Kart</span>
 <a href="javascript:void(0)" onclick="openSaved()">❤️ Saved (<span id="savedCount">0</span>)</a>
 </nav>
 
-<button class="mobile-menu" onclick="toggleMenu()">☰</button>
+<button class="mobile-menu" id="mobileMenuBtn" onclick="toggleMenu()" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation menu">☰</button>
 
 </header>
 
@@ -705,8 +783,8 @@ Recommended Options
 
 <section class="section" id="colleges">
 
-<h2 class="title">
-🏫 Explore 8,000+ Colleges
+<h2 class="title" id="collegeSectionTitle">
+🏫 Explore Colleges & Universities
 </h2>
 
 <p class="subtitle">
@@ -913,6 +991,18 @@ id="predictScore"
 type="number"
 placeholder="Enter score or rank"
 >
+
+</div>
+
+
+<div class="form-group">
+
+<label>This value is a</label>
+
+<select id="predictValueType">
+<option value="score">Score (higher is better)</option>
+<option value="rank">Rank (lower is better)</option>
+</select>
 
 </div>
 
@@ -1519,6 +1609,12 @@ Admin dashboard
 </p>
 
 <input
+id="adminEmail"
+type="email"
+placeholder="Admin email"
+style="margin-bottom:10px">
+
+<input
 id="adminPassword"
 type="password"
 placeholder="Admin password"
@@ -1533,6 +1629,8 @@ Login
 
 </button>
 
+<p id="adminLoginError" style="color:var(--red);font-size:13px;margin-top:10px;display:none"></p>
+
 </div>
 
 </div>
@@ -1546,6 +1644,16 @@ Login
 ⚙ ChoiceKart Admin
 </h2>
 
+<div style="display:flex;gap:10px">
+
+<button
+class="btn secondary"
+onclick="logoutAdmin()">
+
+Logout
+
+</button>
+
 <button
 class="btn primary"
 onclick="closeAdmin()">
@@ -1553,6 +1661,8 @@ onclick="closeAdmin()">
 Close
 
 </button>
+
+</div>
 
 </div>
 
@@ -1594,6 +1704,28 @@ The college directory is loaded dynamically.
 Use the public source/database to update institution information.
 
 </p>
+
+</div>
+
+
+<div class="admin-card" style="margin-top:20px">
+
+<h3>📩 Recent Advice Requests</h3>
+
+<p style="color:#64748b;margin-top:8px;margin-bottom:10px">
+Synced live from Firestore — visible from any device you log in on.
+</p>
+
+<div id="counsellingList"></div>
+
+</div>
+
+
+<div class="admin-card" style="margin-top:20px">
+
+<h3>🆘 Recent Help Requests</h3>
+
+<div id="helpList"></div>
 
 </div>
 
@@ -2461,9 +2593,9 @@ list.map(c=>`
 
 <span
 class="save-heart"
-onclick="toggleSave(${colleges.indexOf(c)},event)"
-id="heart-${colleges.indexOf(c)}">
-${savedColleges.includes(colleges.indexOf(c)) ? "❤️" : "🤍"}
+onclick="toggleSave('${c.id}',event)"
+id="heart-${c.id}">
+${savedColleges.includes(String(c.id)) ? "❤️" : "🤍"}
 </span>
 
 🏫
@@ -2509,8 +2641,8 @@ cursor:pointer">
 
 <input
 type="checkbox"
-onchange="toggleCompare(${colleges.indexOf(c)},this)"
-${compareList.includes(colleges.indexOf(c)) ? "checked" : ""}
+onchange="toggleCompare('${c.id}',this)"
+${compareList.includes(String(c.id)) ? "checked" : ""}
 style="width:auto">
 
 Add to Compare
@@ -2519,7 +2651,7 @@ Add to Compare
 
 <button
 class="small-btn"
-onclick="showCollege(${colleges.indexOf(c)})">
+onclick="showCollege('${c.id}')">
 
 View Details
 
@@ -2600,10 +2732,17 @@ behavior:"smooth"
    COLLEGE DETAILS
 ========================================= */
 
-function showCollege(index){
+function findCollegeById(id){
+
+return colleges.find(c=>String(c.id)===String(id));
+
+}
+
+
+function showCollege(id){
 
 const c =
-colleges[index];
+findCollegeById(id) || colleges[id];
 
 if(!c)return;
 
@@ -2891,10 +3030,14 @@ contact you regarding your query. We do not sell
 your personal data to third parties.
 </p>
 <p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>Storage:</b> Form submissions are currently stored
-securely for the purpose of responding to your
-request. You may contact us anytime to request that
-your data be deleted.
+<b>Storage:</b> When you submit the "Advice from Expert"
+form, your details are sent directly to our team via
+WhatsApp. Other data — such as saved colleges, compare
+lists and help form entries — is currently stored only
+in your own browser's local storage on your device, not
+on a central server. Clearing your browser data will
+remove it. You may contact us anytime with questions
+about your data.
 </p>
 <p style="line-height:1.7;color:#334155;margin-top:12px">
 <b>Cookies:</b> We may use basic local storage to
@@ -3046,26 +3189,28 @@ specific counselling authority, as they can vary by exam.
 };
 
 
-function toggleSave(idx,event){
+function toggleSave(id,event){
 
 if(event) event.stopPropagation();
 
-if(savedColleges.includes(idx)){
+id = String(id);
 
-savedColleges = savedColleges.filter(i=>i!==idx);
+if(savedColleges.includes(id)){
+
+savedColleges = savedColleges.filter(i=>i!==id);
 
 }else{
 
-savedColleges.push(idx);
+savedColleges.push(id);
 
 }
 
 localStorage.setItem("ck_saved",JSON.stringify(savedColleges));
 
 
-const heart = document.getElementById("heart-"+idx);
+const heart = document.getElementById("heart-"+id);
 
-if(heart) heart.innerText = savedColleges.includes(idx) ? "❤️" : "🤍";
+if(heart) heart.innerText = savedColleges.includes(id) ? "❤️" : "🤍";
 
 
 updateSavedBar();
@@ -3085,7 +3230,7 @@ if(countEl) countEl.innerText = savedColleges.length;
 function openSaved(){
 
 const selected = savedColleges
-.map(i=>({idx:i,college:colleges[i]}))
+.map(id=>({id,college:findCollegeById(id)}))
 .filter(x=>x.college);
 
 
@@ -3098,7 +3243,7 @@ html = `<p style="color:#64748b">You haven't saved any colleges yet. Tap the �
 
 }else{
 
-html = selected.map(({idx,college:c})=>`
+html = selected.map(({id,college:c})=>`
 
 <div style="
 display:flex;
@@ -3117,9 +3262,9 @@ border-bottom:1px solid #edf2f7">
 
 <div style="display:flex;gap:8px;flex-shrink:0">
 
-<button class="small-btn" onclick="closeSaved();showCollege(${idx})">View</button>
+<button class="small-btn" onclick="closeSaved();showCollege('${id}')">View</button>
 
-<button class="action-btn delete" onclick="toggleSave(${idx});openSaved()">Remove</button>
+<button class="action-btn delete" onclick="toggleSave('${id}');openSaved()">Remove</button>
 
 </div>
 
@@ -3144,7 +3289,9 @@ document.getElementById("savedModal").style.display="none";
 }
 
 
-function toggleCompare(idx,checkbox){
+function toggleCompare(id,checkbox){
+
+id = String(id);
 
 if(checkbox.checked){
 
@@ -3158,15 +3305,15 @@ return;
 
 }
 
-if(!compareList.includes(idx)){
+if(!compareList.includes(id)){
 
-compareList.push(idx);
+compareList.push(id);
 
 }
 
 }else{
 
-compareList = compareList.filter(i=>i!==idx);
+compareList = compareList.filter(i=>i!==id);
 
 }
 
@@ -3202,7 +3349,7 @@ const rows = [
 
 
 const selected = compareList
-.map(i=>colleges[i])
+.map(id=>findCollegeById(id))
 .filter(Boolean);
 
 
@@ -3518,6 +3665,11 @@ document.getElementById("predictScore")
 .value;
 
 
+const valueType =
+document.getElementById("predictValueType")
+.value;
+
+
 const course =
 document.getElementById("predictCourse")
 .value;
@@ -3536,6 +3688,10 @@ document.getElementById("predictQuota")
 const domicile =
 document.getElementById("predictDomicile")
 .value || state;
+
+
+const category =
+document.getElementById("predictCategory").value;
 
 
 if(!exam || !score || !course){
@@ -3563,12 +3719,83 @@ list=colleges;
 }
 
 
-const high=list.slice(0,5);
-const medium=list.slice(5,10);
-const low=list.slice(10,15);
+/* Match this list against real cutoff records (added via Admin
+   panel) for the same exam + category, so classification uses
+   actual data where available instead of just list order. */
+
+const userValue = Number(score);
+
+const cutoffRecords = getCutoffs().filter(r=>
+(r.exam||"").toLowerCase()===exam.toLowerCase() &&
+(r.category||"").toLowerCase()===category.toLowerCase()
+);
 
 
-function names(arr){
+const ranked=[]; const unranked=[];
+
+list.forEach(c=>{
+
+const matches = cutoffRecords
+.filter(r=>r.college.trim().toLowerCase()===c.name.trim().toLowerCase())
+.sort((a,b)=>b.year-a.year);
+
+if(matches.length){
+
+ranked.push({college:c,cutoff:Number(matches[0].value)});
+
+}else{
+
+unranked.push(c);
+
+}
+
+});
+
+
+function tierOf(userVal,cutoffVal){
+
+if(valueType==="rank"){
+
+if(userVal<=cutoffVal*0.95) return "high";
+
+if(userVal<=cutoffVal*1.05) return "medium";
+
+return "low";
+
+}else{
+
+if(userVal>=cutoffVal*1.05) return "high";
+
+if(userVal>=cutoffVal*0.95) return "medium";
+
+return "low";
+
+}
+
+}
+
+
+const high=[], medium=[], low=[];
+
+ranked.forEach(({college,cutoff})=>{
+
+const tier = tierOf(userValue,cutoff);
+
+const entry = {...college, _cutoff:cutoff};
+
+if(tier==="high") high.push(entry);
+
+else if(tier==="medium") medium.push(entry);
+
+else low.push(entry);
+
+});
+
+
+/* Fill remaining slots with unranked colleges (no cutoff data yet)
+   so the predictor still gives options, clearly separated below. */
+
+function names(arr,showCutoff){
 
 if(!arr.length){
 
@@ -3582,11 +3809,15 @@ return arr.map(c=>
 `<p style="margin:8px 0">
 🏫 <b>${escapeHTML(c.name)}</b>
 — ${escapeHTML(c.state)}
+${showCutoff && c._cutoff ? `<br><span style="font-size:12px;color:#64748b">Last known cutoff: ${escapeHTML(String(c._cutoff))} (${escapeHTML(exam)} ${escapeHTML(category)})</span>` : ""}
 </p>`
 
 ).join("");
 
 }
+
+
+const unrankedPreview = unranked.slice(0,10);
 
 
 const result =
@@ -3596,9 +3827,9 @@ document.getElementById("predictResult");
 result.style.display="block";
 
 
-window.lastPredictProfile = {exam,score,course,state,quota,domicile,category:document.getElementById("predictCategory").value};
+window.lastPredictProfile = {exam,score,valueType,course,state,quota,domicile,category};
 
-window.lastPredictLists = {high,medium,low};
+window.lastPredictLists = {high,medium,low,unranked:unrankedPreview};
 
 document.getElementById("downloadResultBtn").style.display="block";
 
@@ -3645,14 +3876,17 @@ ${escapeHTML(domicile || "Not specified")}
 
 ${quotaNote}
 
+${ranked.length ? "" : `<p style="margin-top:8px;font-size:13px;color:#b45309">ℹ️ No cutoff data has been added yet for this exam/category combination, so results below are general suggestions, not rank-based.</p>`}
+
 </div>
 
 
 <div class="prediction-section prediction-high">
 
 <h3>🟢 High Chance Options</h3>
+<p style="font-size:12px;color:#64748b;margin-bottom:6px">Based on your ${escapeHTML(valueType)} vs. previous cutoffs added for this exam/category.</p>
 
-${names(high)}
+${names(high,true)}
 
 </div>
 
@@ -3661,7 +3895,7 @@ ${names(high)}
 
 <h3>🟡 Moderate Options</h3>
 
-${names(medium)}
+${names(medium,true)}
 
 </div>
 
@@ -3670,9 +3904,21 @@ ${names(medium)}
 
 <h3>🔴 Ambitious Options</h3>
 
-${names(low)}
+${names(low,true)}
 
 </div>
+
+
+${unrankedPreview.length ? `
+<div class="prediction-section" style="background:#f8fafc;border-left:5px solid #94a3b8">
+
+<h3>⚪ Other Options in Your State</h3>
+<p style="font-size:12px;color:#64748b;margin-bottom:6px">No cutoff data added yet for these — shown as general suggestions, not ranked against your score.</p>
+
+${names(unrankedPreview,false)}
+
+</div>
+` : ""}
 
 
 <p style="
@@ -3799,7 +4045,7 @@ const text =
 "ChoiceKart — My College Prediction Result\n"+
 "=========================================\n\n"+
 "Exam: "+p.exam+"\n"+
-"Score/Rank: "+p.score+"\n"+
+"Score/Rank ("+p.valueType+"): "+p.score+"\n"+
 "Category: "+p.category+"\n"+
 "Course: "+p.course+"\n"+
 "Quota: "+p.quota+"\n"+
@@ -3808,6 +4054,7 @@ const text =
 "HIGH CHANCE OPTIONS:\n"+listText(l.high)+"\n\n"+
 "MODERATE OPTIONS:\n"+listText(l.medium)+"\n\n"+
 "AMBITIOUS OPTIONS:\n"+listText(l.low)+"\n\n"+
+"OTHER OPTIONS (no cutoff data yet):\n"+listText(l.unranked||[])+"\n\n"+
 "-----------------------------------------\n"+
 "Note: This is only an estimate based on available data.\n"+
 "Final admission depends on official cut-offs, eligibility,\n"+
@@ -3842,7 +4089,7 @@ URL.revokeObjectURL(url);
    COUNSELLING
 ========================================= */
 
-function bookCounselling(){
+async function bookCounselling(){
 
 const name =
 document.getElementById("cName").value.trim();
@@ -3874,30 +4121,39 @@ return;
 }
 
 
-const requests =
-JSON.parse(
-localStorage.getItem("ck_counselling") || "[]"
+const cleanPhone = phone.replace(/[^0-9]/g,"");
+
+if(!/^[6-9][0-9]{9}$/.test(cleanPhone)){
+
+alert(
+"Please enter a valid 10-digit Indian mobile number."
 );
 
+return;
 
-requests.push({
+}
 
-name,
-phone,
-exam,
-course,
-rank,
-category,
+
+if(window.firebaseReady){
+
+try{
+
+await window.firebaseFunctions.addDoc(
+window.firebaseFunctions.collection(window.firebaseDB,"counselling"),
+{
+name,phone,exam,course,rank,category,
 status:"New",
 date:new Date().toLocaleString()
-
-});
-
-
-localStorage.setItem(
-"ck_counselling",
-JSON.stringify(requests)
+}
 );
+
+}catch(error){
+
+console.error("Failed to save advice request:",error);
+
+}
+
+}
 
 
 const waMessage =
@@ -3926,8 +4182,92 @@ document.getElementById("cPhone").value="";
 document.getElementById("cCourse").value="";
 document.getElementById("cRank").value="";
 
+}
 
-updateAdminStats();
+
+async function loadCounsellingRequests(){
+
+const box = document.getElementById("counsellingList");
+
+if(!box) return;
+
+if(!window.firebaseReady){
+
+box.innerHTML = `<p style="color:#64748b;font-size:14px">Loading…</p>`;
+
+return;
+
+}
+
+
+try{
+
+const snap = await window.firebaseFunctions.getDocs(
+window.firebaseFunctions.collection(window.firebaseDB,"counselling")
+);
+
+const records = snap.docs.map(d=>({...d.data(),_docId:d.id}));
+
+
+document.getElementById("statCounselling").innerText = records.length;
+
+
+if(!records.length){
+
+box.innerHTML = `<p style="color:#64748b;font-size:14px">No advice requests yet.</p>`;
+
+return;
+
+}
+
+
+box.innerHTML = records.map(r=>`
+
+<div class="admin-list-item" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+
+<div>
+<b>${escapeHTML(r.name)}</b> — ${escapeHTML(r.phone)}<br>
+<span style="font-size:12px;color:#64748b">
+${escapeHTML(r.exam)} · ${escapeHTML(r.course)} · Rank/Score: ${escapeHTML(r.rank)} · ${escapeHTML(r.category)}
+</span>
+</div>
+
+<button class="action-btn delete" onclick="deleteCounsellingRequest('${r._docId}')">Delete</button>
+
+</div>
+
+`).join("");
+
+}catch(error){
+
+console.error("Failed to load advice requests:",error);
+
+box.innerHTML = `<p style="color:#dc2626;font-size:14px">Could not load requests.</p>`;
+
+}
+
+}
+
+
+async function deleteCounsellingRequest(docId){
+
+try{
+
+await window.firebaseFunctions.deleteDoc(
+window.firebaseFunctions.doc(window.firebaseDB,"counselling",docId)
+);
+
+}catch(error){
+
+console.error(error);
+
+alert("❌ Could not delete. Please try again.");
+
+return;
+
+}
+
+loadCounsellingRequests();
 
 }
 
@@ -3936,7 +4276,7 @@ updateAdminStats();
    HELP
 ========================================= */
 
-function sendHelp(){
+async function sendHelp(){
 
 const name =
 document.getElementById("helpName").value.trim();
@@ -3957,27 +4297,30 @@ return;
 }
 
 
-const requests =
-JSON.parse(
-localStorage.getItem("ck_help") || "[]"
-);
+if(window.firebaseReady){
 
+try{
 
-requests.push({
-
-name,
-email,
-message,
+await window.firebaseFunctions.addDoc(
+window.firebaseFunctions.collection(window.firebaseDB,"help"),
+{
+name,email,message,
 status:"New",
 date:new Date().toLocaleString()
-
-});
-
-
-localStorage.setItem(
-"ck_help",
-JSON.stringify(requests)
+}
 );
+
+}catch(error){
+
+console.error("Failed to save help request:",error);
+
+alert("❌ Could not submit right now. Please try again or WhatsApp us.");
+
+return;
+
+}
+
+}
 
 
 alert(
@@ -3989,8 +4332,90 @@ document.getElementById("helpName").value="";
 document.getElementById("helpEmail").value="";
 document.getElementById("helpMessage").value="";
 
+}
 
-updateAdminStats();
+
+async function loadHelpRequests(){
+
+const box = document.getElementById("helpList");
+
+if(!box) return;
+
+if(!window.firebaseReady){
+
+box.innerHTML = `<p style="color:#64748b;font-size:14px">Loading…</p>`;
+
+return;
+
+}
+
+
+try{
+
+const snap = await window.firebaseFunctions.getDocs(
+window.firebaseFunctions.collection(window.firebaseDB,"help")
+);
+
+const records = snap.docs.map(d=>({...d.data(),_docId:d.id}));
+
+
+document.getElementById("statHelp").innerText = records.length;
+
+
+if(!records.length){
+
+box.innerHTML = `<p style="color:#64748b;font-size:14px">No help requests yet.</p>`;
+
+return;
+
+}
+
+
+box.innerHTML = records.map(r=>`
+
+<div class="admin-list-item" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+
+<div>
+<b>${escapeHTML(r.name)}</b> — ${escapeHTML(r.email)}<br>
+<span style="font-size:12px;color:#64748b">${escapeHTML(r.message)}</span>
+</div>
+
+<button class="action-btn delete" onclick="deleteHelpRequest('${r._docId}')">Delete</button>
+
+</div>
+
+`).join("");
+
+}catch(error){
+
+console.error("Failed to load help requests:",error);
+
+box.innerHTML = `<p style="color:#dc2626;font-size:14px">Could not load requests.</p>`;
+
+}
+
+}
+
+
+async function deleteHelpRequest(docId){
+
+try{
+
+await window.firebaseFunctions.deleteDoc(
+window.firebaseFunctions.doc(window.firebaseDB,"help",docId)
+);
+
+}catch(error){
+
+console.error(error);
+
+alert("❌ Could not delete. Please try again.");
+
+return;
+
+}
+
+loadHelpRequests();
 
 }
 
@@ -4015,20 +4440,73 @@ document.getElementById("adminLogin")
 }
 
 
-function loginAdmin(){
+async function loginAdmin(){
+
+const email =
+document.getElementById("adminEmail")
+.value.trim();
 
 const password =
 document.getElementById("adminPassword")
 .value;
 
+const errorBox =
+document.getElementById("adminLoginError");
 
-/*
-IMPORTANT:
-For production use Firebase Authentication.
-This demo login is intentionally simple.
-*/
+errorBox.style.display="none";
 
-if(password==="Yadav@505"){
+
+if(!email || !password){
+
+errorBox.innerText = "Please enter email and password.";
+
+errorBox.style.display="block";
+
+return;
+
+}
+
+
+if(!window.firebaseReady){
+
+errorBox.innerText = "Login system is still loading, please try again in a moment.";
+
+errorBox.style.display="block";
+
+return;
+
+}
+
+
+try{
+
+await window.firebaseFunctions.signInWithEmailAndPassword(
+window.firebaseAuth,
+email,
+password
+);
+
+/* onAdminAuthChanged (triggered by onAuthStateChanged) handles
+   opening the panel once Firebase confirms the sign-in. */
+
+document.getElementById("adminPassword").value="";
+
+}catch(error){
+
+console.error("Admin login failed:",error);
+
+errorBox.innerText = "❌ Invalid email or password.";
+
+errorBox.style.display="block";
+
+}
+
+}
+
+
+function onAdminAuthChanged(user){
+
+if(user){
 
 closeAdminLogin();
 
@@ -4039,9 +4517,23 @@ updateAdminStats();
 
 }else{
 
-alert("❌ Wrong password!");
+document.getElementById("adminPanel")
+.style.display="none";
 
 }
+
+}
+
+window.onAdminAuthChanged = onAdminAuthChanged;
+
+
+async function logoutAdmin(){
+
+if(!window.firebaseReady) return;
+
+await window.firebaseFunctions.signOut(window.firebaseAuth);
+
+closeAdmin();
 
 }
 
@@ -4054,19 +4546,7 @@ document.getElementById("adminPanel")
 }
 
 
-function updateAdminStats(){
-
-const counselling =
-JSON.parse(
-localStorage.getItem("ck_counselling") || "[]"
-);
-
-
-const help =
-JSON.parse(
-localStorage.getItem("ck_help") || "[]"
-);
-
+async function updateAdminStats(){
 
 document.getElementById("statColleges")
 .innerText =
@@ -4078,14 +4558,19 @@ document.getElementById("statCourses")
 courses.length;
 
 
-document.getElementById("statCounselling")
-.innerText =
-counselling.length;
+document.getElementById("statCounselling").innerText = "…";
+
+document.getElementById("statHelp").innerText = "…";
 
 
-document.getElementById("statHelp")
-.innerText =
-help.length;
+await Promise.all([
+
+loadCounsellingRequests(),
+
+loadHelpRequests()
+
+]);
+
 
 renderCutoffList();
 
@@ -4098,16 +4583,42 @@ renderExamDateAdminList();
    CUTOFF DATA MANAGER
 ========================================= */
 
-function getCutoffs(){
+let cutoffsCache = [];
 
-return JSON.parse(
-localStorage.getItem("ck_cutoffs") || "[]"
+
+async function loadCutoffsFromFirestore(){
+
+if(!window.firebaseReady) return;
+
+try{
+
+const snap = await window.firebaseFunctions.getDocs(
+window.firebaseFunctions.collection(window.firebaseDB,"cutoffs")
 );
+
+cutoffsCache = snap.docs.map(d=>({...d.data(),_docId:d.id}));
+
+}catch(error){
+
+console.error("Failed to load cutoffs:",error);
+
+}
+
+renderCutoffList();
+
+renderExamDateWidget();
 
 }
 
 
-function addCutoff(){
+function getCutoffs(){
+
+return cutoffsCache;
+
+}
+
+
+async function addCutoff(){
 
 const college =
 document.getElementById("cutoffCollege").value.trim();
@@ -4134,11 +4645,22 @@ return;
 }
 
 
-const records = getCutoffs();
+try{
 
-records.push({college,exam,year,category,value});
+await window.firebaseFunctions.addDoc(
+window.firebaseFunctions.collection(window.firebaseDB,"cutoffs"),
+{college,exam,year,category,value}
+);
 
-localStorage.setItem("ck_cutoffs",JSON.stringify(records));
+}catch(error){
+
+console.error("Failed to save cutoff:",error);
+
+alert("❌ Could not save. Please try again.");
+
+return;
+
+}
 
 
 document.getElementById("cutoffCollege").value="";
@@ -4146,20 +4668,31 @@ document.getElementById("cutoffYear").value="";
 document.getElementById("cutoffValue").value="";
 
 
-renderCutoffList();
+await loadCutoffsFromFirestore();
 
 }
 
 
-function deleteCutoff(i){
+async function deleteCutoff(docId){
 
-const records = getCutoffs();
+try{
 
-records.splice(i,1);
+await window.firebaseFunctions.deleteDoc(
+window.firebaseFunctions.doc(window.firebaseDB,"cutoffs",docId)
+);
 
-localStorage.setItem("ck_cutoffs",JSON.stringify(records));
+}catch(error){
 
-renderCutoffList();
+console.error("Failed to delete cutoff:",error);
+
+alert("❌ Could not delete. Please try again.");
+
+return;
+
+}
+
+
+await loadCutoffsFromFirestore();
 
 }
 
@@ -4183,7 +4716,7 @@ return;
 }
 
 
-box.innerHTML = records.map((r,i)=>`
+box.innerHTML = records.map((r)=>`
 
 <div class="admin-list-item" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
 
@@ -4192,7 +4725,7 @@ box.innerHTML = records.map((r,i)=>`
 (${escapeHTML(r.category)}): <b>${escapeHTML(r.value)}</b>
 </div>
 
-<button class="action-btn delete" onclick="deleteCutoff(${i})">Delete</button>
+<button class="action-btn delete" onclick="deleteCutoff('${r._docId}')">Delete</button>
 
 </div>
 
@@ -4205,16 +4738,42 @@ box.innerHTML = records.map((r,i)=>`
    EXAM DATE TRACKER
 ========================================= */
 
-function getExamDates(){
+let examDatesCache = [];
 
-return JSON.parse(
-localStorage.getItem("ck_examdates") || "[]"
+
+async function loadExamDatesFromFirestore(){
+
+if(!window.firebaseReady) return;
+
+try{
+
+const snap = await window.firebaseFunctions.getDocs(
+window.firebaseFunctions.collection(window.firebaseDB,"examdates")
 );
+
+examDatesCache = snap.docs.map(d=>({...d.data(),_docId:d.id}));
+
+}catch(error){
+
+console.error("Failed to load exam dates:",error);
+
+}
+
+renderExamDateAdminList();
+
+renderExamDateWidget();
 
 }
 
 
-function addExamDate(){
+function getExamDates(){
+
+return examDatesCache;
+
+}
+
+
+async function addExamDate(){
 
 const name = document.getElementById("examName").value.trim();
 
@@ -4232,35 +4791,53 @@ return;
 }
 
 
-const records = getExamDates();
+try{
 
-records.push({name,date,label});
+await window.firebaseFunctions.addDoc(
+window.firebaseFunctions.collection(window.firebaseDB,"examdates"),
+{name,date,label}
+);
 
-localStorage.setItem("ck_examdates",JSON.stringify(records));
+}catch(error){
+
+console.error("Failed to save exam date:",error);
+
+alert("❌ Could not save. Please try again.");
+
+return;
+
+}
 
 
 document.getElementById("examName").value="";
 document.getElementById("examDate").value="";
 
 
-renderExamDateAdminList();
-
-renderExamDateWidget();
+await loadExamDatesFromFirestore();
 
 }
 
 
-function deleteExamDate(i){
+async function deleteExamDate(docId){
 
-const records = getExamDates();
+try{
 
-records.splice(i,1);
+await window.firebaseFunctions.deleteDoc(
+window.firebaseFunctions.doc(window.firebaseDB,"examdates",docId)
+);
 
-localStorage.setItem("ck_examdates",JSON.stringify(records));
+}catch(error){
 
-renderExamDateAdminList();
+console.error("Failed to delete exam date:",error);
 
-renderExamDateWidget();
+alert("❌ Could not delete. Please try again.");
+
+return;
+
+}
+
+
+await loadExamDatesFromFirestore();
 
 }
 
@@ -4288,8 +4865,6 @@ return;
 
 box.innerHTML = records.map((r)=>{
 
-const i = getExamDates().indexOf(r);
-
 return `
 
 <div class="admin-list-item" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
@@ -4299,7 +4874,7 @@ return `
 <b>${escapeHTML(r.date)}</b>
 </div>
 
-<button class="action-btn delete" onclick="deleteExamDate(${i})">Delete</button>
+<button class="action-btn delete" onclick="deleteExamDate('${r._docId}')">Delete</button>
 
 </div>
 
@@ -4394,12 +4969,15 @@ ${cards}
 function toggleMenu(){
 
 const nav =
-document.querySelector("nav");
+document.getElementById("mainNav");
 
 
-if(nav.style.display==="flex"){
+const isOpen = nav.style.display==="flex";
 
-nav.style.display="none";
+
+if(isOpen){
+
+closeMobileMenu();
 
 }else{
 
@@ -4415,130 +4993,4 @@ nav.style.right="0";
 
 nav.style.background="white";
 
-nav.style.padding="20px";
-
-nav.style.flexDirection="column";
-
-}
-
-}
-
-
-/* =========================================
-   MODAL BACKDROP
-========================================= */
-
-window.addEventListener("click",e=>{
-
-if(e.target===
-document.getElementById("detailModal")){
-
-closeModal();
-
-}
-
-if(e.target===
-document.getElementById("adminLogin")){
-
-closeAdminLogin();
-
-}
-
-if(e.target===
-document.getElementById("infoModal")){
-
-closeInfo();
-
-}
-
-if(e.target===
-document.getElementById("compareModal")){
-
-closeCompare();
-
-}
-
-if(e.target===
-document.getElementById("savedModal")){
-
-closeSaved();
-
-}
-
-});
-
-
-/* =========================================
-   FILTER EVENTS
-========================================= */
-
-document
-.getElementById("collegeSearch")
-.addEventListener(
-"input",
-applyFilters
-);
-
-
-document
-.getElementById("stateFilter")
-.addEventListener(
-"change",
-()=>{
-
-updateDistrictFilter();
-
-applyFilters();
-
-}
-);
-
-
-document
-.getElementById("districtFilter")
-.addEventListener(
-"change",
-applyFilters
-);
-
-
-document
-.getElementById("typeFilter")
-.addEventListener(
-"change",
-applyFilters
-);
-
-
-document
-.getElementById("pageSize")
-.addEventListener(
-"change",
-()=>{
-
-currentPage=1;
-
-renderColleges();
-
-}
-);
-
-
-/* =========================================
-   START
-========================================= */
-
-renderCourses();
-
-loadColleges();
-
-updateCompareBar();
-
-updateSavedBar();
-
-renderExamDateWidget();
-
-</script>
-
-</body>
-</html>
+nav.style.padding="20
