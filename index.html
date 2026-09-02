@@ -479,6 +479,51 @@ footer a{
  cursor:pointer;
 }
 
+.typing-dots{
+ display:inline-flex;
+ gap:4px;
+ align-items:center;
+ padding:4px 2px;
+}
+
+.typing-dots span{
+ width:8px;
+ height:8px;
+ border-radius:50%;
+ background:#94a3b8;
+ animation:typingBounce 1.2s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2){animation-delay:.2s}
+.typing-dots span:nth-child(3){animation-delay:.4s}
+
+@keyframes typingBounce{
+ 0%,60%,100%{transform:translateY(0);opacity:.6}
+ 30%{transform:translateY(-6px);opacity:1}
+}
+
+.skeleton-card{
+ background:white;
+ border-radius:15px;
+ padding:20px;
+ overflow:hidden;
+ position:relative;
+}
+
+.skeleton-line{
+ height:12px;
+ border-radius:6px;
+ background:linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%);
+ background-size:200% 100%;
+ animation:skeletonShine 1.4s infinite;
+ margin-top:12px;
+}
+
+@keyframes skeletonShine{
+ 0%{background-position:200% 0}
+ 100%{background-position:-200% 0}
+}
+
 .admin-btn{
  position:fixed;
  right:20px;
@@ -489,6 +534,22 @@ footer a{
  padding:13px 18px;
  background:var(--navy);
  color:white;
+ cursor:pointer;
+}
+
+#compareBar{
+ display:none;
+ position:fixed;
+ left:20px;
+ bottom:20px;
+ z-index:2000;
+ background:var(--navy);
+ color:white;
+ padding:12px 18px;
+ border-radius:30px;
+ box-shadow:0 8px 25px #0004;
+ align-items:center;
+ gap:12px;
  cursor:pointer;
 }
 
@@ -591,6 +652,27 @@ footer a{
   width:100%;
   padding:13px;
  }
+ .admin-btn{
+  right:12px;
+  bottom:12px;
+  padding:12px 16px;
+  font-size:14px;
+ }
+ #compareBar{
+  left:12px;
+  right:12px;
+  bottom:70px;
+  justify-content:center;
+  text-align:center;
+ }
+ .modal-content{
+  padding:20px;
+  max-height:85vh;
+ }
+ .college-card .small-btn,
+ .college-card label{
+  min-height:40px;
+ }
 }
 </style>
 </head>
@@ -610,6 +692,7 @@ Choice<span>Kart</span>
 <a href="#predictor">Predictor</a>
 <a href="#ai">AI</a>
 <a href="#counselling">Counselling</a>
+<a href="#resources">Scholarships</a>
 <a href="#help">Help</a>
 </nav>
 
@@ -700,6 +783,10 @@ Recommended Options
 <p class="subtitle">
 Search and filter Indian higher-education institutions by
 name, state, district and institution type.
+</p>
+
+<p style="text-align:center;font-size:12px;color:#94a3b8;margin-top:-20px;margin-bottom:20px">
+📅 College database last updated: <span id="dataUpdatedDate"></span> — cut-offs and details may change; always verify with the official institution.
 </p>
 
 
@@ -1138,6 +1225,94 @@ Send Help Request
 </section>
 
 
+<section class="section" id="resources">
+
+<h2 class="title">
+📚 Scholarships & Student Guides
+</h2>
+
+<p class="subtitle">
+Free resources to help you plan admissions, documents and finances.
+</p>
+
+
+<h3 style="margin-top:10px;color:var(--navy)">💰 Scholarships</h3>
+
+<p style="color:#64748b;font-size:13px;margin-top:6px;margin-bottom:15px">
+Amounts, eligibility and deadlines change every year — always apply and
+verify on the official <a href="https://scholarships.gov.in" target="_blank" rel="noopener">National Scholarship Portal (NSP)</a>.
+</p>
+
+<div class="admin-stats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+
+<div class="admin-card">
+<h3 style="font-size:16px">National Scholarship Portal (NSP)</h3>
+<p style="color:#64748b;font-size:13px;margin-top:8px">
+Single government platform hosting 100+ central and state
+scholarships for Class 1 to PhD. Start here first.
+</p>
+<a href="https://scholarships.gov.in" target="_blank" rel="noopener" class="btn secondary" style="margin-top:12px;display:inline-block;font-size:13px;padding:8px 16px">Visit NSP →</a>
+</div>
+
+<div class="admin-card">
+<h3 style="font-size:16px">CSSS (Central Sector Scheme)</h3>
+<p style="color:#64748b;font-size:13px;margin-top:8px">
+For meritorious UG/PG students from lower-income families,
+based on Class 12 marks. Applied for via NSP.
+</p>
+</div>
+
+<div class="admin-card">
+<h3 style="font-size:16px">Post-Matric Scholarship (SC/ST/OBC/Minority)</h3>
+<p style="color:#64748b;font-size:13px;margin-top:8px">
+Covers tuition and maintenance allowance for students from
+SC, ST, OBC and minority communities, income-limit based.
+</p>
+</div>
+
+<div class="admin-card">
+<h3 style="font-size:16px">PM YASASVI</h3>
+<p style="color:#64748b;font-size:13px;margin-top:8px">
+For OBC, EBC and DNT category students — check the current
+notification for course-level eligibility.
+</p>
+</div>
+
+<div class="admin-card">
+<h3 style="font-size:16px">State Government Scholarships</h3>
+<p style="color:#64748b;font-size:13px;margin-top:8px">
+Most states run their own post-matric/merit scholarships too —
+check your state's education department portal.
+</p>
+</div>
+
+</div>
+
+
+<h3 style="margin-top:35px;color:var(--navy)">📖 Guides</h3>
+
+<div class="admin-stats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:15px">
+
+<div class="admin-card" style="cursor:pointer" onclick="openInfo('guidePreflist')">
+<h3 style="font-size:16px">How to Make Your College Preference List</h3>
+<p style="color:#64748b;font-size:13px;margin-top:8px">A simple strategy for ordering your choices during counselling.</p>
+</div>
+
+<div class="admin-card" style="cursor:pointer" onclick="openInfo('guideDocs')">
+<h3 style="font-size:16px">Documents Needed for Counselling</h3>
+<p style="color:#64748b;font-size:13px;margin-top:8px">Checklist of documents to keep ready before admission rounds.</p>
+</div>
+
+<div class="admin-card" style="cursor:pointer" onclick="openInfo('guideCategory')">
+<h3 style="font-size:16px">Category Certificates Guide</h3>
+<p style="color:#64748b;font-size:13px;margin-top:8px">OBC/EWS/SC/ST certificates — what they are and why they matter.</p>
+</div>
+
+</div>
+
+</section>
+
+
 <footer>
 
 <div class="footer-grid">
@@ -1177,18 +1352,50 @@ courses and admission opportunities.
 <h3>Support</h3>
 
 <a href="#counselling">Counselling</a>
+<a href="#resources">Scholarships</a>
 <a href="#help">Help</a>
 
 </div>
 
+
+<div>
+
+<h3>Company</h3>
+
+<a href="javascript:void(0)" onclick="openInfo('about')">About Us</a>
+<a href="javascript:void(0)" onclick="openInfo('privacy')">Privacy Policy</a>
+<a href="javascript:void(0)" onclick="openInfo('terms')">Terms & Conditions</a>
+<a href="javascript:void(0)" onclick="openInfo('contact')">Contact Us</a>
+
+</div>
+
 </div>
 
 
-<p style="text-align:center;margin-top:30px">
+<p style="text-align:center;margin-top:30px;font-size:12px;color:#94a3b8">
+⚠️ ChoiceKart provides estimated predictions based on past trends for guidance only.
+It is not affiliated with any government body and does not guarantee admission.
+Always verify with official counselling authorities.
+</p>
+
+<p style="text-align:center;margin-top:10px">
 © 2026 ChoiceKart. All Rights Reserved.
 </p>
 
 </footer>
+
+
+<div class="modal" id="infoModal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeInfo()">&times;</span>
+
+<div id="infoModalBody"></div>
+
+</div>
+
+</div>
 
 
 <button
@@ -1198,6 +1405,33 @@ onclick="openAdmin()">
 ⚙ Admin
 
 </button>
+
+
+<div
+id="compareBar"
+onclick="openCompare()">
+
+📊 <span id="compareCount">0</span> selected —
+<b style="color:var(--orange)">Compare Now</b>
+
+</div>
+
+
+<div class="modal" id="compareModal">
+
+<div class="modal-content" style="max-width:900px">
+
+<span class="close" onclick="closeCompare()">&times;</span>
+
+<h2 style="color:var(--navy);margin-bottom:15px">
+📊 Compare Colleges
+</h2>
+
+<div id="compareBody" style="overflow-x:auto"></div>
+
+</div>
+
+</div>
 
 
 <div class="modal" id="detailModal">
@@ -1314,6 +1548,67 @@ Use the public source/database to update institution information.
 
 </div>
 
+
+<div class="admin-card" style="margin-top:20px">
+
+<h3>📈 Cutoff Data Manager</h3>
+
+<p style="color:#64748b;margin-top:8px;margin-bottom:15px">
+Add year-wise cutoff/rank data for a college. Once added, it
+will automatically show as a trend chart on that college's
+detail page.
+</p>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>College Name (exact match)</label>
+<input id="cutoffCollege" placeholder="e.g. IIT Delhi">
+</div>
+
+<div class="form-group">
+<label>Exam</label>
+<select id="cutoffExam">
+<option>CUET</option>
+<option>NEET</option>
+<option>JEE</option>
+<option>UPCATET</option>
+<option>ICAR UG</option>
+<option>ICAR JRF</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Year</label>
+<input id="cutoffYear" type="number" placeholder="e.g. 2025">
+</div>
+
+<div class="form-group">
+<label>Category</label>
+<select id="cutoffCategory">
+<option>General</option>
+<option>OBC</option>
+<option>EWS</option>
+<option>SC</option>
+<option>ST</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Closing Rank / Score</label>
+<input id="cutoffValue" type="number" placeholder="e.g. 4500">
+</div>
+
+</div>
+
+<button class="btn primary" style="margin-top:15px" onclick="addCutoff()">
++ Add Cutoff Record
+</button>
+
+<div id="cutoffList" style="margin-top:20px"></div>
+
+</div>
+
 </div>
 
 </div>
@@ -1331,6 +1626,14 @@ const COLLEGE_API_BASE =
 const COLLEGE_STATES_API =
 "https://indian-colleges-list.vercel.app/api/institutions/states";
 
+/* Update this date manually whenever college/cut-off data is refreshed */
+const DATA_LAST_UPDATED = "1 September 2026";
+
+document.addEventListener("DOMContentLoaded",()=>{
+const el = document.getElementById("dataUpdatedDate");
+if(el) el.innerText = DATA_LAST_UPDATED;
+});
+
 
 let colleges=[];
 
@@ -1339,6 +1642,10 @@ let filteredColleges=[];
 let currentPage=1;
 
 let pageSize=24;
+
+let compareList = JSON.parse(localStorage.getItem("ck_compare") || "[]");
+
+const MAX_COMPARE = 4;
 
 
 /* =========================================
@@ -1419,6 +1726,16 @@ async function loadColleges(){
 
 document.getElementById("collegeCount").innerHTML =
 "🔄 Loading complete college database...";
+
+document.getElementById("collegeResults").innerHTML =
+Array(8).fill(`
+<div class="skeleton-card">
+<div class="skeleton-line" style="width:40%;height:20px;margin-top:0"></div>
+<div class="skeleton-line" style="width:80%"></div>
+<div class="skeleton-line" style="width:60%"></div>
+<div class="skeleton-line" style="width:50%"></div>
+</div>
+`).join("");
 
 try{
 
@@ -1904,6 +2221,25 @@ ${c.university ? `
 🎓 ${escapeHTML(c.course)}
 </p>
 
+<label style="
+display:flex;
+align-items:center;
+gap:6px;
+margin-top:10px;
+font-size:12px;
+color:var(--navy);
+cursor:pointer">
+
+<input
+type="checkbox"
+onchange="toggleCompare(${colleges.indexOf(c)},this)"
+${compareList.includes(colleges.indexOf(c)) ? "checked" : ""}
+style="width:auto">
+
+Add to Compare
+
+</label>
+
 <button
 class="small-btn"
 onclick="showCollege(${colleges.indexOf(c)})">
@@ -2072,11 +2408,427 @@ official/current admission sources.
 
 </p>
 
+<div id="cutoffChartBox"></div>
+
 `;
+
+
+document.getElementById("cutoffChartBox").innerHTML =
+renderCutoffChart(c.name);
 
 
 document.getElementById("detailModal")
 .style.display="flex";
+
+}
+
+
+function renderCutoffChart(collegeName){
+
+const records = getCutoffs()
+.filter(r=>r.college.trim().toLowerCase() === (collegeName||"").trim().toLowerCase())
+.sort((a,b)=>a.year-b.year);
+
+
+if(!records.length){
+
+return `
+
+<h3 style="margin-top:20px">📈 Cutoff Trend</h3>
+
+<p style="color:#64748b;font-size:14px;margin-top:8px">
+No cutoff/rank data available yet for this college.
+</p>
+
+`;
+
+}
+
+
+const values = records.map(r=>Number(r.value)||0);
+
+const maxVal = Math.max(...values,1);
+
+
+const bars = records.map(r=>{
+
+const h = Math.max(10,(Number(r.value)/maxVal)*120);
+
+return `
+
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:70px">
+
+<div style="font-size:11px;color:#64748b">${escapeHTML(r.value)}</div>
+
+<div style="
+width:32px;
+height:${h}px;
+background:var(--orange);
+border-radius:6px 6px 0 0"></div>
+
+<div style="font-size:11px;color:var(--navy);font-weight:bold">${escapeHTML(r.year)}</div>
+
+<div style="font-size:10px;color:#94a3b8">${escapeHTML(r.exam)} · ${escapeHTML(r.category)}</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+return `
+
+<h3 style="margin-top:20px">📈 Cutoff Trend</h3>
+
+<p style="color:#94a3b8;font-size:12px;margin-top:4px">
+Closing rank/score by year (lower rank = harder to get, for score-based exams higher = harder)
+</p>
+
+<div style="
+display:flex;
+align-items:flex-end;
+gap:14px;
+overflow-x:auto;
+padding:20px 10px 10px;
+background:#f8fafc;
+border-radius:10px;
+margin-top:10px">
+
+${bars}
+
+</div>
+
+`;
+
+}
+
+
+const infoContent = {
+
+about: `
+<h2 style="color:var(--navy);margin-bottom:15px">About ChoiceKart</h2>
+<p style="line-height:1.7;color:#334155">
+ChoiceKart is a free college and course discovery
+platform built to help Indian students navigate
+admissions across CUET, NEET, JEE, UPCATET and
+ICAR entrance exams.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+We bring together college data, course information
+and rank/score based predictions in one place so
+students and parents can make informed decisions
+without relying on scattered, outdated sources.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+ChoiceKart is an independent platform and is not
+affiliated with any government body, university or
+official counselling authority.
+</p>
+`,
+
+privacy: `
+<h2 style="color:var(--navy);margin-bottom:15px">Privacy Policy</h2>
+<p style="line-height:1.7;color:#334155">
+We collect only the information you choose to share
+with us, such as your name, phone number, email and
+academic details, when you use our Predictor,
+Counselling booking or Help form.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>How we use it:</b> To respond to your counselling
+or help requests, improve our recommendations, and
+contact you regarding your query. We do not sell
+your personal data to third parties.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>Storage:</b> Form submissions are currently stored
+securely for the purpose of responding to your
+request. You may contact us anytime to request that
+your data be deleted.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>Cookies:</b> We may use basic local storage to
+remember your session preferences. We do not use
+third-party tracking or advertising cookies.
+</p>
+`,
+
+terms: `
+<h2 style="color:var(--navy);margin-bottom:15px">Terms & Conditions</h2>
+<p style="line-height:1.7;color:#334155">
+By using ChoiceKart, you agree to the following:
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>1. Estimates only:</b> College predictions,
+cut-offs and chances shown on this platform are
+estimates based on past trends. They are not a
+guarantee of admission.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>2. Verify officially:</b> Always cross-check
+college, course and cut-off information with the
+official counselling authority or institution before
+making decisions.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>3. No liability:</b> ChoiceKart is not responsible
+for any loss or decision made solely based on
+information provided on this platform.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>4. Fair use:</b> Content on this site may not be
+copied or redistributed without permission.
+</p>
+`,
+
+contact: `
+<h2 style="color:var(--navy);margin-bottom:15px">Contact Us</h2>
+<p style="line-height:1.7;color:#334155">
+Have a question, feedback or need help with your
+college selection? Reach out to us:
+</p>
+<p style="line-height:1.9;color:#334155;margin-top:12px">
+📧 <b>Email:</b> vishalyadav.rtp89@gmail.com<br>
+📱 <b>Phone/WhatsApp:</b> +91-9795591809<br>
+📍 <b>Location:</b> India
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+You can also use the <b>Help</b> section on this page
+to send us a message directly.
+</p>
+`,
+
+guidePreflist: `
+<h2 style="color:var(--navy);margin-bottom:15px">How to Make Your College Preference List</h2>
+<p style="line-height:1.7;color:#334155">
+During counselling, you're usually asked to rank colleges
+and courses in order of preference. Getting this order
+right matters — here's a simple approach:
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>1. List broadly first.</b> Don't limit yourself to 4-5
+options. Add every college + course combination you'd
+genuinely accept, even ones that feel like a stretch.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>2. Rank by preference, not just difficulty.</b> Put your
+most-wanted combination first, regardless of how likely you
+think it is. Seat allotment always tries to give you your
+highest-ranked available choice.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>3. Don't leave out "backup" options.</b> Include colleges
+you're fairly confident about too — if you only list dream
+colleges, you risk ending up with no seat at all.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>4. Consider more than rank.</b> Location, fees, hostel
+availability and placement record all matter for your
+actual college life, not just the admission chance.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>5. Use the ChoiceKart Predictor and Compare tool</b>
+to shortlist realistic options before you sit down to
+fill your final preference list.
+</p>
+`,
+
+guideDocs: `
+<h2 style="color:var(--navy);margin-bottom:15px">Documents Needed for Counselling</h2>
+<p style="line-height:1.7;color:#334155">
+Requirements vary slightly by exam and state, but most
+counselling processes ask for the following. Keep both
+originals and photocopies ready:
+</p>
+<p style="line-height:1.9;color:#334155;margin-top:12px">
+• Admit card and scorecard/rank card of the exam<br>
+• Class 10 and Class 12 marksheets and certificates<br>
+• Transfer certificate / migration certificate<br>
+• Category certificate (OBC/EWS/SC/ST), if applicable<br>
+• Income certificate, if applying under an income-based
+category or scholarship<br>
+• Domicile / state residence certificate, if required<br>
+• Passport-size photographs (as specified by the portal)<br>
+• Valid government photo ID (Aadhaar card, etc.)<br>
+• Aadhaar number for portal registration
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+Always check the exact list on your specific counselling
+authority's official website, as requirements can differ
+by exam and year.
+</p>
+`,
+
+guideCategory: `
+<h2 style="color:var(--navy);margin-bottom:15px">Category Certificates Guide</h2>
+<p style="line-height:1.7;color:#334155">
+Reservation categories can affect your cut-off and seat
+allotment. Here's a quick overview of common certificates:
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>OBC (Non-Creamy Layer):</b> For candidates from listed
+Other Backward Classes whose family income is below the
+prescribed limit. Needs periodic renewal — check the
+validity date on your certificate.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>EWS (Economically Weaker Section):</b> For candidates
+from the general category with family income and asset
+limits below the prescribed threshold.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>SC / ST:</b> For candidates belonging to Scheduled
+Castes or Scheduled Tribes as per the government list
+applicable to your state.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+<b>Getting a certificate:</b> These are issued by your
+state government (Tehsildar/SDM office or via the state's
+e-district portal). Processing can take a few weeks, so
+apply well before counselling begins.
+</p>
+<p style="line-height:1.7;color:#334155;margin-top:12px">
+Always confirm exact formats and validity rules with your
+specific counselling authority, as they can vary by exam.
+</p>
+`
+
+};
+
+
+function toggleCompare(idx,checkbox){
+
+if(checkbox.checked){
+
+if(compareList.length>=MAX_COMPARE){
+
+alert("You can compare up to "+MAX_COMPARE+" colleges at a time.");
+
+checkbox.checked=false;
+
+return;
+
+}
+
+if(!compareList.includes(idx)){
+
+compareList.push(idx);
+
+}
+
+}else{
+
+compareList = compareList.filter(i=>i!==idx);
+
+}
+
+localStorage.setItem("ck_compare",JSON.stringify(compareList));
+
+updateCompareBar();
+
+}
+
+
+function updateCompareBar(){
+
+const bar = document.getElementById("compareBar");
+
+document.getElementById("compareCount").innerText = compareList.length;
+
+bar.style.display = compareList.length>=2 ? "flex" : "none";
+
+}
+
+
+function openCompare(){
+
+const rows = [
+["Name","name"],
+["Type","type"],
+["State","state"],
+["District","district"],
+["University","university"],
+["Course","course"],
+["Address","address"]
+];
+
+
+const selected = compareList
+.map(i=>colleges[i])
+.filter(Boolean);
+
+
+let html = `<table style="width:100%;border-collapse:collapse;min-width:${selected.length*180+150}px">`;
+
+
+html += `<tr><td style="padding:10px;font-weight:bold;color:var(--navy);border-bottom:2px solid #edf2f7">Field</td>`;
+
+selected.forEach(c=>{
+
+html += `<td style="padding:10px;font-weight:bold;color:var(--navy);border-bottom:2px solid #edf2f7">${escapeHTML(c.name||"—")}</td>`;
+
+});
+
+html += `</tr>`;
+
+
+rows.forEach(([label,key])=>{
+
+if(key==="name") return;
+
+html += `<tr><td style="padding:10px;color:#64748b;border-bottom:1px solid #edf2f7">${label}</td>`;
+
+selected.forEach(c=>{
+
+html += `<td style="padding:10px;border-bottom:1px solid #edf2f7">${escapeHTML(c[key]||"—")}</td>`;
+
+});
+
+html += `</tr>`;
+
+});
+
+
+html += `</table>`;
+
+
+if(!selected.length){
+
+html = `<p style="color:#64748b">No colleges selected yet.</p>`;
+
+}
+
+
+document.getElementById("compareBody").innerHTML = html;
+
+document.getElementById("compareModal").style.display="flex";
+
+}
+
+
+function closeCompare(){
+
+document.getElementById("compareModal").style.display="none";
+
+}
+
+
+function openInfo(type){
+
+document.getElementById("infoModalBody").innerHTML =
+infoContent[type] || "";
+
+document.getElementById("infoModal")
+.style.display="flex";
+
+}
+
+
+function closeInfo(){
+
+document.getElementById("infoModal")
+.style.display="none";
 
 }
 
@@ -2510,7 +3262,29 @@ escapeHTML(q),
 input.value="";
 
 
+const typingId = "typing-" + Date.now();
+
+const box = document.getElementById("aiMessages");
+
+const typingDiv = document.createElement("div");
+
+typingDiv.className = "message bot";
+
+typingDiv.id = typingId;
+
+typingDiv.innerHTML =
+`<span class="typing-dots"><span></span><span></span><span></span></span>`;
+
+box.appendChild(typingDiv);
+
+box.scrollTop = box.scrollHeight;
+
+
 setTimeout(()=>{
+
+const typingEl = document.getElementById(typingId);
+
+if(typingEl) typingEl.remove();
 
 const lower =
 q.toLowerCase();
@@ -2823,7 +3597,7 @@ localStorage.getItem("ck_help") || "[]"
 
 
 document.getElementById("statColleges")
-innerText =
+.innerText =
 colleges.length;
 
 
@@ -2840,6 +3614,115 @@ counselling.length;
 document.getElementById("statHelp")
 .innerText =
 help.length;
+
+renderCutoffList();
+
+}
+
+
+/* =========================================
+   CUTOFF DATA MANAGER
+========================================= */
+
+function getCutoffs(){
+
+return JSON.parse(
+localStorage.getItem("ck_cutoffs") || "[]"
+);
+
+}
+
+
+function addCutoff(){
+
+const college =
+document.getElementById("cutoffCollege").value.trim();
+
+const exam =
+document.getElementById("cutoffExam").value;
+
+const year =
+document.getElementById("cutoffYear").value.trim();
+
+const category =
+document.getElementById("cutoffCategory").value;
+
+const value =
+document.getElementById("cutoffValue").value.trim();
+
+
+if(!college || !year || !value){
+
+alert("Please fill college name, year and cutoff value.");
+
+return;
+
+}
+
+
+const records = getCutoffs();
+
+records.push({college,exam,year,category,value});
+
+localStorage.setItem("ck_cutoffs",JSON.stringify(records));
+
+
+document.getElementById("cutoffCollege").value="";
+document.getElementById("cutoffYear").value="";
+document.getElementById("cutoffValue").value="";
+
+
+renderCutoffList();
+
+}
+
+
+function deleteCutoff(i){
+
+const records = getCutoffs();
+
+records.splice(i,1);
+
+localStorage.setItem("ck_cutoffs",JSON.stringify(records));
+
+renderCutoffList();
+
+}
+
+
+function renderCutoffList(){
+
+const box = document.getElementById("cutoffList");
+
+if(!box) return;
+
+
+const records = getCutoffs();
+
+
+if(!records.length){
+
+box.innerHTML = `<p style="color:#64748b;font-size:14px">No cutoff records added yet.</p>`;
+
+return;
+
+}
+
+
+box.innerHTML = records.map((r,i)=>`
+
+<div class="admin-list-item" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+
+<div>
+<b>${escapeHTML(r.college)}</b> — ${escapeHTML(r.exam)} ${escapeHTML(r.year)}
+(${escapeHTML(r.category)}): <b>${escapeHTML(r.value)}</b>
+</div>
+
+<button class="action-btn delete" onclick="deleteCutoff(${i})">Delete</button>
+
+</div>
+
+`).join("");
 
 }
 
@@ -2898,6 +3781,20 @@ if(e.target===
 document.getElementById("adminLogin")){
 
 closeAdminLogin();
+
+}
+
+if(e.target===
+document.getElementById("infoModal")){
+
+closeInfo();
+
+}
+
+if(e.target===
+document.getElementById("compareModal")){
+
+closeCompare();
 
 }
 
@@ -2967,6 +3864,8 @@ renderColleges();
 renderCourses();
 
 loadColleges();
+
+updateCompareBar();
 
 </script>
 
