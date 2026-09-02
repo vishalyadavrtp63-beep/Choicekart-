@@ -697,9 +697,7 @@ Choice<span>Kart</span>
 <a href="#courses">Courses</a>
 <a href="#predictor">Predictor</a>
 <a href="#counselling">Advice from Expert</a>
-<a href="#resources">Scholarships</a>
 <a href="#faq">FAQ</a>
-<a href="#help">Help</a>
 <a href="javascript:void(0)" onclick="openSaved()">❤️ Saved (<span id="savedCount">0</span>)</a>
 </nav>
 
@@ -888,73 +886,6 @@ Enter your profile to explore possible college options.
 <div id="examDateBox" style="margin-bottom:25px"></div>
 
 
-<div class="admin-card" style="margin-bottom:25px;background:#f8fafc">
-
-<h3 style="color:var(--navy)">🧮 Score Calculator</h3>
-
-<p style="color:#64748b;font-size:13px;margin-top:6px;margin-bottom:15px">
-Not sure of your exact score yet? Enter your correct/wrong
-answers from the answer key and we'll calculate it for you.
-</p>
-
-<div class="form-grid">
-
-<div class="form-group">
-<label>Exam</label>
-<select id="calcExam" onchange="updateCalcScheme()">
-<option value="NEET">NEET (+4 / -1)</option>
-<option value="JEE">JEE Main MCQs (+4 / -1)</option>
-<option value="CUET">CUET (+5 / -1)</option>
-<option value="CUSTOM">Other / Custom marking</option>
-</select>
-</div>
-
-<div class="form-group" id="calcCorrectMarksGroup" style="display:none">
-<label>Marks per Correct</label>
-<input id="calcCorrectMarks" type="number" value="4">
-</div>
-
-<div class="form-group" id="calcWrongMarksGroup" style="display:none">
-<label>Negative per Wrong</label>
-<input id="calcWrongMarks" type="number" value="1">
-</div>
-
-<div class="form-group">
-<label>Correct Answers</label>
-<input id="calcCorrect" type="number" placeholder="e.g. 150">
-</div>
-
-<div class="form-group">
-<label>Wrong Answers</label>
-<input id="calcWrong" type="number" placeholder="e.g. 20">
-</div>
-
-</div>
-
-<button class="btn secondary" style="margin-top:15px" onclick="calculateScore()">
-Calculate Score
-</button>
-
-<div id="calcResultBox" style="margin-top:15px;display:none">
-
-<p style="font-size:15px">
-Estimated Score: <b id="calcResultValue" style="color:var(--navy);font-size:20px"></b>
-</p>
-
-<button class="small-btn" style="margin-top:8px" onclick="useCalculatedScore()">
-Use This Score in Predictor ↓
-</button>
-
-</div>
-
-<p style="font-size:11px;color:#94a3b8;margin-top:10px">
-⚠️ This is a self-calculated estimate based on the general marking
-scheme. Always verify with the official answer key.
-</p>
-
-</div>
-
-
 <div class="form-box">
 
 <div class="form-grid">
@@ -1057,42 +988,6 @@ Select Exam First
 <option>Gujarat</option>
 <option>Karnataka</option>
 <option>Tamil Nadu</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Field</label>
-
-<select id="predictType">
-
-<option>All</option>
-<option>Agriculture</option>
-<option>Medical</option>
-<option>Engineering</option>
-<option>Veterinary</option>
-<option>Government</option>
-<option>Private</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Quota Type</label>
-
-<select id="predictQuota">
-
-<option>All India Quota (AIQ)</option>
-<option>State Quota</option>
-<option>Deemed University</option>
-<option>Management Quota</option>
-<option>NRI Quota</option>
 
 </select>
 
@@ -1235,153 +1130,6 @@ Advice from Expert
 </section>
 
 
-<section class="section" id="help">
-
-<h2 class="title">
-🆘 Need Help?
-</h2>
-
-<p class="subtitle">
-Send your question or problem to the ChoiceKart team.
-</p>
-
-
-<div class="form-box">
-
-<div class="form-group">
-
-<label>Name</label>
-
-<input id="helpName"
-placeholder="Enter your name">
-
-</div>
-
-
-<div class="form-group" style="margin-top:15px">
-
-<label>Email</label>
-
-<input id="helpEmail"
-type="email"
-placeholder="Enter your email">
-
-</div>
-
-
-<div class="form-group" style="margin-top:15px">
-
-<label>Message</label>
-
-<textarea
-id="helpMessage"
-placeholder="Tell us how we can help..."
-></textarea>
-
-</div>
-
-
-<button
-class="btn primary"
-style="width:100%;margin-top:18px"
-onclick="sendHelp()">
-
-Send Help Request
-
-</button>
-
-</div>
-
-</section>
-
-
-<section class="section" id="resources">
-
-<h2 class="title">
-📚 Scholarships & Student Guides
-</h2>
-
-<p class="subtitle">
-Free resources to help you plan admissions, documents and finances.
-</p>
-
-
-<h3 style="margin-top:10px;color:var(--navy)">💰 Scholarships</h3>
-
-<p style="color:#64748b;font-size:13px;margin-top:6px;margin-bottom:15px">
-Amounts, eligibility and deadlines change every year — always apply and
-verify on the official <a href="https://scholarships.gov.in" target="_blank" rel="noopener">National Scholarship Portal (NSP)</a>.
-</p>
-
-<div class="admin-stats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-
-<div class="admin-card">
-<h3 style="font-size:16px">National Scholarship Portal (NSP)</h3>
-<p style="color:#64748b;font-size:13px;margin-top:8px">
-Single government platform hosting 100+ central and state
-scholarships for Class 1 to PhD. Start here first.
-</p>
-<a href="https://scholarships.gov.in" target="_blank" rel="noopener" class="btn secondary" style="margin-top:12px;display:inline-block;font-size:13px;padding:8px 16px">Visit NSP →</a>
-</div>
-
-<div class="admin-card">
-<h3 style="font-size:16px">CSSS (Central Sector Scheme)</h3>
-<p style="color:#64748b;font-size:13px;margin-top:8px">
-For meritorious UG/PG students from lower-income families,
-based on Class 12 marks. Applied for via NSP.
-</p>
-</div>
-
-<div class="admin-card">
-<h3 style="font-size:16px">Post-Matric Scholarship (SC/ST/OBC/Minority)</h3>
-<p style="color:#64748b;font-size:13px;margin-top:8px">
-Covers tuition and maintenance allowance for students from
-SC, ST, OBC and minority communities, income-limit based.
-</p>
-</div>
-
-<div class="admin-card">
-<h3 style="font-size:16px">PM YASASVI</h3>
-<p style="color:#64748b;font-size:13px;margin-top:8px">
-For OBC, EBC and DNT category students — check the current
-notification for course-level eligibility.
-</p>
-</div>
-
-<div class="admin-card">
-<h3 style="font-size:16px">State Government Scholarships</h3>
-<p style="color:#64748b;font-size:13px;margin-top:8px">
-Most states run their own post-matric/merit scholarships too —
-check your state's education department portal.
-</p>
-</div>
-
-</div>
-
-
-<h3 style="margin-top:35px;color:var(--navy)">📖 Guides</h3>
-
-<div class="admin-stats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:15px">
-
-<div class="admin-card" style="cursor:pointer" onclick="openInfo('guidePreflist')">
-<h3 style="font-size:16px">How to Make Your College Preference List</h3>
-<p style="color:#64748b;font-size:13px;margin-top:8px">A simple strategy for ordering your choices during counselling.</p>
-</div>
-
-<div class="admin-card" style="cursor:pointer" onclick="openInfo('guideDocs')">
-<h3 style="font-size:16px">Documents Needed for Counselling</h3>
-<p style="color:#64748b;font-size:13px;margin-top:8px">Checklist of documents to keep ready before admission rounds.</p>
-</div>
-
-<div class="admin-card" style="cursor:pointer" onclick="openInfo('guideCategory')">
-<h3 style="font-size:16px">Category Certificates Guide</h3>
-<p style="color:#64748b;font-size:13px;margin-top:8px">OBC/EWS/SC/ST certificates — what they are and why they matter.</p>
-</div>
-
-</div>
-
-</section>
-
 
 <section class="section" id="faq">
 
@@ -1416,18 +1164,13 @@ Quick answers to common questions students ask.
 </details>
 
 <details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
-<summary style="font-weight:bold;color:var(--navy);cursor:pointer">Does ChoiceKart help with scholarships too?</summary>
-<p style="color:#475569;margin-top:10px;line-height:1.6">We list major central and state scholarship schemes in the Scholarships section, along with links to the official National Scholarship Portal so you can check current eligibility and apply.</p>
-</details>
-
-<details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
 <summary style="font-weight:bold;color:var(--navy);cursor:pointer">How do I get advice from an expert?</summary>
 <p style="color:#475569;margin-top:10px;line-height:1.6">Scroll to the "Advice from Expert" section, fill in your details, and our team will get in touch with you to guide you through the admission process.</p>
 </details>
 
 <details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
 <summary style="font-weight:bold;color:var(--navy);cursor:pointer">I found wrong or outdated information about a college. What do I do?</summary>
-<p style="color:#475569;margin-top:10px;line-height:1.6">Please use the "Need Help?" form below to report it with details — we'll look into it. College data comes from a public dataset, so occasional inaccuracies are possible.</p>
+<p style="color:#475569;margin-top:10px;line-height:1.6">Please reach out via the Contact Us details in the footer to report it — we'll look into it. College data comes from a public dataset, so occasional inaccuracies are possible.</p>
 </details>
 
 </div>
@@ -1473,9 +1216,7 @@ courses and admission opportunities.
 <h3>Support</h3>
 
 <a href="#counselling">Advice from Expert</a>
-<a href="#resources">Scholarships</a>
 <a href="#faq">FAQ</a>
-<a href="#help">Help</a>
 
 </div>
 
@@ -3085,106 +2826,7 @@ college selection? Reach out to us:
 📱 <b>Phone/WhatsApp:</b> +91-9795591809<br>
 📍 <b>Location:</b> India
 </p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-You can also use the <b>Help</b> section on this page
-to send us a message directly.
-</p>
 `,
-
-guidePreflist: `
-<h2 style="color:var(--navy);margin-bottom:15px">How to Make Your College Preference List</h2>
-<p style="line-height:1.7;color:#334155">
-During counselling, you're usually asked to rank colleges
-and courses in order of preference. Getting this order
-right matters — here's a simple approach:
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>1. List broadly first.</b> Don't limit yourself to 4-5
-options. Add every college + course combination you'd
-genuinely accept, even ones that feel like a stretch.
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>2. Rank by preference, not just difficulty.</b> Put your
-most-wanted combination first, regardless of how likely you
-think it is. Seat allotment always tries to give you your
-highest-ranked available choice.
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>3. Don't leave out "backup" options.</b> Include colleges
-you're fairly confident about too — if you only list dream
-colleges, you risk ending up with no seat at all.
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>4. Consider more than rank.</b> Location, fees, hostel
-availability and placement record all matter for your
-actual college life, not just the admission chance.
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>5. Use the ChoiceKart Predictor and Compare tool</b>
-to shortlist realistic options before you sit down to
-fill your final preference list.
-</p>
-`,
-
-guideDocs: `
-<h2 style="color:var(--navy);margin-bottom:15px">Documents Needed for Counselling</h2>
-<p style="line-height:1.7;color:#334155">
-Requirements vary slightly by exam and state, but most
-counselling processes ask for the following. Keep both
-originals and photocopies ready:
-</p>
-<p style="line-height:1.9;color:#334155;margin-top:12px">
-• Admit card and scorecard/rank card of the exam<br>
-• Class 10 and Class 12 marksheets and certificates<br>
-• Transfer certificate / migration certificate<br>
-• Category certificate (OBC/EWS/SC/ST), if applicable<br>
-• Income certificate, if applying under an income-based
-category or scholarship<br>
-• Domicile / state residence certificate, if required<br>
-• Passport-size photographs (as specified by the portal)<br>
-• Valid government photo ID (Aadhaar card, etc.)<br>
-• Aadhaar number for portal registration
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-Always check the exact list on your specific counselling
-authority's official website, as requirements can differ
-by exam and year.
-</p>
-`,
-
-guideCategory: `
-<h2 style="color:var(--navy);margin-bottom:15px">Category Certificates Guide</h2>
-<p style="line-height:1.7;color:#334155">
-Reservation categories can affect your cut-off and seat
-allotment. Here's a quick overview of common certificates:
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>OBC (Non-Creamy Layer):</b> For candidates from listed
-Other Backward Classes whose family income is below the
-prescribed limit. Needs periodic renewal — check the
-validity date on your certificate.
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>EWS (Economically Weaker Section):</b> For candidates
-from the general category with family income and asset
-limits below the prescribed threshold.
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>SC / ST:</b> For candidates belonging to Scheduled
-Castes or Scheduled Tribes as per the government list
-applicable to your state.
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-<b>Getting a certificate:</b> These are issued by your
-state government (Tehsildar/SDM office or via the state's
-e-district portal). Processing can take a few weeks, so
-apply well before counselling begins.
-</p>
-<p style="line-height:1.7;color:#334155;margin-top:12px">
-Always confirm exact formats and validity rules with your
-specific counselling authority, as they can vary by exam.
-</p>
-`
 
 };
 
@@ -3680,11 +3322,6 @@ document.getElementById("predictState")
 .value;
 
 
-const quota =
-document.getElementById("predictQuota")
-.value;
-
-
 const domicile =
 document.getElementById("predictDomicile")
 .value || state;
@@ -3827,17 +3464,11 @@ document.getElementById("predictResult");
 result.style.display="block";
 
 
-window.lastPredictProfile = {exam,score,valueType,course,state,quota,domicile,category};
+window.lastPredictProfile = {exam,score,valueType,course,state,domicile,category};
 
 window.lastPredictLists = {high,medium,low,unranked:unrankedPreview};
 
 document.getElementById("downloadResultBtn").style.display="block";
-
-
-const quotaNote =
-quota==="State Quota"
-? `<p style="margin-top:8px;font-size:13px;color:#b45309">ℹ️ State Quota seats are generally only available to candidates domiciled in <b>${escapeHTML(domicile)}</b>. Confirm your domicile eligibility with the official counselling authority.</p>`
-: "";
 
 
 result.innerHTML = `
@@ -3865,16 +3496,9 @@ ${escapeHTML(course)}
 </p>
 
 <p>
-<b>Quota:</b>
-${escapeHTML(quota)}
-</p>
-
-<p>
 <b>Domicile:</b>
 ${escapeHTML(domicile || "Not specified")}
 </p>
-
-${quotaNote}
 
 ${ranked.length ? "" : `<p style="margin-top:8px;font-size:13px;color:#b45309">ℹ️ No cutoff data has been added yet for this exam/category combination, so results below are general suggestions, not rank-based.</p>`}
 
@@ -3938,91 +3562,6 @@ counselling rules and seat availability.
 }
 
 
-const SCORE_SCHEMES = {
-NEET: {correct:4, wrong:1},
-JEE: {correct:4, wrong:1},
-CUET: {correct:5, wrong:1}
-};
-
-
-function updateCalcScheme(){
-
-const exam = document.getElementById("calcExam").value;
-
-const showCustom = exam==="CUSTOM";
-
-document.getElementById("calcCorrectMarksGroup").style.display = showCustom ? "block" : "none";
-
-document.getElementById("calcWrongMarksGroup").style.display = showCustom ? "block" : "none";
-
-
-if(!showCustom){
-
-document.getElementById("calcCorrectMarks").value = SCORE_SCHEMES[exam].correct;
-
-document.getElementById("calcWrongMarks").value = SCORE_SCHEMES[exam].wrong;
-
-}
-
-}
-
-
-function calculateScore(){
-
-const exam = document.getElementById("calcExam").value;
-
-const correct = Number(document.getElementById("calcCorrect").value)||0;
-
-const wrong = Number(document.getElementById("calcWrong").value)||0;
-
-
-const scheme =
-exam==="CUSTOM"
-? {
-correct:Number(document.getElementById("calcCorrectMarks").value)||0,
-wrong:Number(document.getElementById("calcWrongMarks").value)||0
-}
-: SCORE_SCHEMES[exam];
-
-
-const total = (correct*scheme.correct) - (wrong*scheme.wrong);
-
-
-window.lastCalculatedScore = total;
-
-window.lastCalculatedExam = exam;
-
-
-document.getElementById("calcResultValue").innerText = total;
-
-document.getElementById("calcResultBox").style.display="block";
-
-}
-
-
-function useCalculatedScore(){
-
-if(window.lastCalculatedScore===undefined) return;
-
-
-document.getElementById("predictScore").value = window.lastCalculatedScore;
-
-
-if(window.lastCalculatedExam && window.lastCalculatedExam!=="CUSTOM"){
-
-document.getElementById("predictExam").value = window.lastCalculatedExam;
-
-updatePredictCourses();
-
-}
-
-
-document.getElementById("predictScore")
-.scrollIntoView({behavior:"smooth",block:"center"});
-
-}
-
-
 function downloadPredictResult(){
 
 const p = window.lastPredictProfile;
@@ -4048,7 +3587,6 @@ const text =
 "Score/Rank ("+p.valueType+"): "+p.score+"\n"+
 "Category: "+p.category+"\n"+
 "Course: "+p.course+"\n"+
-"Quota: "+p.quota+"\n"+
 "Domicile: "+(p.domicile||"Not specified")+"\n"+
 "Preferred State: "+p.state+"\n\n"+
 "HIGH CHANCE OPTIONS:\n"+listText(l.high)+"\n\n"+
@@ -4993,4 +4531,192 @@ nav.style.right="0";
 
 nav.style.background="white";
 
-nav.style.padding="20
+nav.style.padding="20px";
+
+nav.style.flexDirection="column";
+
+document.getElementById("mobileMenuBtn").setAttribute("aria-expanded","true");
+
+}
+
+}
+
+
+function closeMobileMenu(){
+
+const nav = document.getElementById("mainNav");
+
+if(window.innerWidth>900) return;
+
+nav.style.display="none";
+
+const btn = document.getElementById("mobileMenuBtn");
+
+if(btn) btn.setAttribute("aria-expanded","false");
+
+}
+
+
+document.getElementById("mainNav")
+.querySelectorAll("a")
+.forEach(link=>{
+
+link.addEventListener("click",closeMobileMenu);
+
+});
+
+
+document.addEventListener("click",(e)=>{
+
+const nav = document.getElementById("mainNav");
+
+const btn = document.getElementById("mobileMenuBtn");
+
+if(
+nav.style.display==="flex" &&
+!nav.contains(e.target) &&
+!btn.contains(e.target)
+){
+
+closeMobileMenu();
+
+}
+
+});
+
+
+/* =========================================
+   MODAL BACKDROP
+========================================= */
+
+window.addEventListener("click",e=>{
+
+if(e.target===
+document.getElementById("detailModal")){
+
+closeModal();
+
+}
+
+if(e.target===
+document.getElementById("adminLogin")){
+
+closeAdminLogin();
+
+}
+
+if(e.target===
+document.getElementById("infoModal")){
+
+closeInfo();
+
+}
+
+if(e.target===
+document.getElementById("compareModal")){
+
+closeCompare();
+
+}
+
+if(e.target===
+document.getElementById("savedModal")){
+
+closeSaved();
+
+}
+
+});
+
+
+/* =========================================
+   FILTER EVENTS
+========================================= */
+
+document
+.getElementById("collegeSearch")
+.addEventListener(
+"input",
+applyFilters
+);
+
+
+document
+.getElementById("stateFilter")
+.addEventListener(
+"change",
+()=>{
+
+updateDistrictFilter();
+
+applyFilters();
+
+}
+);
+
+
+document
+.getElementById("districtFilter")
+.addEventListener(
+"change",
+applyFilters
+);
+
+
+document
+.getElementById("typeFilter")
+.addEventListener(
+"change",
+applyFilters
+);
+
+
+document
+.getElementById("pageSize")
+.addEventListener(
+"change",
+()=>{
+
+currentPage=1;
+
+renderColleges();
+
+}
+);
+
+
+/* =========================================
+   START
+========================================= */
+
+renderCourses();
+
+loadColleges();
+
+updateCompareBar();
+
+updateSavedBar();
+
+renderExamDateWidget();
+
+
+window.addEventListener("firebase-ready",()=>{
+
+loadCutoffsFromFirestore();
+
+loadExamDatesFromFirestore();
+
+});
+
+if(window.firebaseReady){
+
+loadCutoffsFromFirestore();
+
+loadExamDatesFromFirestore();
+
+}
+
+</script>
+
+</body>
+</html>
