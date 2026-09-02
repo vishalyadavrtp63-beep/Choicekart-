@@ -221,6 +221,7 @@ input,select,textarea{
  border-radius:14px;
  overflow:hidden;
  box-shadow:0 5px 20px #00000010;
+ position:relative;
 }
 
 .college-image{
@@ -231,6 +232,28 @@ input,select,textarea{
  align-items:center;
  justify-content:center;
  font-size:45px;
+ position:relative;
+}
+
+.save-heart{
+ position:absolute;
+ top:10px;
+ right:10px;
+ width:34px;
+ height:34px;
+ border-radius:50%;
+ background:#ffffffdd;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:18px;
+ cursor:pointer;
+ z-index:5;
+ transition:transform .15s;
+}
+
+.save-heart:active{
+ transform:scale(1.2);
 }
 
 .college-info{
@@ -693,7 +716,9 @@ Choice<span>Kart</span>
 <a href="#ai">AI</a>
 <a href="#counselling">Counselling</a>
 <a href="#resources">Scholarships</a>
+<a href="#faq">FAQ</a>
 <a href="#help">Help</a>
+<a href="javascript:void(0)" onclick="openSaved()">❤️ Saved (<span id="savedCount">0</span>)</a>
 </nav>
 
 <button class="mobile-menu" onclick="toggleMenu()">☰</button>
@@ -878,6 +903,9 @@ Enter your profile to explore possible college options.
 </p>
 
 
+<div id="examDateBox" style="margin-bottom:25px"></div>
+
+
 <div class="form-box">
 
 <div class="form-grid">
@@ -992,6 +1020,48 @@ Select Exam First
 
 </div>
 
+
+<div class="form-group">
+
+<label>Quota Type</label>
+
+<select id="predictQuota">
+
+<option>All India Quota (AIQ)</option>
+<option>State Quota</option>
+<option>Deemed University</option>
+<option>Management Quota</option>
+<option>NRI Quota</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Domicile State</label>
+
+<select id="predictDomicile">
+
+<option value="">Same as Preferred State</option>
+<option>Uttar Pradesh</option>
+<option>Delhi</option>
+<option>Bihar</option>
+<option>Maharashtra</option>
+<option>Rajasthan</option>
+<option>Haryana</option>
+<option>Madhya Pradesh</option>
+<option>Punjab</option>
+<option>Gujarat</option>
+<option>Karnataka</option>
+<option>Tamil Nadu</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
 </div>
 
 
@@ -1009,6 +1079,16 @@ onclick="predictCollege()">
 class="predictor-result"
 id="predictResult">
 </div>
+
+<button
+class="btn secondary"
+id="downloadResultBtn"
+style="width:100%;margin-top:12px;display:none"
+onclick="downloadPredictResult()">
+
+📥 Download My Result
+
+</button>
 
 </div>
 
@@ -1313,6 +1393,58 @@ check your state's education department portal.
 </section>
 
 
+<section class="section" id="faq">
+
+<h2 class="title">
+❓ Frequently Asked Questions
+</h2>
+
+<p class="subtitle">
+Quick answers to common questions students ask.
+</p>
+
+<div style="max-width:750px;margin:0 auto">
+
+<details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
+<summary style="font-weight:bold;color:var(--navy);cursor:pointer">Is ChoiceKart's college predictor 100% accurate?</summary>
+<p style="color:#475569;margin-top:10px;line-height:1.6">No predictor can be 100% accurate. Our predictions are estimates based on past trends and available data — cut-offs change every year based on the number of applicants, seat availability and paper difficulty. Always confirm your options with the official counselling authority before making a final decision.</p>
+</details>
+
+<details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
+<summary style="font-weight:bold;color:var(--navy);cursor:pointer">Is ChoiceKart free to use?</summary>
+<p style="color:#475569;margin-top:10px;line-height:1.6">Yes, the college directory, predictor, AI assistant and guides on ChoiceKart are completely free to use.</p>
+</details>
+
+<details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
+<summary style="font-weight:bold;color:var(--navy);cursor:pointer">How do I save colleges to check later?</summary>
+<p style="color:#475569;margin-top:10px;line-height:1.6">Tap the 🤍 heart icon on any college card to save it. You can view all your saved colleges anytime from the "❤️ Saved" link in the menu — they're stored right on your device.</p>
+</details>
+
+<details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
+<summary style="font-weight:bold;color:var(--navy);cursor:pointer">Can I compare multiple colleges at once?</summary>
+<p style="color:#475569;margin-top:10px;line-height:1.6">Yes — check the "Add to Compare" box on up to 4 college cards, then tap the "Compare Now" bar that appears to see them side by side.</p>
+</details>
+
+<details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
+<summary style="font-weight:bold;color:var(--navy);cursor:pointer">Does ChoiceKart help with scholarships too?</summary>
+<p style="color:#475569;margin-top:10px;line-height:1.6">We list major central and state scholarship schemes in the Scholarships section, along with links to the official National Scholarship Portal so you can check current eligibility and apply.</p>
+</details>
+
+<details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
+<summary style="font-weight:bold;color:var(--navy);cursor:pointer">How do I book a counselling session?</summary>
+<p style="color:#475569;margin-top:10px;line-height:1.6">Scroll to the "Book Counselling" section, fill in your details, and our team will get in touch with you to guide you through the admission process.</p>
+</details>
+
+<details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
+<summary style="font-weight:bold;color:var(--navy);cursor:pointer">I found wrong or outdated information about a college. What do I do?</summary>
+<p style="color:#475569;margin-top:10px;line-height:1.6">Please use the "Need Help?" form below to report it with details — we'll look into it. College data comes from a public dataset, so occasional inaccuracies are possible.</p>
+</details>
+
+</div>
+
+</section>
+
+
 <footer>
 
 <div class="footer-grid">
@@ -1353,6 +1485,7 @@ courses and admission opportunities.
 
 <a href="#counselling">Counselling</a>
 <a href="#resources">Scholarships</a>
+<a href="#faq">FAQ</a>
 <a href="#help">Help</a>
 
 </div>
@@ -1428,6 +1561,23 @@ onclick="openCompare()">
 </h2>
 
 <div id="compareBody" style="overflow-x:auto"></div>
+
+</div>
+
+</div>
+
+
+<div class="modal" id="savedModal">
+
+<div class="modal-content" style="max-width:600px">
+
+<span class="close" onclick="closeSaved()">&times;</span>
+
+<h2 style="color:var(--navy);margin-bottom:15px">
+❤️ My Saved Colleges
+</h2>
+
+<div id="savedBody"></div>
 
 </div>
 
@@ -1609,6 +1759,48 @@ detail page.
 
 </div>
 
+
+<div class="admin-card" style="margin-top:20px">
+
+<h3>📅 Exam Date Tracker</h3>
+
+<p style="color:#64748b;margin-top:8px;margin-bottom:15px">
+Add upcoming exam dates. They'll show as a countdown widget
+above the Predictor section on the homepage.
+</p>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Exam Name</label>
+<input id="examName" placeholder="e.g. CUET UG 2027">
+</div>
+
+<div class="form-group">
+<label>Date</label>
+<input id="examDate" type="date">
+</div>
+
+<div class="form-group">
+<label>Label</label>
+<select id="examLabel">
+<option>Application Deadline</option>
+<option>Exam Date</option>
+<option>Result Date</option>
+<option>Counselling Starts</option>
+</select>
+</div>
+
+</div>
+
+<button class="btn primary" style="margin-top:15px" onclick="addExamDate()">
++ Add Date
+</button>
+
+<div id="examDateAdminList" style="margin-top:20px"></div>
+
+</div>
+
 </div>
 
 </div>
@@ -1646,6 +1838,8 @@ let pageSize=24;
 let compareList = JSON.parse(localStorage.getItem("ck_compare") || "[]");
 
 const MAX_COMPARE = 4;
+
+let savedColleges = JSON.parse(localStorage.getItem("ck_saved") || "[]");
 
 
 /* =========================================
@@ -1777,10 +1971,11 @@ throw new Error("No states returned by college API");
 }
 
 
-/* Download state snapshots in small requests. */
-const chunks =
-await Promise.all(
-stateNames.map(async stateName=>{
+/* Download state snapshots in small requests, with one retry per state
+   if the first attempt fails — reduces silent drops from flaky states. */
+const failedStates = [];
+
+async function fetchState(stateName, isRetry){
 
 try{
 
@@ -1794,6 +1989,8 @@ await fetch(url);
 
 if(!response.ok){
 console.warn("State failed:",stateName,response.status);
+if(!isRetry) return await fetchState(stateName,true);
+failedStates.push(stateName);
 return [];
 }
 
@@ -1807,11 +2004,18 @@ return Array.isArray(result)
 }catch(error){
 
 console.warn("State load failed:",stateName,error);
+if(!isRetry) return await fetchState(stateName,true);
+failedStates.push(stateName);
 return [];
 
 }
 
-})
+}
+
+
+const chunks =
+await Promise.all(
+stateNames.map(stateName=>fetchState(stateName,false))
 );
 
 
@@ -1944,7 +2148,16 @@ id:c.id || ("fallback-"+i)
 }));
 
 document.getElementById("collegeCount").innerHTML =
-"⚠️ Live college database unavailable — showing demo data. Please refresh/retry.";
+`⚠️ Live college database unavailable — showing demo data.
+<button onclick="loadColleges()" style="
+margin-left:8px;
+padding:4px 12px;
+border:0;
+border-radius:20px;
+background:var(--orange);
+color:white;
+cursor:pointer;
+font-size:12px">Retry</button>`;
 
 }
 
@@ -2189,6 +2402,14 @@ list.map(c=>`
 <div class="college-card">
 
 <div class="college-image">
+
+<span
+class="save-heart"
+onclick="toggleSave(${colleges.indexOf(c)},event)"
+id="heart-${colleges.indexOf(c)}">
+${savedColleges.includes(colleges.indexOf(c)) ? "❤️" : "🤍"}
+</span>
+
 🏫
 </div>
 
@@ -2426,8 +2647,7 @@ document.getElementById("detailModal")
 function renderCutoffChart(collegeName){
 
 const records = getCutoffs()
-.filter(r=>r.college.trim().toLowerCase() === (collegeName||"").trim().toLowerCase())
-.sort((a,b)=>a.year-b.year);
+.filter(r=>r.college.trim().toLowerCase() === (collegeName||"").trim().toLowerCase());
 
 
 if(!records.length){
@@ -2445,18 +2665,76 @@ No cutoff/rank data available yet for this college.
 }
 
 
-const values = records.map(r=>Number(r.value)||0);
+/* Group by exam + category so we only compare like-with-like across years */
+const groups = {};
+
+records.forEach(r=>{
+
+const key = (r.exam||"General")+" · "+(r.category||"General");
+
+if(!groups[key]) groups[key]=[];
+
+groups[key].push(r);
+
+});
+
+
+const groupBlocks = Object.keys(groups).map(key=>{
+
+const group = groups[key].sort((a,b)=>a.year-b.year);
+
+const values = group.map(r=>Number(r.value)||0);
 
 const maxVal = Math.max(...values,1);
 
 
-const bars = records.map(r=>{
+const bars = group.map((r,i)=>{
 
 const h = Math.max(10,(Number(r.value)/maxVal)*120);
+
+const prev = i>0 ? Number(group[i-1].value) : null;
+
+const curr = Number(r.value);
+
+
+let deltaHTML = "";
+
+if(prev!==null && !isNaN(prev) && !isNaN(curr)){
+
+const diff = curr-prev;
+
+if(diff!==0){
+
+const up = diff>0;
+
+deltaHTML = `
+
+<div style="
+font-size:10px;
+font-weight:bold;
+color:${up ? "#dc2626" : "#16a34a"};
+margin-bottom:2px">
+
+${up ? "▲" : "▼"} ${Math.abs(diff)}
+
+</div>
+
+`;
+
+}else{
+
+deltaHTML = `<div style="font-size:10px;color:#94a3b8;margin-bottom:2px">— same</div>`;
+
+}
+
+}
+
 
 return `
 
 <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:70px">
+
+${deltaHTML}
 
 <div style="font-size:11px;color:#64748b">${escapeHTML(r.value)}</div>
 
@@ -2468,7 +2746,32 @@ border-radius:6px 6px 0 0"></div>
 
 <div style="font-size:11px;color:var(--navy);font-weight:bold">${escapeHTML(r.year)}</div>
 
-<div style="font-size:10px;color:#94a3b8">${escapeHTML(r.exam)} · ${escapeHTML(r.category)}</div>
+</div>
+
+`;
+
+}).join("");
+
+
+return `
+
+<div style="margin-top:18px">
+
+<p style="font-size:13px;font-weight:bold;color:var(--navy)">${escapeHTML(key)}</p>
+
+<div style="
+display:flex;
+align-items:flex-end;
+gap:14px;
+overflow-x:auto;
+padding:20px 10px 10px;
+background:#f8fafc;
+border-radius:10px;
+margin-top:8px">
+
+${bars}
+
+</div>
 
 </div>
 
@@ -2479,25 +2782,15 @@ border-radius:6px 6px 0 0"></div>
 
 return `
 
-<h3 style="margin-top:20px">📈 Cutoff Trend</h3>
+<h3 style="margin-top:20px">📈 Cutoff Trend (Year-on-Year)</h3>
 
 <p style="color:#94a3b8;font-size:12px;margin-top:4px">
-Closing rank/score by year (lower rank = harder to get, for score-based exams higher = harder)
+Closing rank/score compared with the previous year for the same exam
+and category. 🔴 ▲ = cutoff went up (tougher) &nbsp; 🟢 ▼ = cutoff went down (easier).
+For score-based exams, read the direction the other way round.
 </p>
 
-<div style="
-display:flex;
-align-items:flex-end;
-gap:14px;
-overflow-x:auto;
-padding:20px 10px 10px;
-background:#f8fafc;
-border-radius:10px;
-margin-top:10px">
-
-${bars}
-
-</div>
+${groupBlocks}
 
 `;
 
@@ -2695,6 +2988,104 @@ specific counselling authority, as they can vary by exam.
 `
 
 };
+
+
+function toggleSave(idx,event){
+
+if(event) event.stopPropagation();
+
+if(savedColleges.includes(idx)){
+
+savedColleges = savedColleges.filter(i=>i!==idx);
+
+}else{
+
+savedColleges.push(idx);
+
+}
+
+localStorage.setItem("ck_saved",JSON.stringify(savedColleges));
+
+
+const heart = document.getElementById("heart-"+idx);
+
+if(heart) heart.innerText = savedColleges.includes(idx) ? "❤️" : "🤍";
+
+
+updateSavedBar();
+
+}
+
+
+function updateSavedBar(){
+
+const countEl = document.getElementById("savedCount");
+
+if(countEl) countEl.innerText = savedColleges.length;
+
+}
+
+
+function openSaved(){
+
+const selected = savedColleges
+.map(i=>({idx:i,college:colleges[i]}))
+.filter(x=>x.college);
+
+
+let html = "";
+
+
+if(!selected.length){
+
+html = `<p style="color:#64748b">You haven't saved any colleges yet. Tap the 🤍 on any college card to save it here.</p>`;
+
+}else{
+
+html = selected.map(({idx,college:c})=>`
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+padding:14px 0;
+border-bottom:1px solid #edf2f7">
+
+<div>
+<b>${escapeHTML(c.name)}</b>
+<p style="font-size:12px;color:#64748b;margin-top:4px">
+📍 ${escapeHTML(c.district)}${c.district && c.state ? ", " : ""}${escapeHTML(c.state)}
+</p>
+</div>
+
+<div style="display:flex;gap:8px;flex-shrink:0">
+
+<button class="small-btn" onclick="closeSaved();showCollege(${idx})">View</button>
+
+<button class="action-btn delete" onclick="toggleSave(${idx});openSaved()">Remove</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+document.getElementById("savedBody").innerHTML = html;
+
+document.getElementById("savedModal").style.display="flex";
+
+}
+
+
+function closeSaved(){
+
+document.getElementById("savedModal").style.display="none";
+
+}
 
 
 function toggleCompare(idx,checkbox){
@@ -3081,6 +3472,16 @@ document.getElementById("predictState")
 .value;
 
 
+const quota =
+document.getElementById("predictQuota")
+.value;
+
+
+const domicile =
+document.getElementById("predictDomicile")
+.value || state;
+
+
 if(!exam || !score || !course){
 
 alert(
@@ -3139,6 +3540,19 @@ document.getElementById("predictResult");
 result.style.display="block";
 
 
+window.lastPredictProfile = {exam,score,course,state,quota,domicile,category:document.getElementById("predictCategory").value};
+
+window.lastPredictLists = {high,medium,low};
+
+document.getElementById("downloadResultBtn").style.display="block";
+
+
+const quotaNote =
+quota==="State Quota"
+? `<p style="margin-top:8px;font-size:13px;color:#b45309">ℹ️ State Quota seats are generally only available to candidates domiciled in <b>${escapeHTML(domicile)}</b>. Confirm your domicile eligibility with the official counselling authority.</p>`
+: "";
+
+
 result.innerHTML = `
 
 <div style="
@@ -3162,6 +3576,18 @@ ${escapeHTML(score)}
 <b>Course:</b>
 ${escapeHTML(course)}
 </p>
+
+<p>
+<b>Quota:</b>
+${escapeHTML(quota)}
+</p>
+
+<p>
+<b>Domicile:</b>
+${escapeHTML(domicile || "Not specified")}
+</p>
+
+${quotaNote}
 
 </div>
 
@@ -3206,6 +3632,65 @@ counselling rules and seat availability.
 </p>
 
 `;
+
+}
+
+
+function downloadPredictResult(){
+
+const p = window.lastPredictProfile;
+
+const l = window.lastPredictLists;
+
+if(!p || !l) return;
+
+
+function listText(arr){
+
+if(!arr.length) return "  No matching colleges available.";
+
+return arr.map(c=>"  - "+c.name+" ("+c.state+")").join("\n");
+
+}
+
+
+const text =
+"ChoiceKart — My College Prediction Result\n"+
+"=========================================\n\n"+
+"Exam: "+p.exam+"\n"+
+"Score/Rank: "+p.score+"\n"+
+"Category: "+p.category+"\n"+
+"Course: "+p.course+"\n"+
+"Quota: "+p.quota+"\n"+
+"Domicile: "+(p.domicile||"Not specified")+"\n"+
+"Preferred State: "+p.state+"\n\n"+
+"HIGH CHANCE OPTIONS:\n"+listText(l.high)+"\n\n"+
+"MODERATE OPTIONS:\n"+listText(l.medium)+"\n\n"+
+"AMBITIOUS OPTIONS:\n"+listText(l.low)+"\n\n"+
+"-----------------------------------------\n"+
+"Note: This is only an estimate based on available data.\n"+
+"Final admission depends on official cut-offs, eligibility,\n"+
+"category, counselling rules and seat availability.\n"+
+"Generated by ChoiceKart — choicekart.vishalyadav-rtp63.workers.dev\n";
+
+
+const blob = new Blob([text],{type:"text/plain"});
+
+const url = URL.createObjectURL(blob);
+
+const a = document.createElement("a");
+
+a.href = url;
+
+a.download = "ChoiceKart-Prediction-Result.txt";
+
+document.body.appendChild(a);
+
+a.click();
+
+document.body.removeChild(a);
+
+URL.revokeObjectURL(url);
 
 }
 
@@ -3617,6 +4102,8 @@ help.length;
 
 renderCutoffList();
 
+renderExamDateAdminList();
+
 }
 
 
@@ -3728,6 +4215,192 @@ box.innerHTML = records.map((r,i)=>`
 
 
 /* =========================================
+   EXAM DATE TRACKER
+========================================= */
+
+function getExamDates(){
+
+return JSON.parse(
+localStorage.getItem("ck_examdates") || "[]"
+);
+
+}
+
+
+function addExamDate(){
+
+const name = document.getElementById("examName").value.trim();
+
+const date = document.getElementById("examDate").value;
+
+const label = document.getElementById("examLabel").value;
+
+
+if(!name || !date){
+
+alert("Please fill exam name and date.");
+
+return;
+
+}
+
+
+const records = getExamDates();
+
+records.push({name,date,label});
+
+localStorage.setItem("ck_examdates",JSON.stringify(records));
+
+
+document.getElementById("examName").value="";
+document.getElementById("examDate").value="";
+
+
+renderExamDateAdminList();
+
+renderExamDateWidget();
+
+}
+
+
+function deleteExamDate(i){
+
+const records = getExamDates();
+
+records.splice(i,1);
+
+localStorage.setItem("ck_examdates",JSON.stringify(records));
+
+renderExamDateAdminList();
+
+renderExamDateWidget();
+
+}
+
+
+function renderExamDateAdminList(){
+
+const box = document.getElementById("examDateAdminList");
+
+if(!box) return;
+
+
+const records = getExamDates()
+.slice()
+.sort((a,b)=>new Date(a.date)-new Date(b.date));
+
+
+if(!records.length){
+
+box.innerHTML = `<p style="color:#64748b;font-size:14px">No exam dates added yet.</p>`;
+
+return;
+
+}
+
+
+box.innerHTML = records.map((r)=>{
+
+const i = getExamDates().indexOf(r);
+
+return `
+
+<div class="admin-list-item" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+
+<div>
+<b>${escapeHTML(r.name)}</b> — ${escapeHTML(r.label)}:
+<b>${escapeHTML(r.date)}</b>
+</div>
+
+<button class="action-btn delete" onclick="deleteExamDate(${i})">Delete</button>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+function renderExamDateWidget(){
+
+const box = document.getElementById("examDateBox");
+
+if(!box) return;
+
+
+const today = new Date();
+
+today.setHours(0,0,0,0);
+
+
+const upcoming = getExamDates()
+.filter(r=>new Date(r.date) >= today)
+.sort((a,b)=>new Date(a.date)-new Date(b.date))
+.slice(0,4);
+
+
+if(!upcoming.length){
+
+box.innerHTML = "";
+
+return;
+
+}
+
+
+const cards = upcoming.map(r=>{
+
+const target = new Date(r.date);
+
+const daysLeft = Math.ceil((target-today)/(1000*60*60*24));
+
+return `
+
+<div style="
+background:white;
+border-radius:12px;
+padding:16px;
+box-shadow:0 5px 15px #00000010;
+min-width:160px;
+flex:1">
+
+<p style="font-size:12px;color:#64748b">${escapeHTML(r.label)}</p>
+
+<h3 style="color:var(--navy);margin-top:4px;font-size:16px">${escapeHTML(r.name)}</h3>
+
+<p style="margin-top:8px;font-size:13px;color:#334155">
+📅 ${escapeHTML(r.date)}
+</p>
+
+<p style="margin-top:6px;font-weight:bold;color:${daysLeft<=7 ? "#dc2626" : "var(--orange)"}">
+${daysLeft===0 ? "Today!" : daysLeft+" days left"}
+</p>
+
+</div>
+
+`;
+
+}).join("");
+
+
+box.innerHTML = `
+
+<h3 style="color:var(--navy);margin-bottom:12px">📅 Upcoming Exam Dates</h3>
+
+<div style="display:flex;gap:14px;overflow-x:auto;padding-bottom:8px">
+
+${cards}
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================
    MOBILE MENU
 ========================================= */
 
@@ -3795,6 +4468,13 @@ if(e.target===
 document.getElementById("compareModal")){
 
 closeCompare();
+
+}
+
+if(e.target===
+document.getElementById("savedModal")){
+
+closeSaved();
 
 }
 
@@ -3866,6 +4546,10 @@ renderCourses();
 loadColleges();
 
 updateCompareBar();
+
+updateSavedBar();
+
+renderExamDateWidget();
 
 </script>
 
