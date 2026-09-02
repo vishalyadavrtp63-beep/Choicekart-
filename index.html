@@ -1796,6 +1796,156 @@ const fallbackColleges=[
 
 
 /* =========================================
+   CURATED GOVERNMENT INSTITUTIONS
+   (Central Universities, IITs, NITs, IIMs, AIIMS)
+   The live AICTE-based API mainly covers technical/
+   engineering institutions, so major central
+   universities are added here manually and merged in.
+========================================= */
+
+const curatedGovtInstitutions=[
+
+{name:"Banaras Hindu University (BHU)",state:"Uttar Pradesh",district:"Varanasi",type:"Central University",course:"Arts, Science, Commerce, Agriculture, Medicine, Engineering"},
+{name:"University of Delhi (DU)",state:"Delhi",district:"Delhi",type:"Central University",course:"Arts, Commerce, Science, Management, Law"},
+{name:"Jawaharlal Nehru University (JNU)",state:"Delhi",district:"New Delhi",type:"Central University",course:"Social Sciences, Languages, International Studies"},
+{name:"Aligarh Muslim University (AMU)",state:"Uttar Pradesh",district:"Aligarh",type:"Central University",course:"Arts, Science, Engineering, Medicine, Law"},
+{name:"Jamia Millia Islamia",state:"Delhi",district:"New Delhi",type:"Central University",course:"Arts, Engineering, Law, Education"},
+{name:"Jamia Hamdard",state:"Delhi",district:"New Delhi",type:"Deemed University",course:"Pharmacy, Medicine, Management"},
+{name:"University of Hyderabad",state:"Telangana",district:"Hyderabad",type:"Central University",course:"Sciences, Humanities, Management"},
+{name:"Pondicherry University",state:"Puducherry",district:"Puducherry",type:"Central University",course:"Arts, Science, Management, Law"},
+{name:"Visva-Bharati University",state:"West Bengal",district:"Birbhum",type:"Central University",course:"Arts, Agriculture, Fine Arts"},
+{name:"North Eastern Hill University (NEHU)",state:"Meghalaya",district:"Shillong",type:"Central University",course:"Arts, Science, Management"},
+{name:"Tezpur University",state:"Assam",district:"Tezpur",type:"Central University",course:"Engineering, Science, Management"},
+{name:"Assam University",state:"Assam",district:"Silchar",type:"Central University",course:"Arts, Science, Management"},
+{name:"Manipur University",state:"Manipur",district:"Imphal",type:"Central University",course:"Arts, Science, Management"},
+{name:"Mizoram University",state:"Mizoram",district:"Aizawl",type:"Central University",course:"Arts, Science, Engineering"},
+{name:"Nagaland University",state:"Nagaland",district:"Lumami",type:"Central University",course:"Arts, Science, Agriculture"},
+{name:"Sikkim University",state:"Sikkim",district:"Gangtok",type:"Central University",course:"Arts, Science, Management"},
+{name:"Tripura University",state:"Tripura",district:"Agartala",type:"Central University",course:"Arts, Science, Engineering"},
+{name:"Rajiv Gandhi University",state:"Arunachal Pradesh",district:"Itanagar",type:"Central University",course:"Arts, Science, Commerce"},
+{name:"Dr. Harisingh Gour Vishwavidyalaya",state:"Madhya Pradesh",district:"Sagar",type:"Central University",course:"Arts, Science, Law"},
+{name:"Guru Ghasidas Vishwavidyalaya",state:"Chhattisgarh",district:"Bilaspur",type:"Central University",course:"Arts, Science, Engineering, Law"},
+{name:"Indira Gandhi National Tribal University",state:"Madhya Pradesh",district:"Anuppur",type:"Central University",course:"Arts, Science, Tribal Studies"},
+{name:"Maulana Azad National Urdu University",state:"Telangana",district:"Hyderabad",type:"Central University",course:"Arts, Education, Journalism"},
+{name:"English and Foreign Languages University",state:"Telangana",district:"Hyderabad",type:"Central University",course:"Languages, Literature"},
+{name:"Mahatma Gandhi Antarrashtriya Hindi Vishwavidyalaya",state:"Maharashtra",district:"Wardha",type:"Central University",course:"Hindi, Journalism, Translation"},
+{name:"Central Sanskrit University",state:"Delhi",district:"New Delhi",type:"Central University",course:"Sanskrit, Vedic Studies"},
+{name:"Indira Gandhi National Open University (IGNOU)",state:"Delhi",district:"New Delhi",type:"Central University",course:"Distance Education — Arts, Science, Management, Law"},
+{name:"Central University of Punjab",state:"Punjab",district:"Bathinda",type:"Central University",course:"Arts, Science, Management"},
+{name:"Central University of Rajasthan",state:"Rajasthan",district:"Ajmer",type:"Central University",course:"Arts, Science, Management"},
+{name:"Central University of Gujarat",state:"Gujarat",district:"Gandhinagar",type:"Central University",course:"Arts, Science, Management"},
+{name:"Central University of Kerala",state:"Kerala",district:"Kasaragod",type:"Central University",course:"Arts, Science, Management"},
+{name:"Central University of Tamil Nadu",state:"Tamil Nadu",district:"Thiruvarur",type:"Central University",course:"Arts, Science, Management"},
+{name:"Central University of Karnataka",state:"Karnataka",district:"Kalaburagi",type:"Central University",course:"Arts, Science, Management"},
+{name:"Central University of Himachal Pradesh",state:"Himachal Pradesh",district:"Dharamshala",type:"Central University",course:"Arts, Science, Management"},
+{name:"Central University of Jharkhand",state:"Jharkhand",district:"Ranchi",type:"Central University",course:"Arts, Science, Management"},
+{name:"Central University of Haryana",state:"Haryana",district:"Mahendragarh",type:"Central University",course:"Arts, Science, Management"},
+{name:"Central University of South Bihar",state:"Bihar",district:"Gaya",type:"Central University",course:"Arts, Science, Management"},
+
+{name:"IIT Bombay",state:"Maharashtra",district:"Mumbai",type:"IIT",course:"Engineering, Science, Design, Management"},
+{name:"IIT Delhi",state:"Delhi",district:"New Delhi",type:"IIT",course:"Engineering, Science, Management"},
+{name:"IIT Kanpur",state:"Uttar Pradesh",district:"Kanpur",type:"IIT",course:"Engineering, Science"},
+{name:"IIT Kharagpur",state:"West Bengal",district:"Kharagpur",type:"IIT",course:"Engineering, Science, Architecture"},
+{name:"IIT Madras",state:"Tamil Nadu",district:"Chennai",type:"IIT",course:"Engineering, Science, Management"},
+{name:"IIT Roorkee",state:"Uttarakhand",district:"Roorkee",type:"IIT",course:"Engineering, Architecture, Management"},
+{name:"IIT Guwahati",state:"Assam",district:"Guwahati",type:"IIT",course:"Engineering, Science, Design"},
+{name:"IIT Hyderabad",state:"Telangana",district:"Hyderabad",type:"IIT",course:"Engineering, Science, Design"},
+{name:"IIT Indore",state:"Madhya Pradesh",district:"Indore",type:"IIT",course:"Engineering, Science"},
+{name:"IIT (BHU) Varanasi",state:"Uttar Pradesh",district:"Varanasi",type:"IIT",course:"Engineering, Mining, Pharmacy"},
+{name:"IIT Ropar",state:"Punjab",district:"Rupnagar",type:"IIT",course:"Engineering, Science"},
+{name:"IIT Bhubaneswar",state:"Odisha",district:"Bhubaneswar",type:"IIT",course:"Engineering, Science"},
+{name:"IIT Gandhinagar",state:"Gujarat",district:"Gandhinagar",type:"IIT",course:"Engineering, Science, Humanities"},
+{name:"IIT Jodhpur",state:"Rajasthan",district:"Jodhpur",type:"IIT",course:"Engineering, Science, Design"},
+{name:"IIT Patna",state:"Bihar",district:"Patna",type:"IIT",course:"Engineering, Science"},
+{name:"IIT Mandi",state:"Himachal Pradesh",district:"Mandi",type:"IIT",course:"Engineering, Science"},
+{name:"IIT (ISM) Dhanbad",state:"Jharkhand",district:"Dhanbad",type:"IIT",course:"Mining, Engineering, Geology"},
+{name:"IIT Palakkad",state:"Kerala",district:"Palakkad",type:"IIT",course:"Engineering, Science"},
+{name:"IIT Tirupati",state:"Andhra Pradesh",district:"Tirupati",type:"IIT",course:"Engineering, Science"},
+{name:"IIT Bhilai",state:"Chhattisgarh",district:"Bhilai",type:"IIT",course:"Engineering, Science"},
+{name:"IIT Goa",state:"Goa",district:"Ponda",type:"IIT",course:"Engineering, Science"},
+{name:"IIT Jammu",state:"Jammu and Kashmir",district:"Jammu",type:"IIT",course:"Engineering, Science"},
+{name:"IIT Dharwad",state:"Karnataka",district:"Dharwad",type:"IIT",course:"Engineering, Science"},
+
+{name:"NIT Tiruchirappalli",state:"Tamil Nadu",district:"Tiruchirappalli",type:"NIT",course:"Engineering, Architecture"},
+{name:"NIT Warangal",state:"Telangana",district:"Warangal",type:"NIT",course:"Engineering, Management"},
+{name:"NIT Karnataka, Surathkal",state:"Karnataka",district:"Mangalore",type:"NIT",course:"Engineering, Architecture"},
+{name:"NIT Rourkela",state:"Odisha",district:"Rourkela",type:"NIT",course:"Engineering, Management"},
+{name:"NIT Calicut",state:"Kerala",district:"Kozhikode",type:"NIT",course:"Engineering, Architecture, Management"},
+{name:"NIT Durgapur",state:"West Bengal",district:"Durgapur",type:"NIT",course:"Engineering, Management"},
+{name:"NIT Kurukshetra",state:"Haryana",district:"Kurukshetra",type:"NIT",course:"Engineering, Architecture"},
+{name:"MNNIT Allahabad",state:"Uttar Pradesh",district:"Prayagraj",type:"NIT",course:"Engineering, Architecture, Management"},
+{name:"MANIT Bhopal",state:"Madhya Pradesh",district:"Bhopal",type:"NIT",course:"Engineering, Architecture"},
+{name:"VNIT Nagpur",state:"Maharashtra",district:"Nagpur",type:"NIT",course:"Engineering, Architecture"},
+{name:"MNIT Jaipur",state:"Rajasthan",district:"Jaipur",type:"NIT",course:"Engineering, Architecture"},
+{name:"NIT Silchar",state:"Assam",district:"Silchar",type:"NIT",course:"Engineering"},
+{name:"NIT Hamirpur",state:"Himachal Pradesh",district:"Hamirpur",type:"NIT",course:"Engineering, Architecture"},
+{name:"NIT Jalandhar",state:"Punjab",district:"Jalandhar",type:"NIT",course:"Engineering"},
+{name:"NIT Patna",state:"Bihar",district:"Patna",type:"NIT",course:"Engineering"},
+{name:"NIT Raipur",state:"Chhattisgarh",district:"Raipur",type:"NIT",course:"Engineering, Architecture"},
+{name:"NIT Agartala",state:"Tripura",district:"Agartala",type:"NIT",course:"Engineering"},
+{name:"NIT Delhi",state:"Delhi",district:"New Delhi",type:"NIT",course:"Engineering"},
+{name:"NIT Goa",state:"Goa",district:"Ponda",type:"NIT",course:"Engineering"},
+{name:"NIT Meghalaya",state:"Meghalaya",district:"Shillong",type:"NIT",course:"Engineering"},
+{name:"NIT Manipur",state:"Manipur",district:"Imphal",type:"NIT",course:"Engineering"},
+{name:"NIT Mizoram",state:"Mizoram",district:"Aizawl",type:"NIT",course:"Engineering"},
+{name:"NIT Nagaland",state:"Nagaland",district:"Dimapur",type:"NIT",course:"Engineering"},
+{name:"NIT Puducherry",state:"Puducherry",district:"Karaikal",type:"NIT",course:"Engineering"},
+{name:"NIT Sikkim",state:"Sikkim",district:"Ravangla",type:"NIT",course:"Engineering"},
+{name:"NIT Uttarakhand",state:"Uttarakhand",district:"Srinagar",type:"NIT",course:"Engineering"},
+{name:"NIT Andhra Pradesh",state:"Andhra Pradesh",district:"Tadepalligudem",type:"NIT",course:"Engineering"},
+{name:"NIT Arunachal Pradesh",state:"Arunachal Pradesh",district:"Yupia",type:"NIT",course:"Engineering"},
+
+{name:"IIM Ahmedabad",state:"Gujarat",district:"Ahmedabad",type:"IIM",course:"MBA, Management"},
+{name:"IIM Bangalore",state:"Karnataka",district:"Bengaluru",type:"IIM",course:"MBA, Management"},
+{name:"IIM Calcutta",state:"West Bengal",district:"Kolkata",type:"IIM",course:"MBA, Management"},
+{name:"IIM Lucknow",state:"Uttar Pradesh",district:"Lucknow",type:"IIM",course:"MBA, Management"},
+{name:"IIM Indore",state:"Madhya Pradesh",district:"Indore",type:"IIM",course:"MBA, Management"},
+{name:"IIM Kozhikode",state:"Kerala",district:"Kozhikode",type:"IIM",course:"MBA, Management"},
+
+{name:"AIIMS New Delhi",state:"Delhi",district:"New Delhi",type:"AIIMS",course:"MBBS, Nursing, Medical Education"},
+{name:"AIIMS Bhopal",state:"Madhya Pradesh",district:"Bhopal",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Bhubaneswar",state:"Odisha",district:"Bhubaneswar",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Jodhpur",state:"Rajasthan",district:"Jodhpur",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Patna",state:"Bihar",district:"Patna",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Raipur",state:"Chhattisgarh",district:"Raipur",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Rishikesh",state:"Uttarakhand",district:"Rishikesh",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Nagpur",state:"Maharashtra",district:"Nagpur",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Mangalagiri",state:"Andhra Pradesh",district:"Guntur",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Rae Bareli",state:"Uttar Pradesh",district:"Raebareli",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Kalyani",state:"West Bengal",district:"Kalyani",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Gorakhpur",state:"Uttar Pradesh",district:"Gorakhpur",type:"AIIMS",course:"MBBS, Nursing"},
+{name:"AIIMS Bathinda",state:"Punjab",district:"Bathinda",type:"AIIMS",course:"MBBS, Nursing"}
+
+].map((c,i)=>({
+...c,
+id:"govt-"+i,
+description:(c.type)+" located in "+c.district+", "+c.state+"."
+}));
+
+
+function mergeCuratedInstitutions(list){
+
+const seen = new Set(
+
+list.map(c=>
+(c.name||"").toLowerCase().trim()
+)
+
+);
+
+
+const toAdd =
+curatedGovtInstitutions.filter(c=>
+!seen.has(c.name.toLowerCase().trim())
+);
+
+
+return [...toAdd, ...list];
+
+}
+
+
+/* =========================================
    ESCAPE
 ========================================= */
 
@@ -2016,6 +2166,11 @@ colleges =
 Array.from(unique.values());
 
 
+/* Always ensure major central universities/IITs/NITs/IIMs/AIIMS
+   are present, since the AICTE-based API often excludes them. */
+colleges = mergeCuratedInstitutions(colleges);
+
+
 if(colleges.length < 1000){
 
 throw new Error(
@@ -2041,10 +2196,12 @@ console.error("College database error:",error);
 */
 
 colleges =
+mergeCuratedInstitutions(
 fallbackColleges.map((c,i)=>({
 ...c,
 id:c.id || ("fallback-"+i)
-}));
+}))
+);
 
 document.getElementById("collegeCount").innerHTML =
 `⚠️ Live college database unavailable — showing demo data.
