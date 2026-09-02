@@ -383,71 +383,6 @@ input,select,textarea{
  border-left:5px solid var(--red);
 }
 
-.ai-section{
- background:linear-gradient(135deg,var(--navy),#1e4978);
-}
-
-.ai-section .title{
- color:white;
-}
-
-.ai-box{
- max-width:850px;
- margin:auto;
- background:white;
- border-radius:15px;
- overflow:hidden;
-}
-
-.ai-header{
- background:var(--navy);
- color:white;
- padding:18px;
-}
-
-.ai-messages{
- height:320px;
- overflow-y:auto;
- padding:18px;
- background:#f8fafc;
-}
-
-.message{
- max-width:78%;
- padding:12px;
- margin-bottom:12px;
- border-radius:12px;
- line-height:1.5;
-}
-
-.bot{
- background:white;
- border:1px solid #e2e8f0;
-}
-
-.user{
- background:var(--orange);
- color:white;
- margin-left:auto;
-}
-
-.ai-input{
- display:flex;
- gap:10px;
- padding:15px;
-}
-
-.ai-input input{flex:1}
-
-.ai-input button{
- width:110px;
- border:0;
- background:var(--orange);
- color:white;
- border-radius:8px;
- cursor:pointer;
-}
-
 .counselling{
  background:#fff7ed;
 }
@@ -500,29 +435,6 @@ footer a{
  float:right;
  font-size:25px;
  cursor:pointer;
-}
-
-.typing-dots{
- display:inline-flex;
- gap:4px;
- align-items:center;
- padding:4px 2px;
-}
-
-.typing-dots span{
- width:8px;
- height:8px;
- border-radius:50%;
- background:#94a3b8;
- animation:typingBounce 1.2s infinite ease-in-out;
-}
-
-.typing-dots span:nth-child(2){animation-delay:.2s}
-.typing-dots span:nth-child(3){animation-delay:.4s}
-
-@keyframes typingBounce{
- 0%,60%,100%{transform:translateY(0);opacity:.6}
- 30%{transform:translateY(-6px);opacity:1}
 }
 
 .skeleton-card{
@@ -668,13 +580,6 @@ footer a{
  .admin-stats{
   grid-template-columns:1fr;
  }
- .ai-input{
-  flex-direction:column;
- }
- .ai-input button{
-  width:100%;
-  padding:13px;
- }
  .admin-btn{
   right:12px;
   bottom:12px;
@@ -713,8 +618,7 @@ Choice<span>Kart</span>
 <a href="#colleges">Colleges</a>
 <a href="#courses">Courses</a>
 <a href="#predictor">Predictor</a>
-<a href="#ai">AI</a>
-<a href="#counselling">Counselling</a>
+<a href="#counselling">Advice from Expert</a>
 <a href="#resources">Scholarships</a>
 <a href="#faq">FAQ</a>
 <a href="#help">Help</a>
@@ -906,6 +810,73 @@ Enter your profile to explore possible college options.
 <div id="examDateBox" style="margin-bottom:25px"></div>
 
 
+<div class="admin-card" style="margin-bottom:25px;background:#f8fafc">
+
+<h3 style="color:var(--navy)">🧮 Score Calculator</h3>
+
+<p style="color:#64748b;font-size:13px;margin-top:6px;margin-bottom:15px">
+Not sure of your exact score yet? Enter your correct/wrong
+answers from the answer key and we'll calculate it for you.
+</p>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Exam</label>
+<select id="calcExam" onchange="updateCalcScheme()">
+<option value="NEET">NEET (+4 / -1)</option>
+<option value="JEE">JEE Main MCQs (+4 / -1)</option>
+<option value="CUET">CUET (+5 / -1)</option>
+<option value="CUSTOM">Other / Custom marking</option>
+</select>
+</div>
+
+<div class="form-group" id="calcCorrectMarksGroup" style="display:none">
+<label>Marks per Correct</label>
+<input id="calcCorrectMarks" type="number" value="4">
+</div>
+
+<div class="form-group" id="calcWrongMarksGroup" style="display:none">
+<label>Negative per Wrong</label>
+<input id="calcWrongMarks" type="number" value="1">
+</div>
+
+<div class="form-group">
+<label>Correct Answers</label>
+<input id="calcCorrect" type="number" placeholder="e.g. 150">
+</div>
+
+<div class="form-group">
+<label>Wrong Answers</label>
+<input id="calcWrong" type="number" placeholder="e.g. 20">
+</div>
+
+</div>
+
+<button class="btn secondary" style="margin-top:15px" onclick="calculateScore()">
+Calculate Score
+</button>
+
+<div id="calcResultBox" style="margin-top:15px;display:none">
+
+<p style="font-size:15px">
+Estimated Score: <b id="calcResultValue" style="color:var(--navy);font-size:20px"></b>
+</p>
+
+<button class="small-btn" style="margin-top:8px" onclick="useCalculatedScore()">
+Use This Score in Predictor ↓
+</button>
+
+</div>
+
+<p style="font-size:11px;color:#94a3b8;margin-top:10px">
+⚠️ This is a self-calculated estimate based on the general marking
+scheme. Always verify with the official answer key.
+</p>
+
+</div>
+
+
 <div class="form-box">
 
 <div class="form-grid">
@@ -1095,81 +1066,10 @@ onclick="downloadPredictResult()">
 </section>
 
 
-<section class="section ai-section" id="ai">
-
-<h2 class="title">
-🤖 ChoiceKart AI
-</h2>
-
-<p class="subtitle" style="color:#dbeafe">
-Ask about exams, courses, colleges and admissions.
-</p>
-
-
-<div class="ai-box">
-
-<div class="ai-header">
-
-<h3>
-🤖 ChoiceKart AI Assistant
-</h3>
-
-<p>
-Your smart college and admission guide
-</p>
-
-</div>
-
-
-<div class="ai-messages" id="aiMessages">
-
-<div class="message bot">
-
-👋 Namaste!
-
-Main <b>ChoiceKart AI</b> hoon.
-
-<br><br>
-
-Apna exam, score/rank, course
-ya college preference batao.
-
-<br><br>
-
-Example:
-
-<b>
-"Mera CUET score 620 hai, B.Sc Agriculture chahiye."
-</b>
-
-</div>
-
-</div>
-
-
-<div class="ai-input">
-
-<input
-id="aiInput"
-placeholder="Ask ChoiceKart AI..."
-onkeydown="if(event.key==='Enter')sendAI()"
->
-
-<button onclick="sendAI()">
-Send
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
 <section class="section counselling" id="counselling">
 
 <h2 class="title">
-📞 Book Counselling
+📞 Advice from Expert
 </h2>
 
 <p class="subtitle">
@@ -1236,7 +1136,7 @@ class="btn secondary"
 style="width:100%;margin-top:20px"
 onclick="bookCounselling()">
 
-Book Counselling
+Advice from Expert
 
 </button>
 
@@ -1431,8 +1331,8 @@ Quick answers to common questions students ask.
 </details>
 
 <details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
-<summary style="font-weight:bold;color:var(--navy);cursor:pointer">How do I book a counselling session?</summary>
-<p style="color:#475569;margin-top:10px;line-height:1.6">Scroll to the "Book Counselling" section, fill in your details, and our team will get in touch with you to guide you through the admission process.</p>
+<summary style="font-weight:bold;color:var(--navy);cursor:pointer">How do I get advice from an expert?</summary>
+<p style="color:#475569;margin-top:10px;line-height:1.6">Scroll to the "Advice from Expert" section, fill in your details, and our team will get in touch with you to guide you through the admission process.</p>
 </details>
 
 <details style="background:white;border-radius:10px;padding:16px 18px;margin-top:12px;box-shadow:0 3px 12px #00000008">
@@ -1474,7 +1374,6 @@ courses and admission opportunities.
 <a href="#colleges">Explore Colleges</a>
 <a href="#courses">Courses</a>
 <a href="#predictor">Predictor</a>
-<a href="#ai">ChoiceKart AI</a>
 
 </div>
 
@@ -1483,7 +1382,7 @@ courses and admission opportunities.
 
 <h3>Support</h3>
 
-<a href="#counselling">Counselling</a>
+<a href="#counselling">Advice from Expert</a>
 <a href="#resources">Scholarships</a>
 <a href="#faq">FAQ</a>
 <a href="#help">Help</a>
@@ -3636,6 +3535,91 @@ counselling rules and seat availability.
 }
 
 
+const SCORE_SCHEMES = {
+NEET: {correct:4, wrong:1},
+JEE: {correct:4, wrong:1},
+CUET: {correct:5, wrong:1}
+};
+
+
+function updateCalcScheme(){
+
+const exam = document.getElementById("calcExam").value;
+
+const showCustom = exam==="CUSTOM";
+
+document.getElementById("calcCorrectMarksGroup").style.display = showCustom ? "block" : "none";
+
+document.getElementById("calcWrongMarksGroup").style.display = showCustom ? "block" : "none";
+
+
+if(!showCustom){
+
+document.getElementById("calcCorrectMarks").value = SCORE_SCHEMES[exam].correct;
+
+document.getElementById("calcWrongMarks").value = SCORE_SCHEMES[exam].wrong;
+
+}
+
+}
+
+
+function calculateScore(){
+
+const exam = document.getElementById("calcExam").value;
+
+const correct = Number(document.getElementById("calcCorrect").value)||0;
+
+const wrong = Number(document.getElementById("calcWrong").value)||0;
+
+
+const scheme =
+exam==="CUSTOM"
+? {
+correct:Number(document.getElementById("calcCorrectMarks").value)||0,
+wrong:Number(document.getElementById("calcWrongMarks").value)||0
+}
+: SCORE_SCHEMES[exam];
+
+
+const total = (correct*scheme.correct) - (wrong*scheme.wrong);
+
+
+window.lastCalculatedScore = total;
+
+window.lastCalculatedExam = exam;
+
+
+document.getElementById("calcResultValue").innerText = total;
+
+document.getElementById("calcResultBox").style.display="block";
+
+}
+
+
+function useCalculatedScore(){
+
+if(window.lastCalculatedScore===undefined) return;
+
+
+document.getElementById("predictScore").value = window.lastCalculatedScore;
+
+
+if(window.lastCalculatedExam && window.lastCalculatedExam!=="CUSTOM"){
+
+document.getElementById("predictExam").value = window.lastCalculatedExam;
+
+updatePredictCourses();
+
+}
+
+
+document.getElementById("predictScore")
+.scrollIntoView({behavior:"smooth",block:"center"});
+
+}
+
+
 function downloadPredictResult(){
 
 const p = window.lastPredictProfile;
@@ -3695,176 +3679,6 @@ URL.revokeObjectURL(url);
 }
 
 
-/* =========================================
-   AI
-========================================= */
-
-function addAI(text,type){
-
-const box =
-document.getElementById("aiMessages");
-
-
-const div =
-document.createElement("div");
-
-
-div.className =
-"message " + type;
-
-
-div.innerHTML=text;
-
-
-box.appendChild(div);
-
-
-box.scrollTop =
-box.scrollHeight;
-
-}
-
-
-function sendAI(){
-
-const input =
-document.getElementById("aiInput");
-
-
-const q =
-input.value.trim();
-
-
-if(!q)return;
-
-
-addAI(
-escapeHTML(q),
-"user"
-);
-
-
-input.value="";
-
-
-const typingId = "typing-" + Date.now();
-
-const box = document.getElementById("aiMessages");
-
-const typingDiv = document.createElement("div");
-
-typingDiv.className = "message bot";
-
-typingDiv.id = typingId;
-
-typingDiv.innerHTML =
-`<span class="typing-dots"><span></span><span></span><span></span></span>`;
-
-box.appendChild(typingDiv);
-
-box.scrollTop = box.scrollHeight;
-
-
-setTimeout(()=>{
-
-const typingEl = document.getElementById(typingId);
-
-if(typingEl) typingEl.remove();
-
-const lower =
-q.toLowerCase();
-
-
-let answer = `
-
-🤖 Main ChoiceKart AI hoon.
-
-Aap mujhe apna
-<b>exam, score/rank, course aur preferred state</b>
-bata sakte ho.
-
-`;
-
-
-if(lower.includes("agriculture")){
-
-answer = `
-
-🌾 <b>Agriculture Guidance</b>
-
-<br><br>
-
-B.Sc Agriculture,
-Horticulture, Forestry aur
-related programs explore kar sakte ho.
-
-<br><br>
-
-Apna exam aur score/rank batao.
-
-`;
-
-}
-
-
-else if(lower.includes("neet")){
-
-answer = `
-
-🩺 <b>NEET Guidance</b>
-
-<br><br>
-
-MBBS, BDS, BAMS, BHMS aur
-other medical options score/rank,
-category and counselling rules
-par depend karte hain.
-
-`;
-
-}
-
-
-else if(lower.includes("cuet")){
-
-answer = `
-
-🎓 <b>CUET Guidance</b>
-
-<br><br>
-
-CUET score, category, course aur
-university preference batao.
-
-`;
-
-}
-
-
-else if(lower.includes("jee")){
-
-answer = `
-
-💻 <b>JEE Guidance</b>
-
-<br><br>
-
-JEE rank, category, branch aur
-preferred state batao.
-
-`;
-
-}
-
-
-addAI(
-answer,
-"bot"
-);
-
-},500);
-
-}
 
 
 /* =========================================
@@ -3929,8 +3743,24 @@ JSON.stringify(requests)
 );
 
 
+const waMessage =
+"📩 *New Advice Request — ChoiceKart*%0A%0A"+
+"👤 Name: "+encodeURIComponent(name)+"%0A"+
+"📱 Phone: "+encodeURIComponent(phone)+"%0A"+
+"📝 Exam: "+encodeURIComponent(exam)+"%0A"+
+"🎓 Course: "+encodeURIComponent(course)+"%0A"+
+"🏆 Score/Rank: "+encodeURIComponent(rank)+"%0A"+
+"📂 Category: "+encodeURIComponent(category);
+
+
+window.open(
+"https://wa.me/919795591809?text="+waMessage,
+"_blank"
+);
+
+
 alert(
-"✅ Counselling request submitted successfully!"
+"✅ Request submitted! Please tap Send in WhatsApp to reach our expert."
 );
 
 
