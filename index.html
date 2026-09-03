@@ -622,6 +622,8 @@ import {
     collection,
     addDoc,
     getDocs,
+    getDoc,
+    setDoc,
     updateDoc,
     deleteDoc,
     doc
@@ -656,6 +658,8 @@ window.firebaseFunctions = {
     collection,
     addDoc,
     getDocs,
+    getDoc,
+    setDoc,
     updateDoc,
     deleteDoc,
     doc
@@ -1527,12 +1531,8 @@ detail page.
 + Add Cutoff Record
 </button>
 
-<button class="btn secondary" style="margin-top:15px;margin-left:8px" onclick="importVerifiedCutoffs()">
-📥 Import Verified Sample Data
-</button>
-
 <p style="font-size:11px;color:#94a3b8;margin-top:8px">
-Adds a small set of real, cross-checked NEET cutoff records (e.g. AIIMS New Delhi) to get you started. Safe to click once — it skips records that already exist.
+A small set of real, verified NEET cutoff records (e.g. AIIMS New Delhi) is added automatically the first time you log in as admin.
 </p>
 
 <div id="cutoffList" style="margin-top:20px"></div>
@@ -4061,6 +4061,11 @@ document.getElementById("adminPanel")
 
 updateAdminStats();
 
+/* Runs automatically as soon as an admin session exists —
+   no separate click needed. Safe to call every login: it
+   checks a flag doc first and does nothing if already seeded. */
+autoSeedVerifiedCutoffs();
+
 }else{
 
 document.getElementById("adminPanel")
@@ -4143,11 +4148,11 @@ const VERIFIED_CUTOFF_SEED = [
 ];
 
 
-async function importVerifiedCutoffs(){
+async function importVerifiedCutoffs(silent){
 
 if(!window.firebaseReady){
 
-alert("Please wait a moment for the system to load and try again.");
+if(!silent) alert("Please wait a moment for the system to load and try again.");
 
 return;
 
@@ -4168,7 +4173,7 @@ const toImport = VERIFIED_CUTOFF_SEED.filter(r=>
 
 if(!toImport.length){
 
-alert("✅ This verified sample data is already in your database.");
+if(!silent) alert("✅ This verified sample data is already in your database.");
 
 return;
 
@@ -4188,16 +4193,60 @@ record
 
 }catch(error){
 
-console.error("Import failed:",error);
+console.error("Cutoff seed import failed (likely needs an authenticated session — Firestore rules probably require login to write):",error);
 
-alert("❌ Import failed partway through. Please check your connection and try again.");
+if(!silent) alert("❌ Import failed. Make sure you're logged in as admin, then try again.");
+
+return;
 
 }
 
 
 await loadCutoffsFromFirestore();
 
-alert("✅ Imported "+toImport.length+" verified cutoff record(s).");
+if(!silent) alert("✅ Imported "+toImport.length+" verified cutoff record(s).");
+
+}
+
+
+/* Runs once automatically (no button click, no manual admin action
+   needed) the first time this updated site loads with a session that
+   has write access. Uses a flag document so it never repeats. If
+   Firestore rules require an authenticated write, this quietly
+   succeeds the next time an admin has the site open — no separate
+   step required from them. */
+async function autoSeedVerifiedCutoffs(){
+
+if(!window.firebaseReady) return;
+
+try{
+
+const flagRef = window.firebaseFunctions.doc(window.firebaseDB,"meta","cutoffSeedV1");
+
+const flagSnap = await window.firebaseFunctions.getDoc(flagRef);
+
+if(flagSnap.exists()) return;
+
+
+await importVerifiedCutoffs(true);
+
+
+await window.firebaseFunctions.setDoc(flagRef,{
+
+seededAt:new Date().toISOString()
+
+});
+
+}catch(error){
+
+/* Expected to fail quietly for a visitor without write access
+   (e.g. Firestore rules requiring admin auth) — it will simply
+   succeed automatically next time an authenticated admin session
+   loads the site. */
+
+console.log("Auto-seed skipped (will retry automatically with an authenticated session):",error.message);
+
+}
 
 }
 
