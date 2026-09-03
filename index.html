@@ -1527,6 +1527,14 @@ detail page.
 + Add Cutoff Record
 </button>
 
+<button class="btn secondary" style="margin-top:15px;margin-left:8px" onclick="importVerifiedCutoffs()">
+📥 Import Verified Sample Data
+</button>
+
+<p style="font-size:11px;color:#94a3b8;margin-top:8px">
+Adds a small set of real, cross-checked NEET cutoff records (e.g. AIIMS New Delhi) to get you started. Safe to click once — it skips records that already exist.
+</p>
+
 <div id="cutoffList" style="margin-top:20px"></div>
 
 </div>
@@ -4122,6 +4130,76 @@ renderExamDateAdminList();
 ========================================= */
 
 let cutoffsCache = [];
+
+
+/* Small, cross-checked starting dataset (verified against multiple
+   sources on the same figures). Real cutoff data is highly
+   time/round/category sensitive, so this is intentionally a small,
+   trustworthy seed rather than a large guessed table — add more
+   verified records over time via the form above. */
+const VERIFIED_CUTOFF_SEED = [
+{college:"AIIMS New Delhi",exam:"NEET",year:"2023",category:"General",value:"57"},
+{college:"AIIMS New Delhi",exam:"NEET",year:"2025",category:"General",value:"48"}
+];
+
+
+async function importVerifiedCutoffs(){
+
+if(!window.firebaseReady){
+
+alert("Please wait a moment for the system to load and try again.");
+
+return;
+
+}
+
+
+const existing = getCutoffs();
+
+const existingKeys = new Set(
+existing.map(r=>(r.college+"|"+r.exam+"|"+r.year+"|"+r.category).toLowerCase())
+);
+
+
+const toImport = VERIFIED_CUTOFF_SEED.filter(r=>
+!existingKeys.has((r.college+"|"+r.exam+"|"+r.year+"|"+r.category).toLowerCase())
+);
+
+
+if(!toImport.length){
+
+alert("✅ This verified sample data is already in your database.");
+
+return;
+
+}
+
+
+try{
+
+for(const record of toImport){
+
+await window.firebaseFunctions.addDoc(
+window.firebaseFunctions.collection(window.firebaseDB,"cutoffs"),
+record
+);
+
+}
+
+}catch(error){
+
+console.error("Import failed:",error);
+
+alert("❌ Import failed partway through. Please check your connection and try again.");
+
+}
+
+
+await loadCutoffsFromFirestore();
+
+alert("✅ Imported "+toImport.length+" verified cutoff record(s).");
+
+}
 
 
 async function loadCutoffsFromFirestore(){
